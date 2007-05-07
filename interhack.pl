@@ -49,7 +49,15 @@ print {$sock}"$IAC$WILL$TTYPE"
             ."$IAC$SB$NAWS$IS".chr(80).$IS.chr(24)."$IAC$SE";
 
 # autologin
-print {$sock} "l$nick\n$pass\n";
+if ($nick ne '')
+{
+  print {$sock} "l$nick\n";
+  if ($pass ne '')
+  {
+    print {$sock} "$pass\n";
+  }
+}
+
 
 ReadMode 3;
 END { ReadMode 0 }
