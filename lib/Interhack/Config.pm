@@ -57,6 +57,8 @@ sub parse_config_line
   elsif ($line =~ /^color\s+([\w&]+)\s+(.+)\s*$/i)
   {
     my ($regex, $color) = (eval("qr/$2/"), lc($1));
+    die "config line $number: Unable to parse color '$color'\n"
+      unless exists $colormap{$color};
 
     $color = "\e[0;31m" if $color eq "red";
     $color = "\e[1;31m" if $color eq "bred";
