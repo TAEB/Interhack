@@ -73,6 +73,10 @@ sub parse_config_line
   {
     $main::nick = $1;
   }
+  elsif ($line =~ /^pass\s+(\S+)\s*$/i)
+  {
+    $main::pass = $1;
+  }
   else
   {
     die "Unable to parse line $number: $line\n";
