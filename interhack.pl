@@ -96,9 +96,6 @@ while (1)
     # make floating eyes bright cyan
     $buf =~ s{\e\[(?:0;)?34me}{\e[0;36me}g;
 
-    # colorify picking up gold
-    $buf =~ s{\e\[H(\d+ gold pieces?\.)}{\e[H\e[1;33m$1\e[0m}g;
-
     # display Xp needed for next level
     $buf =~ s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
 
