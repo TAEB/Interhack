@@ -10,9 +10,13 @@ sub parse_config_line
   $line =~ s/^\s*//;
   return if $line eq '';
 
+  $line =~ s/\\#/#/g;
+
   if ($line =~ /^map\s+(\S+)\s+(\S+)\s*$/i)
   {
-    $main::keymap{$1} = $2;
+    my ($trigger, $action) = ($1, $2);
+    $action =~ s/\\n/\n/g;
+    $main::keymap{$trigger} = $action;
   }
   elsif ($line =~ /^color\s+(\w+)\s+(.+)\s*$/i)
   {
