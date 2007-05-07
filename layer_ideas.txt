@@ -1,0 +1,54 @@
+extensible, togglable plugins, etc
+use dark gray for output so it can't be confused with NH output
+allow rebooting without losing connection (with exec)
+
+autologin
+castle tune suggestions (configurably fast (R3) or slow (current best))
+price IDing help
+hpmonitor (for devnull)
+power monitor
+menucolors (for devnull) (also optionally specify more-powerful Perl regex)
+color anything! ("You are slowing down")
+statuscolors
+keymappings (so 0 -> "E-  Elbereth\n")
+conduct blocks (so if illit, confirm for the "r" command)
+edit nethackrc locally
+keep track of which squares you've stepped on (key off of Dlvl etc)
+automap certain levels (such as each Minetown)
+internal paste buffer ("Press X to send the string: "#name\nnldark 100/150")
+view other maps
+thing finder ("/scare monster" -> "Dlvl 5, turn 1090")
+overview mode ("Level 1: fountain, Level 3: mines entrance")
+ray bounce thing
+possibly some kind of overenchant protection
+builtin start scummer >_>
+send keys at the beginning of play (for setting options in devnull)
+showweight
+mysterious force counter
+realtime counter
+some kind of mouse support
+kill counter
+local ttyrec output
+which could be used to rewind live
+sokoban helper
+hunger estimator
+prayer timeout estimator
+wish/geno listings
+name empty wands
+mind flayer protection
+hide attributes (to use for something more important)
+max carry capacity indicator
+display stairs (if an item is on them)
+color branch stairs
+VS display
+jump helper
+recolor certain char/color combos (dark blue e -> cyan e) would be nice to do the same for Elvenkings
+confirm escape when wishing
+remap escape to something that works instantly.. or something.. maybe!
+color altars based on alignment
+exp to next level
+exp gained from kills
+automatic intrinsic tracker
+object ID stuff (like wand engraving, ring sinkdropping, etc)
+autoopen doors :)
+
