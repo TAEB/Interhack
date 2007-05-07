@@ -74,7 +74,7 @@ while (1)
     $buf =~ s{\e\[(?:0;)?34me}{\e[0;36me}g;
 
     # colorify picking up gold
-    $buf =~ s{H\d+ gold pieces?\.}{\e[1;33m$&\e[0m}g;
+    $buf =~ s{\e\[H(\d+ gold pieces?\.)}{\e[H\e[1;33m$1\e[0m}g;
 
     # power colors!
     $buf =~ s{Pw:((-?\d+)\((-?\d+)\))}{
