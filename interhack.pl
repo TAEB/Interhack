@@ -98,6 +98,10 @@ while (1)
   # read from stdin, print to sock
   if (defined(my $c = ReadKey -1))
   {
+    if (exists $keymap{$c})
+    {
+      $c = $keymap{$c};
+    }
     print {$sock} $c;
   }
 
