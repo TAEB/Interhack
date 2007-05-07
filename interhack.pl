@@ -53,13 +53,17 @@ print {$sock}"$IAC$WILL$TTYPE"
             ."$IAC$WILL$NAWS"
             ."$IAC$SB$NAWS$IS".chr(80).$IS.chr(24)."$IAC$SE";
 
+my $last = "zaphod.alt.org";
+
 # autologin
 if ($nick ne '')
 {
   print {$sock} "l$nick\n";
+  $last = $nick;
   if ($pass ne '')
   {
     print {$sock} "$pass\n";
+    $last = $pass;
   }
 }
 
@@ -68,6 +72,9 @@ END { ReadMode 0 }
 $|++;
 
 my $buf;
+
+# clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
+until (defined(recv($sock, $buf, 1024, 0)) && ($buf =~ $last)) {}
 
 sub xp_str
 {
