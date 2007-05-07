@@ -100,7 +100,7 @@ while (1)
   if (defined(recv($sock, $buf, 1024, 0)))
   {
     # make floating eyes bright cyan
-    $buf =~ s{\e\[(?:0;)?34me}{\e[0;36me}g;
+    $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[0;36m$1}g;
 
     # display Xp needed for next level
     $buf =~ s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
