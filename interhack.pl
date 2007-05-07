@@ -110,7 +110,7 @@ while (1)
     }
 
     # make floating eyes bright cyan
-    $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[0;36m$1}g;
+    $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
 
     # display Xp needed for next level
     $buf =~ s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
