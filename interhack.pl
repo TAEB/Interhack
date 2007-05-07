@@ -92,12 +92,23 @@ sub xp_str
   }
 }
 
+my $responses_so_far = '';
+my $response_this_play = 1;
+my $tab = "\t";
+
 while (1)
 {
   # read from stdin, print to sock
   if (defined(my $c = ReadKey -1))
   {
-    if (exists $keymap{$c})
+    if ($tab ne "\t")
+    {
+      $c = $tab if $c eq "\t";
+      $tab = "\t";
+      #$c .= chr(18); # refresh screen
+      print "\e[s\e[2H\e[K\e[u";
+    }
+    elsif (exists $keymap{$c})
     {
       $c = $keymap{$c};
     }
@@ -107,6 +118,21 @@ while (1)
   # read from sock, print to stdout
   if (defined(recv($sock, $buf, 1024, 0)))
   {
+    if ($buf =~ /\e\[HYou hear (\d+) tumblers? click and (\d+) gears? turn\./)
+    {
+      $responses_so_far .= " $1$2";
+      $response_this_play = 1;
+    }
+    elsif ($buf =~ /\e\[HWhat tune are you playing\?/)
+    {
+      $responses_so_far .= " 00" unless $response_this_play;
+      $response_this_play = 0;
+      my $next = `/home/sartak/devel/rodney/trunk/commands/automastermind $responses_so_far`;
+      ($next) = $next =~ /^([A-G]{5})/;
+      print "\e[s\e[2H\e[1;30mPress tab to send the string: $next\\n\e[0m\e[u";
+      $tab = "$next\n";
+    }
+
     foreach my $map (@colormap)
     {
       $buf =~ s{$map->[0]}{$map->[1]$&\e[0m}g;
