@@ -123,3 +123,5 @@ while (1)
   }
 }
 
+ReadMode 0;
+
