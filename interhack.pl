@@ -58,6 +58,20 @@ $|++;
 
 my $buf;
 
+sub xp_str
+{
+  my ($level, $total_exp) = @_;
+  my $length = length $total_exp;
+
+  my $exp_needed = $level < 11 ? 10     * 2 ** $level
+                 : $level < 21 ? 10_000 * 2 ** $level
+                 : 10_000_000 * ($level - 19);
+
+  $exp_needed -= $total_exp;
+
+  return sprintf "Xp:%dn%-$length.${length}s", $level, $exp_needed;
+}
+
 while (1)
 {
   # read from stdin, print to sock
@@ -75,6 +89,9 @@ while (1)
 
     # colorify picking up gold
     $buf =~ s{\e\[H(\d+ gold pieces?\.)}{\e[H\e[1;33m$1\e[0m}g;
+
+    # display Xp needed for next level
+    $buf =~ s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
 
     # power colors!
     $buf =~ s{Pw:((-?\d+)\((-?\d+)\))}{
