@@ -99,6 +99,9 @@ while (1)
     # display Xp needed for next level
     $buf =~ s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
 
+    # highlight "high priest of Foo" except when Foo = Moloch
+    $buf =~ s{high priest of (?!Moloch)\S+}{\e[1;31m$&\e[0m}g;
+
     # power colors!
     $buf =~ s{Pw:((-?\d+)\((-?\d+)\))}{
       my $color = '';
