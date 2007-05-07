@@ -58,7 +58,6 @@ if ($nick ne '')
   }
 }
 
-
 ReadMode 3;
 END { ReadMode 0 }
 $|++;
