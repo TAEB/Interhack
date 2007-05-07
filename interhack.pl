@@ -6,8 +6,7 @@ use IO::Socket;
 
 # CONFIG
 my $nick = 'Interhack';
-my $pass = 'kool'; # zomg!
-my $killswitch = "\t"; # automatically kills the script, Just In Case
+my $pass = '';
 # END CONFIG
 
 my $server = 'nethack.alt.org';
@@ -86,7 +85,6 @@ while (1)
   # read from stdin, print to sock
   if (defined(my $c = ReadKey -1))
   {
-    last if $c eq $killswitch;
     print {$sock} $c;
   }
 
