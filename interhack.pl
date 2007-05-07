@@ -104,6 +104,11 @@ while (1)
   # read from sock, print to stdout
   if (defined(recv($sock, $buf, 1024, 0)))
   {
+    foreach my $map (@colormap)
+    {
+      $buf =~ s{$map->[0]}{$map->[1]$&\e[0m}g;
+    }
+
     # make floating eyes bright cyan
     $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[0;36m$1}g;
 
