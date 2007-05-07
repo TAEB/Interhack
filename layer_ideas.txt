@@ -51,4 +51,5 @@ exp gained from kills
 automatic intrinsic tracker
 object ID stuff (like wand engraving, ring sinkdropping, etc)
 autoopen doors :)
+doy: marvin's farsight, looking at every square for ghosts
 
