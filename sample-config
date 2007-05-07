@@ -4,7 +4,8 @@
 nick Eidolos
 
 # keymaps
-map X \#enhance\n
+# map X doesn't work, e.g. DX
+#map X \#enhance\n
 
 # simple colorings
 color red the high priest(ess)? of (?!Moloch)[a-zA-Z- ]+
