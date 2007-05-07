@@ -1,15 +1,21 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+use lib 'lib';
 use Term::ReadKey;
 use IO::Socket;
 
 # CONFIG
-my $nick = 'Interhack';
-my $pass = '';
+our $nick = '';
+our $pass = '';
+our $server = 'nethack.alt.org';
 # END CONFIG
 
-my $server = 'nethack.alt.org';
+our %keymap;
+our @colormap;
+
+use Interhack::Config;
+Interhack::Config::run();
 
 my $sock = new IO::Socket::INET(PeerAddr => $server,
                                 PeerPort => 23,
