@@ -60,28 +60,14 @@ sub parse_config_line
     die "config line $number: Unable to parse color '$color'\n"
       unless exists $colormap{$color};
 
-    $color = "\e[0;31m" if $color eq "red";
-    $color = "\e[1;31m" if $color eq "bred";
+    push @main::colormap, [$regex => $colormap{$color}];
+  }
+  elsif ($line =~ /^MENUCOLOR=(.+)=([\w&]+)\s*$/)
+  {
+    my ($regex, $color) = ($1, lc($2));
+    $regex =~ s/\\([()|])/$1/g;
 
-    $color = "\e[0;32m" if $color eq "green";
-    $color = "\e[1;32m" if $color eq "bgreen";
-
-    $color = "\e[0;33m" if $color eq "brown";
-    $color = "\e[1;33m" if $color eq "yellow";
-
-    $color = "\e[0;34m" if $color eq "blue";
-    $color = "\e[1;34m" if $color eq "bblue";
-
-    $color = "\e[0;35m" if $color eq "magenta" || $color eq "purple";
-    $color = "\e[1;35m" if $color eq "bmagenta" || $color eq "bpurple";
-
-    $color = "\e[0;36m" if $color eq "cyan";
-    $color = "\e[1;36m" if $color eq "bcyan";
-
-    $color = "\e[0;37m" if $color eq "white";
-    $color = "\e[1;37m" if $color eq "bwhite";
-
-    push @main::colormap, [$regex => $color];
+    push @main::colormap, [eval("qr/$regex/") => $colormap{$color}];
   }
   elsif ($line =~ /^nick\s+(\S+)\s*$/i)
   {
