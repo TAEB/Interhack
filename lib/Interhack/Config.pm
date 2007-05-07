@@ -42,7 +42,7 @@ my %colormap =
 sub parse_config_line
 {
   my ($line, $number) = @_;
-  $line =~ s/\s*(?<!\\)#.*//;
+  $line =~ s/\s*(?<!\\)#.*// unless $line =~ /^MENUCOLOR/;
   $line =~ s/^\s*//;
   return if $line eq '';
 
@@ -62,7 +62,7 @@ sub parse_config_line
 
     push @main::colormap, [$regex => $colormap{$color}];
   }
-  elsif ($line =~ /^MENUCOLOR=(.+)=([\w&]+)\s*$/)
+  elsif ($line =~ /^MENUCOLOR\s*=\s*"(.+)"\s*=\s*([\w&]+)\s*(?:#.*)?$/)
   {
     my ($regex, $color) = ($1, lc($2));
     $regex =~ s/\\([()|])/$1/g;
