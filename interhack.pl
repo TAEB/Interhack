@@ -70,15 +70,8 @@ while (1)
   # read from sock, print to stdout
   if (defined(recv($sock, $buf, 1024, 0)))
   {
-    # example of a simple message coloring
-    $buf =~ s{The newt bites.}{\e[1;31m$&\e[0m}g;
-
     # make floating eyes bright cyan
     $buf =~ s{\e\[(?:0;)?34me}{\e[0;36me}g;
-
-    # make jackals look like mind flayers
-    $buf =~ s{\e\[(?:0;)?33md}{\e[0;35mh}g;
-    $buf =~ s{\bjackal\b}{master mind flayer}g;
 
     # colorify picking up gold
     $buf =~ s{H\d+ gold pieces?\.}{\e[1;33m$&\e[0m}g;
