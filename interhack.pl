@@ -69,7 +69,16 @@ sub xp_str
 
   $exp_needed -= $total_exp;
 
-  return sprintf "Xp:%dn%-$length.${length}s", $level, $exp_needed;
+
+  if (length($exp_needed)-1 > $length)
+  {
+    return "Xp:$level!$total_exp";
+  }
+  else
+  {
+    $length++;
+    return sprintf "X:%dn%-${length}s", $level, $exp_needed;
+  }
 }
 
 while (1)
