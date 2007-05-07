@@ -1,0 +1,13 @@
+# save this at $HOME/.interhack/config
+
+# main config
+nick Eidolos
+
+# keymaps
+map X \#enhance\n
+
+# simple colorings
+color red the high priest(ess)? of (?!Moloch)[a-zA-Z- ]+
+
+color yellow \d+ gold pieces?\.
+
