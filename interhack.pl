@@ -96,6 +96,7 @@ my $responses_so_far = '';
 my $response_this_play = 1;
 my $tab = "\t";
 
+ITER:
 while (1)
 {
   # read from stdin, print to sock
@@ -103,6 +104,10 @@ while (1)
   {
     if ($tab ne "\t")
     {
+      ($responses_so_far, $response_this_play) = ('', 1)
+        and next ITER
+          if $c eq "'";
+
       $c = $tab if $c eq "\t";
       $tab = "\t";
       #$c .= chr(18); # refresh screen
@@ -118,9 +123,20 @@ while (1)
   # read from sock, print to stdout
   if (defined(recv($sock, $buf, 1024, 0)))
   {
+    study $buf;
     if ($buf =~ /\e\[HYou hear (\d+) tumblers? click and (\d+) gears? turn\./)
     {
-      $responses_so_far .= " $1$2";
+      $responses_so_far .= " $2$1";
+      $response_this_play = 1;
+    }
+    elsif ($buf =~ /\e\[HYou hear (\d+) tumblers? click\./)
+    {
+      $responses_so_far .= " 0$1";
+      $response_this_play = 1;
+    }
+    elsif ($buf =~ /\e\[HYou hear (\d+) gears? turn\./)
+    {
+      $responses_so_far .= " ${1}0";
       $response_this_play = 1;
     }
     elsif ($buf =~ /\e\[HWhat tune are you playing\?/)
@@ -128,9 +144,18 @@ while (1)
       $responses_so_far .= " 00" unless $response_this_play;
       $response_this_play = 0;
       my $next = `/home/sartak/devel/rodney/trunk/commands/automastermind $responses_so_far`;
-      ($next) = $next =~ /^([A-G]{5})/;
-      print "\e[s\e[2H\e[1;30mPress tab to send the string: $next\\n\e[0m\e[u";
-      $tab = "$next\n";
+      if ($next =~ 'ACK')
+      {
+        print "\e[s\e[2H\e[1;30mNo possible tunes. Resetting.\e[0m\e[u";
+        ($responses_so_far, $response_this_play) = ('', 1);
+        $tab = "";
+      }
+      else
+      {
+        ($next) = $next =~ /^([A-G]{5})/;
+        print "\e[s\e[2H\e[1;30mPress ' to reset, tab to send the string: $next\\n\e[0m\e[u";
+        $tab = "$next\n";
+      }
     }
 
     foreach my $map (@colormap)
