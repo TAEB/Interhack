@@ -143,7 +143,7 @@ while (1)
     {
       $responses_so_far .= " 00" unless $response_this_play;
       $response_this_play = 0;
-      my $next = `/home/sartak/devel/rodney/trunk/commands/automastermind $responses_so_far`;
+      my $next = `./automastermind $responses_so_far`;
       if ($next =~ 'ACK')
       {
         print "\e[s\e[2H\e[1;30mNo possible tunes. Resetting.\e[0m\e[u";
