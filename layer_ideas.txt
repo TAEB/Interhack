@@ -2,20 +2,23 @@ extensible, togglable plugins, etc
 use dark gray for output so it can't be confused with NH output
 allow rebooting without losing connection (with exec)
 
-autologin
-castle tune suggestions (configurably fast (R3) or slow (current best))
+starred ideas have been implemented
+
+* autologin
+* castle tune suggestions
+... configurably fast (R3) or slow (current best)
 price IDing help
-hpmonitor (for devnull)
-power monitor
-menucolors (for devnull) (also optionally specify more-powerful Perl regex)
-color anything! ("You are slowing down")
-statuscolors
-keymappings (so 0 -> "E-  Elbereth\n")
+* hpmonitor (for devnull)
+* power monitor
+* menucolors (for devnull) (also optionally specify more-powerful Perl regex)
+* color anything! ("You are slowing down")
+* statuscolors
+* keymappings (so 0 -> "E-  Elbereth\n")
 conduct blocks (so if illit, confirm for the "r" command)
-edit nethackrc locally
+* edit nethackrc locally
 keep track of which squares you've stepped on (key off of Dlvl etc)
 automap certain levels (such as each Minetown)
-internal paste buffer ("Press X to send the string: "#name\nnldark 100/150")
+* internal paste buffer ("Press X to send the string: "#name\nnldark 100/150")
 view other maps
 thing finder ("/scare monster" -> "Dlvl 5, turn 1090")
 overview mode ("Level 1: fountain, Level 3: mines entrance")
@@ -42,7 +45,8 @@ display stairs (if an item is on them)
 color branch stairs
 VS display
 jump helper
-recolor certain char/color combos (dark blue e -> cyan e) would be nice to do the same for Elvenkings
+* recolor certain char/color combos (dark blue e -> cyan e)
+... would be nice to do the same for Elvenkings
 confirm escape when wishing
 remap escape to something that works instantly.. or something.. maybe!
 color altars based on alignment
