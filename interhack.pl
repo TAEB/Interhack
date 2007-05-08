@@ -136,6 +136,8 @@ sub hpmon
 my $responses_so_far = '';
 my $response_this_play = 1;
 my $tab = "\t";
+my $me;
+my $at_login = 0;
 
 ITER:
 while (1)
@@ -143,6 +145,21 @@ while (1)
   # read from stdin, print to sock
   if (defined(my $c = ReadKey -1))
   {
+    if ($c eq "\t" && $at_login)
+    {
+      my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
+      my ($fh, $name) = tempfile();
+      print {$fh} $nethackrc;
+      close $fh;
+      $ENV{EDITOR} = 'vi' unless exists $ENV{EDITOR};
+      system("$ENV{EDITOR} $name");
+      $nethackrc = do { local (@ARGV, $/) = $name; <> };
+      print {$sock} "o:0\n1000ddi";
+      print {$sock} "$nethackrc\eg";
+      until (defined(recv($sock, $buf, 1024, 0)) && ($buf =~ /\e\[.*?'g' is not implemented/)) {}
+      print {$sock} ":wq\n";
+    }
+
     if ($tab ne "\t")
     {
       ($responses_so_far, $response_this_play) = ('', 1)
@@ -158,6 +175,8 @@ while (1)
     {
       $c = $keymap{$c};
     }
+
+    $at_login = 0;
     print {$sock} $c;
   }
 
@@ -165,6 +184,17 @@ while (1)
   if (defined(recv($sock, $buf, 1024, 0)))
   {
     study $buf;
+
+    if ($buf =~ /Logged in as: (\w+)/)
+    {
+      $at_login = 1;
+      $me = $1;
+    }
+
+    if ($at_login)
+    {
+      $buf =~ s/(o\) Edit option file)/$1 \e[1;30mTab) .. locally\e[0m/;
+    }
 
     # make floating eyes bright cyan
     $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
