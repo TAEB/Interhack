@@ -3,6 +3,8 @@ use strict;
 use lib 'lib';
 use Term::ReadKey;
 use IO::Socket;
+use LWP::Simple;
+use File::Temp qw/tempfile/;
 
 # CONFIG
 our $nick = '';
