@@ -163,17 +163,17 @@ while (1)
   if (defined(recv($sock, $buf, 1024, 0)))
   {
     study $buf;
-    if ($buf =~ /\e\[HYou hear (\d+) tumblers? click and (\d+) gears? turn\./)
+    if ($buf =~ /\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
     {
       $responses_so_far .= " $2$1";
       $response_this_play = 1;
     }
-    elsif ($buf =~ /\e\[HYou hear (\d+) tumblers? click\./)
+    elsif ($buf =~ /\e\[HYou hear (\d) tumblers? click\./)
     {
       $responses_so_far .= " 0$1";
       $response_this_play = 1;
     }
-    elsif ($buf =~ /\e\[HYou hear (\d+) gears? turn\./)
+    elsif ($buf =~ /\e\[HYou hear (\d) gears? turn\./)
     {
       $responses_so_far .= " ${1}0";
       $response_this_play = 1;
