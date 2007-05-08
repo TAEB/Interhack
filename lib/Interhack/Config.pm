@@ -72,8 +72,13 @@ sub parse_config_line
   elsif ($line =~ /^nick\s+(\w+)\s*$/i)
   {
     $main::nick = $1;
+    if (-e "$ENV{HOME}/.interhack/$1")
+    {
+      $main::pass = do { local @ARGV = "$ENV{HOME}/.interhack/$1"; <> };
+      chomp $main::pass;
+    }
   }
-  elsif ($line =~ /^pass\s+(\S+)\s*$/i)
+  elsif ($main::pass eq '' && $line =~ /^pass\s+(\S+)\s*$/i)
   {
     $main::pass = $1;
   }
