@@ -5,6 +5,8 @@ use warnings;
 
 my %colormap =
 (
+  black          => "\e[0;30m",
+  darkgray       => "\e[1;30m",
   red            => "\e[0;31m",
   bred           => "\e[1;31m",
   "bold&red"     => "\e[1;31m",
