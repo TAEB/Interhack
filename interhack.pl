@@ -100,6 +100,37 @@ sub xp_str
   }
 }
 
+sub hpmon
+{
+  my ($pre, $text, $cur, $max) = @_;
+  my $color = '';
+
+  # prayer point
+  if ($cur * 7 <= $max || $cur <= 6)
+  {
+    $color = "\e[1;30m";
+  }
+  elsif ($cur >= $max) { }
+  elsif ($cur * 2 >= $max)
+  {
+    $color = "\e[1;32m";
+  }
+  elsif ($cur * 3 >= $max)
+  {
+    $color = "\e[1;33m";
+  }
+  elsif ($cur * 4 >= $max)
+  {
+    $color = "\e[0;31m";
+  }
+  elsif ($cur * 5 >= $max)
+  {
+    $color = "\e[1;31m";
+  }
+
+  "$pre$color$text\e[0m"
+}
+
 my $responses_so_far = '';
 my $response_this_play = 1;
 my $tab = "\t";
@@ -181,34 +212,9 @@ while (1)
     $buf =~ s{high priest of (?!Moloch)\S+}{\e[1;31m$&\e[0m}g;
 
     # HPmon done right
-    $buf =~ s{HP:((-?\d+)\((-?\d+)\))}{
-      my $color = '';
+    $buf =~ s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
+    $buf =~ s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
 
-      # prayer point
-      if ($2 * 7 <= $3 || $2 <= 6)
-      {
-        $color = "\e[1;30m";
-      }
-      elsif ($2 >= $3) { }
-      elsif ($2 * 2 >= $3)
-      {
-        $color = "\e[1;32m";
-      }
-      elsif ($2 * 3 >= $3)
-      {
-        $color = "\e[1;33m";
-      }
-      elsif ($2 * 4 >= $3)
-      {
-        $color = "\e[0;31m";
-      }
-      elsif ($2 * 5 >= $3)
-      {
-        $color = "\e[1;31m";
-      }
-
-      "HP:$color$1\e[0m"
-      }eg;
     # power colors!
     $buf =~ s{Pw:((-?\d+)\((-?\d+)\))}{
       my $color = '';
