@@ -10,6 +10,7 @@ our $pass = '';
 our $server = 'nethack.alt.org';
 # END CONFIG
 
+our $autologin = !grep {$_ eq "-l"} @ARGV;
 our %keymap;
 our @colormap;
 
@@ -56,7 +57,7 @@ print {$sock}"$IAC$WILL$TTYPE"
 my $last = "zaphod.alt.org";
 
 # autologin
-if ($nick ne '')
+if ($autologin && $nick ne '')
 {
   print {$sock} "l$nick\n";
   $last = $nick;
