@@ -163,6 +163,10 @@ while (1)
   if (defined(recv($sock, $buf, 1024, 0)))
   {
     study $buf;
+
+    # make floating eyes bright cyan
+    $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
+
     if ($buf =~ /\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
     {
       $responses_so_far .= " $2$1";
@@ -201,9 +205,6 @@ while (1)
     {
       $buf =~ s{$map->[0]}{$map->[1]$&\e[0m}g;
     }
-
-    # make floating eyes bright cyan
-    $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
 
     # display Xp needed for next level
     $buf =~ s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
