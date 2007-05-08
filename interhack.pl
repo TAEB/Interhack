@@ -179,6 +179,35 @@ while (1)
     # highlight "high priest of Foo" except when Foo = Moloch
     $buf =~ s{high priest of (?!Moloch)\S+}{\e[1;31m$&\e[0m}g;
 
+    # HPmon done right
+    $buf =~ s{HP:((-?\d+)\((-?\d+)\))}{
+      my $color = '';
+
+      # prayer point
+      if ($2 * 7 <= $3 || $2 <= 6)
+      {
+        $color = "\e[1;30m";
+      }
+      elsif ($2 >= $3) { }
+      elsif ($2 * 2 >= $3)
+      {
+        $color = "\e[1;32m";
+      }
+      elsif ($2 * 3 >= $3)
+      {
+        $color = "\e[1;33m";
+      }
+      elsif ($2 * 4 >= $3)
+      {
+        $color = "\e[0;31m";
+      }
+      elsif ($2 * 5 >= $3)
+      {
+        $color = "\e[1;31m";
+      }
+
+      "HP:$color$1\e[0m"
+      }eg;
     # power colors!
     $buf =~ s{Pw:((-?\d+)\((-?\d+)\))}{
       my $color = '';
