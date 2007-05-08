@@ -69,7 +69,7 @@ sub parse_config_line
 
     push @main::colormap, [eval("qr/$regex/") => $colormap{$color}];
   }
-  elsif ($line =~ /^nick\s+(\S+)\s*$/i)
+  elsif ($line =~ /^nick\s+(\w+)\s*$/i)
   {
     $main::nick = $1;
   }
