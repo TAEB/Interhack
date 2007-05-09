@@ -16,26 +16,6 @@ our @repmap;
 our @annomap;
 our @tabmap;
 
-use Interhack::Config;
-Interhack::Config::run();
-
-use Interhack::Sock;
-my $sock = Interhack::Sock::sock($server);
-
-# autologin
-if ($autologin && $nick ne '')
-{
-  print {$sock} "l$nick\n";
-  if ($pass ne '')
-  {
-    print {$sock} "$pass\n";
-  }
-}
-
-ReadMode 3;
-END { ReadMode 0 }
-$|++;
-
 my $responses_so_far = '';
 my $response_this_play = 1;
 my $tab = "\t";
@@ -44,9 +24,6 @@ my $at_login = 0;
 my $postprint = '';
 my $annotation_onscreen = 0;
 my $stop_sing_pass = 0;
-
-# clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
-until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
 
 sub xp_str
 {
@@ -116,6 +93,31 @@ sub tab
   $string =~ s/\n/\\n/g;
   annotate("$msg$string");
 }
+
+use Interhack::Config;
+Interhack::Config::run();
+
+use Interhack::Sock;
+my $sock = Interhack::Sock::sock($server);
+
+# autologin
+if ($autologin && $nick ne '')
+{
+  print {$sock} "l$nick\n";
+  if ($pass ne '')
+  {
+    print {$sock} "$pass\n";
+  }
+}
+
+# clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
+until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
+
+ReadMode 3;
+END { ReadMode 0 }
+$|++;
+
+for (@repmap) { $_ = eval $_ }
 
 ITER:
 while (1)

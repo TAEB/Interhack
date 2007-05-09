@@ -14,6 +14,13 @@ There is definitely a vault on this level!    /g
 
 eval $_ =~ /^A/ ? ("A" x length) : $_
 
+# dual SD anyone?
+eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
+           if ($mod20 == 3)  { annotate("Remove your left ring.")  } \
+        elsif ($mod20 == 5)  { annotate("Put on your left ring.")  } \
+        elsif ($mod20 == 11) { annotate("Remove your right ring.") } \
+        elsif ($mod20 == 13) { annotate("Put on your right ring.") } }
+
 # tab completions
 tab /\e\[HWhat do you want to name this gray stone\?/ the Heart of Ahriman\n
 tab /\e\[HWhat do you want to name this \w+ amulet\?/ the Eye of the Aethiopica\n
