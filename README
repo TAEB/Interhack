@@ -9,6 +9,10 @@ program, written in C. The following is all you need:
 
   make
 
+If running Interhack produces an error that resembles "Can't locate $FOO.pm in
+@INC", you need to install modules via CPAN. Use "cpan -i $FOO" (possibly as
+root).
+
 Configuration:
 
 See CONFIG for information about the configuration file.
