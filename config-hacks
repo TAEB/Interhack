@@ -1,0 +1,9 @@
+# looking for neat stuff! first one to really impress me wins a PRIZE!
+
+# for dual-SD games (by Eidolos)
+eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
+           if ($mod20 == 3)  { annotate("Remove your left ring.")  } \
+        elsif ($mod20 == 5)  { annotate("Put on your left ring.")  } \
+        elsif ($mod20 == 11) { annotate("Remove your right ring.") } \
+        elsif ($mod20 == 13) { annotate("Put on your right ring.") } }
+
