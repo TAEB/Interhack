@@ -123,7 +123,7 @@ ITER:
 while (1)
 {
   # read from stdin, print to sock
-  if (defined(my $c = ReadKey -1))
+  if (defined(my $c = ReadKey .05))
   {
     if ($c eq "\t" && $at_login)
     {
