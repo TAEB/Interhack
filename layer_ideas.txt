@@ -50,7 +50,7 @@ jump helper
 confirm escape when wishing
 remap escape to something that works instantly.. or something.. maybe!
 color altars based on alignment
-exp to next level
+* exp to next level
 exp gained from kills
 automatic intrinsic tracker
 object ID stuff (like wand engraving, ring sinkdropping, etc)
@@ -58,5 +58,5 @@ autoopen doors :)
 doy: marvin's farsight, looking at every square for ghosts
 auto-unidle
 keystroke counter! and recorder!
-dual slow digestion messages (and anything else of that nature)
+* dual slow digestion messages (and anything else of that nature)
 
