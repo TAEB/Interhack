@@ -77,6 +77,8 @@ my $response_this_play = 1;
 my $tab = "\t";
 my $me;
 my $at_login = 0;
+my $postprint = '';
+my $annotation_onscreen = 0;
 
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
 until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
@@ -138,7 +140,8 @@ sub hpmon
 sub annotate
 {
   my $annotation = shift;
-  return "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
+  $annotation_onscreen = 1;
+  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
 }
 
 sub tab
@@ -147,7 +150,7 @@ sub tab
   my $msg = @_ ? shift : "Press tab to send the string: ";
   $tab = $string;
   $string =~ s/\n/\\n/g;
-  return annotate("$msg$string");
+  annotate("$msg$string");
 }
 
 ITER:
@@ -199,15 +202,16 @@ while (1)
       $c = $tab if $c eq "\t";
       $tab = "\t";
       #$c .= chr(18); # refresh screen
-      print "\e[s\e[2H\e[K\e[u";
     }
     elsif (exists $keymap{$c})
     {
       $c = $keymap{$c};
     }
 
-    $at_login = 0;
     print {$sock} $c;
+    print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
+    $at_login = 0;
+    $annotation_onscreen = 0;
   }
 
   # read from sock, print to stdout
@@ -260,31 +264,29 @@ while (1)
       my $next = `./automastermind $responses_so_far`;
       if ($next =~ 'ACK')
       {
-        print "\e[s\e[2H\e[1;30mNo possible tunes. Resetting.\e[0m\e[u";
         ($responses_so_far, $response_this_play) = ('', 1);
-        $tab = "";
+        annotate("No possible tunes. Resetting.");
       }
       else
       {
         ($next) = $next =~ /^([A-G]{5})/;
-        print tab("$next\n", "Press ' to reset, tab to send the string: ");
-        $tab = "$next\n";
+        tab("$next\n", "Press ' to reset, tab to send the string: ");
       }
     }
 
     if (/\e\[HWhat do you want to name this gray stone\?/)
     {
-      $_ .= tab("the Heart of Ahriman\n");
+      tab("the Heart of Ahriman\n");
     }
 
     if (/\e\[HWhat do you want to name this \w+ helmet\?/)
     {
-      $_ .= tab("the Mitre of Holiness\n");
+      tab("the Mitre of Holiness\n");
     }
 
     if (/\e\[HWhat do you want to name this \w+ amulet\?/)
     {
-      $_ .= tab("the Eye of the Aethiopica\n");
+      tab("the Eye of the Aethiopica\n");
     }
 
     foreach my $map (@colormap)
@@ -323,6 +325,8 @@ while (1)
       "Pw:$color$1\e[0m"
       }eg;
     print;
+    print $postprint and $postprint = ''
+      if $postprint ne '';
   }
 }
 
