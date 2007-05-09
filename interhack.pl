@@ -26,6 +26,7 @@ my $annotation_onscreen = 0;
 my $stop_sing_pass = 0;
 my $starttime = time;
 my $keystrokes = 0;
+my $in_game = 0;
 
 sub serialize_time
 {
@@ -33,7 +34,24 @@ sub serialize_time
   my $hours = int($seconds / 3600);
   $seconds %= 3600;
   my $minutes = int($seconds / 60);
-  sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
+
+  if ($hours > 9)
+  {
+    sprintf '%d:%02d', $hours, $minutes;
+  }
+  else
+  {
+    sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
+  }
+}
+
+sub time_to_screen
+{
+  return if !$in_game;
+  my $time = shift;
+  my $left = 81;
+  $left -= length $time;
+  print "\e[s\e[23;${left}H\e[1;44m$time\e[0m\e[u";
 }
 
 sub xp_str
@@ -136,6 +154,7 @@ while (1)
   # read from stdin, print to sock
   if (defined(my $c = ReadKey .05))
   {
+    if ($c eq "p" && $at_login) { $in_game = 1 }
     if ($c eq "\t" && $at_login)
     {
       print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
@@ -303,7 +322,7 @@ while (1)
 
   print;
 
-  print "\e[s\e[23H\e[1;44m".serialize_time(time - $starttime)."\e[0m\e[u";
+  time_to_screen(serialize_time(time - $starttime));
 
   print $postprint and $postprint = ''
     if $postprint ne '';
