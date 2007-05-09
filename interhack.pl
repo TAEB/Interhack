@@ -195,6 +195,7 @@ while (1)
     $stop_sing_pass = 1;
     $at_login = 1;
     $me = $1;
+    $pass = '';
   }
 
   if ($at_login)
