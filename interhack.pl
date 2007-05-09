@@ -252,6 +252,12 @@ while (1)
       }
     }
 
+    if ($buf =~ /\e\[HWhat do you want to name this gray stone\?/)
+    {
+      print "\e[s\e[2H\e[1;30mPress tab to send the string: the Heart of Ahriman\\n\e[0m\e[u";
+      $tab = "the Heart of Ahriman\n";
+    }
+
     foreach my $map (@colormap)
     {
       $buf =~ s{$map->[0]}{$map->[1]$&\e[0m}g;
