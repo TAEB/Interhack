@@ -59,7 +59,6 @@ sub xp_str
 
   $exp_needed -= $total_exp;
 
-
   if (length($exp_needed)-1 > $length)
   {
     return "Xp:$level!$total_exp";
@@ -145,12 +144,12 @@ while (1)
       $nethackrc = do { local (@ARGV, $/) = $name; <> };
       if ($nethackrc eq '')
       {
-        print "\e[24H\e[1;30mYour nethackrc came out empty, so I'm bailing.--More--";
+        print "\e[24H\e[1;30mYour nethackrc came out empty, so I'm bailing.--More--\e[0m";
         ReadKey 0;
       }
       else
       {
-        print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.";
+        print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.\e0m";
         print {$sock} "o:0\n1000ddi";
         print {$sock} "$nethackrc\eg";
         until (defined(recv($sock, $_, 1024, 0)) && /\e\[.*?'g' is not implemented/) {}
