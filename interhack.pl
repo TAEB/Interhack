@@ -147,17 +147,36 @@ while (1)
   {
     if ($c eq "\t" && $at_login)
     {
+      print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
       my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
       my ($fh, $name) = tempfile();
       print {$fh} $nethackrc;
       close $fh;
+      my $t = (stat $name)[9];
       $ENV{EDITOR} = 'vi' unless exists $ENV{EDITOR};
       system("$ENV{EDITOR} $name");
+
+      # file wasn't modified, so silently bail
+      if ($t == (stat $name)[9])
+      {
+        print {$sock} ' ';
+        next ITER;
+      }
+
       $nethackrc = do { local (@ARGV, $/) = $name; <> };
-      print {$sock} "o:0\n1000ddi";
-      print {$sock} "$nethackrc\eg";
-      until (defined(recv($sock, $buf, 1024, 0)) && ($buf =~ /\e\[.*?'g' is not implemented/)) {}
-      print {$sock} ":wq\n";
+      if ($nethackrc eq '')
+      {
+        print "\e[24H\e[1;30mYour nethackrc came out empty, so I'm bailing.--More--";
+        ReadKey 0;
+      }
+      else
+      {
+        print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.";
+        print {$sock} "o:0\n1000ddi";
+        print {$sock} "$nethackrc\eg";
+        until (defined(recv($sock, $buf, 1024, 0)) && ($buf =~ /\e\[.*?'g' is not implemented/)) {}
+        print {$sock} ":wq\n";
+      }
     }
 
     if ($tab ne "\t")
