@@ -81,6 +81,12 @@ sub parse_config_line
   {
     push @main::annomap, [qr/$2/ => $3];
   }
+  elsif ($line =~ /^tab\s+(.)(.*?)\1\s*(.+)\s*/)
+  {
+    my ($regex, $tab) = (qr/$2/, $3);
+    $tab =~ s/\\n/\n/g;
+    push @main::tabmap, [$regex => $tab];
+  }
   elsif ($line =~ /^color\s+([\w&]+)\s+(.+)\s*$/i)
   {
     my ($regex, $color) = (eval("qr/$2/"), lc($1));

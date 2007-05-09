@@ -14,6 +14,11 @@ There is definitely a vault on this level!    /g
 
 eval $_ =~ /^A/ ? ("A" x length) : $_
 
+# tab completions
+tab /\e\[HWhat do you want to name this gray stone\?/ the Heart of Ahriman\n
+tab /\e\[HWhat do you want to name this \w+ amulet\?/ the Eye of the Aethiopica\n
+tab /\e\[HWhat do you want to name this \w+ helmet\?/ the Mitre of Holiness\n
+
 # simple colorings
 color red the high priest(ess)? of (?!Moloch)[a-zA-Z- ]+
 

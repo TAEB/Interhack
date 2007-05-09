@@ -17,6 +17,7 @@ our %keymap;
 our @colormap;
 our @repmap;
 our @annomap;
+our @tabmap;
 
 use Interhack::Config;
 Interhack::Config::run();
@@ -274,19 +275,10 @@ while (1)
       }
     }
 
-    if (/\e\[HWhat do you want to name this gray stone\?/)
+    for my $tabmap (@tabmap)
     {
-      tab("the Heart of Ahriman\n");
-    }
-
-    if (/\e\[HWhat do you want to name this \w+ helmet\?/)
-    {
-      tab("the Mitre of Holiness\n");
-    }
-
-    if (/\e\[HWhat do you want to name this \w+ amulet\?/)
-    {
-      tab("the Eye of the Aethiopica\n");
+      tab($tabmap->[1])
+        if $_ =~ $tabmap->[0];
     }
 
     foreach my $map (@colormap)
