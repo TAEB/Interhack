@@ -196,7 +196,7 @@ while (1)
 
     if ($at_login)
     {
-      s/(o\) Edit option file)/$1 \e[1;30mTab) .. locally\e[0m/;
+      s/(o\) Edit option file)/$1  \e[1;30mTab) edit options locally\e[0m/g;
     }
 
     foreach my $map (@repmap)
@@ -283,6 +283,7 @@ while (1)
 
       "Pw:$color$1\e[0m"
       }eg;
+
     print;
     print $postprint and $postprint = ''
       if $postprint ne '';
