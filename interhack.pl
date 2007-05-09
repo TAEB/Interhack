@@ -30,6 +30,7 @@ my $stop_sing_pass = 0;
 my $starttime = time;
 my $keystrokes = 0;
 my $in_game = 0;
+my $buf = '';
 # }}}
 
 sub serialize_time # {{{
@@ -222,6 +223,17 @@ while (1)
   my $recv = recv($sock, $_, 1024, 0);
   next ITER if !defined($recv);
   last if length == 0;
+
+  if ($recv =~ / \e (?: \[ [0-9;]* )?$/x)
+  {
+    $buf .= $recv;
+  }
+
+  if ($buf ne '')
+  {
+    $recv = $buf . $recv;
+    $buf = '';
+  }
 
   unless ($stop_sing_pass)
   {
