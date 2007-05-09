@@ -233,7 +233,7 @@ while (1)
     {
       $responses_so_far .= " 00" unless $response_this_play;
       $response_this_play = 0;
-      my $next = `./automastermind $responses_so_far`;
+      my $next = `./c/automastermind $responses_so_far`;
       if ($next =~ 'ACK')
       {
         ($responses_so_far, $response_this_play) = ('', 1);
