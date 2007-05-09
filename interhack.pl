@@ -263,6 +263,16 @@ while (1)
       $_ .= tab("the Heart of Ahriman\n");
     }
 
+    if (/\e\[HWhat do you want to name this \w+ helmet\?/)
+    {
+      $_ .= tab("the Mitre of Holiness\n");
+    }
+
+    if (/\e\[HWhat do you want to name this \w+ amulet\?/)
+    {
+      $_ .= tab("the Eye of the Aethiopica\n");
+    }
+
     foreach my $map (@colormap)
     {
       s{$map->[0]}{$map->[1]$&\e[0m}g;
