@@ -24,6 +24,16 @@ my $at_login = 0;
 my $postprint = '';
 my $annotation_onscreen = 0;
 my $stop_sing_pass = 0;
+my $starttime = time;
+
+sub serialize_time
+{
+  my $seconds = shift;
+  my $hours = int($seconds / 3600);
+  $seconds %= 3600;
+  my $minutes = int($seconds / 60);
+  sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
+}
 
 sub xp_str
 {
@@ -290,6 +300,7 @@ while (1)
     }eg;
 
   print;
+  print "\e[s\e[23H\e[1;44m".serialize_time(time - $starttime)."\e[0m\e[u";
   print $postprint and $postprint = ''
     if $postprint ne '';
 }
