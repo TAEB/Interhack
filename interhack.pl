@@ -181,113 +181,114 @@ while (1)
   }
 
   # read from sock, print to stdout
-  if (defined(recv($sock, $_, 1024, 0)))
+  my $recv = recv($sock, $_, 1024, 0);
+  next ITER if !defined($recv);
+  last if length == 0;
+
+  unless ($stop_sing_pass)
   {
-    unless ($stop_sing_pass)
-    {
-      s/\Q$pass//g;
-    }
-
-    if (/Logged in as: (\w+)/)
-    {
-      $stop_sing_pass = 1;
-      $at_login = 1;
-      $me = $1;
-    }
-
-    if ($at_login)
-    {
-      s/(o\) Edit option file)/$1  \e[1;30mTab) edit options locally\e[0m/g;
-    }
-
-    foreach my $map (@repmap)
-    {
-      $map->();
-    }
-
-    foreach my $annomap (@annomap)
-    {
-      annotate($annomap->[1])
-        if $_ =~ $annomap->[0];
-    }
-
-    # make floating eyes bright cyan
-    s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
-
-    if (/\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
-    {
-      $responses_so_far .= " $2$1";
-      $response_this_play = 1;
-    }
-    elsif (/\e\[HYou hear (\d) tumblers? click\./)
-    {
-      $responses_so_far .= " 0$1";
-      $response_this_play = 1;
-    }
-    elsif (/\e\[HYou hear (\d) gears? turn\./)
-    {
-      $responses_so_far .= " ${1}0";
-      $response_this_play = 1;
-    }
-    elsif (/\e\[HWhat tune are you playing\?/)
-    {
-      $responses_so_far .= " 00" unless $response_this_play;
-      $response_this_play = 0;
-      my $next = `./c/automastermind $responses_so_far`;
-      if ($next =~ 'ACK')
-      {
-        ($responses_so_far, $response_this_play) = ('', 1);
-        annotate("No possible tunes. Resetting.");
-      }
-      else
-      {
-        ($next) = $next =~ /^([A-G]{5})/;
-        tab("$next\n", "Press ' to reset, tab to send the string: ");
-      }
-    }
-
-    for my $tabmap (@tabmap)
-    {
-      tab($tabmap->[1])
-        if $_ =~ $tabmap->[0];
-    }
-
-    foreach my $map (@colormap)
-    {
-      s{$map->[0]}{$map->[1]$&\e[0m}g;
-    }
-
-    # display Xp needed for next level
-    s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
-
-    # HPmon done right
-    s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
-    s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
-
-    # power colors!
-    s{Pw:((-?\d+)\((-?\d+)\))}{
-      my $color = '';
-
-      if ($2 >= $3) { }
-      elsif ($2 * 2 >= $3)
-      {
-        $color = "\e[1;36m";
-      }
-      elsif ($2 * 3 >= $3)
-      {
-        $color = "\e[1;35m";
-      }
-      else
-      {
-        $color = "\e[0;35m";
-      }
-
-      "Pw:$color$1\e[0m"
-      }eg;
-
-    print;
-    print $postprint and $postprint = ''
-      if $postprint ne '';
+    s/\Q$pass//g;
   }
+
+  if (/Logged in as: (\w+)/)
+  {
+    $stop_sing_pass = 1;
+    $at_login = 1;
+    $me = $1;
+  }
+
+  if ($at_login)
+  {
+    s/(o\) Edit option file)/$1  \e[1;30mTab) edit options locally\e[0m/g;
+  }
+
+  foreach my $map (@repmap)
+  {
+    $map->();
+  }
+
+  foreach my $annomap (@annomap)
+  {
+    annotate($annomap->[1])
+      if $_ =~ $annomap->[0];
+  }
+
+  # make floating eyes bright cyan
+  s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
+
+  if (/\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
+  {
+    $responses_so_far .= " $2$1";
+    $response_this_play = 1;
+  }
+  elsif (/\e\[HYou hear (\d) tumblers? click\./)
+  {
+    $responses_so_far .= " 0$1";
+    $response_this_play = 1;
+  }
+  elsif (/\e\[HYou hear (\d) gears? turn\./)
+  {
+    $responses_so_far .= " ${1}0";
+    $response_this_play = 1;
+  }
+  elsif (/\e\[HWhat tune are you playing\?/)
+  {
+    $responses_so_far .= " 00" unless $response_this_play;
+    $response_this_play = 0;
+    my $next = `./c/automastermind $responses_so_far`;
+    if ($next =~ 'ACK')
+    {
+      ($responses_so_far, $response_this_play) = ('', 1);
+      annotate("No possible tunes. Resetting.");
+    }
+    else
+    {
+      ($next) = $next =~ /^([A-G]{5})/;
+      tab("$next\n", "Press ' to reset, tab to send the string: ");
+    }
+  }
+
+  for my $tabmap (@tabmap)
+  {
+    tab($tabmap->[1])
+      if $_ =~ $tabmap->[0];
+  }
+
+  foreach my $map (@colormap)
+  {
+    s{$map->[0]}{$map->[1]$&\e[0m}g;
+  }
+
+  # display Xp needed for next level
+  s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
+
+  # HPmon done right
+  s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
+  s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
+
+  # power colors!
+  s{Pw:((-?\d+)\((-?\d+)\))}{
+    my $color = '';
+
+    if ($2 >= $3) { }
+    elsif ($2 * 2 >= $3)
+    {
+      $color = "\e[1;36m";
+    }
+    elsif ($2 * 3 >= $3)
+    {
+      $color = "\e[1;35m";
+    }
+    else
+    {
+      $color = "\e[0;35m";
+    }
+
+    "Pw:$color$1\e[0m"
+    }eg;
+
+  print;
+  print $postprint and $postprint = ''
+    if $postprint ne '';
 }
 
