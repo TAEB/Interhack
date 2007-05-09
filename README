@@ -1,0 +1,18 @@
+Interhack is a layer that sits between you and your NetHack server (which we'll
+call NAO) and plays with the text going both ways. For example, this could be
+used to color the message "You are slowing down" in bright red.
+
+Building:
+
+There's only one step to building Interhack, which is to build the Mastermind
+program. The following is all you need:
+
+  gcc automastermind.c -O3 -o automastermind
+
+-O3 sets the optimization level, -o automastermind tells it which file to dump
+the result in.
+
+Configuration:
+
+See CONFIG for information about the configuration file.
+

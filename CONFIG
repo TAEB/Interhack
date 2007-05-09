@@ -1,0 +1,77 @@
+The config file Interhack checks first is ~/.interhack/config. Each config line
+can be broken into multiple lines (for readability) by using \ at the end of
+the line. Also, comments can be used; # comments to the end of the line. There
+are several types of config lines:
+
+  nick NICK
+    This sets your autologin nickname to NICK.
+      nick Eidolos
+
+  pass PASS
+    This sets your autologin pass to PASS. See below on setting passwords.
+      pass foob3
+
+  color COLOR REGEX
+    This colorizes any string matched by REGEX to COLOR. See below on what
+    valid colors are. Also, the config reader can parse NetHack-style MENUCOLOR
+    lines.
+      color red You are slowing down
+
+  map KEY STRING
+    This remaps KEY to send STRING instead of KEY. It's not very powerful right
+    now because you can't define ctrl-keys or anything fancy. So wait on this.
+      map ~ #enhance\n
+
+  annotate /REGEX/ MESSAGE
+    This sets up an annotation for strings matching REGEX. (note that you can
+    choose any delimiter instead of /) When a string matching REGEX is seen,
+    then MESSAGE is displayed on the second line in dark gray.
+      annotate /You feel cool!/ You just got fire resistance!
+
+  tab /REGEX/ STRING
+    This sets up a "tab". When a string matching REGEX is seen, then a tab is
+    set up such that when the player presses tab, STRING is sent.
+      tab /What do you want to name this gray stone/ the Heart of Ahriman
+
+  eval CODE
+    This lets you run CODE for each chunk of input. The input is in $_, which
+    you can modify to have an effect on what is sent to the screen, or do other
+    fancy things.
+      eval if (m{ Xp: \d+ / (\d+) }x) { \
+        annotate "You gain " . ($1 - $oldexp) . " experience." \
+          unless $1 == $oldexp; \
+        $oldexp = $1 }
+
+  s/REGEX/REPLACEMENT/OPTS
+    This is just a shortcut for eval s/REGEX/REPLACEMENT/OPTS. You can of
+    course choose your own delimiters.
+      s/You hear someone counting money\./There is a vault on this level. /g
+
+Passwords:
+
+While you can put your password in ~/.interhack/config, it's probably not a
+good idea (since it makes sharing more difficult). So instead you can make
+files such as ~/.interhack/Eidolos which would contain the password to the
+account Eidolos (any player named "config" might be out of luck here!). Make
+sure that these files are unreadable to others ('chmod 700 ~/.interhack' is
+probably your best bet)
+
+Colors:
+
+  black bblack bold&black black&bold bblack darkgray darkgrey
+
+  red bred bold&red red&bold orange
+
+  green bgreen bold&green green&bold
+
+  brown bbrown bold&brown brown&bold yellow darkyellow
+
+  blue bblue bold&blue blue&bold
+
+  purple bpurple bold&purple purple&bold
+  magenta bmagenta bold&magenta magenta&bold
+
+  cyan bcyan bold&cyan cyan&bold
+
+  white bwhite gray grey bold&white white&bold
+
