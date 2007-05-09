@@ -6,13 +6,11 @@ use IO::Socket;
 use LWP::Simple;
 use File::Temp qw/tempfile/;
 
-# CONFIG
+our $autologin = !grep {$_ eq "-l"} @ARGV;
+
 our $nick = '';
 our $pass = '';
 our $server = 'nethack.alt.org';
-# END CONFIG
-
-our $autologin = !grep {$_ eq "-l"} @ARGV;
 our %keymap;
 our @colormap;
 our @repmap;
@@ -45,7 +43,6 @@ my $ECHO = chr(1);
 my $NAWS = chr(31);
 my $STATUS = chr(5);
 my $LFLOW = chr(33);
-my $LINEMODE = chr(34);
 
 print {$sock}"$IAC$WILL$TTYPE"
             ."$IAC$SB$TTYPE${IS}xterm-color$IAC$SE"
@@ -295,9 +292,6 @@ while (1)
 
     # display Xp needed for next level
     s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
-
-    # highlight "high priest of Foo" except when Foo = Moloch
-    s{high priest of (?!Moloch)\S+}{\e[1;31m$&\e[0m}g;
 
     # HPmon done right
     s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
