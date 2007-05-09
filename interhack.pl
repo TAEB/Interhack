@@ -75,6 +75,12 @@ END { ReadMode 0 }
 $|++;
 
 my $buf;
+my $responses_so_far = '';
+my $response_this_play = 1;
+my $tab = "\t";
+my $me;
+my $at_login = 0;
+
 
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
 until (defined(recv($sock, $buf, 1024, 0)) && ($buf =~ $last)) {}
@@ -133,11 +139,14 @@ sub hpmon
   "$pre$color$text\e[0m"
 }
 
-my $responses_so_far = '';
-my $response_this_play = 1;
-my $tab = "\t";
-my $me;
-my $at_login = 0;
+sub tab
+{
+  my $string = shift;
+  my $msg = @_ ? shift : "Press tab to send the string: ";
+  $tab = $string;
+  $string =~ s/\n/\\n/g;
+  return "\e[s\e[2H\e[1;30m$msg$string\e[0m\e[u";
+}
 
 ITER:
 while (1)
@@ -247,15 +256,14 @@ while (1)
       else
       {
         ($next) = $next =~ /^([A-G]{5})/;
-        print "\e[s\e[2H\e[1;30mPress ' to reset, tab to send the string: $next\\n\e[0m\e[u";
+        print tab("$next\n", "Press ' to reset, tab to send the string: ");
         $tab = "$next\n";
       }
     }
 
     if ($buf =~ /\e\[HWhat do you want to name this gray stone\?/)
     {
-      $buf .= "\e[s\e[2H\e[1;30mPress tab to send the string: the Heart of Ahriman\\n\e[0m\e[u";
-      $tab = "the Heart of Ahriman\n";
+      $buf .= tab("the Heart of Ahriman\n");
     }
 
     foreach my $map (@colormap)
