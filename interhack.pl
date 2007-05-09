@@ -16,6 +16,7 @@ our $autologin = !grep {$_ eq "-l"} @ARGV;
 our %keymap;
 our @colormap;
 our @repmap;
+our @annomap;
 
 use Interhack::Config;
 Interhack::Config::run();
@@ -134,13 +135,19 @@ sub hpmon
   "$pre$color$text\e[0m"
 }
 
+sub annotate
+{
+  my $annotation = shift;
+  return "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
+}
+
 sub tab
 {
   my $string = shift;
   my $msg = @_ ? shift : "Press tab to send the string: ";
   $tab = $string;
   $string =~ s/\n/\\n/g;
-  return "\e[s\e[2H\e[1;30m$msg$string\e[0m\e[u";
+  return annotate("$msg$string");
 }
 
 ITER:
@@ -220,6 +227,12 @@ while (1)
     foreach my $map (@repmap)
     {
       $map->();
+    }
+
+    foreach my $annomap (@annomap)
+    {
+      annotate($annomap->[1])
+        if $_ =~ $annomap->[0];
     }
 
     # make floating eyes bright cyan

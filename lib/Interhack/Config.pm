@@ -77,6 +77,10 @@ sub parse_config_line
   {
     push @main::repmap, sub { eval $line };
   }
+  elsif ($line =~ /^annotate\s+(.)(.*?)\1\s*(.+)\s*/)
+  {
+    push @main::annomap, [qr/$2/ => $3];
+  }
   elsif ($line =~ /^color\s+([\w&]+)\s+(.+)\s*$/i)
   {
     my ($regex, $color) = (eval("qr/$2/"), lc($1));
