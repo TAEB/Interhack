@@ -152,6 +152,7 @@ while (1)
       else
       {
         print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.\e[0m";
+        chomp $nethackrc;
         print {$sock} "o:0\n1000ddi";
         print {$sock} "$nethackrc\eg";
         until (defined(recv($sock, $_, 1024, 0)) && /\e\[.*?'g' is not implemented/) {}
