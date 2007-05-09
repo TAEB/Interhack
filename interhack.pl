@@ -7,6 +7,7 @@ use File::Temp qw/tempfile/;
 
 our $autologin = !grep {$_ eq "-l"} @ARGV;
 
+# globals {{{
 our $nick = '';
 our $pass = '';
 our $server = 'nethack.alt.org';
@@ -15,7 +16,9 @@ our @colormap;
 our @repmap;
 our @annomap;
 our @tabmap;
+# }}}
 
+# lexical variables {{{
 my $responses_so_far = '';
 my $response_this_play = 1;
 my $tab = "\t";
@@ -27,8 +30,9 @@ my $stop_sing_pass = 0;
 my $starttime = time;
 my $keystrokes = 0;
 my $in_game = 0;
+# }}}
 
-sub serialize_time
+sub serialize_time # {{{
 {
   my $seconds = shift;
   my $hours = int($seconds / 3600);
@@ -43,18 +47,18 @@ sub serialize_time
   {
     sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
   }
-}
+} # }}}
 
-sub time_to_screen
+sub time_to_screen # {{{
 {
   return if !$in_game;
   my $time = shift;
   my $left = 81;
   $left -= length $time;
   print "\e[s\e[23;${left}H\e[1;44m$time\e[0m\e[u";
-}
+} # }}}
 
-sub xp_str
+sub xp_str # {{{
 {
   my ($level, $total_exp) = @_;
   my $length = length $total_exp;
@@ -74,9 +78,9 @@ sub xp_str
     $length++;
     return sprintf "X:%dn%-${length}s", $level, $exp_needed;
   }
-}
+} # }}}
 
-sub hpmon
+sub hpmon # {{{
 {
   my ($pre, $text, $cur, $max) = @_;
   my $color = '';
@@ -105,31 +109,33 @@ sub hpmon
   }
 
   "$pre$color$text\e[0m"
-}
+} # }}}
 
-sub annotate
+sub annotate # {{{
 {
   my $annotation = shift;
   $annotation_onscreen = 1;
   $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
-}
+} # }}}
 
-sub tab
+sub tab # {{{
 {
   my $string = shift;
   my $msg = @_ ? shift : "Press tab to send the string: ";
   $tab = $string;
   $string =~ s/\n/\\n/g;
   annotate("$msg$string");
-}
+} # }}}
 
+# load Interhack modules {{{
 use Interhack::Config;
 Interhack::Config::run();
 
 use Interhack::Sock;
 my $sock = Interhack::Sock::sock($server);
+# }}}
 
-# autologin
+# autologin {{{
 if ($autologin && $nick ne '')
 {
   print {$sock} "l$nick\n";
@@ -137,7 +143,7 @@ if ($autologin && $nick ne '')
   {
     print {$sock} "$pass\n";
   }
-}
+} # }}}
 
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
 until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
@@ -151,7 +157,7 @@ for (@repmap) { $_ = eval $_ }
 ITER:
 while (1)
 {
-  # read from stdin, print to sock
+  # read from stdin, print to sock {{{
   if (defined(my $c = ReadKey .05))
   {
     if ($c eq "p" && $at_login) { $in_game = 1 }
@@ -210,9 +216,9 @@ while (1)
     print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
     $at_login = 0;
     $annotation_onscreen = 0;
-  }
+  } # }}}
 
-  # read from sock, print to stdout
+  # read from sock, print to stdout {{{
   my $recv = recv($sock, $_, 1024, 0);
   next ITER if !defined($recv);
   last if length == 0;
@@ -249,6 +255,7 @@ while (1)
   # make floating eyes bright cyan
   s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
 
+  # mastermind {{{
   if (/\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
   {
     $responses_so_far .= " $2$1";
@@ -279,7 +286,7 @@ while (1)
       ($next) = $next =~ /^([A-G]{5})/;
       tab("$next\n", "Press ' to reset, tab to send the string: ");
     }
-  }
+  } # }}}
 
   for my $tabmap (@tabmap)
   {
@@ -295,11 +302,12 @@ while (1)
   # display Xp needed for next level
   s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
 
-  # HPmon done right
+  # HPmon done right {{{
   s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
   s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
+  # }}}
 
-  # power colors!
+  # power colors! {{{
   s{Pw:((-?\d+)\((-?\d+)\))}{
     my $color = '';
 
@@ -318,7 +326,7 @@ while (1)
     }
 
     "Pw:$color$1\e[0m"
-    }eg;
+    }eg; # }}}
 
   print;
 
@@ -326,6 +334,7 @@ while (1)
 
   print $postprint and $postprint = ''
     if $postprint ne '';
+  # }}}
 }
 
 print "You typed $keystrokes keystrokes in the game.\n";
