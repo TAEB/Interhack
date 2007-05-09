@@ -80,6 +80,7 @@ my $me;
 my $at_login = 0;
 my $postprint = '';
 my $annotation_onscreen = 0;
+my $stop_sing_pass = 0;
 
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
 until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
@@ -218,8 +219,14 @@ while (1)
   # read from sock, print to stdout
   if (defined(recv($sock, $_, 1024, 0)))
   {
+    unless ($stop_sing_pass)
+    {
+      s/\Q$pass//g;
+    }
+
     if (/Logged in as: (\w+)/)
     {
+      $stop_sing_pass = 1;
       $at_login = 1;
       $me = $1;
     }
