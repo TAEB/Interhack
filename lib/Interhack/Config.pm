@@ -73,7 +73,7 @@ sub parse_config_line
     $action =~ s/\\n/\n/g;
     $main::keymap{$trigger} = $action;
   }
-  elsif ($line =~ m#^s/#)
+  elsif ($line =~ m#^s/# || $line =~ s/^eval\s+//)
   {
     push @main::repmap, sub { eval $line };
   }
