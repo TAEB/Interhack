@@ -17,6 +17,7 @@ my %colormap =
   bred           => "\e[1;31m",
   "bold&red"     => "\e[1;31m",
   "red&bold"     => "\e[1;31m",
+  orange         => "\e[1;31m",
 
   green          => "\e[0;32m",
   bgreen         => "\e[1;32m",
