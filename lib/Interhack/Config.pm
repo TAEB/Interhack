@@ -75,7 +75,7 @@ sub parse_config_line
   }
   elsif ($line =~ m#^s/# || $line =~ s/^eval\s+//)
   {
-    push @main::repmap, "sub { $line }";
+    push @main::repmap, "no strict; sub { $line }";
   }
   elsif ($line =~ /^annotate\s+(.)(.*?)\1\s*(.+)\s*/)
   {
