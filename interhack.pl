@@ -210,8 +210,6 @@ while (1)
   # read from sock, print to stdout
   if (defined(recv($sock, $_, 1024, 0)))
   {
-    study;
-
     if (/Logged in as: (\w+)/)
     {
       $at_login = 1;
