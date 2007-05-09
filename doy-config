@@ -8,8 +8,8 @@ color darkgray With great effort you move the boulder.
 color darkgray You try to move the boulder, but in vain.
 # }}}
 # pets {{{
-color darkgray You displaced your .*?.
-color darkgray You stop.  Your .*? is in the way!
+color darkgray You displaced your [^.?!]*.
+color darkgray You stop[^.?!]*.  Your .*? is in the way!
 # }}}
 # fountains {{{
 color darkgray You hear water falling on coins.
@@ -31,7 +31,7 @@ color purple You feel (strong|agile|tough|smart|wise|charismatic)!
 color purple Welcome to experience level \d+.
 # }}}
 # wishing {{{
-color purple For what do you wish?
+color purple For what do you wish\?
 # }}}
 # resists {{{
 color green  You feel ((especially )?healthy|hardy).
@@ -93,7 +93,7 @@ color red   (Wizard|Valkyrie|Elf) needs food, badly!
 # }}}
 # serious life threatening issues {{{
 color bred   You faint from lack of food.
-color bred   Stop eating?
+color bred   Stop eating\?
 color bred   You are slowing down.
 color bred   Your limbs are stiffening.
 color bred   You (don't feel very well|are turning a little green).
@@ -102,7 +102,7 @@ color bred   You are turning into a green slime.
 color bred   You feel deathly sick.
 color bred   You feel much worse.
 color bred   The .*? swings itself around you!
-color bred   Really quit?
+color bred   Really quit\?
 # }}}
 # }}}
 
@@ -169,4 +169,9 @@ color darkgray [a-z]+\s+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
 color white    [a-z] - [a-z ]+\s+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
 color red      \*[a-z] - [a-z ]+\s+\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]
 color red      \#[a-z] - [a-z ]+\s+\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]
+# }}}
+
+# plot {{{
+color bred the high priest(ess)? of (?!Moloch)\S+
+color bred You feel a strange vibration [^.?!]*.
 # }}}
