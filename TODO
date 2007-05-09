@@ -1,5 +1,4 @@
 extensible, togglable plugins, etc
-use dark gray for output so it can't be confused with NH output
 allow rebooting without losing connection (with exec)
 
 starred ideas have been implemented
