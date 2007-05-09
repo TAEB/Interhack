@@ -74,7 +74,6 @@ ReadMode 3;
 END { ReadMode 0 }
 $|++;
 
-my $buf;
 my $responses_so_far = '';
 my $response_this_play = 1;
 my $tab = "\t";
@@ -83,7 +82,7 @@ my $at_login = 0;
 
 
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
-until (defined(recv($sock, $buf, 1024, 0)) && ($buf =~ $last)) {}
+until (defined(recv($sock, $_, 1024, 0)) && ($_ =~ $last)) {}
 
 sub xp_str
 {
@@ -183,7 +182,7 @@ while (1)
         print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.";
         print {$sock} "o:0\n1000ddi";
         print {$sock} "$nethackrc\eg";
-        until (defined(recv($sock, $buf, 1024, 0)) && ($buf =~ /\e\[.*?'g' is not implemented/)) {}
+        until (defined(recv($sock, $_, 1024, 0)) && /\e\[.*?'g' is not implemented/) {}
         print {$sock} ":wq\n";
       }
     }
@@ -209,11 +208,11 @@ while (1)
   }
 
   # read from sock, print to stdout
-  if (defined(recv($sock, $buf, 1024, 0)))
+  if (defined(recv($sock, $_, 1024, 0)))
   {
-    study $buf;
+    study;
 
-    if ($buf =~ /Logged in as: (\w+)/)
+    if (/Logged in as: (\w+)/)
     {
       $at_login = 1;
       $me = $1;
@@ -221,28 +220,28 @@ while (1)
 
     if ($at_login)
     {
-      $buf =~ s/(o\) Edit option file)/$1 \e[1;30mTab) .. locally\e[0m/;
+      s/(o\) Edit option file)/$1 \e[1;30mTab) .. locally\e[0m/;
     }
 
     # make floating eyes bright cyan
-    $buf =~ s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
+    s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
 
-    if ($buf =~ /\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
+    if (/\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
     {
       $responses_so_far .= " $2$1";
       $response_this_play = 1;
     }
-    elsif ($buf =~ /\e\[HYou hear (\d) tumblers? click\./)
+    elsif (/\e\[HYou hear (\d) tumblers? click\./)
     {
       $responses_so_far .= " 0$1";
       $response_this_play = 1;
     }
-    elsif ($buf =~ /\e\[HYou hear (\d) gears? turn\./)
+    elsif (/\e\[HYou hear (\d) gears? turn\./)
     {
       $responses_so_far .= " ${1}0";
       $response_this_play = 1;
     }
-    elsif ($buf =~ /\e\[HWhat tune are you playing\?/)
+    elsif (/\e\[HWhat tune are you playing\?/)
     {
       $responses_so_far .= " 00" unless $response_this_play;
       $response_this_play = 0;
@@ -261,28 +260,28 @@ while (1)
       }
     }
 
-    if ($buf =~ /\e\[HWhat do you want to name this gray stone\?/)
+    if (/\e\[HWhat do you want to name this gray stone\?/)
     {
-      $buf .= tab("the Heart of Ahriman\n");
+      $_ .= tab("the Heart of Ahriman\n");
     }
 
     foreach my $map (@colormap)
     {
-      $buf =~ s{$map->[0]}{$map->[1]$&\e[0m}g;
+      s{$map->[0]}{$map->[1]$&\e[0m}g;
     }
 
     # display Xp needed for next level
-    $buf =~ s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
+    s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
 
     # highlight "high priest of Foo" except when Foo = Moloch
-    $buf =~ s{high priest of (?!Moloch)\S+}{\e[1;31m$&\e[0m}g;
+    s{high priest of (?!Moloch)\S+}{\e[1;31m$&\e[0m}g;
 
     # HPmon done right
-    $buf =~ s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
-    $buf =~ s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
+    s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
+    s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
 
     # power colors!
-    $buf =~ s{Pw:((-?\d+)\((-?\d+)\))}{
+    s{Pw:((-?\d+)\((-?\d+)\))}{
       my $color = '';
 
       if ($2 >= $3) { }
@@ -301,7 +300,7 @@ while (1)
 
       "Pw:$color$1\e[0m"
       }eg;
-    print $buf;
+    print;
   }
 }
 
