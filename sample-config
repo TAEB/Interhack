@@ -7,6 +7,11 @@ nick Eidolos
 # map X doesn't work, e.g. DX
 #map X \#enhance\n
 
+# output remappings
+s/You hear someone counting money\./There is a vault on this level! /g
+s/You hear the footsteps of a guard on patrol\./\
+There is definitely a vault on this level!    /g
+
 # simple colorings
 color red the high priest(ess)? of (?!Moloch)[a-zA-Z- ]+
 

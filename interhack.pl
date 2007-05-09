@@ -15,6 +15,7 @@ our $server = 'nethack.alt.org';
 our $autologin = !grep {$_ eq "-l"} @ARGV;
 our %keymap;
 our @colormap;
+our @repmap;
 
 use Interhack::Config;
 Interhack::Config::run();
@@ -219,6 +220,11 @@ while (1)
     if ($at_login)
     {
       s/(o\) Edit option file)/$1 \e[1;30mTab) .. locally\e[0m/;
+    }
+
+    foreach my $map (@repmap)
+    {
+      $map->();
     }
 
     # make floating eyes bright cyan

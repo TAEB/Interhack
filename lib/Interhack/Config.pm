@@ -72,6 +72,10 @@ sub parse_config_line
     $action =~ s/\\n/\n/g;
     $main::keymap{$trigger} = $action;
   }
+  elsif ($line =~ m#^s/#)
+  {
+    push @main::repmap, sub { eval $line };
+  }
   elsif ($line =~ /^color\s+([\w&]+)\s+(.+)\s*$/i)
   {
     my ($regex, $color) = (eval("qr/$2/"), lc($1));
