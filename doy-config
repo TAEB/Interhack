@@ -1,0 +1,172 @@
+# main config {{{
+nick doy
+# }}}
+
+# messages to ignore {{{
+# boulders {{{
+color darkgray With great effort you move the boulder.
+color darkgray You try to move the boulder, but in vain.
+# }}}
+# pets {{{
+color darkgray You displaced your .*?.
+color darkgray You stop.  Your .*? is in the way!
+# }}}
+# fountains {{{
+color darkgray You hear water falling on coins.
+color darkgray You hear bubbling water.
+# }}}
+# vaults {{{
+color darkgray You hear someone counting money.
+color darkgray You hear the footsteps of a guard on patrol.
+# }}}
+# misc {{{
+color darkgray Unknown command '[^']+'.
+color darkgray --More--
+# }}}
+# }}}
+
+# good messages {{{
+# gain ability/level {{{
+color purple You feel (strong|agile|tough|smart|wise|charismatic)!
+color purple Welcome to experience level \d+.
+# }}}
+# wishing {{{
+color purple For what do you wish?
+# }}}
+# resists {{{
+color green  You feel ((especially )?healthy|hardy).
+color green  You feel (full of hot air|warm).
+color green  You (feel a momentary chill|feel cool|be chillin').
+color green  You feel ((wide )?awake).
+color green  You feel (very firm|totally together, man).
+color green  Your health currently feels amplified!
+color green  You feel (insulated|grounded in reality).
+# }}}
+# other intrinsics {{{
+color blue   You feel (very jumpy|diffuse).
+color blue   You feel (in control of yourself|centered in your personal space).
+color blue   You feel (controlled)
+color blue   You feel (a strange mental acuity|in touch with the cosmos).
+color blue   You feel (hidden|perceptive|stealthy|sensitive).
+color blue   You feel (very self-conscious|transparent).
+color blue   You see an image of someone stalking you.
+color blue   Your vision becomes clear.
+color blue   You (seem faster|feel quick).
+# }}}
+# skills {{{
+color cyan   You feel more confident in your.*? skills.
+color cyan   You feel like you could be more dangerous!
+# }}}
+# misc {{{
+color bblue  You feel (a mild buzz).
+# }}}
+# }}}
+
+# dangerous messages {{{
+# attack effects {{{
+color red    Goodbye level \d+.
+color red    The .*? grabs you.
+# }}}
+# pet hunger {{{
+color red    The .*? yowls!
+# }}}
+# negative status effects {{{
+color red    Oh wow!  Great stuff!
+color red    You reel...
+color red    You feel somewhat dizzy.
+# }}}
+# losing resists {{{
+color red    You feel (warmer|a little sick|cooler|tired|conductive).
+# }}}
+# losing intrinsics {{{
+color red    You seem slower.
+color red    You feel (slow|slower).
+color red    You feel (less attractive|paranoid|vulnerable|clumsy).
+color red    You feel (uncontrolled|less jumpy).
+color red    You (thought you saw something|tawt you taw a puttie tat).
+color red    Your senses fail.
+# }}}
+# hunger {{{
+color red    You are beginning to feel hungry.
+color red    You are beginning to feel weak.
+color red   (Wizard|Valkyrie|Elf) needs food, badly!
+# }}}
+# serious life threatening issues {{{
+color bred   You faint from lack of food.
+color bred   Stop eating?
+color bred   You are slowing down.
+color bred   Your limbs are stiffening.
+color bred   You (don't feel very well|are turning a little green).
+color bred   Your (limbs are getting oozy|skin begins to peel away).
+color bred   You are turning into a green slime.
+color bred   You feel deathly sick.
+color bred   You feel much worse.
+color bred   The .*? swings itself around you!
+color bred   Really quit?
+# }}}
+# }}}
+
+# useful messages {{{
+# shops {{{
+color yellow You hear someone cursing shoplifters.
+color yellow You hear the chime of a cash register.
+# }}}
+# }}}
+
+# items {{{
+# buc {{{
+color red      (?<!un)cursed
+color green    blessed
+color brown    uncursed
+# }}}
+# enchantment/charges {{{
+color darkgray \(\d+:0\)
+color cyan     \(\d+:\d+\)
+color brown    \s\+0
+color green    \s\+[1-9]\d*
+color red      \s\-[1-9]\d*
+# }}}
+# important items {{{
+color magenta  Amulet of Yendor
+color magenta  Bell of Opening
+color magenta  silver bell
+color magenta  Candelabrum of Invocation
+color magenta  candelabrum
+color magenta  Book of the Dead
+color magenta  papyrus spellbook
+# }}}
+# dangerous items {{{
+color bred     cancellation
+color bred     \(cock\|chick\)atrice corpse
+color bred     bag of tricks
+color bred     wand .* vanish
+# }}}
+# gold {{{
+color yellow   \d+ (gold piece|zorkmid)s?
+# }}}
+# water {{{
+color cyan     (?<= of )water
+color blue     (?<!un)holy
+color bred     unholy
+# }}}
+# }}}
+
+# spell menu {{{
+color white   [a-zA-Z] - [a-z ]+ \d\s+\w+\s+0%
+color cyan    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+[1-9]%
+color cyan    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+[12][0-9]%
+color yellow  [a-zA-Z] - [a-z ]+ \d\s+\w+\s+[3-6][0-9]%
+color yellow  [a-zA-Z] - [a-z ]+ \d\s+\w+\s+7[0-5]%
+color bred    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+7[6-9]%
+color bred    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+8[0-9]%
+color red     [a-zA-Z] - [a-z ]+ \d\s+\w+\s+9[0-9]%
+color red     [a-zA-Z] - [a-z ]+ \d\s+\w+\s+100%
+color magenta [a-zA-Z] - [a-z ]+ \d\*.*[0-9]+%
+# }}}
+
+# enhance menu {{{
+color darkgray [a-z]+\s+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color white    [a-z] - [a-z ]+\s+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color red      \*[a-z] - [a-z ]+\s+\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]
+color red      \#[a-z] - [a-z ]+\s+\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]
+# }}}
