@@ -25,6 +25,7 @@ my $postprint = '';
 my $annotation_onscreen = 0;
 my $stop_sing_pass = 0;
 my $starttime = time;
+my $keystrokes = 0;
 
 sub serialize_time
 {
@@ -185,6 +186,7 @@ while (1)
       $c = $keymap{$c};
     }
 
+    $keystrokes += length $c;
     print {$sock} $c;
     print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
     $at_login = 0;
@@ -300,8 +302,12 @@ while (1)
     }eg;
 
   print;
+
   print "\e[s\e[23H\e[1;44m".serialize_time(time - $starttime)."\e[0m\e[u";
+
   print $postprint and $postprint = ''
     if $postprint ne '';
 }
+
+print "You typed $keystrokes keystrokes in the game.\n";
 
