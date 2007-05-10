@@ -24,6 +24,7 @@ my $response_this_play = 1;
 my $tab = "\t";
 my $me;
 my $at_login = 0;
+my $logged_in = 0;
 my $postprint = '';
 my $annotation_onscreen = 0;
 my $stop_sing_pass = 0;
@@ -161,8 +162,8 @@ while (1)
   # read from stdin, print to sock {{{
   if (defined(my $c = ReadKey .05))
   {
-    if ($c eq "p" && $at_login) { $in_game = 1 }
-    if ($c eq "\t" && $at_login)
+    if ($c eq "p" && $logged_in) { $in_game = 1 }
+    if ($c eq "\t" && $logged_in)
     {
       print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
       my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
@@ -240,15 +241,20 @@ while (1)
     s/\Q$pass//g;
   }
 
+  if (/\e\[1B ## dgamelaunch - network console game launcher/)
+  {
+    $at_login = 1;
+  }
   if (/Logged in as: (\w+)/)
   {
     $stop_sing_pass = 1;
     $at_login = 1;
+    $logged_in = 1;
     $me = $1;
     $pass = '';
   }
 
-  if ($at_login)
+  if ($at_login && $logged_in)
   {
     s/(o\) Edit option file)/$1  \e[1;30mTab) edit options locally\e[0m/g;
   }
