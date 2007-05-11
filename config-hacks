@@ -22,3 +22,9 @@ eval BEGIN { $start_time = time } if ($in_game) { my $time = serialize_time(time
 # add geno listing (by Eidolos)
 eval while (/Wiped out all (.*?)\./g) { $geno{$1} = 1 } if (/\e\[Hgeno(?:cide)?s?: unknown extended command/) { annotate(join ", ", sort keys %geno) }
 
+# add keystroke count extended command (by Eidolos)
+s/key(?:stroke)?s?: unknown extended command/$keystrokes keystrokes thus far./g
+
+# add realtime listing (in case you don't like the timer) (by Eidolos)
+eval BEGIN { $start_time = time } s/(?:real)?timer?: unknown extended command/serialize_time(time - $start_time) . " thus far."/eg
+
