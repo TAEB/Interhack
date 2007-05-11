@@ -166,6 +166,11 @@ sub nick
     $nick = shift;
 }
 
+sub pass
+{
+    $pass = shift;
+}
+
 sub each_iteration(&;$)
 {
     push @repmap, shift;
