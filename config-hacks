@@ -10,3 +10,9 @@ eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
         elsif ($mod20 == 11) { annotate("Remove your right ring.") } \
         elsif ($mod20 == 13) { annotate("Put on your right ring.") } }
 
+# print a nethackidiocy fortune on the NAO main menu (by Eidolos)
+eval if ($at_login) { $postprint .= "\e[s\e[19H\e[1;30m" . `fortune $ENV{HOME}/.fortune/nethackidiocy` . "\e[0m\e[u" }
+
+# clear screen when going to the watch menu from the main menu (by Eidolos)
+keval if ($at_login && $_ eq "w") { print "\e[2J" }
+
