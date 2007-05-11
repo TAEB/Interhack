@@ -155,7 +155,7 @@ while (1)
   if (defined(my $c = ReadKey .05))
   {
     if ($c eq "p" && $logged_in) { $in_game = 1 }
-    if ($c eq "\t" && $logged_in)
+    if ($c eq "\t" && $at_login && $logged_in)
     {
       print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
       my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
