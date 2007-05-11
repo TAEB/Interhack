@@ -222,8 +222,11 @@ sub tab # {{{
 } # }}}
 
 # load Interhack modules {{{
-use Interhack::Config;
-Interhack::Config::run();
+#use Interhack::Config;
+#Interhack::Config::run();
+do "$ENV{HOME}/.interhack/new-config"
+    if -e "$ENV{HOME}/.interhack/new-config";
+die $@ if $@;
 
 use Interhack::Sock;
 my $sock = Interhack::Sock::sock($server, $port);
