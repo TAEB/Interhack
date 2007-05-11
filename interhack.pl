@@ -89,6 +89,12 @@ our $in_game = 0;
 our $buf = '';
 # }}}
 
+sub remap
+{
+    my ($key, $result) = @_;
+    $keymap{$key} = $result;
+}
+
 sub make_annotation
 {
     my ($matching, $annotation) = @_;
