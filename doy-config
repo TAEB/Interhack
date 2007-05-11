@@ -14,6 +14,7 @@ color darkgray You stop[^.?!]*.  Your .*? is in the way!
 # fountains {{{
 color darkgray You hear water falling on coins.
 color darkgray You hear bubbling water.
+color darkgray You hear the splashing of a naiad.
 # }}}
 # vaults {{{
 color darkgray You hear someone counting money.
@@ -55,7 +56,7 @@ color blue   You (seem faster|feel quick).
 # }}}
 # skills {{{
 color cyan   You feel more confident in your.*? skills.
-color cyan   You feel like you could be more dangerous!
+color cyan   You feel you could be more dangerous!
 # }}}
 # misc {{{
 color bblue  You feel (a mild buzz).
@@ -65,7 +66,7 @@ color bblue  You feel (a mild buzz).
 # dangerous messages {{{
 # attack effects {{{
 color red    Goodbye level \d+.
-color red    The .*? grabs you.
+color red    The [^.!\e]*? grabs you.
 # }}}
 # pet hunger {{{
 color red    The .*? yowls!
@@ -74,6 +75,7 @@ color red    The .*? yowls!
 color red    Oh wow!  Great stuff!
 color red    You reel...
 color red    You feel somewhat dizzy.
+color red    You feel feverish.
 # }}}
 # losing resists {{{
 color red    You feel (warmer|a little sick|cooler|tired|conductive).
@@ -115,16 +117,19 @@ color yellow You hear the chime of a cash register.
 
 # items {{{
 # buc {{{
-color red      (?<!un)cursed
-color green    blessed
-color brown    uncursed
+color red      (?<![Uu]n)[Cc]ursed
+color green    [Bb]lessed
+color brown    [Uu]ncursed
 # }}}
 # enchantment/charges {{{
-color darkgray \(\d+:0\)
 color cyan     \(\d+:\d+\)
+color darkgray \(\d+:0\)
 color brown    \s\+0
 color green    \s\+[1-9]\d*
-color red      \s\-[1-9]\d*
+color red      (?<!AC)\s\-[1-9]\d*
+# }}}
+# erosion {{{
+color red (very|thoroughly)? ?(rusty|burnt|rotted|corroded)
 # }}}
 # important items {{{
 color magenta  Amulet of Yendor
@@ -137,7 +142,7 @@ color magenta  papyrus spellbook
 # }}}
 # dangerous items {{{
 color bred     cancellation
-color bred     \(cock\|chick\)atrice corpse
+color bred     (cock|chick)atrice corpse
 color bred     bag of tricks
 color bred     wand .* vanish
 # }}}
@@ -165,13 +170,33 @@ color magenta [a-zA-Z] - [a-z ]+ \d\*.*[0-9]+%
 # }}}
 
 # enhance menu {{{
-color darkgray [a-z]+\s+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
-color white    [a-z] - [a-z ]+\s+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
-color red      \*[a-z] - [a-z ]+\s+\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]
-color red      \#[a-z] - [a-z ]+\s+\[\(Unskilled\|Basic\|Skilled\|Expert\|Master\|Grand Master\)\]
+color darkgray (?<![a-z] - )[a-z -]+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color bgreen   [a-z] - [a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color green    \*[a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color red      \#[a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color white    \[Unskilled\]
+color cyan     \[Basic\]
+color yellow   \[Skilled\]
+color bred     \[Expert\]
+color red      \[Master\]
+color magenta  \[Grand Master\]
 # }}}
 
 # plot {{{
-color bred [Tt]he high priest(ess)? of (?!Moloch)\S+
-color bred You feel a strange vibration [^.?!]*.
+color yellow [Tt]he high priest(ess)? of (?!Moloch)\S+
+color yellow You feel a strange vibration [^.?!]*.
+# }}}
+
+# CHEATZ {{{
+tab /\e\[HWhat do you want to name this gray stone\?/ the Heart of Ahriman\n
+tab /\e\[HWhat do you want to name this \w+ helmet\?/ the Mitre of Holiness\n
+tab /\e\[HWhat do you want to name this \w+ amulet\?/ the Eye of the Aethiopica\n
+# }}}
+
+# other stuff {{{
+eval if ($at_login) { \
+         $postprint .= "\e[s\e[20H\e[1;30m" . \
+                       `fortune -n200 -s $ENV{HOME}/.fortune/yasd-fortune` . \
+                       "\e[0m\e[u"; \
+     }
 # }}}
