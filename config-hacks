@@ -16,7 +16,7 @@ eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
 eval if ($at_login) { $postprint .= "\e[s\e[19H\e[1;30m" . `fortune $ENV{HOME}/.fortune/nethackidiocy` . "\e[0m\e[u" }
 # }}}
 
-# clear screen when going to the watch menu from the main menu (by Eidolos) {{{
+# clrscr when going to the watch menu from main menu (by Eidolos) {{{
 keval if ($at_login && $_ eq "w") { print "\e[2J" }
 # }}}
 
@@ -32,7 +32,7 @@ eval while (/Wiped out all (.*?)\./g) { $geno{$1} = 1 } if (/\e\[Hgeno(?:cide)?s
 s/key(?:stroke)?s?: unknown extended command/$keystrokes keystrokes thus far.\e[K/g
 # }}}
 
-# add realtime listing (in case you don't like the timer) (by Eidolos) {{{
+# add realtime listing (if you don't like the timer) (by Eidolos) {{{
 eval BEGIN { $start_time = time } s/(?:real)?timer?: unknown extended command/serialize_time(time - $start_time) . " thus far.\e[K"/eg
 # }}}
 
