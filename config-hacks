@@ -40,3 +40,14 @@ eval BEGIN { $start_time = time } s/(?:real)?timer?: unknown extended command/se
 eval s/\bSt:\d+.*?Ch:\d+/' ' x length $&/eg and $stats = $&; s/stat(?:istic)?s?: unknown extended command/$stats\e[K/g
 # }}}
 
+# power colors! (by Eidolos) {{{
+eval s{Pw:((-?\d+)\((-?\d+)\))}{                    \
+       my $color = '';                              \
+          if ($2 >= $3)     {                     } \
+       elsif ($2 * 2 >= $3) { $color = "\e[1;36m" } \
+       elsif ($2 * 3 >= $3) { $color = "\e[1;35m" } \
+       else                 { $color = "\e[0;35m" } \
+       "Pw:$color$1\e[0m"                           \
+     }eg;
+# }}}
+
