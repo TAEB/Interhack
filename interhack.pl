@@ -29,7 +29,6 @@ my $logged_in = 0;
 my $postprint = '';
 my $annotation_onscreen = 0;
 my $stop_sing_pass = 0;
-my $starttime = time;
 my $keystrokes = 0;
 my $in_game = 0;
 my $buf = '';
@@ -50,15 +49,6 @@ sub serialize_time # {{{
   {
     sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
   }
-} # }}}
-
-sub time_to_screen # {{{
-{
-  return if !$in_game;
-  my $time = shift;
-  my $left = 81;
-  $left -= length $time;
-  print "\e[s\e[23;${left}H\e[1;44m$time\e[0m\e[u";
 } # }}}
 
 sub xp_str # {{{
@@ -357,8 +347,6 @@ while (1)
     }eg; # }}}
 
   print;
-
-  time_to_screen(serialize_time(time - $starttime));
 
   print $postprint and $postprint = ''
     if $postprint ne '';
