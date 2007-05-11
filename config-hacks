@@ -51,6 +51,19 @@ eval s{Pw:((-?\d+)\((-?\d+)\))}{                    \
      }eg;
 # }}}
 
+# hpmon done right (by Eidolos) {{{
+eval s{(\e\[24;\d+H|HP:)((\d+)\((\d+)\))}{                     \
+       my $color = '';                                         \
+          if ($3 * 7 <= $4 || $3 <= 6) { $color = "\e[1;30m" } \
+       elsif ($3     >= $4)            {                     } \
+       elsif ($3 * 2 >= $4)            { $color = "\e[1;32m" } \
+       elsif ($3 * 3 >= $4)            { $color = "\e[1;33m" } \
+       elsif ($3 * 4 >= $4)            { $color = "\e[0;31m" } \
+       elsif ($3 * 5 >= $4)            { $color = "\e[1;31m" } \
+       "$1$color$2\e[0m"                                       \
+     }eg;
+# }}}
+
 # display exp needed to next level (by Eidolos) {{{
 eval s{Xp:(\d+)\/(\d+)}{                                           \
        my $length = length $2;                                     \

@@ -52,37 +52,6 @@ sub serialize_time # {{{
   }
 } # }}}
 
-sub hpmon # {{{
-{
-  my ($pre, $text, $cur, $max) = @_;
-  my $color = '';
-
-  # prayer point
-  if ($cur * 7 <= $max || $cur <= 6)
-  {
-    $color = "\e[1;30m";
-  }
-  elsif ($cur >= $max) { }
-  elsif ($cur * 2 >= $max)
-  {
-    $color = "\e[1;32m";
-  }
-  elsif ($cur * 3 >= $max)
-  {
-    $color = "\e[1;33m";
-  }
-  elsif ($cur * 4 >= $max)
-  {
-    $color = "\e[0;31m";
-  }
-  elsif ($cur * 5 >= $max)
-  {
-    $color = "\e[1;31m";
-  }
-
-  "$pre$color$text\e[0m"
-} # }}}
-
 sub annotate # {{{
 {
   my $annotation = shift;
@@ -298,11 +267,6 @@ while (1)
   {
     s{$map->[0]}{$map->[1]$&\e[0m}g;
   }
-
-  # HPmon done right {{{
-  s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
-  s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
-  # }}}
 
   print;
 
