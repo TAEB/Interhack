@@ -18,6 +18,7 @@ our @repmap;
 our @krepmap;
 our @annomap;
 our @tabmap;
+our %extended_command;
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
 our %colormap =
 (
@@ -89,6 +90,13 @@ our $keystrokes = 0;
 our $in_game = 0;
 our $buf = '';
 # }}}
+
+sub extended_command
+{
+    my ($cmd, $result) = @_;
+    $cmd =~ s/^#//;
+    $extended_command{$cmd} = $result;
+}
 
 sub remap
 {
@@ -385,6 +393,17 @@ while (1)
   {
     s/(o\) Edit option file)/$1  \e[1;30mTab) edit options locally\e[0m/g;
   }
+
+  s{(\e\[[0-9;]*.\s*)(\w+): unknown extended command\.}{
+      if (exists $extended_command{$2})
+      {
+        $1 . $extended_command{$2}->() . "\e[K"
+      }
+      else
+      {
+        $&
+      }
+  }eg;
 
   foreach my $map (@repmap)
   {
