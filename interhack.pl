@@ -35,6 +35,105 @@ our $in_game = 0;
 our $buf = '';
 # }}}
 
+sub make_annotation
+{
+    my ($matching, $annotation) = @_;
+    if (!ref($matching))
+    {
+        push @repmap, sub { if (index($_, $matching) > -1) { annotate($annotation) } }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @repmap, sub { if (/$matching/) { annotate($annotation) } }
+    }
+    elsif (ref($matching) eq "CODE")
+    {
+        push @repmap, sub { if ($matching->()) { annotate($annotation) } }
+    }
+    else
+    {
+        die "Unable to make_annotation matching object of type " . ref($matching);
+    }
+}
+
+sub make_anno
+{
+    make_annotation(@_);
+}
+
+sub recolor
+{
+    my ($matching, $newcolor) = @_;
+    $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : die "Unable to discern the color described by \"$newcolor\"";
+
+    if (!ref($matching))
+    {
+        push @repmap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @repmap, sub { s/$matching/$newcolor$&\e[0m/g }
+    }
+    else
+    {
+        die "Unable to recolor matching object of type " . ref($matching);
+    }
+}
+
+sub make_tab
+{
+    my ($matching, $tabstring) = @_;
+    if (!ref($matching))
+    {
+        push @repmap, sub { if (index($_, $matching) > -1) { tab($tabstring) } }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @repmap, sub { if (/$matching/) { tab($tabstring) } }
+    }
+    elsif (ref($matching) eq "CODE")
+    {
+        push @repmap, sub { if ($matching->()) { tab($tabstring) } }
+    }
+    else
+    {
+        die "Unable to make_tab matching object of type " . ref($matching);
+    }
+}
+
+sub nick
+{
+    $nick = shift;
+}
+
+sub each_iteration(&;$)
+{
+    push @repmap, shift;
+}
+
+sub include
+{
+    my $module = shift;
+    $module .= ".pl" unless $module =~ /\.p[lm]$/;
+    my $file;
+
+    if (-e "$ENV{HOME}/.interhack/modules/$module")
+    {
+        $file = "$ENV{HOME}/.interhack/modules/$module";
+    }
+    elsif (-e "modules/$module")
+    {
+        $file = "modules/$module";
+    }
+    else
+    {
+        die "Unable to find $module in $ENV{HOME}/.interhack/modules/$module or modules/$module";
+    }
+
+    do $file;
+    die $@ if $@;
+}
+
 sub serialize_time # {{{
 {
   my $seconds = shift;
