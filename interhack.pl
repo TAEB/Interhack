@@ -195,7 +195,7 @@ ReadMode 3;
 END { ReadMode 0 }
 $|++;
 
-for (@repmap) { $_ = eval $_ }
+#for (@repmap) { $_ = eval $_ }
 for (@krepmap) { $_ = eval $_ }
 
 ITER:
