@@ -18,6 +18,7 @@ our @repmap;
 our @krepmap;
 our @annomap;
 our @tabmap;
+our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
 our %colormap =
 (
   black          => "\e[0;30m",
@@ -191,17 +192,18 @@ sub include
     $module .= ".pl" unless $module =~ /\.p[lm]$/;
     my $file;
 
-    if (-e "$ENV{HOME}/.interhack/modules/$module")
+    for (@mINC)
     {
-        $file = "$ENV{HOME}/.interhack/modules/$module";
+      if (-e "$_/$module")
+      {
+        $file = "$_/$module";
+        last;
+      }
     }
-    elsif (-e "modules/$module")
+
+    if (!defined($file))
     {
-        $file = "modules/$module";
-    }
-    else
-    {
-        die "Unable to find $module in $ENV{HOME}/.interhack/modules/$module or modules/$module";
+        die "Unable to find $module in @mINC";
     }
 
     do $file;
