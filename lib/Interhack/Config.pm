@@ -77,6 +77,10 @@ sub parse_config_line
   {
     push @main::repmap, "no strict; sub { $line }";
   }
+  elsif ($line =~ s/^keval\s+//)
+  {
+    push @main::krepmap, "no strict; sub { $line }";
+  }
   elsif ($line =~ /^annotate\s+(.)(.*?)\1\s*(.+)\s*/)
   {
     push @main::annomap, [qr/$2/ => $3];

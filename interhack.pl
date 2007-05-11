@@ -14,6 +14,7 @@ our $server = 'nethack.alt.org';
 our %keymap;
 our @colormap;
 our @repmap;
+our @krepmap;
 our @annomap;
 our @tabmap;
 # }}}
@@ -155,6 +156,7 @@ END { ReadMode 0 }
 $|++;
 
 for (@repmap) { $_ = eval $_ }
+for (@krepmap) { $_ = eval $_ }
 
 ITER:
 while (1)
@@ -214,6 +216,14 @@ while (1)
     }
 
     $keystrokes += length $c;
+
+    foreach my $map (@krepmap)
+    {
+      local $_ = $c;
+      $map->();
+      $c = $_;
+    }
+
     print {$sock} $c;
     print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
     $at_login = 0;
