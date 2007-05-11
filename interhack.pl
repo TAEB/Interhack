@@ -11,6 +11,7 @@ our $autologin = !grep {$_ eq "-l"} @ARGV;
 our $nick = '';
 our $pass = '';
 our $server = 'nethack.alt.org';
+our $port = 23;
 our %keymap;
 our @colormap;
 our @repmap;
@@ -125,7 +126,7 @@ use Interhack::Config;
 Interhack::Config::run();
 
 use Interhack::Sock;
-my $sock = Interhack::Sock::sock($server);
+my $sock = Interhack::Sock::sock($server, $port);
 # }}}
 
 # autologin {{{
@@ -139,7 +140,10 @@ if ($autologin && $nick ne '')
 } # }}}
 
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
-until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
+if ($server =~ /alt\.org/)
+{
+  until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
+}
 
 ReadMode 3;
 END { ReadMode 0 }
