@@ -95,6 +95,14 @@ sub remap
     $keymap{$key} = $result;
 }
 
+sub value_of
+{
+    my $exp = shift;
+    return $exp unless ref($exp);
+    return $exp->() if ref($exp) eq "CODE";
+    return $exp;
+}
+
 sub make_annotation
 {
     my ($matching, $annotation) = @_;
@@ -123,7 +131,8 @@ sub make_anno
 
 sub recolor
 {
-    my ($matching, $newcolor) = @_;
+    my $matching = shift;
+    my $newcolor = value_of(shift);
     $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : die "Unable to discern the color described by \"$newcolor\"";
 
     if (!ref($matching))
@@ -218,14 +227,14 @@ sub serialize_time # {{{
 
 sub annotate # {{{
 {
-  my $annotation = shift;
+  my $annotation = value_of(shift);
   $annotation_onscreen = 1;
   $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
 } # }}}
 
 sub tab # {{{
 {
-  my $string = shift;
+  my $string = value_of(shift);
   my $msg = @_ ? shift : "Press tab to send the string: ";
   $tab = $string;
   $string =~ s/\n/\\n/g;
