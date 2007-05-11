@@ -3,7 +3,6 @@
 # mysterious force counter (by Eidolos) {{{
 eval if (/\e\[HA mysterious force momentarily surrounds you\.\.\./) { annotate("That's force number " . ++$mysterious_force . ".") }
 # }}}
-
 # for dual-SD games (by Eidolos) {{{
 eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
            if ($mod20 == 3)  { annotate("Remove your left ring.")  } \
@@ -11,35 +10,27 @@ eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
         elsif ($mod20 == 11) { annotate("Remove your right ring.") } \
         elsif ($mod20 == 13) { annotate("Put on your right ring.") } }
 # }}}
-
 # print a nethackidiocy fortune on the NAO main menu (by Eidolos) {{{
 eval if ($at_login) { $postprint .= "\e[s\e[19H\e[1;30m" . `fortune $ENV{HOME}/.fortune/nethackidiocy` . "\e[0m\e[u" }
 # }}}
-
 # clrscr when going to the watch menu from main menu (by Eidolos) {{{
 keval if ($at_login && $_ eq "w") { print "\e[2J" }
 # }}}
-
 # add realtime clock to botl (by Eidolos) {{{
 eval BEGIN { $start_time = time } if ($in_game) { my $time = serialize_time(time - $start_time); my $col = 81 - length $time; $postprint .= "\e[s\e[23;${col}H\e[1;44m$time\e[0m\e[u"; }
 # }}}
-
 # add geno listing (by Eidolos) {{{
 eval while (/Wiped out all (.*?)\./g) { $geno{$1} = 1 } if (/\e\[Hgeno(?:cide)?s?: unknown extended command/) { annotate(join ", ", sort keys %geno) }
 # }}}
-
 # add keystroke count extended command (by Eidolos) {{{
 s/key(?:stroke)?s?: unknown extended command/$keystrokes keystrokes thus far.\e[K/g
 # }}}
-
 # add realtime listing (if you don't like the timer) (by Eidolos) {{{
 eval BEGIN { $start_time = time } s/(?:real)?timer?: unknown extended command/serialize_time(time - $start_time) . " thus far.\e[K"/eg
 # }}}
-
 # avoid displaying stats on botl (by Eidolos) {{{
 eval s/\bSt:\d+.*?Ch:\d+/' ' x length $&/eg and $stats = $&; s/stat(?:istic)?s?: unknown extended command/$stats\e[K/g
 # }}}
-
 # power colors! (by Eidolos) {{{
 eval s{Pw:((-?\d+)\((-?\d+)\))}{                    \
        my $color = '';                              \
@@ -50,7 +41,6 @@ eval s{Pw:((-?\d+)\((-?\d+)\))}{                    \
        "Pw:$color$1\e[0m"                           \
      }eg;
 # }}}
-
 # hpmon done right (by Eidolos) {{{
 eval s{(\e\[24;\d+H|HP:)((\d+)\((\d+)\))}{                     \
        my $color = '';                                         \
@@ -63,7 +53,6 @@ eval s{(\e\[24;\d+H|HP:)((\d+)\((\d+)\))}{                     \
        "$1$color$2\e[0m"                                       \
      }eg;
 # }}}
-
 # display exp needed to next level (by Eidolos) {{{
 eval s{Xp:(\d+)\/(\d+)}{                                           \
        my $length = length $2;                                     \
