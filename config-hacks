@@ -1,17 +1,31 @@
 # looking for neat stuff! first one to really impress me wins a PRIZE!
 
 # mysterious force counter (by Eidolos) {{{
-eval if (/\e\[HA mysterious force momentarily surrounds you\.\.\./) { annotate("That's force number " . ++$mysterious_force . ".") }
+make_anno "\e[HA mysterious force momentarily surrounds you\.\.\." => sub { "That's force number " . ++$mysterious_force . "." };
 # }}}
 # for dual-SD games (by Eidolos) {{{
-eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
-           if ($mod20 == 3)  { annotate("Remove your left ring.")  } \
-        elsif ($mod20 == 5)  { annotate("Put on your left ring.")  } \
-        elsif ($mod20 == 11) { annotate("Remove your right ring.") } \
-        elsif ($mod20 == 13) { annotate("Put on your right ring.") } }
+each_iteration
+{
+    if (/ T:(\d+)/)
+    {
+        my $mod20 = $1 % 20;
+           if ($mod20 == 3)  { annotate("Remove your left ring.")  }
+        elsif ($mod20 == 5)  { annotate("Put on your left ring.")  }
+        elsif ($mod20 == 11) { annotate("Remove your right ring.") }
+        elsif ($mod20 == 13) { annotate("Put on your right ring.") }
+    }
+}
 # }}}
 # print a nethackidiocy fortune on the NAO main menu (by Eidolos) {{{
-eval if ($at_login) { $postprint .= "\e[s\e[19H\e[1;30m" . `fortune $ENV{HOME}/.fortune/nethackidiocy` . "\e[0m\e[u" }
+each_iteration
+{
+    if ($at_login)
+    {
+        $postprint .= "\e[s\e[19H\e[1;30m"
+                    . `fortune $ENV{HOME}/.fortune/nethackidiocy`
+                    . "\e[0m\e[u"
+    }
+}
 # }}}
 # clrscr when going to the watch menu from main menu (by Eidolos) {{{
 keval if ($at_login && $_ eq "w") { print "\e[2J" }
