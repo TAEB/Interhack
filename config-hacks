@@ -28,3 +28,6 @@ s/key(?:stroke)?s?: unknown extended command/$keystrokes keystrokes thus far.\e[
 # add realtime listing (in case you don't like the timer) (by Eidolos)
 eval BEGIN { $start_time = time } s/(?:real)?timer?: unknown extended command/serialize_time(time - $start_time) . " thus far.\e[K"/eg
 
+# avoid displaying stats on botl (by Eidolos)
+eval s/\bSt:\d+.*?Ch:\d+/' ' x length $&/eg and $stats = $&; s/stat(?:istic)?s?: unknown extended command/$stats\e[K/g
+
