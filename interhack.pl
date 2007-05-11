@@ -232,11 +232,9 @@ sub tab # {{{
   annotate("$msg$string");
 } # }}}
 
-# load Interhack modules {{{
-#use Interhack::Config;
-#Interhack::Config::run();
-do "$ENV{HOME}/.interhack/new-config"
-    if -e "$ENV{HOME}/.interhack/new-config";
+# read config, get a socket {{{
+do "$ENV{HOME}/.interhack/config"
+    if -e "$ENV{HOME}/.interhack/config";
 die $@ if $@;
 
 use Interhack::Sock;
