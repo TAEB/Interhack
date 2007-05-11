@@ -251,7 +251,7 @@ while (1)
     s/\Q$pass//g;
   }
 
-  if (/\e\[1B ## dgamelaunch - network console game launcher/)
+  if (/\e\[1B ## Send mail to <dtype\@dtype.org> for details or a copy of the source code./)
   {
     $at_login = 1;
   }
