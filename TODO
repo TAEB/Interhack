@@ -26,7 +26,7 @@ possibly some kind of overenchant protection
 builtin start scummer >_>
 send keys at the beginning of play (for setting options in devnull)
 showweight
-mysterious force counter
+* mysterious force counter
 * realtime counter
 some kind of mouse support
 kill counter

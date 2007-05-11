@@ -1,5 +1,8 @@
 # looking for neat stuff! first one to really impress me wins a PRIZE!
 
+# mysterious force counter (by Eidolos)
+eval if (/\e\[HA mysterious force momentarily surrounds you\.\.\./) { annotate("That's force number " . ++$mysterious_force . ".") }
+
 # for dual-SD games (by Eidolos)
 eval if (/ T:(\d+)/) { my $mod20 = $1 % 20; \
            if ($mod20 == 3)  { annotate("Remove your left ring.")  } \
