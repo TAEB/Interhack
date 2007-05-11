@@ -47,6 +47,14 @@ are several types of config lines:
     course choose your own delimiters.
       s/You hear someone counting money\./There is a vault on this level. /g
 
+  keval CODE
+    This lets you run CODE for each chunk of user input. The key (or keys!) is
+    in $_, which you can modify to have an effect on what is sent to the
+    server, or do other fancy things. kevals are run in order and if a
+    replacement is made, it still keeps going with the new keystrokes to send
+    to the server.
+      keval if ($_ eq "~" && $at_login) { $_ = "q" }
+
 Passwords:
 
 While you can put your password in ~/.interhack/config, it's probably not a
