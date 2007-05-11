@@ -172,6 +172,6 @@ color red      \#[a-z] - [a-z ]+\s+\[\(Unskilled\|Basic\|Skilled\|Expert\|Master
 # }}}
 
 # plot {{{
-color bred the high priest(ess)? of (?!Moloch)\S+
+color bred [Tt]he high priest(ess)? of (?!Moloch)\S+
 color bred You feel a strange vibration [^.?!]*.
 # }}}
