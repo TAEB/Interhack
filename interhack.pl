@@ -52,28 +52,6 @@ sub serialize_time # {{{
   }
 } # }}}
 
-sub xp_str # {{{
-{
-  my ($level, $total_exp) = @_;
-  my $length = length $total_exp;
-
-  my $exp_needed = $level < 11 ? 10     * 2 ** $level
-                 : $level < 21 ? 10_000 * 2 ** $level
-                 : 10_000_000 * ($level - 19);
-
-  $exp_needed -= $total_exp;
-
-  if (length($exp_needed)-1 > $length)
-  {
-    return "Xp:$level!$total_exp";
-  }
-  else
-  {
-    $length++;
-    return sprintf "X:%dn%-${length}s", $level, $exp_needed;
-  }
-} # }}}
-
 sub hpmon # {{{
 {
   my ($pre, $text, $cur, $max) = @_;
@@ -321,14 +299,10 @@ while (1)
     s{$map->[0]}{$map->[1]$&\e[0m}g;
   }
 
-  # display Xp needed for next level
-  s{Xp:(\d+)\/(\d+)}{xp_str($1, $2)}eg;
-
   # HPmon done right {{{
   s{(\e\[24;\d+H)((\d+)\((\d+)\))}{hpmon($1, $2, $3, $4)}eg;
   s{HP:((-?\d+)\((-?\d+)\))}{hpmon("HP:", $1, $2, $3)}eg;
   # }}}
-
 
   print;
 

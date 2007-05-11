@@ -51,3 +51,14 @@ eval s{Pw:((-?\d+)\((-?\d+)\))}{                    \
      }eg;
 # }}}
 
+# display exp needed to next level (by Eidolos) {{{
+eval s{Xp:(\d+)\/(\d+)}{                                           \
+       my $length = length $2;                                     \
+       my $exp_needed = $1 < 11 ? 10     * 2 ** $1                 \
+                      : $1 < 21 ? 10_000 * 2 ** $1                 \
+                      : 10_000_000 * ($level - 19);                \
+       $exp_needed -= $2;                                          \
+       if (length($exp_needed)-1 > $length) { "Xp:$1!$2" }         \
+       else { sprintf "X:%dn%-".(1+$length)."s", $1, $exp_needed } \
+     }eg;
+# }}}
