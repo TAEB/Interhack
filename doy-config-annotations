@@ -1,0 +1,242 @@
+# main config {{{
+nick doy
+# }}}
+
+# messages to ignore {{{
+# boulders {{{
+color darkgray With great effort you move the boulder.
+color darkgray You try to move the boulder, but in vain.
+# }}}
+# pets {{{
+color darkgray You displaced your [^.?!]*.
+color darkgray You stop[^.?!]*.  Your .*? is in the way!
+# }}}
+# fountains {{{
+color darkgray You hear water falling on coins.
+color darkgray You hear bubbling water.
+color darkgray You hear the splashing of a naiad.
+# }}}
+# vaults {{{
+color darkgray You hear someone counting money.
+color darkgray You hear the footsteps of a guard on patrol.
+# }}}
+# misc {{{
+color darkgray Unknown command '[^']+'.
+color darkgray --More--
+# }}}
+# }}}
+
+# good messages {{{
+# gain ability/level {{{
+color purple You feel (strong|agile|tough|smart|wise|charismatic)!
+color purple Welcome to experience level \d+.
+# }}}
+# wishing {{{
+color purple For what do you wish\?
+# }}}
+# resists {{{
+color green  You feel ((especially )?healthy|hardy).
+annotate /You feel ((especially )? healthy|hardy)./ Gained poison resistance.
+color green  You feel (full of hot air|warm).
+annotate /You feel (full of hot air|warm)./ Gained cold resistance.
+color green  You (feel a momentary chill|feel cool|be chillin').
+annotate /You (feel a momentary chill|feel cool|be chillin')./ Gained fire resistance.
+color green  You feel ((wide )?awake).
+annotate /You feel ((wide )?awake)./ Gained sleep resistance.
+color green  You feel (very firm|totally together, man).
+annotate /You feel (very firm|totally together, man)./ Gained disintegration resistance.
+color green  Your health currently feels amplified!
+annotate /Your health currently feels amplified!/ Gained shock resistance.
+color green  You feel (insulated|grounded in reality).
+annotate /You feel (insulated|grounded in reality)/ Gained shock resistance.
+# }}}
+# other intrinsics {{{
+color blue   You feel (very jumpy|diffuse).
+annotate /You feel (very jumpy|diffuse)./ Gained teleportitis.
+color blue   You feel (in control of yourself|centered in your personal space).
+annotate /You feel (in control of yourself|centered in your personal space)./
+color blue   You feel (controlled)
+annotate /You feel (controlled)/ Gained teleport control.
+color blue   You feel (a strange mental acuity|in touch with the cosmos).
+annotate /You feel (a strange mental acuity|in touch with the cosmos)./ Gained intrinsic telepathy.
+color blue   You feel (hidden|perceptive|stealthy|sensitive).
+annotate /You feel hidden./ Gained invisibility.
+annotate /You feel perceptive./ Gained searching intrinsic.
+annotate /You feel stealthy./ Gained stealth intrinsic.
+annotate /You feel sensitive./ Gained warning intrinsic.
+color blue   You feel (very self-conscious|transparent).
+color blue   You see an image of someone stalking you.
+color blue   Your vision becomes clear.
+annotate /You feel (very self-conscious|transparent)./ Gained see invisible.
+annotate /You see an image of someone stalking you./ Gained see invisible.
+annotate /Your vision becomes clear./ Gained see invisible.
+color blue   You (seem faster|feel quick).
+annotate /You (seem faster|feel quick)./ You are now 'fast'.
+# }}}
+# skills {{{
+color cyan   You feel more confident in your.*? skills.
+color cyan   You feel you could be more dangerous!
+# }}}
+# misc {{{
+color bblue  You feel (a mild buzz).
+annotate /You feel (a mild buzz)./ Gained 1-3 energy.
+# }}}
+# }}}
+
+# dangerous messages {{{
+# attack effects {{{
+color red    Goodbye level \d+.
+color red    The [^.!\e]*? grabs you.
+# }}}
+# pet hunger {{{
+color red    The .*? yowls!
+annotate /The .*? yowls!/ Your pet is hungry!
+# }}}
+# negative status effects {{{
+color red    Oh wow!  Great stuff!
+annotate /Oh wow!  Great stuff!/ You are now hallucinating.
+color red    You reel...
+annotate /You reel.../ You are now stunned.
+color red    You feel somewhat dizzy.
+annotate /You feel somewhat dizzy./ You are now confused.
+color red    You feel feverish.
+annotate /You feel feverish./ You are now a werefoo.
+# }}}
+# losing resists {{{
+color red    You feel (warmer|a little sick|cooler|tired|conductive).
+annotate /You feel warmer./ Lost fire resistance.
+annotate /You feel cooler./ Lost cold resistance.
+annotate /You feel a little sick./ Lost poison resistance.
+annotate /You feel tired./ Lost sleep resistance.
+annotate /You feel conductive./ Lost shock resistance
+# }}}
+# losing intrinsics {{{
+color red    You seem slower.
+color red    You feel (slow|slower).
+annotate /You seem slower./ You are no longer 'fast'.
+annotate /You feel (slow|slower)./ You are no longer 'fast'.
+color red    You feel (less attractive|paranoid|vulnerable|clumsy).
+annotate /You feel less attractive./ Lost aggravate monster intrinsic.
+annotate /You feel paranoid./ Lost invisibility intrinsic.
+annotate /You feel vulnerable./ Lost protection.
+annotate /You feel clumsy./ Lost stealth intrinsic.
+color red    You feel (uncontrolled|less jumpy).
+annotate /You feel less jumpy./ Lost teleportitis.
+annotate /You feel uncontrolled./ Lost teleport control.
+color red    You (thought you saw something|tawt you taw a puttie tat).
+annotate /You (thought you saw something|tawt you taw a puttie tat)./ Lost see invisible.
+color red    Your senses fail.
+annotate /Your senses fail./ Lost intrinsic telepathy.
+# }}}
+# hunger {{{
+color red    You are beginning to feel hungry.
+color red    You are beginning to feel weak.
+color red   (Wizard|Valkyrie|Elf) needs food, badly!
+# }}}
+# serious life threatening issues {{{
+color bred   You faint from lack of food.
+color bred   Stop eating\?
+color bred   You are slowing down.
+color bred   Your limbs are stiffening.
+color bred   You (don't feel very well|are turning a little green).
+color bred   Your (limbs are getting oozy|skin begins to peel away).
+color bred   You are turning into a green slime.
+color bred   You feel deathly sick.
+color bred   You feel much worse.
+color bred   The .*? swings itself around you!
+color bred   Really quit\?
+# }}}
+# }}}
+
+# useful messages {{{
+# shops {{{
+color yellow You hear someone cursing shoplifters.
+color yellow You hear the chime of a cash register.
+# }}}
+# }}}
+
+# items {{{
+# buc {{{
+color red      (?<![Uu]n)[Cc]ursed
+color green    [Bb]lessed
+color brown    [Uu]ncursed
+# }}}
+# enchantment/charges {{{
+color cyan     \(\d+:\d+\)
+color darkgray \(\d+:0\)
+color brown    \s\+0
+color green    \s\+[1-9]\d*
+color red      (?<!AC)\s\-[1-9]\d*
+# }}}
+# erosion {{{
+color red (very|thoroughly)? ?(rusty|burnt|rotted|corroded)
+# }}}
+# important items {{{
+color magenta  Amulet of Yendor
+color magenta  Bell of Opening
+color magenta  silver bell
+color magenta  Candelabrum of Invocation
+color magenta  candelabrum
+color magenta  Book of the Dead
+color magenta  papyrus spellbook
+# }}}
+# dangerous items {{{
+color bred     cancellation
+color bred     (cock|chick)atrice corpse
+color bred     bag of tricks
+color bred     wand .* vanish
+# }}}
+# gold {{{
+color yellow   \d+ (gold piece|zorkmid)s?
+# }}}
+# water {{{
+color cyan     (?<= of )water
+color blue     (?<!un)holy
+color bred     unholy
+# }}}
+# }}}
+
+# spell menu {{{
+color white   [a-zA-Z] - [a-z ]+ \d\s+\w+\s+0%
+color cyan    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+[1-9]%
+color cyan    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+[12][0-9]%
+color yellow  [a-zA-Z] - [a-z ]+ \d\s+\w+\s+[3-6][0-9]%
+color yellow  [a-zA-Z] - [a-z ]+ \d\s+\w+\s+7[0-5]%
+color bred    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+7[6-9]%
+color bred    [a-zA-Z] - [a-z ]+ \d\s+\w+\s+8[0-9]%
+color red     [a-zA-Z] - [a-z ]+ \d\s+\w+\s+9[0-9]%
+color red     [a-zA-Z] - [a-z ]+ \d\s+\w+\s+100%
+color magenta [a-zA-Z] - [a-z ]+ \d\*.*[0-9]+%
+# }}}
+
+# enhance menu {{{
+color darkgray (?<![a-z] - )[a-z -]+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color bgreen   [a-z] - [a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color green    \*[a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color red      \#[a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]
+color white    \[Unskilled\]
+color cyan     \[Basic\]
+color yellow   \[Skilled\]
+color bred     \[Expert\]
+color red      \[Master\]
+color magenta  \[Grand Master\]
+# }}}
+
+# plot {{{
+color yellow [Tt]he high priest(ess)? of (?!Moloch)\S+
+color yellow You feel a strange vibration [^.?!]*.
+# }}}
+
+# CHEATZ {{{
+tab /\e\[HWhat do you want to name this gray stone\?/ the Heart of Ahriman\n
+tab /\e\[HWhat do you want to name this \w+ helmet\?/ the Mitre of Holiness\n
+tab /\e\[HWhat do you want to name this \w+ amulet\?/ the Eye of the Aethiopica\n
+# }}}
+
+# other stuff {{{
+eval if ($at_login) { \
+         $postprint .= "\e[s\e[20H\e[1;30m" . \
+                       `fortune -n200 -s $ENV{HOME}/.fortune/yasd-fortune` . \
+                       "\e[0m\e[u"; \
+     }
+# }}}
