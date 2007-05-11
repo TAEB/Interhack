@@ -397,7 +397,7 @@ while (1)
   s{(\e\[[0-9;]*.\s*)(\w+): unknown extended command\.}{
       if (exists $extended_command{$2})
       {
-        $1 . $extended_command{$2}->() . "\e[K"
+        $1 . value_of($extended_command{$2}) . "\e[K"
       }
       else
       {
