@@ -21,18 +21,18 @@ our @tabmap;
 # }}}
 
 # lexical variables {{{
-my $responses_so_far = '';
-my $response_this_play = 1;
-my $tab = "\t";
-my $me;
-my $at_login = 0;
-my $logged_in = 0;
-my $postprint = '';
-my $annotation_onscreen = 0;
-my $stop_sing_pass = 0;
-my $keystrokes = 0;
-my $in_game = 0;
-my $buf = '';
+our $responses_so_far = '';
+our $response_this_play = 1;
+our $tab = "\t";
+our $me;
+our $at_login = 0;
+our $logged_in = 0;
+our $postprint = '';
+our $annotation_onscreen = 0;
+our $stop_sing_pass = 0;
+our $keystrokes = 0;
+our $in_game = 0;
+our $buf = '';
 # }}}
 
 sub serialize_time # {{{
