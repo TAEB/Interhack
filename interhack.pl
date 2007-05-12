@@ -406,7 +406,7 @@ while (1)
     unless defined(recv($sock, $_, 4096, 0));
   last if length == 0;
 
-  if (/ \e \[? [0-9;]* \z /x)
+  if (/ \e \[? [0-9;]* \z /x || m/  [^]* \z /x)
   {
     $buf .= $_;
     next ITER;
