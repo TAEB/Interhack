@@ -192,6 +192,12 @@ sub pass # {{{
     $pass = shift;
 } # }}}
 
+sub server # {{{
+{
+    ($server, $port) = @_;
+    $port = 23 unless defined $port;
+} # }}}
+
 sub each_iteration(&;$) # {{{
 {
     push @configmap, shift;
