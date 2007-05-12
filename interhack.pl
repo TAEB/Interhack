@@ -194,8 +194,11 @@ sub include
 
     if ($module eq "*")
     {
-      for (map {<$_/*.p[lm]>} @mINC)
+      my %seen;
+      for (map {sort <$_/*.p[lm]>} @mINC)
       {
+        my ($file) = m{^.*/([^/]+)$};
+        next if $seen{$file}++;
         do $_;
         die $@ if $@;
       }
