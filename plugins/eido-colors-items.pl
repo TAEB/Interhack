@@ -148,6 +148,18 @@ recolor qr/(?<=named )empty\b/ => "darkgray";
 
 # item in use {{{
 recolor qr/(?<=\()lit(?=\))/ => "yellow";
+
+# equipment (originally by Stabwound) {{{
+recolor qr/ \(weapon in [^)]+\)/ => "brown";
+recolor qr/ \(wielded[^)]*\)/ => "brown";
+recolor qr/ \(alternate weapon[^)]*\)/ => "brown";
+recolor qr/ \(in quiver\)/ => "brown";
+recolor qr/ \(being worn\)/ => "brown";
+recolor qr/ \(embedded in your skin\)/ => "brown";
+recolor qr/ \(on left [^)]+\)/ => "brown";
+recolor qr/ \(on right [^)]+\)/ => "brown";
+recolor qr/ \(in use\)/ => "brown";
+# }}}
 # }}}
 # }}}
 
