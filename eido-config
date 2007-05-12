@@ -1,4 +1,5 @@
-nick "Eidolos";
+#nick "Eidolos";
+exclude_plugins "doy-colors-items";
 include "*";
 
 remap chr(5) => sub { "E-  Elbereth\n" };
