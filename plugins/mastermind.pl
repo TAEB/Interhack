@@ -4,10 +4,10 @@
 
 my $mastermind_prog = "./c/automastermind";
 my $responses_so_far = "";
-my $response_this_play = 0;
+my $response_this_play = 1;
 
 extended_command "#mm"
-              => sub { ($responses_so_far, $response_this_play) = ('', 0);
+              => sub { ($responses_so_far, $response_this_play) = ('', 1);
                        "Resetting Mastermind status." };
 
 each_iteration
