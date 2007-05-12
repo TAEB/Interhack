@@ -32,21 +32,34 @@ each_iteration
     "\e[23;1HS:$score\e[K"
   }eg;
 
-  s{\e\[23;(?!1H)(\d+)H($st_char+)}{
-    my ($update_pos, $update) = ($1, $2);
+  s{\e\[23;(?!1H)(\d+)H((?:$st_char|\e\[C)+)}{
+    my $update_pos = $1;
+    my @updates = split /\e\[C/, $2;
     for my $i (0..4) {
       if ($update_pos >= $stat_pos[$i] && $update_pos < $stat_pos[$i + 1]) {
-        my $same_length = $update_pos - $stat_pos[$i] - 1;
-        substr($stats[$i], $same_length, length($update), $update);
+        for my $update (@updates) {
+          my $start = $update_pos - $stat_pos[$i] - 1;
+          substr($stats[$i], $start, length($update), $update);
+          $update_pos += length($update) + 1;
+        }
+        $stats[$i] = substr($stats[$i], 0, $update_pos - $stat_pos[$i] - 2);
       }
     }
     if ($update_pos >= $stat_pos[5] && $update_pos < $score_pos) {
-      my $same_length = $update_pos - $stat_pos[5] - 1;
-      substr($stats[5], $same_length, length($update), $update);
+      for my $update (@updates) {
+        my $start = $update_pos - $stat_pos[5] - 1;
+        substr($stats[5], $start, length($update), $update);
+        $update_pos += length($update) + 1;
+      }
+      $stats[5] = substr($stats[5], 0, $update_pos - $stat_pos[5] - 2);
     }
     elsif ($update_pos >= $score_pos) {
-      my $same_length = $update_pos - $score_pos - 1;
-      substr($score, $same_length, length($update), $update);
+      for my $update (@updates) {
+        my $start = $update_pos - $score_pos - 1;
+        substr($score, $start, length($update), $update);
+        $update_pos += length($update) + 1;
+      }
+      $score = substr($score, 0, $update_pos - $score_pos - 2);
     }
     $stats = "St:$stats[0] Dx:$stats[1] Co:$stats[2] In:$stats[3] Wi:$stats[4] Ch:$stats[5]";
     "\e[23;1HS:$score\e[K"
