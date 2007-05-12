@@ -13,7 +13,7 @@ sub exp_for
   return $exp_for[$level];
 }
 
-my ($level, $total_exp, $exp_needed);
+our ($level, $total_exp, $exp_needed);
 
 extended_command "#exp"
               => sub

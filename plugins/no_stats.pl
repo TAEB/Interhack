@@ -2,8 +2,8 @@
 # stats are still available through new #stats ext-cmd
 # by Eidolos and doy
 
+our $stats = '';
 my $char = '';
-my $stats = '';
 my @stats = ();
 my $align = '';
 my $score = '';
