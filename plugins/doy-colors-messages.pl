@@ -64,8 +64,9 @@ recolor qr/You feel (a mild buzz)./ => "bblue";
 recolor qr/Goodbye level \d+./ => "red";
 recolor qr/The [^.!\e]*? grabs you./ => "red";
 # }}}
-# pet hunger {{{
+# pets {{{
 recolor qr/The .*? yowls!/ => "red";
+recolor qr/You have a (sad|peculiar) feeling for a moment, then it passes\./ => "red";
 # }}}
 # negative status effects {{{
 recolor qr/Oh wow!  Great stuff!/ => "red";
