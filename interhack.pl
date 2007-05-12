@@ -404,8 +404,6 @@ while (1)
     $map->();
   }
 
-  # make floating eyes bright cyan
-
   print;
 
   print $postprint and $postprint = ''
