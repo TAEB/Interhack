@@ -349,19 +349,19 @@ while (1)
   } # }}}
 
   # read from sock, print to stdout {{{
-  my $recv = recv($sock, $_, 1024, 0);
-  next ITER if !defined($recv);
+  next ITER
+    unless defined(recv($sock, $_, 1024, 0));
   last if length == 0;
 
-  if ($recv =~ / \e (?: \[ [0-9;]* )? $/x)
+  if (/ \e \[? [0-9;]* \z /x)
   {
-    $buf .= $recv;
-    next;
+    $buf .= $_;
+    next ITER;
   }
 
   if ($buf ne '')
   {
-    $recv = $buf . $recv;
+    $_ = $buf . $_;
     $buf = '';
   }
 
