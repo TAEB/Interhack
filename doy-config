@@ -3,24 +3,8 @@ nick "doy";
 # }}}
 
 # plugins {{{
-include "artifact_name";
-include "exp_2nl";
-include "floating_eyes";
-include "fortune";
-include "geno_list";
-include "hpmon";
-include "keystroke_count";
-include "mastermind";
-include "mysterious_force";
-include "no_stats";
-include "powermon";
-include "slow_digestion";
-include "timer";
-
-include "doy-colors-messages";
-include "doy-colors-items";
-include "doy-colors-menus";
-include "toft-annotations";
+exclude_plugins "eido-colors-items";
+include "*";
 # }}}
 
 # plugin configuration {{{
