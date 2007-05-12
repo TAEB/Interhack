@@ -22,3 +22,7 @@ include "doy-colors-items";
 include "doy-colors-menus";
 include "toft-annotations";
 # }}}
+
+# plugin configuration {{{
+$fortune = "~/.fortune/yasd-fortune ~/.fortune/ideas";
+# }}}
