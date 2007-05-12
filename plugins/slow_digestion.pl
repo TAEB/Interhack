@@ -3,16 +3,16 @@
 # by Eidolos
 
 my $last_mod20 = -1;
-my $enabled = 1;
+our $dual_sd_enabled = 0;
 
 extended_command "#dualsd"
               => sub
                  {
                    # the "if" is to guard against ^P toggling
-                   $enabled = not $enabled
+                   $dual_sd_enabled = not $dual_sd_enabled
                      if substr($&, 0, 3) eq "\e[H";
                    "Slow digestion notification "
-                   . ($enabled ? "ON." : "OFF.")
+                   . ($dual_sd_enabled ? "ON." : "OFF.")
                  };
 
 each_iteration
@@ -25,7 +25,7 @@ each_iteration
         last if $mod20 == $last_mod20;
         $last_mod20 = $mod20;
 
-        last if not $enabled;
+        last if not $dual_sd_enabled;
 
            if ($mod20 == 3)  { annotate("Remove your left ring.")  }
         elsif ($mod20 == 5)  { annotate("Put on your left ring.")  }
