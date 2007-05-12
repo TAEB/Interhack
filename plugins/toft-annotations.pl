@@ -10,7 +10,7 @@ make_annotation qr/You feel (insulated|grounded in reality)/ => "Gained shock re
 # }}}
 # other intrinsics {{{
 make_annotation qr/You feel (very jumpy|diffuse)./ => "Gained teleportitis.";
-make_annotation qr/You feel (in control of yourself|centered in your personal space)./
+make_annotation qr/You feel (in control of yourself|centered in your personal space)./;
 make_annotation qr/You feel (controlled)/ => "Gained teleport control.";
 make_annotation qr/You feel (a strange mental acuity|in touch with the cosmos)./ => "Gained intrinsic telepathy.";
 make_annotation qr/You feel hidden./ => "Gained invisibility.";
