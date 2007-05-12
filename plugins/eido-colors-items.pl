@@ -131,12 +131,14 @@ recolor qr/\bgems? $called hard\b/ => "yellow";
 
 # interhack-specific stuff {{{
 # charges and enchantment (originally from doy) {{{
-recolor qr/(?<=\()0(?=:)/   => "cyan";  # 0 recharges
-recolor qr/(?<=:)0(?=\))/   => "red";   # 0 charges
-recolor qr/(?<=:)\d+(?=\))/ => "cyan";  # many charges
-recolor qr/(?<=\()\d+(?=:)/ => "green"; # many recharges
-recolor qr/\s\+0/ => "brown";
-recolor qr/\s\+[1-9]\d*/ => "green";
+recolor qr/(?<=\()0(?=:)/       => "cyan";  # 0 recharges
+recolor qr/(?<=:)0(?=\))/       => "red";   # 0 charges
+recolor qr/(?<=:)\d+(?=\))/     => "cyan";  # many charges
+recolor qr/(?<=\()\d+(?=:)/     => "green"; # many recharges
+
+recolor qr/\s\+0/               => "brown";
+recolor qr/\s\+[1-3]/           => "green";
+recolor qr/\s\+[4-9]\d*/        => "bgreen";
 recolor qr/(?<!AC)\s\-[1-9]\d*/ => "red";
 # }}}
 
