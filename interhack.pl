@@ -197,6 +197,17 @@ sub each_iteration(&;$)
 sub include
 {
     my $module = shift;
+
+    if ($module eq "*")
+    {
+      for (map {<$_/*.p[lm]>} @mINC)
+      {
+        do $_;
+        die $@ if $@;
+      }
+      return;
+    }
+
     $module .= ".pl" unless $module =~ /\.p[lm]$/;
     my $file;
 
