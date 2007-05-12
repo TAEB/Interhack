@@ -10,3 +10,7 @@ include "*";
 # plugin configuration {{{
 $fortune = "~/.fortune/yasd-fortune ~/.fortune/ideas";
 # }}}
+
+# mappings {{{
+remap chr(5) => sub { "E-  Elbereth\n" };
+# }}}
