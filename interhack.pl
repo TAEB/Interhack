@@ -348,7 +348,7 @@ while (1)
     }
     elsif (exists $keymap{$c})
     {
-      $c = $keymap{$c};
+      $c = value_of($keymap{$c});
     }
 
     $keystrokes += length $c;
