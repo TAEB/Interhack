@@ -1,0 +1,5 @@
+nick "Eidolos";
+include "*";
+
+remap chr(5) => sub { "E-  Elbereth\n" };
+
