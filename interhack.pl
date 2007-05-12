@@ -353,6 +353,7 @@ while (1)
   if ($recv =~ / \e (?: \[ [0-9;]* )?$/x)
   {
     $buf .= $recv;
+    next;
   }
 
   if ($buf ne '')
