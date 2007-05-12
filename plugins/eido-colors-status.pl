@@ -17,9 +17,10 @@ my %status_colors =
 # }}}
 
 # minor status effects {{{
-"Stun"  => "bgreen",
-"Conf"  => "bgreen",
-"Hallu" => "bgreen",
+"Stun"  => "yellow",
+"Conf"  => "yellow",
+"Hallu" => "yellow",
+"Blind" => "yellow",
 # }}}
 
 # major status effects {{{
