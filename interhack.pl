@@ -276,6 +276,7 @@ sub tab # {{{
   $tab = $display;
   return if @_;
   $display =~ s/\n/\\n/g;
+  $display =~ s/\e/\\e/g;
   annotate("Press tab to send the string: $display");
 } # }}}
 
