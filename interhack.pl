@@ -15,6 +15,7 @@ our $port = 23;
 our %keymap;
 our @configmap;
 our %extended_command;
+our %plugin_loaded;
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
 our %colormap =
 (
@@ -84,6 +85,14 @@ our $keystrokes = 0;
 our $in_game = 0;
 our $buf = '';
 # }}}
+
+sub exclude_plugins
+{
+    for (@_)
+    {
+        $plugin_loaded{$_} = 1;
+    }
+}
 
 sub extended_command
 {
@@ -194,11 +203,10 @@ sub include
 
     if ($module eq "*")
     {
-      my %seen;
       for (map {sort <$_/*.p[lm]>} @mINC)
       {
         my ($file) = m{^.*/([^/]+)$};
-        next if $seen{$file}++;
+        next if $plugin_loaded{$file}++;
         do $_;
         die $@ if $@;
       }
