@@ -17,8 +17,8 @@ include "powermon";
 include "slow_digestion";
 include "timer";
 
-include "doy-colors-message";
-include "doy-colors-item";
-include "doy-colors-menu";
+include "doy-colors-messages";
+include "doy-colors-items";
+include "doy-colors-menus";
 include "toft-annotations";
 # }}}
