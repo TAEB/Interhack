@@ -287,9 +287,18 @@ my $sock = Interhack::Sock::sock($server, $port);
 # }}}
 
 # autologin {{{
-if ($autologin && $nick ne '')
+if ($autologin)
 {
+  $nick = value_of($nick);
+  $pass = value_of($pass);
   print {$sock} "l$nick\n";
+
+  if ($pass eq '')
+  {
+    $pass = do { local @ARGV = "$ENV{HOME}/.interhack/passwords/$nick"; <> };
+    chomp $pass;
+  }
+
   if ($pass ne '')
   {
     print {$sock} "$pass\n";
