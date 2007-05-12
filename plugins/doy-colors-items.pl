@@ -27,10 +27,10 @@ recolor qr/papyrus spellbook/ => "magenta";
 # }}}
 
 # dangerous items {{{
-recolor qr/cancellation/ => "bred";
+recolor qr/(?<=wand of )cancellation/ => "bred";
 recolor qr/(cock|chick)atrice corpse/ => "bred";
 recolor qr/bag of tricks/ => "bred";
-recolor qr/wand .* vanish/ => "bred";
+recolor qr/vanish(es)?/ => "bred";
 # }}}
 
 # gold {{{
