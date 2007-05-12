@@ -1,6 +1,6 @@
 # avoids adding stats to botl to make room for other more important things
 # stats are still available through new #stats ext-cmd
-# by Eidolos
+# by Eidolos and doy
 
 my $char = '';
 my $stats = '';
@@ -15,7 +15,7 @@ extended_command "#stats"
 
 each_iteration
 {
-  s{\e\[23;1H((.*?)\s*)(St:(\w+) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+))(\s+(\w+)\s+)S:(\d+)}{
+  s{\e\[23;1H((.*?)\s*)(St:(\S+) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+))(\s+(\w+)\s+)S:(\d+)}{
     my $stat_start = length $1;
     $char = $2;
     $stats = $3;
