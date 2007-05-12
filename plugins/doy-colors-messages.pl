@@ -89,6 +89,13 @@ recolor qr/You are beginning to feel hungry./ => "red";
 recolor qr/You are beginning to feel weak./ => "red";
 recolor qr/(Wizard|Valkyrie|Elf) needs food, badly!/ => "red";
 # }}}
+# encumbrance {{{
+recolor qr/Your movements are slowed slightly because of your load\./ => "red";
+recolor qr/You rebalance your load\.  Movement is difficult\./ => "bred";
+recolor qr/You stagger under your heavy load\.  Movement is very hard\./ => "bred";
+recolor qr/You can barely move a handspan with this load!/ => "bred";
+recolor qr/You can't even move a handspan with this load!/ => "bred";
+# }}}
 # serious life threatening issues {{{
 recolor qr/You faint from lack of food./ => "bred";
 recolor qr/Stop eating\?/ => "bred";
