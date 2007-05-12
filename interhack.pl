@@ -5,10 +5,30 @@ use Term::ReadKey;
 use LWP::Simple;
 use File::Temp qw/tempfile/;
 
-our $autologin = !grep {$_ eq "-l"} @ARGV;
+our $autologin = 1;
+our $arg_nick = '';
+
+if (@ARGV)
+{
+  for (<$ENV{HOME}/.interhack/passwords/*>)
+  {
+    local ($_) = m{.*/(\w+)};
+    if (index($_, $ARGV[0]) > -1)
+    {
+      if ($arg_nick ne '')
+      {
+        die "Ambiguous login name given: $arg_nick, $_";
+      }
+      else
+      {
+        $arg_nick = $_;
+      }
+    }
+  }
+}
 
 # globals {{{
-our $nick = '';
+our $nick = $arg_nick;
 our $pass = '';
 our $server = 'nethack.alt.org';
 our $port = 23;
@@ -294,6 +314,7 @@ my $sock = Interhack::Sock::sock($server, $port);
 if ($autologin)
 {
   $nick = value_of($nick);
+  $nick = $arg_nick if $arg_nick ne '';
   $pass = value_of($pass);
   print {$sock} "l$nick\n";
 
