@@ -13,11 +13,7 @@ our $pass = '';
 our $server = 'nethack.alt.org';
 our $port = 23;
 our %keymap;
-our @colormap;
-our @repmap;
-our @krepmap;
-our @annomap;
-our @tabmap;
+our @configmap;
 our %extended_command;
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
 our %colormap =
@@ -77,8 +73,6 @@ our %colormap =
 # }}}
 
 # lexical variables {{{
-our $responses_so_far = '';
-our $response_this_play = 1;
 our $tab = "\t";
 our $me;
 our $at_login = 0;
@@ -106,9 +100,9 @@ sub remap
 
 sub value_of
 {
-    my $exp = shift;
+    my ($exp, $args) = @_;
     return $exp unless ref($exp);
-    return $exp->() if ref($exp) eq "CODE";
+    return $exp->($args) if ref($exp) eq "CODE";
     return $exp;
 }
 
@@ -117,15 +111,15 @@ sub make_annotation
     my ($matching, $annotation) = @_;
     if (!ref($matching))
     {
-        push @repmap, sub { if (index($_, $matching) > -1) { annotate($annotation) } }
+        push @configmap, sub { if (index($_, $matching) > -1) { annotate($annotation) } }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @repmap, sub { if (/$matching/) { annotate($annotation) } }
+        push @configmap, sub { if (/$matching/) { annotate($annotation) } }
     }
     elsif (ref($matching) eq "CODE")
     {
-        push @repmap, sub { if ($matching->()) { annotate($annotation) } }
+        push @configmap, sub { if ($matching->()) { annotate($annotation) } }
     }
     else
     {
@@ -146,11 +140,11 @@ sub recolor
 
     if (!ref($matching))
     {
-        push @repmap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
+        push @configmap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @repmap, sub { s/$matching/$newcolor$&\e[0m/g }
+        push @configmap, sub { s/$matching/$newcolor$&\e[0m/g }
     }
     else
     {
@@ -163,15 +157,15 @@ sub make_tab
     my ($matching, $tabstring) = @_;
     if (!ref($matching))
     {
-        push @repmap, sub { if (index($_, $matching) > -1) { tab($tabstring) } }
+        push @configmap, sub { if (index($_, $matching) > -1) { tab($tabstring) } }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @repmap, sub { if (/$matching/) { tab($tabstring) } }
+        push @configmap, sub { if (/$matching/) { tab($tabstring) } }
     }
     elsif (ref($matching) eq "CODE")
     {
-        push @repmap, sub { if ($matching->()) { tab($tabstring) } }
+        push @configmap, sub { if ($matching->()) { tab($tabstring) } }
     }
     else
     {
@@ -191,7 +185,7 @@ sub pass
 
 sub each_iteration(&;$)
 {
-    push @repmap, shift;
+    push @configmap, shift;
 }
 
 sub include
@@ -255,11 +249,11 @@ sub annotate # {{{
 
 sub tab # {{{
 {
-  my $string = value_of(shift);
-  my $msg = @_ ? shift : "Press tab to send the string: ";
-  $tab = $string;
-  $string =~ s/\n/\\n/g;
-  annotate("$msg$string");
+  my $display = value_of(shift);
+  $tab = $display;
+  return if @_;
+  $display =~ s/\n/\\n/g;
+  annotate("Press tab to send the string: $display");
 } # }}}
 
 # read config, get a socket {{{
@@ -290,9 +284,6 @@ if ($server =~ /alt\.org/)
 ReadMode 3;
 END { ReadMode 0 }
 $|++;
-
-#for (@repmap) { $_ = eval $_ }
-for (@krepmap) { $_ = eval $_ }
 
 ITER:
 while (1)
@@ -338,27 +329,15 @@ while (1)
 
     if ($tab ne "\t")
     {
-      ($responses_so_far, $response_this_play) = ('', 1)
-        and next ITER
-          if $c eq "'";
-
       $c = $tab if $c eq "\t";
       $tab = "\t";
-      #$c .= chr(18); # refresh screen
     }
     elsif (exists $keymap{$c})
     {
-      $c = value_of($keymap{$c});
+      $c = value_of($keymap{$c}, $c);
     }
 
     $keystrokes += length $c;
-
-    foreach my $map (@krepmap)
-    {
-      local $_ = $c;
-      $map->();
-      $c = $_;
-    }
 
     print {$sock} $c;
     print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
@@ -408,7 +387,7 @@ while (1)
   s{(\e\[[0-9;]*.\s*)(\w+): unknown extended command\.}{
       if (exists $extended_command{$2})
       {
-        $1 . value_of($extended_command{$2}) . "\e[K"
+        $1 . value_of($extended_command{$2}, $2) . "\e[K"
       }
       else
       {
@@ -416,63 +395,14 @@ while (1)
       }
   }eg;
 
-  foreach my $map (@repmap)
+  foreach my $map (@configmap)
   {
     $map->();
-  }
-
-  foreach my $annomap (@annomap)
-  {
-    annotate($annomap->[1])
-      if $_ =~ $annomap->[0];
   }
 
   # make floating eyes bright cyan
   s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
 
-  # mastermind {{{
-  if (/\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
-  {
-    $responses_so_far .= " $2$1";
-    $response_this_play = 1;
-  }
-  elsif (/\e\[HYou hear (\d) tumblers? click\./)
-  {
-    $responses_so_far .= " 0$1";
-    $response_this_play = 1;
-  }
-  elsif (/\e\[HYou hear (\d) gears? turn\./)
-  {
-    $responses_so_far .= " ${1}0";
-    $response_this_play = 1;
-  }
-  elsif (/\e\[HWhat tune are you playing\?/)
-  {
-    $responses_so_far .= " 00" unless $response_this_play;
-    $response_this_play = 0;
-    my $next = `./c/automastermind $responses_so_far`;
-    if ($next =~ 'ACK')
-    {
-      ($responses_so_far, $response_this_play) = ('', 1);
-      annotate("No possible tunes. Resetting.");
-    }
-    else
-    {
-      ($next) = $next =~ /^([A-G]{5})/;
-      tab("$next\n", "Press ' to reset, tab to send the string: ");
-    }
-  } # }}}
-
-  for my $tabmap (@tabmap)
-  {
-    tab($tabmap->[1])
-      if $_ =~ $tabmap->[0];
-  }
-
-  foreach my $map (@colormap)
-  {
-    s{$map->[0]}{$map->[1]$&\e[0m}g;
-  }
 
   print;
 
