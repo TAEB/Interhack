@@ -117,7 +117,7 @@ recolor qr/\bwand $called vanish(?:er)?\b/ => "blue";
 # }}}
 
 # shinies {{{
-recolor qr/\d+ gold pieces?\b/ => "yellow";
+recolor qr/\d+ (?:gold piece|[Zz]orkmid)s?\b/ => "yellow";
 recolor qr/\bgems? $called valuable\b/ => "brown";
 recolor qr/\bgems? $called hard\b/ => "yellow";
 
