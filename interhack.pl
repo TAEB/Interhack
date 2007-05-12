@@ -90,7 +90,9 @@ sub exclude_plugins # {{{
 {
     for (@_)
     {
-        $plugin_loaded{$_} = 1;
+        my $module = $_;
+        $module .= ".pl" unless $module =~ /\.p[lm]$/;
+        $plugin_loaded{$module} = 1;
     }
 } # }}}
 
