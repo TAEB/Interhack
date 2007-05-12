@@ -115,3 +115,7 @@ recolor qr/You hear the chime of a cash register./ => "yellow";
 recolor qr/[Tt]he high priest(ess)? of (?!Moloch)\S+/ => "yellow";
 recolor qr/You feel a strange vibration [^.?!]*./ => "yellow";
 # }}}
+
+# misc {{{
+recolor  qr/Elbereth/i => "purple";
+# }}}
