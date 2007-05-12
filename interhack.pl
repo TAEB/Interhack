@@ -205,39 +205,43 @@ sub each_iteration(&;$) # {{{
 
 sub include # {{{
 {
-    my $module = shift;
+    my @modules = @_;
 
-    if ($module eq "*")
+    if ($modules[0] eq "*")
     {
-      for (map {sort <$_/*.p[lm]>} @mINC)
-      {
-        my ($file) = m{^.*/([^/]+)$};
-        next if $plugin_loaded{$file}++;
-        do $_;
+        for (map {sort <$_/*.p[lm]>} @mINC)
+        {
+            my ($file) = m{^.*/([^/]+)$};
+            next if $plugin_loaded{$file}++;
+            do $_;
+            die $@ if $@;
+        }
+        return;
+    }
+
+    MODULE: for my $module (@modules)
+    {
+        $module .= ".pl" unless $module =~ /\.p[lm]$/;
+        my $file;
+
+        INC: for (@mINC)
+        {
+            if (-e "$_/$module")
+            {
+                $file = "$_/$module";
+                last INC;
+            }
+        }
+
+        if (!defined($file))
+        {
+            die "Unable to find $module in @mINC";
+        }
+
+        next MODULE if $plugin_loaded{$file}++;
+        do $file;
         die $@ if $@;
-      }
-      return;
     }
-
-    $module .= ".pl" unless $module =~ /\.p[lm]$/;
-    my $file;
-
-    for (@mINC)
-    {
-      if (-e "$_/$module")
-      {
-        $file = "$_/$module";
-        last;
-      }
-    }
-
-    if (!defined($file))
-    {
-        die "Unable to find $module in @mINC";
-    }
-
-    do $file;
-    die $@ if $@;
 } # }}}
 
 sub serialize_time # {{{
