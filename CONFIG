@@ -33,10 +33,9 @@ Passwords:
 
 While you can put your password in ~/.interhack/config, it's probably not a
 good idea (since it makes sharing more difficult). So instead you can make
-files such as ~/.interhack/Eidolos which would contain the password to the
-account Eidolos (any player named "config" might be out of luck here!). Make
-sure that these files are unreadable to others ('chmod 700 ~/.interhack' is
-probably your best bet)
+files such as ~/.interhack/passwords/Eidolos which would contain the password
+to the account Eidolos. Make sure that these files are unreadable to others
+('chmod 700 ~/.interhack/passwords' is probably your best bet).
 
 Colors:
 
