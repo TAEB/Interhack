@@ -86,36 +86,36 @@ our $in_game = 0;
 our $buf = '';
 # }}}
 
-sub exclude_plugins
+sub exclude_plugins # {{{
 {
     for (@_)
     {
         $plugin_loaded{$_} = 1;
     }
-}
+} # }}}
 
-sub extended_command
+sub extended_command # {{{
 {
     my ($cmd, $result) = @_;
     $cmd =~ s/^#//;
     $extended_command{$cmd} = $result;
-}
+} # }}}
 
-sub remap
+sub remap # {{{
 {
     my ($key, $result) = @_;
     $keymap{$key} = $result;
-}
+} # }}}
 
-sub value_of
+sub value_of # {{{
 {
     my ($exp, $args) = @_;
     return $exp unless ref($exp);
     return $exp->($args) if ref($exp) eq "CODE";
     return $exp;
-}
+} # }}}
 
-sub make_annotation
+sub make_annotation # {{{
 {
     my ($matching, $annotation) = @_;
     if (!ref($matching))
@@ -134,14 +134,14 @@ sub make_annotation
     {
         die "Unable to make_annotation matching object of type " . ref($matching);
     }
-}
+} # }}}
 
-sub make_anno
+sub make_anno # {{{
 {
     make_annotation(@_);
-}
+} # }}}
 
-sub recolor
+sub recolor # {{{
 {
     my $matching = shift;
     my $newcolor = value_of(shift);
@@ -159,9 +159,9 @@ sub recolor
     {
         die "Unable to recolor matching object of type " . ref($matching);
     }
-}
+} # }}}
 
-sub make_tab
+sub make_tab # {{{
 {
     my ($matching, $tabstring) = @_;
     if (!ref($matching))
@@ -180,24 +180,24 @@ sub make_tab
     {
         die "Unable to make_tab matching object of type " . ref($matching);
     }
-}
+} # }}}
 
-sub nick
+sub nick # {{{
 {
     $nick = shift;
-}
+} # }}}
 
-sub pass
+sub pass # {{{
 {
     $pass = shift;
-}
+} # }}}
 
-sub each_iteration(&;$)
+sub each_iteration(&;$) # {{{
 {
     push @configmap, shift;
-}
+} # }}}
 
-sub include
+sub include # {{{
 {
     my $module = shift;
 
@@ -232,7 +232,7 @@ sub include
 
     do $file;
     die $@ if $@;
-}
+} # }}}
 
 sub serialize_time # {{{
 {
