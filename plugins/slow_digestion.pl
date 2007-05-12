@@ -27,10 +27,10 @@ each_iteration
 
         last if not $dual_sd_enabled;
 
-           if ($mod20 == 3)  { annotate("Remove your left ring.")  }
-        elsif ($mod20 == 5)  { annotate("Put on your left ring.")  }
-        elsif ($mod20 == 11) { annotate("Remove your right ring.") }
-        elsif ($mod20 == 13) { annotate("Put on your right ring.") }
+           if ($mod20 == 3)  { annotate("Remove your left =oSD.")  }
+        elsif ($mod20 == 5)  { annotate("Put on your left =oSD.")  }
+        elsif ($mod20 == 11) { annotate("Remove your right =oSD.") }
+        elsif ($mod20 == 13) { annotate("Put on your right =oSD.") }
     }}
 }
 
