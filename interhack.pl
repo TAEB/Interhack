@@ -13,6 +13,7 @@ our $pass = '';
 our $server = 'nethack.alt.org';
 our $port = 23;
 our %keymap;
+our $lastkey;
 our @configmap;
 our %extended_command;
 our %plugin_loaded;
@@ -324,6 +325,7 @@ while (1)
   # read from stdin, print to sock {{{
   if (defined(my $c = ReadKey .05))
   {
+    $lastkey = $c;
     if ($c eq "p" && $logged_in) { $in_game = 1 }
     if ($c eq "\t" && $at_login && $logged_in)
     {
