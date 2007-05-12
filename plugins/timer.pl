@@ -10,7 +10,7 @@ each_iteration
   {
     my $time = serialize_time(time - $start_time);
     my $col = 81 - length $time;
-    $postprint .= "\e[s\e[23;${col}H\e[1;44m$time\e[0m\e[u";
+    $postprint .= "\e[s\e[23;${col}H\e[1;30m$time\e[0m\e[u";
     s/(?:real)?timer?: unknown extended command/$time\e[K/g;
   }
 }
