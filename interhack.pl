@@ -333,7 +333,7 @@ if ($autologin)
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
 if ($server =~ /alt\.org/)
 {
-  until (defined(recv($sock, $_, 1024, 0)) && /zaphod\.alt\.org/) {}
+  until (defined(recv($sock, $_, 4096, 0)) && /zaphod\.alt\.org/) {}
 }
 
 ReadMode 3;
@@ -403,7 +403,7 @@ while (1)
 
   # read from sock, print to stdout {{{
   next ITER
-    unless defined(recv($sock, $_, 1024, 0));
+    unless defined(recv($sock, $_, 4096, 0));
   last if length == 0;
 
   if (/ \e \[? [0-9;]* \z /x)
