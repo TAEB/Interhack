@@ -60,4 +60,6 @@ auto-unidle
 * keystroke counter!
 ... and recorder!
 * dual slow digestion messages (and anything else of that nature)
+Aioli: in fact, you can do a lot of speed upgrades just by "generalizing" g + direction travel for many cases
+Aioli: like a routine for searching for the VS, that stops if a monster is encountered
 
