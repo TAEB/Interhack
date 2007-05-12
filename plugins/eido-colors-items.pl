@@ -30,12 +30,11 @@ recolor qr/\bpotions? called water named (?:unholy|cursed|C)\b/ => "orange";
 
 # food conducts {{{
 # vegan {{{
-recolor qr/\b(?:food |cram |[KC]-)ration\b/ => "bgreen";
-recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot)\b/ => "bgreen";
-recolor qr/\btin (?:called|named|of) spinach/ => "bgreen";
+recolor qr/\b(?:food |cram |[KC]-)rations?\b/ => "bgreen";
+recolor qr/\btins? (?:called|named|of) spinach/ => "bgreen";
 recolor qr/\boranges?(?! dragon)\b/ => "bgreen";
 recolor qr/\bpears?\b/ => "bgreen";
-recolor qr/\b(?:pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => "bgreen";
+recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot|pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => "bgreen";
 recolor qr/\bsprigs? of wolfsbane\b/ => "bgreen";
 recolor qr/\beucalyptus lea(?:f|ves)\b/ => "bgreen";
 recolor qr/\bcloves? of garlic\b/ => "bgreen";
@@ -139,6 +138,10 @@ recolor qr/(?<=\()\d+(?=:)/ => "green"; # many recharges
 recolor qr/\s\+0/ => "brown";
 recolor qr/\s\+[1-9]\d*/ => "green";
 recolor qr/(?<!AC)\s\-[1-9]\d*/ => "red";
+# }}}
+
+# empty wands and tools {{{
+recolor qr/(?<=named )empty\b/ => "darkgray";
 # }}}
 # }}}
 
