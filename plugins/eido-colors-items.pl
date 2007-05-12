@@ -143,5 +143,9 @@ recolor qr/(?<!AC)\s\-[1-9]\d*/ => "red";
 # empty wands and tools {{{
 recolor qr/(?<=named )empty\b/ => "darkgray";
 # }}}
+
+# item in use {{{
+recolor qr/(?<=\()lit(?=\))/ => "yellow";
+# }}}
 # }}}
 
