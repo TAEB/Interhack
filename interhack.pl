@@ -402,8 +402,6 @@ while (1)
   }
 
   # make floating eyes bright cyan
-  s{\e\[(?:0;)?34m((?:\x0f)?e)(?! - )}{\e[1;36m$1}g;
-
 
   print;
 
