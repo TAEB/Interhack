@@ -2,9 +2,9 @@
 # adds #mm to reset mastermind state
 # by Eidolos
 
-my $mastermind_prog = "./c/automastermind";
-my $responses_so_far = "";
-my $response_this_play = 1;
+our $mastermind_prog = "./c/automastermind";
+our $responses_so_far = "";
+our $response_this_play = 1;
 
 extended_command "#mm"
               => sub { ($responses_so_far, $response_this_play) = ('', 1);
@@ -12,17 +12,17 @@ extended_command "#mm"
 
 each_iteration
 {
-  if (/\e\[HYou hear (\d) tumblers? click and (\d) gears? turn\./)
+  if (/\e\[(?:(?:1;)?\d+)?HYou hear (\d) tumblers? click and (\d) gears? turn\./)
   {
     $responses_so_far .= " $2$1";
     $response_this_play = 1;
   }
-  elsif (/\e\[HYou hear (\d) tumblers? click\./)
+  elsif (/\e\[(?:(?:1;)?\d+)?HYou hear (\d) tumblers? click\./)
   {
     $responses_so_far .= " 0$1";
     $response_this_play = 1;
   }
-  elsif (/\e\[HYou hear (\d) gears? turn\./)
+  elsif (/\e\[(?:(?:1;)?\d+)?HYou hear (\d) gears? turn\./)
   {
     $responses_so_far .= " ${1}0";
     $response_this_play = 1;
@@ -36,7 +36,8 @@ each_iteration
     if ($next =~ /ACK/)
     {
       ($responses_so_far, $response_this_play) = ('', 1);
-      annotate("No possible tunes. Resetting.");
+      annotate("No possible tunes. Resetting. Press tab for AABBC\\n.");
+      $tab = "AABBC\n";
     }
     else
     {
