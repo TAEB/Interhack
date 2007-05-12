@@ -350,7 +350,7 @@ while (1)
   next ITER if !defined($recv);
   last if length == 0;
 
-  if ($recv =~ / \e (?: \[ [0-9;]* )?$/x)
+  if ($recv =~ / \e (?: \[ [0-9;]* )? $/x)
   {
     $buf .= $recv;
     next;
