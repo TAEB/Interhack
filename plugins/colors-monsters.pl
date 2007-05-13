@@ -287,7 +287,7 @@ recolor qr/Kop Kaptains?/ => "purple";
 # }}}
 
 # liches L {{{
-recolor qr/(?:demi|master |arch-)?lich$es/
+recolor qr/(?:demi|master |arch-)?lich$es(?!en)/
      => sub
         {
             substr($&, 0, 1) eq 'd' ? $colormap{red}
