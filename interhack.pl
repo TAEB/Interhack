@@ -297,6 +297,7 @@ sub serialize_time # {{{
 sub annotate # {{{
 {
   my $annotation = value_of(shift);
+  return if $annotation eq '';
   $annotation_onscreen = 1;
   $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
 } # }}}
@@ -304,6 +305,7 @@ sub annotate # {{{
 sub tab # {{{
 {
   my $display = value_of(shift);
+  return if $display eq '';
   $tab = $display;
   return if @_;
   $display =~ s/\n/\\n/g;
