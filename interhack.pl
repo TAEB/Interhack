@@ -367,8 +367,6 @@ while (1)
 
   if (defined $c)
   {
-    push(@lastkeys, $c);
-    shift @lastkeys if defined($lastkeysmaxlen) && @lastkeys > $lastkeysmaxlen;
     if ($c eq "p" && $logged_in) { $in_game = 1 }
     if ($c eq "\t" && $at_login && $logged_in)
     {
@@ -416,6 +414,9 @@ while (1)
     }
 
     $keystrokes += length $c;
+
+    push @lastkeys => split //, $c;
+    shift @lastkeys if defined($lastkeysmaxlen) && @lastkeys > $lastkeysmaxlen;
 
     print {$sock} $c;
     print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
