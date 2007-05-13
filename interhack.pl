@@ -5,10 +5,10 @@ use Term::ReadKey;
 use LWP::Simple;
 use File::Temp qw/tempfile/;
 
+# check arguments for a nick to autologin {{{
 our $autologin = 1;
 our $arg_nick = '';
 
-# check arguments for a nick to autologin {{{
 if (@ARGV)
 {
   for (<$ENV{HOME}/.interhack/passwords/*>)
@@ -99,9 +99,6 @@ our %colormap =
   "white&bold"   => "\e[1;37m",
 );
 # }}}
-# }}}
-
-# lexical variables {{{
 our $tab = "\t";
 our $me;
 our $at_login = 0;
