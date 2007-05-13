@@ -93,8 +93,8 @@ our %colormap =
 
   white          => "\e[0;37m",
   bwhite         => "\e[1;37m",
-  gray           => "\e[1;37m",
-  grey           => "\e[1;37m",
+  gray           => "\e[0;37m",
+  grey           => "\e[0;37m",
   "bold&white"   => "\e[1;37m",
   "white&bold"   => "\e[1;37m",
 );
