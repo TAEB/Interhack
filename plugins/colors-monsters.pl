@@ -52,8 +52,8 @@ recolor qr/pyrolisks?/ => "red";
 # }}}
 
 # team d {{{
-recolor qr/(?:were)?jackals?|coyotes?/ => "brown";
-recolor qr/(?:were)?wol$ves|wargs?/ => "brown";
+recolor qr/jackals?|coyotes?/ => "brown";
+recolor qr/wol$ves|wargs?/ => "brown";
 recolor qr/foxes?/ => "red";
 recolor qr/(?:little|large)? dogs?|dingos?/ => "bwhite";
 recolor qr/winter wolf cubs?|winter wol$ves/ => "cyan";
