@@ -3,8 +3,8 @@
 # by Eidolos and doy
 
 our $stats = '';
+our @stats = ();
 my $char = '';
-my @stats = ();
 my $align = '';
 my $score = '';
 my @stat_pos = ();
