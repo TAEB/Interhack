@@ -12,7 +12,6 @@ each_iteration
       next unless --$skip < 0;
       $cmdkey = $c, last if $c =~ /[a-zA-Z]/;
     }
-    annotate($cmdkey);
     if ($cmdkey eq 'z')
     {
       tab("#name\ny$lastkeys[-1]empty\n");
