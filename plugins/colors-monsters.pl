@@ -40,19 +40,19 @@ recolor qr/giant beetles?/ => "gray";
 recolor qr/queen bees?/ => "purple";
 # }}}
 
-# team b {{{
+# blobs b {{{
 recolor qr/acid blobs?/ => "green";
 recolor qr/quivering blobs?/ => "white";
 recolor qr/gelatinous cubes?/ => "cyan";
 # }}}
 
-# team c {{{
+# cockatrices c {{{
 recolor qr/chickatrices?/ => "brown";
 recolor qr/cockatrices?/ => "yellow";
 recolor qr/pyrolisks?/ => "red";
 # }}}
 
-# team d {{{
+# canines d {{{
 recolor qr/jackals?|coyotes?/ => "brown";
 recolor qr/wol$ves|wargs?/ => "brown";
 recolor qr/foxes?/ => "red";
@@ -61,7 +61,7 @@ recolor qr/winter wolf cubs?|winter wol$ves/ => "cyan";
 recolor qr/hell hound(?: pup)?s?/ => "red";
 # }}}
 
-# team e {{{
+# eyes and spheres e {{{
 recolor qr/gas spores?/ => "gray";
 recolor qr/floating eyes?/ => "bcyan";
 recolor qr/freezing spheres?/ => "bwhite";
@@ -69,7 +69,7 @@ recolor qr/flaming spheres?/ => "red";
 recolor qr/shocking spheres?/ => "bblue";
 # }}}
 
-# team f {{{
+# felines f {{{
 recolor qr/kittens?|(?:house|large )cats?/ => "bwhite";
 recolor qr/jaguars?/ => "brown";
 recolor qr/lynxes?/ => "cyan";
@@ -77,13 +77,13 @@ recolor qr/panthers?/ => "gray";
 recolor qr/tigers?/ => "yellow";
 # }}}
 
-# team g {{{
+# gremlins and gargoyles g {{{
 recolor qr/gremlins?/ => "green";
 recolor qr/gargoyles?/ => "brown";
 recolor qr/winged gargoyles?/ => "purple";
 # }}}
 
-# team h {{{
+# humanoids h {{{
 recolor qr/hobbits?/ => "green";
 recolor qr/dwar$ves/ => "red";
 recolor qr/bugbears?/ => "brown";
@@ -93,7 +93,7 @@ recolor qr/mind flayers?/ => "purple";
 recolor qr/master mind flayers?/ => "purple";
 # }}}
 
-# team i {{{
+# minor demons i {{{
 recolor qr/manes|imps?/ => "red";
 recolor qr/homuncul$us/ => "green";
 recolor qr/lemures?/ => "brown";
@@ -101,36 +101,36 @@ recolor qr/quasits?/ => "blue";
 recolor qr/tengus?/ => "cyan";
 # }}}
 
-# team j {{{
+# jellies j {{{
 recolor qr/blue jellys?/ => "blue";
 recolor qr/spotted jellys?/ => "green";
 recolor qr/ochre jellys?/ => "brown";
 # }}}
 
-# team k {{{
+# kobolds k {{{
 recolor qr/(?<!large )kobolds?(?! lord| shaman)/ => "brown";
 recolor qr/large kobolds?/ => "red";
 recolor qr/kobold lords?/ => "purple";
 recolor qr/kobold shamans?/ => "bblue";
 # }}}
 
-# team l {{{
+# leprechauns l {{{
 recolor qr/leprechauns?/ => "green";
 # }}}
 
-# team m {{{
+# mimics m {{{
 recolor qr/small mimics?/ => "brown";
 recolor qr/large mimics?/ => "red";
 recolor qr/giant mimics?/ => "purple";
 # }}}
 
-# team n {{{
+# nymphs n {{{
 recolor qr/wood nymphs?/ => "green";
 recolor qr/water nymphs?/ => "blue";
 recolor qr/mountain nymphs?/ => "brown";
 # }}}
 
-# team o {{{
+# orcs o {{{
 recolor qr/goblins?/ => "gray";
 recolor qr/hobgoblins?/ => "brown";
 recolor qr/orcs?\b/ => "red";
@@ -141,13 +141,13 @@ recolor qr/orc shamans?/ => "bblue";
 recolor qr/orc-captains?/ => "purple";
 # }}}
 
-# team p {{{
+# piercers p {{{
 recolor qr/rock piercers?/ => "gray";
 recolor qr/iron piercers?/ => "cyan";
 recolor qr/glass piercers?/ => "bwhite";
 # }}}
 
-# team q {{{
+# quadrupeds q {{{
 recolor qr/rothes?/ => "brown";
 recolor qr/mumaks?|titanotheres?|baluchitheri(?:um|a)/ => "gray";
 recolor qr/leocrottas?/ => "red";
@@ -155,32 +155,32 @@ recolor qr/wumpus$es/ => "cyan";
 recolor qr/mastodons?/ => "gray";
 # }}}
 
-# team r {{{
+# rodents r {{{
 recolor qr/(?:sewer |rabid |giant |were)rats?/ => "brown";
 recolor qr/rock moles?/ => "gray";
 recolor qr/woodchucks?/ => "bpurple";
 # }}}
 
-# team s {{{
+# arachnids or centipedes s {{{
 recolor qr/cave spiders?/ => "gray";
 recolor qr/centipedes?/ => "yellow";
 recolor qr/giant spiders?/ => "purple";
 recolor qr/scorpions?/ => "red";
 # }}}
 
-# team t {{{
+# trappers or lurkers above t {{{
 recolor qr/lurkers? above/ => "gray";
 recolor qr/trappers?/ => "green";
 # }}}
 
-# team u {{{
+# horses and unicorns u {{{
 recolor qr/white unicorns?/ => "white";
 recolor qr/gray unicorns?/ => "gray";
 recolor qr/black unicorns?/ => "gray";
 recolor qr/pon$ies|(?:war)?horses?\b/ => "brown";
 # }}}
 
-# team v {{{
+# clouds and vortices v {{{
 recolor qr/fog clouds?/ => "gray";
 recolor qr/dust vort$ex/ => "brown";
 recolor qr/ice vort$ex/ => "cyan";
@@ -189,26 +189,26 @@ recolor qr/steam vort$ex/ => "blue";
 recolor qr/fire vort$ex/ => "yellow";
 # }}}
 
-# team w {{{
+# worms w {{{
 recolor qr/(?:baby )?long worms?/ => "brown";
 recolor qr/(?:baby )?purple worms?/ => "purple";
 # }}}
 
-# team x {{{
+# fantastical insects x {{{
 recolor qr/grid bugs?/ => "purple";
 recolor qr/xans?/ => "red";
 # }}}
 
-# team y {{{
+# lights y {{{
 recolor qr/yellow lights?/ => "yellow";
 recolor qr/black lights?/ => "gray";
 # }}}
 
-# team z {{{
+# zruties z {{{
 recolor qr/zruty$ies/ => "brown";
 # }}}
 
-# team A {{{
+# angelic beings A {{{
 recolor qr/couatls?/ => "green";
 recolor qr/Aleax$es/ => "yellow";
 recolor qr/Angels?/ => "bwhite";
@@ -216,20 +216,20 @@ recolor qr/ki-rin/ => "yellow";
 recolor qr/Archons?/ => "purple";
 # }}}
 
-# team B {{{
+# bats and birds B {{{
 recolor qr/bats?/ => "brown";
 recolor qr/giant bats?/ => "red";
 recolor qr/ravens?/ => "gray";
 recolor qr/vampire bats?/ => "gray";
 # }}}
 
-# team C {{{
+# centaurs C {{{
 recolor qr/plains centaurs?/ => "brown";
 recolor qr/forest centaurs?/ => "green";
 recolor qr/mountain centaurs?/ => "cyan";
 # }}}
 
-# team D {{{
+# dragons D {{{
 recolor qr/(?:baby )?gray dragons?(?! scale)/ => "gray";
 recolor qr/(?:baby )?silver dragons?(?! scale)/ => "cyan";
 recolor qr/(?:baby )?red dragons?(?! scale)/ => "red";
@@ -241,7 +241,7 @@ recolor qr/(?:baby )?green dragons?(?! scale)/ => "green";
 recolor qr/(?:baby )?yellow dragons?(?! scale)/ => "yellow";
 # }}}
 
-# team E {{{
+# elementals and stalkers E {{{
 recolor qr/stalkers?/ => "bwhite";
 recolor qr/air elementals?/ => "cyan";
 recolor qr/fire elementals?/ => "yellow";
@@ -249,7 +249,7 @@ recolor qr/earth elementals?/ => "brown";
 recolor qr/water elementals?/ => "blue";
 # }}}
 
-# team F {{{
+# fungi and molds F {{{
 recolor qr/lichens?/ => "bgreen";
 recolor qr/brown molds?/ => "brown";
 recolor qr/yellow molds?/ => "yellow";
@@ -258,14 +258,14 @@ recolor qr/red molds?/ => "red";
 recolor qr/shriekers?|violet fung$us/ => "purple";
 # }}}
 
-# team G {{{
+# gnomes G {{{
 recolor qr/gnomes?(?! lord|king)/ => "brown";
 recolor qr/gnome lords?/ => "blue";
 recolor qr/gnomish wizards?/ => "bblue";
 recolor qr/gnome kings?/ => "purple";
 # }}}
 
-# team H {{{
+# large humanoids H {{{
 recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel)/ => "red";
 recolor qr/stone giants?/ => "gray";
 recolor qr/hill giants?/ => "cyan";
@@ -276,11 +276,11 @@ recolor qr/ettins?|minotaurs?/ => "brown";
 recolor qr/titans?/ => "purple";
 # }}}
 
-# team J {{{
+# jabberwocks J {{{
 recolor qr/jabberwocks?/ => "bred";
 # }}}
 
-# team K {{{
+# Keystone Kops K {{{
 recolor qr/Keystone Kops?|Kop Sergeants?/ => "blue";
 recolor qr/Kop Lieutenants?/ => "cyan";
 recolor qr/Kop Kaptains?/ => "purple";
