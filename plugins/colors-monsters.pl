@@ -266,7 +266,7 @@ recolor qr/gnome kings?/ => "purple";
 # }}}
 
 # large humanoids H {{{
-recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel)/ => "red";
+recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel| spider)/ => "red";
 recolor qr/stone giants?/ => "gray";
 recolor qr/hill giants?/ => "cyan";
 recolor qr/fire giants?/ => "yellow";
