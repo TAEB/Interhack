@@ -5,7 +5,7 @@ nick "Eidolos";
 # }}}
 
 # plugins {{{
-exclude_plugins "doy-colors-items";
+exclude_plugins "doy-colors-items", "no_stats";
 include "*";
 # }}}
 
