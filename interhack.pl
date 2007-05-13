@@ -114,6 +114,7 @@ our $in_game = 0;
 our $buf = '';
 our $resting = 0;
 our ($curhp, $maxhp, $curpw, $maxpw) = (0, 0, 0, 0);
+our $vikeys = 0;
 # }}}
 
 sub exclude_plugins # {{{
@@ -493,7 +494,7 @@ while (1)
   if ($resting)
   {
     s/Count: 10//;
-    push @key_queue => "n10s"
+    push @key_queue => ($vikeys ? "" : "n") . "10s"
       unless @key_queue;
   }
 
