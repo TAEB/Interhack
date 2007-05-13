@@ -5,6 +5,7 @@ nick "Eidolos";
 # }}}
 
 # plugins {{{
+$chromatic_gods = $chromatic_nemeses = 1;
 exclude_plugins "doy-colors-items", "no_stats";
 include "*";
 # }}}
