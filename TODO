@@ -37,9 +37,9 @@ hunger estimator
 prayer timeout estimator
 wish listings
 * geno listings
-name empty wands
+* name empty wands
 mind flayer protection
-hide attributes (to use for something more important)
+* hide attributes (to use for something more important)
 max carry capacity indicator
 display stairs (if an item is on them)
 color branch stairs
