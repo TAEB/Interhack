@@ -1,7 +1,8 @@
 # color monster names in messages and menus and things
 # by toft and Eidolos
 
-# shortcut regexes so we can write e.g. "el$ves" instead of "el(?:f|ves)"
+# shorcut regexes {{{
+# so we can write e.g. "el$ves" instead of "el(?:f|ves)"
 my $ves = qr/f|ves/;
 my $the = qr/(?:[Tt]he )?/;
 my $us = qr/us|i/;
@@ -9,8 +10,9 @@ my $es = qr/(?:es)?/;
 my $ies = qr/y|ies/;
 my $ex = qr/ex|ices/;
 my $esses = qr/s?|esses?/;
+# }}}
 
-# chromatic stuff!
+# chromatic stuff {{{
 my @dim_colors = qw/red brown green cyan magenta blue/;
 my @bold_colors = map {$colormap{$_}} map {"b$_"} @dim_colors;
 @dim_colors = map {$colormap{$_}} @dim_colors;
@@ -20,6 +22,7 @@ my @colors = @dim_colors, @bold_colors;
 sub random_color { $colors[     rand @colors     ] }
 sub random_dim   { $dim_colors[ rand @dim_colors ] }
 sub random_bold  { $bold_colors[rand @bold_colors] }
+# }}}
 
 # deities {{{
 if ($chromatic_gods)
@@ -40,19 +43,16 @@ recolor qr/fire ants?/ => "red";
 recolor qr/giant beetles?/ => "gray";
 recolor qr/queen bees?/ => "purple";
 # }}}
-
 # blobs b {{{
 recolor qr/acid blobs?/ => "green";
 recolor qr/quivering blobs?/ => "white";
 recolor qr/gelatinous cubes?/ => "cyan";
 # }}}
-
 # cockatrices c {{{
 recolor qr/chickatrices?/ => "brown";
 recolor qr/cockatrices?/ => "yellow";
 recolor qr/pyrolisks?/ => "red";
 # }}}
-
 # canines d {{{
 recolor qr/(?<!were)jackals?|coyotes?/ => "brown";
 recolor qr/(?<!ter |were)wol$ves|wargs?/ => "brown";
@@ -61,7 +61,6 @@ recolor qr/(?:little|large)? dogs?|dingos?/ => "bwhite";
 recolor qr/winter wolf cubs?|winter wol$ves/ => "cyan";
 recolor qr/hell hound(?: pup)?s?/ => "red";
 # }}}
-
 # eyes and spheres e {{{
 recolor qr/gas spores?/ => "gray";
 recolor qr/floating eyes?/ => "bcyan";
@@ -69,7 +68,6 @@ recolor qr/freezing spheres?/ => "bwhite";
 recolor qr/flaming spheres?/ => "red";
 recolor qr/shocking spheres?/ => "bblue";
 # }}}
-
 # felines f {{{
 recolor qr/kittens?|(?:house|large )cats?/ => "bwhite";
 recolor qr/jaguars?/ => "brown";
@@ -77,13 +75,11 @@ recolor qr/lynxes?/ => "cyan";
 recolor qr/panthers?/ => "gray";
 recolor qr/tigers?/ => "yellow";
 # }}}
-
 # gremlins and gargoyles g {{{
 recolor qr/gremlins?/ => "green";
 recolor qr/(?<!winged )gargoyles?/ => "brown";
 recolor qr/winged gargoyles?/ => "purple";
 # }}}
-
 # humanoids h {{{
 recolor qr/hobbits?/ => "green";
 recolor qr/dwar$ves(?! lord| king| zombie| mumm)/ => "red";
@@ -92,7 +88,6 @@ recolor qr/dwarf lords?/ => "blue";
 recolor qr/dwarf kings?/ => "purple";
 recolor qr/(?:master )?mind flayers?/ => "purple";
 # }}}
-
 # minor demons i {{{
 recolor qr/manes|imps?/ => "red";
 recolor qr/homuncul$us/ => "green";
@@ -100,36 +95,30 @@ recolor qr/lemures?/ => "brown";
 recolor qr/quasits?/ => "blue";
 recolor qr/tengus?/ => "cyan";
 # }}}
-
 # jellies j {{{
 recolor qr/blue jell$ies/ => "blue";
 recolor qr/spotted jell$ies/ => "green";
 recolor qr/ochre jell$ies/ => "brown";
 # }}}
-
 # kobolds k {{{
 recolor qr/(?<!large )kobolds?(?! lord| shaman| zombie| mumm)/ => "brown";
 recolor qr/large kobolds?/ => "red";
 recolor qr/kobold lords?/ => "purple";
 recolor qr/kobold shamans?/ => "bblue";
 # }}}
-
 # leprechauns l {{{
 recolor qr/leprechauns?/ => "green";
 # }}}
-
 # mimics m {{{
 recolor qr/small mimics?/ => "brown";
 recolor qr/large mimics?/ => "red";
 recolor qr/giant mimics?/ => "purple";
 # }}}
-
 # nymphs n {{{
 recolor qr/wood nymphs?/ => "green";
 recolor qr/water nymphs?/ => "blue";
 recolor qr/mountain nymphs?/ => "brown";
 # }}}
-
 # orcs o {{{
 recolor qr/(?<!hob)goblins?/ => "gray";
 recolor qr/hobgoblins?/ => "brown";
@@ -140,13 +129,11 @@ recolor qr/Uruk-hai/ => "gray";
 recolor qr/orc shamans?/ => "bblue";
 recolor qr/orc-captains?/ => "purple";
 # }}}
-
 # piercers p {{{
 recolor qr/rock piercers?/ => "gray";
 recolor qr/iron piercers?/ => "cyan";
 recolor qr/glass piercers?/ => "bwhite";
 # }}}
-
 # quadrupeds q {{{
 recolor qr/rothes?/ => "brown";
 recolor qr/mumaks?|titanotheres?|baluchitheri(?:um|a)/ => "gray";
@@ -154,32 +141,27 @@ recolor qr/leocrottas?/ => "red";
 recolor qr/wumpus$es/ => "cyan";
 recolor qr/mastodons?/ => "gray";
 # }}}
-
 # rodents r {{{
 recolor qr/(?:sewer |rabid |giant |were)rats?/ => "brown";
 recolor qr/rock moles?/ => "gray";
 recolor qr/woodchucks?/ => "bpurple";
 # }}}
-
 # arachnids or centipedes s {{{
 recolor qr/cave spiders?/ => "gray";
 recolor qr/centipedes?/ => "yellow";
 recolor qr/giant spiders?/ => "purple";
 recolor qr/scorpions?/ => "red";
 # }}}
-
 # trappers or lurkers above t {{{
 recolor qr/lurkers? above/ => "gray";
 recolor qr/trappers?/ => "green";
 # }}}
-
 # horses and unicorns u {{{
 recolor qr/white unicorns?/ => "white";
 recolor qr/gray unicorns?/ => "gray";
 recolor qr/black unicorns?/ => "gray";
 recolor qr/pon$ies|(?:war)?horses?\b/ => "brown";
 # }}}
-
 # clouds and vortices v {{{
 recolor qr/fog clouds?/ => "gray";
 recolor qr/dust vort$ex/ => "brown";
@@ -188,22 +170,18 @@ recolor qr/energy vort$ex/ => "bblue";
 recolor qr/steam vort$ex/ => "blue";
 recolor qr/fire vort$ex/ => "yellow";
 # }}}
-
 # worms w {{{
 recolor qr/(?:baby )?long worms?/ => "brown";
 recolor qr/(?:baby )?purple worms?/ => "purple";
 # }}}
-
 # fantastical insects x {{{
 recolor qr/grid bugs?/ => "purple";
 recolor qr/xans?/ => "red";
 # }}}
-
 # lights y {{{
 recolor qr/yellow lights?/ => "yellow";
 recolor qr/black lights?/ => "gray";
 # }}}
-
 # zruties z {{{
 recolor qr/zruty$ies/ => "brown";
 # }}}
@@ -215,20 +193,17 @@ recolor qr/Angels?/ => "bwhite";
 recolor qr/ki-rin/ => "yellow";
 recolor qr/Archons?/ => "purple";
 # }}}
-
 # bats and birds B {{{
 recolor qr/(?<!giant |mpire )bats?\b/ => "brown";
 recolor qr/giant bats?/ => "red";
 recolor qr/ravens?/ => "gray";
 recolor qr/vampire bats?/ => "gray";
 # }}}
-
 # centaurs C {{{
 recolor qr/plains centaurs?/ => "brown";
 recolor qr/forest centaurs?/ => "green";
 recolor qr/mountain centaurs?/ => "cyan";
 # }}}
-
 # dragons D {{{
 recolor qr/(?:baby )?gray dragons?(?! scale)/ => "gray";
 recolor qr/(?:baby )?silver dragons?(?! scale)/ => "bcyan";
@@ -240,7 +215,6 @@ recolor qr/(?:baby )?blue dragons?(?! scale)/ => "blue";
 recolor qr/(?:baby )?green dragons?(?! scale)/ => "green";
 recolor qr/(?:baby )?yellow dragons?(?! scale)/ => "yellow";
 # }}}
-
 # elementals and stalkers E {{{
 recolor qr/stalkers?/ => "bwhite";
 recolor qr/air elementals?/ => "cyan";
@@ -248,7 +222,6 @@ recolor qr/fire elementals?/ => "yellow";
 recolor qr/earth elementals?/ => "brown";
 recolor qr/water elementals?/ => "blue";
 # }}}
-
 # fungi and molds F {{{
 recolor qr/lichens?/ => "bgreen";
 recolor qr/brown molds?/ => "brown";
@@ -257,14 +230,12 @@ recolor qr/green molds?/ => "green";
 recolor qr/red molds?/ => "red";
 recolor qr/shriekers?|violet fung$us/ => "purple";
 # }}}
-
 # gnomes G {{{
 recolor qr/gnomes?(?! lord| king| zombie| mumm)/ => "brown";
 recolor qr/gnome lords?/ => "blue";
 recolor qr/gnomish wizards?/ => "bblue";
 recolor qr/gnome kings?/ => "purple";
 # }}}
-
 # large humanoids H {{{
 recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel| spider| rat| zombie| mumm)/ => "red";
 recolor qr/stone giants?/ => "gray";
@@ -275,17 +246,14 @@ recolor qr/storm giants?/ => "blue";
 recolor qr/ettins?\b(?! zombie| mumm)|minotaurs?/ => "brown";
 recolor qr/titan(?!otheres?)s?/ => "purple";
 # }}}
-
 # jabberwocks J {{{
 recolor qr/jabberwocks?/ => "bred";
 # }}}
-
 # Keystone Kops K {{{
 recolor qr/Keystone Kops?|Kop Sergeants?/ => "blue";
 recolor qr/Kop Lieutenants?/ => "cyan";
 recolor qr/Kop Kaptains?/ => "purple";
 # }}}
-
 # liches L {{{
 recolor qr/(?:demi|master |arch-)?lich$es(?!en)/
      => sub
@@ -295,7 +263,6 @@ recolor qr/(?:demi|master |arch-)?lich$es(?!en)/
           :                           $colormap{purple};
         };
 # }}}
-
 # mummies M {{{
 recolor qr/kobold mumm$ies/ => "brown";
 recolor qr/(?:orc|human) mumm$ies/ => "red";
@@ -304,36 +271,30 @@ recolor qr/elf mumm$ies/ => "green";
 recolor qr/ettin mumm$ies/ => "blue";
 recolor qr/giant mumm$ies/ => "cyan";
 # }}}
-
 # nagas N {{{
 recolor qr/red nagas?(?: hatchlings?)?/ => "red";
 recolor qr/black nagas?(?: hatchlings?)?/ => "blue";
 recolor qr/golden nagas?(?: hatchlings?)?/ => "yellow";
 recolor qr/guardian nagas?(?: hatchlings?)?/ => "green";
 # }}}
-
 # ogres O {{{
 recolor qr/(?<!pr)ogres?\b(?! lord|king)/ => "brown";
 recolor qr/ogre lords?/ => "red";
 recolor qr/ogre kings?/ => "purple";
 # }}}
-
 # puddings and other amoeboids P {{{
 recolor qr/gray oozes?/ => "gray";
 recolor qr/brown puddings?/ => "brown";
 recolor qr/black puddings?/ => "blue";
 recolor qr/green slimes?/ => "green";
 # }}}
-
 # quantum mechanics Q {{{
 recolor qr/quantum mechanics?/ => "cyan";
 # }}}
-
 # rust monsters and disenchanters R {{{
 recolor qr/rust monsters?/ => "brown";
 recolor qr/disenchanters?/ => "blue";
 # }}}
-
 # snakes S {{{
 recolor qr/garter snakes?/ => "green";
 recolor qr/(?<!garter )snakes?/ => "brown";
@@ -341,7 +302,6 @@ recolor qr/water moccasins?/ => "red";
 recolor qr/pit vipers?|cobras?/ => "blue";
 recolor qr/pythons?/ => "purple";
 # }}}
-
 # trolls T {{{
 recolor qr/(?<!ice |ock |ter )trolls?\b/ => "brown";
 recolor qr/ice trolls?/ => "bwhite";
@@ -349,34 +309,28 @@ recolor qr/rock trolls?/ => "cyan";
 recolor qr/water trolls?/ => "blue";
 recolor qr/Olog-hai/ => "purple";
 # }}}
-
 # umber hulks U {{{
 recolor qr/umber hulks?/ => "brown";
 # }}}
-
 # vampires V {{{
 recolor qr/vampires?(?! lord)/ => "red";
 recolor qr/vampire lords?/ => "blue";
 recolor qr/Vlad the Impaler/ => "purple";
 # }}}
-
 # wraiths W {{{
 recolor qr/barrow wights?/ => "gray";
 recolor qr/wraiths?/ => "blue";
 recolor qr/Nazguls?/ => "purple"; # yes it's "9 Nazgul" but NetHack sucks!
 # }}}
-
 # xorns X {{{
 recolor qr/xorns?/ => "brown";
 # }}}
-
 # apelike creatures Y {{{
 recolor qr/monkeys?|sasquatch$es/ => "gray";
 each_iteration { s/carnivorous ape(s?)/\e[34mcarnivorous a\e[34mpe$1\e[0m/g }
 recolor qr/(?<!s[ch])apes?\b|owlbears?/ => "brown";
 recolor qr/yetis?/ => "bwhite";
 # }}}
-
 # zombies Z {{{
 recolor qr/(?:kobold|gnome) zombies?/ => "brown";
 recolor qr/orc zombies?/ => "gray";
@@ -398,7 +352,6 @@ recolor qr/flesh golems?/ => "red";
 recolor qr/stone golems?/ => "gray";
 recolor qr/(?:iron|glass) golems?/ => "cyan";
 # }}}
-
 # humans and elves @ {{{
 recolor qr/humans?(?! zombie| mumm)/ => "bwhite";
 recolor qr/wererats?/ => "brown";
@@ -428,12 +381,10 @@ recolor qr/Medusa/ => "bgreen";
 recolor qr/${the}Wizard of Yendor/ => "purple";
 recolor qr/Croesus/ => "purple";
 # }}}
-
 # ghosts and shades X {{{
 recolor qr/ghosts?/ => "white";
 recolor qr/shades?/ => "blue";
 # }}}
-
 # demons & {{{
 recolor qr/Death|Pestilence|Famine/ => "purple";
 recolor qr/Orcus|Baalzebub|Asmodeus/ => "purple";
@@ -448,7 +399,6 @@ recolor qr/ice devils?/ => "white";
 recolor qr/mail daemons?/ => "bblue";
 recolor qr/water demons?/ => "blue";
 # }}}
-
 # sea monsters ; {{{
 recolor qr/jellyfish/ => "blue";
 recolor qr/piranhas?|krakens?/ => "red";
@@ -456,7 +406,6 @@ recolor qr/sharks?/ => "white";
 recolor qr/giant eels?/ => "cyan";
 recolor qr/electric eels?/ => "bblue";
 # }}}
-
 # lizards : {{{
 recolor qr/newts?/ => "yellow";
 recolor qr/geckos?|lizards?/ => "green";
@@ -500,7 +449,6 @@ else
     recolor qr/${the}Dark One/           => \&random_color;
 }
 # }}}
-
 # quest leaders {{{
 recolor qr/Lord Carnarvon/          => "purple";
 recolor qr/Pelias/                  => "purple";
@@ -516,8 +464,6 @@ recolor qr/Twoflower/               => "bwhite";
 recolor qr/${the}Norn/              => "purple";
 recolor qr/Neferet the Green/       => "green";
 # }}}
-
 # quest guardians {{{
 recolor qr/students?|chieftains?|neanderthals?|attendants?|pages?|abbots?|acolytes?|hunters?|thugs?|ninjas?|roshi|guides?|warriors?|apprentices?/ => "white";
 # }}}
-
