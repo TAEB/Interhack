@@ -29,7 +29,7 @@ each_iteration
     $score_pos = $stat_start + length($stats) + length(${11}) + 2;
     $align = ${12};
     $score = ${13};
-    "\e[23;1HS:$score\e[K"
+    "\e[23;1H\e[0mS:$score\e[K"
   }eg;
 
   s{\e\[23;(?!1H)(\d+)H((?:$st_char|\e\[C)+)(\e\[K)?}{
@@ -69,7 +69,7 @@ each_iteration
         if $clr_to_end;
     }
     $stats = "St:$stats[0] Dx:$stats[1] Co:$stats[2] In:$stats[3] Wi:$stats[4] Ch:$stats[5]";
-    "\e[23;1HS:$score\e[K"
+    "\e[23;1H\e[0mS:$score\e[K"
   }eg;
 }
 
