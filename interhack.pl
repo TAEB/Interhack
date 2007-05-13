@@ -475,11 +475,15 @@ while (1)
   }eg;
 
   ($resting, @key_queue) = 0
-    if /\e\[H(?!(?:\e\[\d?K|Count:))/ || /(?:\e\[24;\d+H|HP:)(\d+)\(\1\)/;
+    if (($resting    ) && /\e\[H(?!\e\[\d?K|Count:)/)
+    || (($resting & 2) && /(?:\e\[24;\d+H|HP:)(\d+)\(\1\)/)
+    || (($resting & 4) && /Pw:(\d+)\(\1\)/);
 
   if (/\e\[Hrest: unknown extended command\./)
   {
-    $resting = 1;
+    $resting  = 1;
+    $resting |= 2 if $curhp != $maxhp;
+    $resting |= 4 if $curpw != $maxpw;
   }
 
   s{rest: unknown extended command\.}
@@ -487,10 +491,10 @@ while (1)
 
   if ($resting)
   {
+    s/Count: 10//;
     push @key_queue => "n10s"
       unless @key_queue;
   }
-
 
   foreach my $map (@configmap, @colormap)
   {
