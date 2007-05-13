@@ -57,7 +57,7 @@ recolor qr/wol$ves|wargs?/ => "brown";
 recolor qr/foxes?/ => "red";
 recolor qr/(?:little|large)? dogs?|dingos?/ => "bwhite";
 recolor qr/winter wolf cubs?|winter wol$ves/ => "cyan";
-recolor qr/hell hounds?|hell hound pups?/ => "red";
+recolor qr/hell hound(?: pup)?s?/ => "red";
 # }}}
 
 # team e {{{
@@ -107,7 +107,7 @@ recolor qr/ochre jellys?/ => "brown";
 # }}}
 
 # team k {{{
-recolor qr/kobolds?/ => "brown";
+recolor qr/(?<!large )kobolds?(?! lord| shaman)/ => "brown";
 recolor qr/large kobolds?/ => "red";
 recolor qr/kobold lords?/ => "purple";
 recolor qr/kobold shamans?/ => "bblue";
@@ -258,7 +258,7 @@ recolor qr/shriekers?|violet fung$us/ => "purple";
 # }}}
 
 # team G {{{
-recolor qr/gnomes?/ => "brown";
+recolor qr/gnomes?(?! lord|king)/ => "brown";
 recolor qr/gnome lords?/ => "blue";
 recolor qr/gnomish wizards?/ => "bblue";
 recolor qr/gnome kings?/ => "purple";
@@ -305,10 +305,10 @@ recolor qr/giant mumm$ies/ => "cyan";
 # }}}
 
 # nagas N {{{
-recolor qr/red nagas?(?: hatchlings?)??/ => "red";
-recolor qr/black nagas?(?: hatchlings?)??/ => "blue";
-recolor qr/golden nagas?(?: hatchlings?)??/ => "yellow";
-recolor qr/guardian nagas?(?: hatchlings?)??/ => "green";
+recolor qr/red nagas?(?: hatchlings?)?/ => "red";
+recolor qr/black nagas?(?: hatchlings?)?/ => "blue";
+recolor qr/golden nagas?(?: hatchlings?)?/ => "yellow";
+recolor qr/guardian nagas?(?: hatchlings?)?/ => "green";
 # }}}
 
 # ogres O {{{
@@ -462,7 +462,7 @@ recolor qr/salamanders?/ => "bred";
 # }}}
 
 # player monsters {{{
-recolor qr/archeologists?|barbarians?|cave(?:wo)?m[ae]n|healers?|knights?|monks?|priests?|priestess(?:es)?|rangers?|rogues?|samurai|tourists?|valkyries?|wizards?/ => "white";
+recolor qr/archeologists?|barbarians?|cave(?:wo)?m[ae]n|healers?|knights?|monks?|priests?|priestess(?:es)?|rangers?|rogues?|samurai|tourists?|valkyries?|(?<!ish|old) wizards?/ => "white";
 # }}}
 
 # quest nemeses {{{
