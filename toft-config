@@ -1,0 +1,35 @@
+nick "Crassworm";
+$vikeys = 1;
+
+# plugins {{{
+exclude_plugins "doy-colors-items";
+include "*";
+$fortune = "yasd ideas nethackidiocy";
+# }}}
+
+# remappings {{{
+remap chr(5) => sub { "E-  Elbereth\n" }; # (^E)
+remap chr(16) => "aany\e"; # for the drawbridge :) (^P)
+# }}}
+
+# autoadjusts {{{
+sub autoadjust;
+
+autoadjust $aa_key         => "k";
+autoadjust $aa_unihorn     => "S";
+autoadjust $aa_athame      => "E";
+autoadjust $aa_stethoscope => "s";
+autoadjust $aa_pickaxe     => "x";
+autoadjust $aa_bag         => "b";
+autoadjust $aa_Amulet      => "d";
+autoadjust $aa_blindfold   => "H";
+autoadjust $aa_lizard      => "L";
+autoadjust $aa_conflict    => "C";
+autoadjust $aa_whistle     => "w";
+autoadjust $aa_lamp        => "l";
+autoadjust $aa_luckstone   => "Z";
+autoadjust $aa_instrument  => "n";
+
+# }}}
+
+# vim:ft=perl:fdm=marker:
