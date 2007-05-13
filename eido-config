@@ -1,10 +1,18 @@
-#nick "Eidolos";
+# main config {{{
+nick "Eidolos";
+# }}}
+
+# plugins {{{
 exclude_plugins "doy-colors-items";
 include "*";
+# }}}
 
+# key remappings {{{
 remap chr(5) => sub { "E-  Elbereth\n" };
-remap chr(4) => "aany\e";
+remap chr(4) => "aany\e"; # for the drawbridge :)
+# }}}
 
+# autoadjusts {{{
 sub autoadjust;
 autoadjust $aa_key         => "k";
 autoadjust $aa_unihorn     => "h";
@@ -17,4 +25,5 @@ autoadjust $aa_blindfold   => "P";
 autoadjust $aa_lizard      => "L";
 autoadjust $aa_conflict    => "C";
 autoadjust $aa_whistle     => "w";
+# }}}
 
