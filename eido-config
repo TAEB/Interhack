@@ -28,5 +28,6 @@ autoadjust $aa_lizard      => "L";
 autoadjust $aa_conflict    => "c";
 autoadjust $aa_whistle     => "w";
 autoadjust $aa_levitation  => "l";
+autoadjust $aa_instrument  => "a";
 # }}}
 
