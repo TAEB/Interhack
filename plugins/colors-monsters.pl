@@ -7,6 +7,7 @@ my $the = qr/(?:[Tt]he )?/;
 my $us = qr/us|i/;
 my $es = qr/(?:es)?/;
 my $ies = qr/y|ies/;
+my $ex = qr/ex|ices/;
 
 # chromatic stuff!
 my @dim_colors = qw/red brown green cyan magenta blue/;
@@ -47,7 +48,7 @@ recolor qr/gelatinous cubes?/ => "cyan";
 
 # team c {{{
 recolor qr/chickatrices?/ => "brown";
-recolor qr/cockatrices?/ => "bbrown";
+recolor qr/cockatrices?/ => "yellow";
 recolor qr/pyrolisks?/ => "red";
 # }}}
 
@@ -73,7 +74,7 @@ recolor qr/kittens?|(?:house|large )cats?/ => "bwhite";
 recolor qr/jaguars?/ => "brown";
 recolor qr/lynxes?/ => "cyan";
 recolor qr/panthers?/ => "gray";
-recolor qr/tigers?/ => "bbrown";
+recolor qr/tigers?/ => "yellow";
 # }}}
 
 # team g {{{
@@ -133,7 +134,7 @@ recolor qr/mountain nymphs?/ => "brown";
 recolor qr/goblins?/ => "gray";
 recolor qr/hobgoblins?/ => "brown";
 recolor qr/orcs?\b/ => "red";
-recolor qr/hill orcs?/ => "bbrown";
+recolor qr/hill orcs?/ => "yellow";
 recolor qr/Mordor orcs?/ => "blue";
 recolor qr/Uruk-hai/ => "gray";
 recolor qr/orc shamans?/ => "bblue";
@@ -162,7 +163,7 @@ recolor qr/woodchucks?/ => "bpurple";
 
 # team s {{{
 recolor qr/cave spiders?/ => "gray";
-recolor qr/centipedes?/ => "bbrown";
+recolor qr/centipedes?/ => "yellow";
 recolor qr/giant spiders?/ => "purple";
 recolor qr/scorpions?/ => "red";
 # }}}
@@ -181,11 +182,11 @@ recolor qr/pon$ies|(?:war)?horses?\b/ => "brown";
 
 # team v {{{
 recolor qr/fog clouds?/ => "gray";
-recolor qr/dust vortex$es/ => "brown";
-recolor qr/ice vortex$es/ => "cyan";
-recolor qr/energy vortex$es/ => "bblue";
-recolor qr/steam vortexs$es/ => "blue";
-recolor qr/fire vortexs$es/ => "bbrown";
+recolor qr/dust vort$ex/ => "brown";
+recolor qr/ice vort$ex/ => "cyan";
+recolor qr/energy vort$ex/ => "bblue";
+recolor qr/steam vort$ex/ => "blue";
+recolor qr/fire vort$ex/ => "yellow";
 # }}}
 
 # team w {{{
@@ -199,7 +200,7 @@ recolor qr/xans?/ => "red";
 # }}}
 
 # team y {{{
-recolor qr/yellow lights?/ => "bbrown";
+recolor qr/yellow lights?/ => "yellow";
 recolor qr/black lights?/ => "gray";
 # }}}
 
@@ -209,9 +210,9 @@ recolor qr/zruty$ies/ => "brown";
 
 # team A {{{
 recolor qr/couatls?/ => "green";
-recolor qr/Aleaxs?/ => "bbrown";
+recolor qr/Aleax$es/ => "yellow";
 recolor qr/Angels?/ => "bwhite";
-recolor qr/ki-rins?/ => "bbrown";
+recolor qr/ki-rin/ => "yellow";
 recolor qr/Archons?/ => "purple";
 # }}}
 
@@ -237,13 +238,13 @@ recolor qr/(?:baby )?orange dragons?(?! scale)/ => "orange";
 recolor qr/(?:baby )?black dragons?(?! scale)/ => "gray";
 recolor qr/(?:baby )?blue dragons?(?! scale)/ => "blue";
 recolor qr/(?:baby )?green dragons?(?! scale)/ => "green";
-recolor qr/(?:baby )?yellow dragons?(?! scale)/ => "bbrown";
+recolor qr/(?:baby )?yellow dragons?(?! scale)/ => "yellow";
 # }}}
 
 # team E {{{
 recolor qr/stalkers?/ => "bwhite";
-recolor qr/air elementals?/ => "bblue";
-recolor qr/fire elementals?/ => "bbrown";
+recolor qr/air elementals?/ => "cyan";
+recolor qr/fire elementals?/ => "yellow";
 recolor qr/earth elementals?/ => "brown";
 recolor qr/water elementals?/ => "blue";
 # }}}
@@ -251,7 +252,7 @@ recolor qr/water elementals?/ => "blue";
 # team F {{{
 recolor qr/lichens?/ => "bgreen";
 recolor qr/brown molds?/ => "brown";
-recolor qr/yellow molds?/ => "bbrown";
+recolor qr/yellow molds?/ => "yellow";
 recolor qr/green molds?/ => "green";
 recolor qr/red molds?/ => "red";
 recolor qr/shriekers?|violet fung$us/ => "purple";
@@ -268,7 +269,7 @@ recolor qr/gnome kings?/ => "purple";
 recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel)/ => "red";
 recolor qr/stone giants?/ => "gray";
 recolor qr/hill giants?/ => "cyan";
-recolor qr/fire giants?/ => "bbrown";
+recolor qr/fire giants?/ => "yellow";
 recolor qr/frost giants?/ => "bwhite";
 recolor qr/storm giants?/ => "blue";
 recolor qr/ettins?|minotaurs?/ => "brown";
