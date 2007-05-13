@@ -11,9 +11,24 @@ include "*";
 # }}}
 
 # plugin configuration {{{
+# fortune {{{
 $fortune = "~/.fortune/yasd-fortune ~/.fortune/ideas";
 # }}}
 
+# autoadjust {{{
+sub autoadjust;
+autoadjust $aa_key         => "o";
+autoadjust $aa_unihorn     => "a";
+autoadjust $aa_athame      => "e";
+autoadjust $aa_stethoscope => "y";
+autoadjust $aa_bag         => "i";
+autoadjust $aa_blindfold   => "n";
+autoadjust $aa_whistle     => "z";
+autoadjust $aa_lamp        => "j";
+autoadjust $aa_trice       => "^y";
+# }}}
+# }}}
+
 # mappings {{{
-remap chr(5) => sub { "E-  Elbereth\n" };
+remap chr(5) => "E-  Elbereth\n";
 # }}}
