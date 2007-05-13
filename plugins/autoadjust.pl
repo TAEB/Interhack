@@ -41,6 +41,7 @@ our $aa_whistle     = qr/magic whistle|whistle called magic/;
 our $aa_lamp        = qr/lamp|lantern/;
 our $aa_luckstone   = qr/luck(?:stone)?/;
 our $aa_levitation  = qr/lev(?:itation)?/;
+our $aa_instrument  = qr/(?:tooled |frost |fire )?horn|(?:wooden |magic )?(?:flute|harp)|bugle/
 
 # samples (see *-config for more):
 # sub autoadjust;
