@@ -4,4 +4,4 @@
 # lamps.)
 # By toft
 
-make_tab qr/\e\[HNothing happens\./ => sub{"#name\ny${lastkey}empty\n"};
+make_tab qr/\e\[HNothing happens\./ => sub{"#name\ny$lastkeys[-1]empty\n"};
