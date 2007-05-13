@@ -8,13 +8,25 @@
 # autoadjust;" in your config before any autoadjust statements OR put parens
 # around those statements. looking for a fix.
 
+my %autoadjusts;
+
 sub autoadjust
 {
     my ($item, $adjust_to) = @_;
+    my %adjust_bad;
+
+    if (substr($adjust_to, 0, 1) ne '^')
+    {
+        $autoadjusts{$adjust_to}++;
+    }
+    else
+    {
+        %adjust_bad = map {$_ => 1} split //, substr($adjust_to, 1);
+    }
 
     make_tab qr{ \e\[H
                  (?-x:You have a little trouble lifting )?
-                 ([^$adjust_to])
+                 (.)
                  \ -\ 
                  (an?|\d+)
                  [^.]*?
@@ -24,7 +36,38 @@ sub autoadjust
                  (?: \ ? \( -? \d+ : -? \d+ \) )?  # charges
                  \.
                }x
-          => sub { "\e#adjust\n$1$adjust_to" };
+          => sub
+             {
+                 if (substr($adjust_to, 0, 1) ne '^')
+                 {
+                     return $1 eq $adjust_to ? "" : "\e#adjust\n$1$adjust_to"
+                 }
+                 else
+                 {
+                     return "" if $1 ne substr($adjust_to, 1, 1);
+
+                     # find an unallocated autoadjust slot
+                     my @letters = ('a'..'z', 'A'..'Z');
+                     while (local $_ = splice @letters, rand @letters, 1)
+                     {
+                         if (!exists($autoadjusts{$_}) && !exists($adjust_bad{$_}))
+                         {
+                             return "\e#adjust\n$1$_";
+                         }
+                     }
+
+                     # ok so we have autoadjusts for all 52 slots, this is
+                     # getting silly, so we'll just pick "a" or "b"
+                     if ($adjust_bad{a})
+                     {
+                         return "\e#adjust\n$1b";
+                     }
+                     else
+                     {
+                         return "\e#adjust\n$1a";
+                     }
+                 }
+             };
 }
 
 our $aa_key         = qr/key|lock pick|credit card/;
@@ -41,7 +84,8 @@ our $aa_whistle     = qr/magic whistle|whistle called magic/;
 our $aa_lamp        = qr/lamp|lantern/;
 our $aa_luckstone   = qr/luck(?:stone)?/;
 our $aa_levitation  = qr/lev(?:itation)?/;
-our $aa_instrument  = qr/(?:tooled |frost |fire )?horn|(?:wooden |magic )?(?:flute|harp)|bugle/
+our $aa_instrument  = qr/(?:tooled |frost |fire )?horn|(?:wooden |magic )?(?:flute|harp)|bugle/;
+our $aa_trice       = qr/c(?:o|hi)ckatrice corpse/;
 
 # samples (see *-config for more):
 # sub autoadjust;
@@ -49,4 +93,7 @@ our $aa_instrument  = qr/(?:tooled |frost |fire )?horn|(?:wooden |magic )?(?:flu
 # autoadjust $aa_unihorn => "h";
 # autoadjust $aa_athame => "E";
 # autoadjust qr/potions? of healing/ => "H";
+# autoadjust $aa_trice => "^ye"; # try to keep cockatrices off "y" and "e"
+# autoadjust qr/\bpotions?\b[^.]*?/ => "^q";
+# autoadjust qr/\bwand\b[^.]*?/ => "^z";
 

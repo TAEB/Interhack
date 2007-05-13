@@ -30,5 +30,10 @@ autoadjust $aa_conflict    => "c";
 autoadjust $aa_whistle     => "w";
 autoadjust $aa_levitation  => "l";
 autoadjust $aa_instrument  => "a";
+
+autoadjust $aa_trice => "^ye";
+autoadjust qr/\bpotions?\b[^.]*?/ => "^q";
+autoadjust qr/\bwand\b[^.]*?/ => "^z";
+autoadjust qr/bugle/ => "^z";
 # }}}
 
