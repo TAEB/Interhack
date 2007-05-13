@@ -1,29 +1,31 @@
 # common regexes {{{
 my $called = qr/called|of/;
 # }}}
-
 # BUC {{{
 if (!$ece_buc)
 {
+# !C !B !UC {{{
     if (!$ece_shortbuc)
     {
         recolor qr/(?<=named )!C\b/ => $ec_semiknown || $ec_notcursed || "brown";
         recolor qr/(?<=named )!B\b/ => $ec_semiknown || $ec_notblessed || "brown";
         recolor qr/(?<=named )!UC\b/ => $ec_semiknown || $ec_notuncursed || "brown";
     }
-
+# }}}
+# blessed uncursed cursed {{{
     if (!$ece_longbuc)
     {
         recolor qr/\buncursed\b|(?<=named )UC?\b/ => $ec_uncursed || "brown";
         recolor qr/\bblessed\b|(?<=named )B\b/ => $ec_blessed || "cyan";
         recolor qr/\bcursed\b|(?<=named )C\b/ => $ec_cursed || "red";
     }
+# }}}
 }
- # }}}
-
+# }}}
 # water sports {{{
 if (!$ece_water)
 {
+# holy water {{{
     if (!$ece_holywater)
     {
         recolor qr/\bholy water\b/ => $ec_holywater || "bcyan";
@@ -33,7 +35,8 @@ if (!$ece_water)
         recolor qr/\bpotions? of water named \b(?:holy|blessed|B)\b/ => $ec_holywater || "bcyan";
         recolor qr/\bpotions? called water named \b(holy|blessed|B)\b/ => $ec_holywater || "bcyan";
     }
-
+# }}}
+# unholy water {{{
     if (!$ece_unholywater)
     {
         recolor qr/\bunholy water\b/ => $ec_unholywater || "orange";
@@ -43,97 +46,95 @@ if (!$ece_water)
         recolor qr/\bpotions? of water named \b(?:unholy|cursed|C)\b/ => $ec_unholywater || "orange";
         recolor qr/\bpotions? called water named (?:unholy|cursed|C)\b/ => $ec_unholywater || "orange";
     }
+# }}}
 }
 # }}}
-
 # food conducts {{{
 if (!$ece_food)
 {
 # vegan {{{
-    if ($ece_vegan)
-    {
-        recolor qr/\b(?:food |cram |[KC]-)rations?\b/ => $ec_vegan || "bgreen";
-        recolor qr/\btins? (?:called|named|of) spinach/ => $ec_vegan || "bgreen";
-        recolor qr/\boranges?(?! dragon| gem)\b/ => $ec_vegan || "bgreen";
-        recolor qr/\bpears?\b/ => $ec_vegan || "bgreen";
-        recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot|pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => $ec_vegan || "bgreen";
-        recolor qr/\bsprigs? of wolfsbane\b/ => $ec_vegan || "bgreen";
-        recolor qr/\beucalyptus lea(?:f|ves)\b/ => $ec_vegan || "bgreen";
-        recolor qr/\bcloves? of garlic\b/ => $ec_vegan || "bgreen";
-        recolor qr/\b(?:tin of )?(?:gelatinous cube|acid blob|quivering blob|lichen|shrieker|violet fungus|(?:blue|spotted|ochre) jelly|(?:brown|yellow|green) mold)(?: corpse)?\b/ => $ec_vegan || "bgreen";
-    }
+if ($ece_vegan)
+{
+    recolor qr/\b(?:food |cram |[KC]-)rations?\b/ => $ec_vegan || "bgreen";
+    recolor qr/\btins? (?:called|named|of) spinach/ => $ec_vegan || "bgreen";
+    recolor qr/\boranges?(?! dragon| gem)\b/ => $ec_vegan || "bgreen";
+    recolor qr/\bpears?\b/ => $ec_vegan || "bgreen";
+    recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot|pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => $ec_vegan || "bgreen";
+    recolor qr/\bsprigs? of wolfsbane\b/ => $ec_vegan || "bgreen";
+    recolor qr/\beucalyptus lea(?:f|ves)\b/ => $ec_vegan || "bgreen";
+    recolor qr/\bcloves? of garlic\b/ => $ec_vegan || "bgreen";
+    recolor qr/\b(?:tin of )?(?:gelatinous cube|acid blob|quivering blob|lichen|shrieker|violet fungus|(?:blue|spotted|ochre) jelly|(?:brown|yellow|green) mold)(?: corpse)?\b/ => $ec_vegan || "bgreen";
+}
 # }}}
-
 # vegetarian {{{
-    if (!$ece_vegetarian)
-    {
-        recolor qr/\b(?:egg|pancake|fortune cookie|candy bar|cream pie)s?\b/ => $ec_vegetarian || "green";
-        recolor qr/\blumps? of royal jelly\b/ => $ec_vegetarian || "green";
-        recolor qr/\b(?:tin of )?(?:brown pudding|gray ooze)(?: corpse)?\b/ => $ec_vegetarian || "green";
-    }
+if (!$ece_vegetarian)
+{
+    recolor qr/\b(?:egg|pancake|fortune cookie|candy bar|cream pie)s?\b/ => $ec_vegetarian || "green";
+    recolor qr/\blumps? of royal jelly\b/ => $ec_vegetarian || "green";
+    recolor qr/\b(?:tin of )?(?:brown pudding|gray ooze)(?: corpse)?\b/ => $ec_vegetarian || "green";
+}
 # }}}
 }
 # }}}
-
 # goodies {{{
 if (!$ece_goodies)
 {
-    recolor qr/(?<!cursed )\bbag $called holding\b/ => $ec_boh || $ec_goody || "magenta" unless $ece_boh;
-    recolor qr/(?<!cursed )\b(?:stone called )?luck(?:stone)?\b/ => $ec_luckstone || $ec_goody || "magenta" unless $ece_luckstone;
-    recolor qr/\bwand $called wishing\b/ => $ec_wishing || $ec_goody || "magenta" unless $ece_wishing;
-    recolor qr/\bmagic marker\b/ => $ec_marker || $ec_goody || "magenta" unless $ece_marker;
-    recolor qr/\bmagic lamp\b/ => $ec_magiclamp || $ec_goody || "magenta" unless $ece_magiclamp;
-    recolor qr/\blamp called magic\b/ => $ec_magiclamp || $ec_goody || "magenta" unless $ece_magiclamp;
-    recolor qr/(?<!cursed )\bunicorn horn\b(?!\s+\[)/ => $ec_unihorn || $ec_goody || "magenta" unless $ece_unihorn;
-    recolor qr/\btinning kit\b/ => $ec_tinkit || "magenta" unless $ece_tinkit;
-    recolor qr/\bring $called regen(?:eration)?\b/ => $ec_regen || $ec_goody || "magenta" unless $ece_regen;
-    recolor qr/\bring $called conflict\b/ => $ec_conflict || $ec_goody || "magenta" unless $ece_conflict;
-    recolor qr/\bring $called (?:FA|free action)\b/ => $ec_freeaction || $ec_goody || "magenta" unless $ece_freeaction;
-    recolor qr/\bring $called (?:TC|teleport control)\b/ => $ec_tc || $ec_goody || "magenta" unless $ece_tc;
-    recolor qr/\bring $called lev(?:itation)?\b/ => $ec_lev || $ec_goody || "magenta" unless $ece_lev;
-    recolor qr/\bamulet $called (?:LS|life ?saving)\b/ => $ec_ls || $ec_goody || "magenta" unless $ece_ls;
-    recolor qr/\bamulet $called ref(?:lection)?\b/ => $ec_ref || $ec_goody || "magenta" unless $ece_ref;
-    recolor qr/\bc(?:o|hi)ckatrice (?:corpse|egg)\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
-    recolor qr/\begg named cockatrice\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
-    recolor qr/\bstethoscope\b/ => $ec_scope || $ec_goody || "magenta" unless $ece_scope;
+recolor qr/(?<!cursed )\bbag $called holding\b/ => $ec_boh || $ec_goody || "magenta" unless $ece_boh;
+recolor qr/(?<!cursed )\b(?:stone called )?luck(?:stone)?\b/ => $ec_luckstone || $ec_goody || "magenta" unless $ece_luckstone;
+recolor qr/\bwand $called wishing\b/ => $ec_wishing || $ec_goody || "magenta" unless $ece_wishing;
+recolor qr/\bmagic marker\b/ => $ec_marker || $ec_goody || "magenta" unless $ece_marker;
+recolor qr/\bmagic lamp\b/ => $ec_magiclamp || $ec_goody || "magenta" unless $ece_magiclamp;
+recolor qr/\blamp called magic\b/ => $ec_magiclamp || $ec_goody || "magenta" unless $ece_magiclamp;
+recolor qr/(?<!cursed )\bunicorn horn\b(?!\s+\[)/ => $ec_unihorn || $ec_goody || "magenta" unless $ece_unihorn;
+recolor qr/\btinning kit\b/ => $ec_tinkit || "magenta" unless $ece_tinkit;
+recolor qr/\bring $called regen(?:eration)?\b/ => $ec_regen || $ec_goody || "magenta" unless $ece_regen;
+recolor qr/\bring $called conflict\b/ => $ec_conflict || $ec_goody || "magenta" unless $ece_conflict;
+recolor qr/\bring $called (?:FA|free action)\b/ => $ec_freeaction || $ec_goody || "magenta" unless $ece_freeaction;
+recolor qr/\bring $called (?:TC|teleport control)\b/ => $ec_tc || $ec_goody || "magenta" unless $ece_tc;
+recolor qr/\bring $called lev(?:itation)?\b/ => $ec_lev || $ec_goody || "magenta" unless $ece_lev;
+recolor qr/\bamulet $called (?:LS|life ?saving)\b/ => $ec_ls || $ec_goody || "magenta" unless $ece_ls;
+recolor qr/\bamulet $called ref(?:lection)?\b/ => $ec_ref || $ec_goody || "magenta" unless $ece_ref;
+recolor qr/\bc(?:o|hi)ckatrice (?:corpse|egg)\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
+recolor qr/\begg named cockatrice\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
+recolor qr/\bstethoscope\b/ => $ec_scope || $ec_goody || "magenta" unless $ece_scope;
 }
 # instruments {{{
 if (!$ece_instrument)
 {
-    recolor qr/\b(?:(?:tooled|fire|frost)? horn)\b/ => $ec_instrument || $ec_goody || "magenta";
-    recolor qr/\bhorn $called (?:tooled|fire|frost)\b/ => $ec_instrument || $ec_goody || "magenta";
-    recolor qr/\b(?:magic|wooden) (?:harp|flute)\b/ => $ec_instrument || $ec_goody || "magenta";
-    recolor qr/\b(?:harp|flute) $called (?:magic|wooden)\b/ => $ec_instrument || $ec_goody || "magenta";
-    recolor qr/\bbugle\b/ => $ec_instrument || $ec_goody || "magenta";
+recolor qr/\b(?:(?:tooled|fire|frost)? horn)\b/ => $ec_instrument || $ec_goody || "magenta";
+recolor qr/\bhorn $called (?:tooled|fire|frost)\b/ => $ec_instrument || $ec_goody || "magenta";
+recolor qr/\b(?:magic|wooden) (?:harp|flute)\b/ => $ec_instrument || $ec_goody || "magenta";
+recolor qr/\b(?:harp|flute) $called (?:magic|wooden)\b/ => $ec_instrument || $ec_goody || "magenta";
+recolor qr/\bbugle\b/ => $ec_instrument || $ec_goody || "magenta";
 }
 # }}}
 # }}}
-
 # artifacts {{{
 if (!$ece_artifact)
 {
-    recolor qr/\b(?:Dragonbane|Fire Brand|Frost Brand|Ogresmasher|Trollsbane|Werebane)\b/ => $ec_uartifact || $ec_artifact || "bgreen";
-
-#lawful normal, quest
-    recolor qr/\b(?:Demonbane|Excalibur|Grayswandir|Snickersnee|Sunsword)\b/ => $ec_lartifact || $ec_artifact || "bgreen";
-    recolor qr/\b(?:Orb of Detection|Sceptre of Might|Magic Mirror of Merlin|Mitre of Holiness|Tsurugi of Muramasa)\b/ => $ec_qlartifact || $ec_qartifact || $ec_lartifact || $ec_artifact || "bgreen";
-
-#neutral normal, quest
-    recolor qr/\b(?:Cleaver|Giantslayer|Magicbane|Mjollnir|Vorpal Blade)\b/ => $ec_nartifact || $ec_artifact || "bgreen";
-    recolor qr/\b(?:Heart of Ahriman|Staff of Aesculapius|Eyes of the Overworld|Platinum Yendorian Express Card|Orb of Fate|Eye of the Aethiopica)\b/ => $ec_qnartifact || $ec_qartifact || $ec_nartifact || $ec_artifact || "bgreen";
-
-#chaotic normal, quest
+# unaligned {{{
+recolor qr/\b(?:Dragonbane|Fire Brand|Frost Brand|Ogresmasher|Trollsbane|Werebane)\b/ => $ec_uartifact || $ec_artifact || "bgreen";
+# }}}
+#lawful {{{
+recolor qr/\b(?:Demonbane|Excalibur|Grayswandir|Snickersnee|Sunsword)\b/ => $ec_lartifact || $ec_artifact || "bgreen";
+recolor qr/\b(?:Orb of Detection|Sceptre of Might|Magic Mirror of Merlin|Mitre of Holiness|Tsurugi of Muramasa)\b/ => $ec_qlartifact || $ec_qartifact || $ec_lartifact || $ec_artifact || "bgreen";
+# }}}
+#neutral {{{
+recolor qr/\b(?:Cleaver|Giantslayer|Magicbane|Mjollnir|Vorpal Blade)\b/ => $ec_nartifact || $ec_artifact || "bgreen";
+recolor qr/\b(?:Heart of Ahriman|Staff of Aesculapius|Eyes of the Overworld|Platinum Yendorian Express Card|Orb of Fate|Eye of the Aethiopica)\b/ => $ec_qnartifact || $ec_qartifact || $ec_nartifact || $ec_artifact || "bgreen";
+# }}}
+#chaotic {{{
     recolor qr/\b(?:Grimtooth|Orcrist|Sting|Stormbringer)\b/ => $ec_cartifact || $ec_artifact || "bgreen";
     recolor qr/\b(?:Longbow of Diana|Master Key of Thievery)\b/ => $ec_qcartifact || $ec_qartifact || $ec_cartifact || $ec_artifact || "bgreen";
 }
-
-#invocation items
+# }}}
+#invocation items {{{
 recolor qr/(?<!cursed )\b(?:Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)\b/ => $ec_invocation || "bmagenta" unless $ece_invocation;
-
-#raison d'etre
+# }}}
+#raison d'etre {{{
 recolor qr/\bAmulet of Yendor(?= named\b)/ => $ec_yendor || "bmagenta" unless $ece_yendor;
 # }}}
-
+# }}}
 # cursed goodies {{{
 if (!$ece_goodies)
 {
@@ -143,11 +144,9 @@ if (!$ece_goodies)
     recolor qr/\bcursed (?:Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)\b/ => $ec_cinvocation || "bred" unless $ece_cinvocation;
 }
 # }}}
-
 # bad stuff! {{{
 recolor qr/\b(?:stone called )?(?<!your )load(?:stone)?\b/ => $ec_loadstone || "bred" unless $ece_loadstone;
 # }}}
-
 # watch out bag of holding {{{
 if (!$ece_bohboom)
 {
@@ -156,12 +155,10 @@ if (!$ece_bohboom)
     recolor qr/\bwand $called vanish(?:er)?\b/ => $ec_vanish || $ec_canc || $ec_bohboom || "blue";
 }
 # }}}
-
 # shinies {{{
 recolor qr/\d+ (?:gold piece|[Zz]orkmid)s?\b/ => $ec_gold || "yellow" unless $ece_gold;
 recolor qr/\bgems? $called valuable\b(?: \w+\b)?/ => $ec_goodsoft || $ec_goodgem || "brown" unless $ece_gem;
 recolor qr/\bgems? $called hard\b(?: \w+\b)?/ => $ec_goodhard || $ec_goodgem || "yellow" unless $ece_gem;
-
 # too tired to do this now {{{
 #soft gems
 #MENUCOLOR=" \([0-9]+\|an?\|gems? .*\) \(uncursed \|cursed \|blessed \)?\(dilithium\|opal\|garnet\|jasper\|agate\|jet\|obsidian\|jade\|citrine\|chrysoberyl\|amber\|amethyst\|fluorite\|turquoise\)\(e?s\)?\( stones?\| gems?\| crystals?\)?\( named .*\)?$"=brown
@@ -169,9 +166,8 @@ recolor qr/\bgems? $called hard\b(?: \w+\b)?/ => $ec_goodhard || $ec_goodgem || 
 #MENUCOLOR=" \([0-9]+\|an?\|gems?.*\) \(uncursed \|cursed \|blessed \)?\(diamond\|rub\(y\|ies\)\|jacinth\|sapphire\|black opal\|emerald\|topaz\|aquamarine\)\(e?s\)?\( stones?\| gems?\)?\( named .*\)?$"=yellow
 # }}}
 # }}}
-
 # interhack-specific stuff {{{
-# charges and enchantment (originally from doy) {{{
+# charges (originally from doy) {{{
 if (!$ece_charges)
 {
     recolor qr/(?<=\()0(?=:)/       => $ec_0_recharges || "cyan";  # 0 recharges
@@ -179,7 +175,8 @@ if (!$ece_charges)
     recolor qr/(?<=:)\d+(?=\))/     => $ec_recharges || "cyan";  # many charges
     recolor qr/(?<=\()\d+(?=:)/     => $ec_charges || "green"; # many recharges
 }
-
+# }}}
+# enchantment (originally from doy) {{{
 if (!$ece_enchantment)
 {
     recolor qr/\s\+0/               => $ece_plus0 || "brown";
@@ -188,14 +185,11 @@ if (!$ece_enchantment)
     recolor qr/(?<!AC)\s\-[1-9]\d*/ => $ece_minus || "red";
 }
 # }}}
-
 # empty wands and tools {{{
 recolor qr/(?<=named )empty\b/ => $ec_emptywand || "darkgray" unless $ece_emptywand;
 # }}}
-
 # item in use {{{
 recolor qr/(?<=\()lit(?=\))/ => $ec_lit || "yellow" unless $ece_lit;
-
 # equipment (originally by Stabwound) {{{
 if (!$ece_wielded)
 {
@@ -216,34 +210,28 @@ if (!$ece_worn)
 }
 # }}}
 # }}}
-
 # pretty useless items {{{
 if (!$ece_useless)
 {
 # scrolls {{{
     recolor qr/scrolls? (?:called|of) (?:light|confuse monster|stinking cloud|punishment|fire|destroy armor|amnesia|create monster|food detection)\b/ => $ec_useless_scrolls || $ec_useless || "darkgray" unless $ece_useless_scrolls;
 # }}}
-
 # potions {{{
     recolor qr/potions? (?:called|of) (?:booze|sake|fruit juice|see invisible|sickness|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|object detection|levitation|polymorph|acid|oil|paralysis)\b/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
     recolor qr/potions? called \w+ 150/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions; # only exception is gain energy and it's ok if we lose that one
 # }}}
-
 # rings {{{
     recolor qr/ring (?:of|called) (?:adornment|hunger|protection(?: from shape changers)?|stealth|sustain ability|warning|aggravate monster|\w+ resistance|gain \w+|increase \w+|invisibility|see invisible|searching|polymorph(?: control)?)\b/ => $ec_useless_rings || $ec_useless || "darkgray" unless $ece_useless_rings;
 # }}}
-
 # wands {{{
     recolor qr/wand (?:called|of) (?:light|nothing|locking|make invisible|opening|probing|secret door detection|\w+ monster|undead turning|create monster)\b/ => $ec_useless_wands || $ec_useless || "darkgray" unless $ece_useless_rings;
 # }}}
-
 # amulets {{{
     recolor qr/amulet (?:called|of) (?:versus poison|change|ESP|magical breathing|restful sleep|strangulation|unchanging)\b/ => $ec_useless_amulets || $ec_useless || "darkgray" unless $ece_useless_rings;
     recolor qr/amulet versus poison\b/ => $ec_useless_amulets || $ec_useless || "darkgray" unless $ece_useless_rings;
 # }}}
 }
 # }}}
-
 # unidentified magical armor {{{
 if (!$ece_unid_armor)
 {
