@@ -26,9 +26,22 @@ sub autoadjust
           => sub { "\e#adjust\n$1$adjust_to" };
 }
 
+our $aa_key         = qr/key|lock pick|credit card/;
+our $aa_unihorn     = qr/unicorn horn/;
+our $aa_athame      = qr/Magicbane|athame/;
+our $aa_stethoscope = qr/stethoscope/;
+our $aa_pickaxe     = qr/pick-axe|mattock/;
+our $aa_bag         = qr/bag|sack|holding/;
+our $aa_Amulet      = qr/Amulet of Yendor(?: named .*?)?/;
+our $aa_blindfold   = qr/towel|blindfold/;
+our $aa_lizard      = qr/lizard corpse/;
+our $aa_conflict    = qr/ring (?:of|called) conflict|Sceptre of Might/;
+our $aa_whistle     = qr/magic whistle|whistle called magic/;
+
 # samples (see *-config for more):
-# autoadjust "key" => "k";
-# autoadjust "unicorn horn" => "h";
-# autoadjust "Magicbane" => "E";
+# sub autoadjust;
+# autoadjust $aa_key => "k";
+# autoadjust $aa_unihorn => "h";
+# autoadjust $aa_athame => "E";
 # autoadjust qr/potions? of healing/ => "H";
 
