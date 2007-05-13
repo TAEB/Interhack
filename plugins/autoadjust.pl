@@ -38,6 +38,8 @@ our $aa_blindfold   = qr/towel|blindfold/;
 our $aa_lizard      = qr/lizard corpse/;
 our $aa_conflict    = qr/ring (?:of|called) conflict|Sceptre of Might/;
 our $aa_whistle     = qr/magic whistle|whistle called magic/;
+our $aa_lamp        = qr/lamp|lantern/;
+our $aa_luckstone   = qr/luck(?:stone)?/;
 
 # samples (see *-config for more):
 # sub autoadjust;
