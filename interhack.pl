@@ -189,7 +189,7 @@ sub recolor # {{{
         }
         else
         {
-          push @colormap, sub { s/\Q$matching\E/$newcolor->()."$&\e[0m"/eg }
+          push @colormap, sub { s/\Q$matching\E/my $c = $newcolor->(); $c ? "$c$&\e[0m" : $&/eg }
         }
     }
     elsif (ref($matching) eq "Regexp")
@@ -200,7 +200,7 @@ sub recolor # {{{
         }
         else
         {
-          push @colormap, sub { s/$matching/$newcolor->()."$&\e[0m"/eg }
+          push @colormap, sub { s/$matching/my $c = $newcolor->(); $c ? "$c$&\e[0m" : $&/eg }
         }
     }
     else
