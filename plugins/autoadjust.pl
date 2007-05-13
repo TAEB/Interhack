@@ -13,7 +13,16 @@ sub autoadjust
 {
     my ($item, $adjust_to) = @_;
 
-    make_tab qr/\e\[H([^$adjust_to]) - (an?|\d+)[^.]*? $item\./
+    make_tab qr{ \e\[H
+                 (?-x:You have a little trouble lifting )?
+                 ([^$adjust_to])
+                 \ -\ 
+                 (an?|\d+)
+                 [^.]*?
+                 \ 
+                 $item
+                 \.
+               }x
           => sub { "\e#adjust\n$1$adjust_to" };
 }
 
