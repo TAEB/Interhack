@@ -31,6 +31,7 @@ autoadjust $aa_whistle     => "w";
 autoadjust $aa_lamp        => "l";
 autoadjust $aa_luckstone   => "Z";
 autoadjust $aa_instrument  => "n";
+autoadjust $aa_trice       => "^y";
 
 # }}}
 
