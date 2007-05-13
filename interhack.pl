@@ -177,16 +177,31 @@ sub make_anno # {{{
 sub recolor # {{{
 {
     my $matching = shift;
-    my $newcolor = value_of(shift);
-    $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : die "Unable to discern the color described by \"$newcolor\"";
+    my $newcolor = shift;
+    $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : die "Unable to discern the color described by \"$newcolor\""
+      unless ref($newcolor) eq 'CODE';
 
     if (!ref($matching))
     {
-        push @colormap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
+        if (!ref($newcolor))
+        {
+          push @colormap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
+        }
+        else
+        {
+          push @colormap, sub { s/\Q$matching\E/$newcolor->()."$&\e[0m"/eg }
+        }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @colormap, sub { s/$matching/$newcolor$&\e[0m/g }
+        if (!ref($newcolor))
+        {
+          push @colormap, sub { s/$matching/$newcolor$&\e[0m/g }
+        }
+        else
+        {
+          push @colormap, sub { s/$matching/$newcolor->()."$&\e[0m"/eg }
+        }
     }
     else
     {
