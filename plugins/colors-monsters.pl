@@ -344,7 +344,7 @@ recolor qr/pythons?/ => "purple";
 # }}}
 
 # trolls T {{{
-recolor qr/trolls?/ => "brown";
+recolor qr/trolls?\b/ => "brown";
 recolor qr/ice trolls?/ => "bwhite";
 recolor qr/rock trolls?/ => "cyan";
 recolor qr/water trolls?/ => "blue";
