@@ -8,7 +8,7 @@ use File::Temp qw/tempfile/;
 our $autologin = 1;
 our $arg_nick = '';
 
-# find what nick to use for autologin {{{
+# check arguments for a nick to autologin {{{
 if (@ARGV)
 {
   for (<$ENV{HOME}/.interhack/passwords/*>)
@@ -503,5 +503,5 @@ while (1)
   # }}}
 }
 
-print "You typed $keystrokes keystrokes in this session .\n";
+print "You typed $keystrokes keystrokes in this session.\n";
 
