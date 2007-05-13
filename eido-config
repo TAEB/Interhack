@@ -23,7 +23,8 @@ autoadjust $aa_bag         => "b";
 autoadjust $aa_Amulet      => "d";
 autoadjust $aa_blindfold   => "P";
 autoadjust $aa_lizard      => "L";
-autoadjust $aa_conflict    => "C";
+autoadjust $aa_conflict    => "c";
 autoadjust $aa_whistle     => "w";
+autoadjust $aa_levitation  => "l";
 # }}}
 

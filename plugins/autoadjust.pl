@@ -40,6 +40,7 @@ our $aa_conflict    = qr/ring (?:of|called) conflict|Sceptre of Might/;
 our $aa_whistle     = qr/magic whistle|whistle called magic/;
 our $aa_lamp        = qr/lamp|lantern/;
 our $aa_luckstone   = qr/luck(?:stone)?/;
+our $aa_levitation  = qr/lev(?:itation)?/;
 
 # samples (see *-config for more):
 # sub autoadjust;
