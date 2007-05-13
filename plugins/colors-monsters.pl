@@ -9,11 +9,15 @@ my $es = qr/(?:es)?/;
 my $ies = qr/y|ies/;
 
 # chromatic stuff!
-my @colors = map {$colormap{$_} || die "$_??"}
-             map {$_, "b$_"}
-             qw/red brown green cyan magenta blue/;
+my @dim_colors = qw/red brown green cyan magenta blue/;
+my @bold_colors = map {$colormap{$_}} map {"b$_"} @dim_colors;
+@dim_colors = map {$colormap{$_}} @dim_colors;
 
-sub random_color { $colors[rand @colors] }
+my @colors = @dim_colors, @bold_colors;
+
+sub random_color { $colors[     rand @colors     ] }
+sub random_dim   { $dim_colors[ rand @dim_colors ] }
+sub random_bold  { $bold_colors[rand @bold_colors] }
 
 # deities {{{
 recolor qr/Marduk|Moloch|Quetzalcoatl|Camaxtli|Huhetotl|Mitra|Crom|Set|Anu|Ishtar|Anshar|Athena|Hermes|Poseidon|Lugh|Brigit|Manannan Mac Lir|Shan Lai Ching|Chih Sung-tzu|Huan Ti|Mercury|Venus|Mars|Issek|Mog|Kos|Amaterasu Omikami|Raijin|Susanowo|Blind Io|The Lady|Offler|Tyr|Odin|Loki|Ptah|Thoth|Anhur/ => \&random_color;
