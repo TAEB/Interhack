@@ -2,6 +2,7 @@
 
 # main config {{{
 nick "doy";
+$vikeys = 1;
 # }}}
 
 # plugins {{{
