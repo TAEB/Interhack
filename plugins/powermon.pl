@@ -5,6 +5,7 @@ each_iteration
 {
     s{Pw:((-?\d+)\((-?\d+)\))}{
         my $color = '';
+        ($curpw, $maxpw) = ($3, $4);
 
            if ($2     >= $3) {                     }
         elsif ($2 * 2 >= $3) { $color = "\e[1;36m" }

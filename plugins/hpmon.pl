@@ -7,6 +7,7 @@ each_iteration
 {
   s{(\e\[24;\d+H|HP:)((\d+)\((\d+)\))}{
     my $color = '';
+    ($curhp, $maxhp) = ($3, $4);
 
        if ($3 * 7 <= $4 || $3 <= 6) { $color = "\e[1;30m" }
     elsif ($3     >= $4)            {                     }

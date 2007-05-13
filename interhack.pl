@@ -113,6 +113,7 @@ our $keystrokes = 0;
 our $in_game = 0;
 our $buf = '';
 our $resting = 0;
+our ($curhp, $maxhp, $curpw, $maxpw) = (0, 0, 0, 0);
 # }}}
 
 sub exclude_plugins # {{{
