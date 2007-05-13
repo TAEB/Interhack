@@ -34,7 +34,6 @@ our $server = 'nethack.alt.org';
 our $port = 23;
 our %keymap;
 our $lastkey;
-our @key_queue;
 our @configmap;
 our @colormap;
 our %extended_command;
@@ -361,7 +360,8 @@ while (1)
 
   if (defined $c)
   {
-    $lastkey = $c;
+    push(@lastkeys, $c);
+    shift @lastkeys if defined($lastkeysmaxlen) && @lastkeys > $lastkeysmaxlen;
     if ($c eq "p" && $logged_in) { $in_game = 1 }
     if ($c eq "\t" && $at_login && $logged_in)
     {
