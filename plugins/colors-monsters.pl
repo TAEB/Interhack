@@ -236,7 +236,7 @@ recolor qr/(?:baby )?red dragons?(?! scale)/ => "red";
 recolor qr/(?:baby )?white dragons?(?! scale)/ => "bwhite";
 recolor qr/(?:baby )?orange dragons?(?! scale)/ => "orange";
 recolor qr/(?:baby )?black dragons?(?! scale)/ => "blue";
-recolor qr/(?:baby )?blue dragons?(?! scala)/ => "bblue";
+recolor qr/(?:baby )?blue dragons?(?! scale)/ => "blue";
 recolor qr/(?:baby )?green dragons?(?! scale)/ => "green";
 recolor qr/(?:baby )?yellow dragons?(?! scale)/ => "yellow";
 # }}}
