@@ -229,15 +229,15 @@ recolor qr/mountain centaurs?/ => "cyan";
 # }}}
 
 # team D {{{
-recolor qr/(?:baby )?gray dragons?/ => "gray";
-recolor qr/(?:baby )?silver dragons?/ => "cyan";
-recolor qr/(?:baby )?red dragons?/ => "red";
-recolor qr/(?:baby )?white dragons?/ => "bwhite";
-recolor qr/(?:baby )?orange dragons?/ => "orange";
-recolor qr/(?:baby )?black dragons?/ => "gray";
-recolor qr/(?:baby )?blue dragons?/ => "blue";
-recolor qr/(?:baby )?green dragons?/ => "green";
-recolor qr/(?:baby )?yellow dragons?/ => "bbrown";
+recolor qr/(?:baby )?gray dragons?(?! scale)/ => "gray";
+recolor qr/(?:baby )?silver dragons?(?! scale)/ => "cyan";
+recolor qr/(?:baby )?red dragons?(?! scale)/ => "red";
+recolor qr/(?:baby )?white dragons?(?! scale)/ => "bwhite";
+recolor qr/(?:baby )?orange dragons?(?! scale)/ => "orange";
+recolor qr/(?:baby )?black dragons?(?! scale)/ => "gray";
+recolor qr/(?:baby )?blue dragons?(?! scale)/ => "blue";
+recolor qr/(?:baby )?green dragons?(?! scale)/ => "green";
+recolor qr/(?:baby )?yellow dragons?(?! scale)/ => "bbrown";
 # }}}
 
 # team E {{{
