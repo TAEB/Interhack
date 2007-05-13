@@ -96,7 +96,7 @@ recolor qr/\b(?:Longbow of Diana|Master Key of Thievery)\b/ => "bgreen";
 recolor qr/(?<!cursed )\b(?:Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)\b/ => "bmagenta";
 
 #raison d'etre
-recolor qr/ Amulet of Yendor named/ => "bmagenta";
+recolor qr/\bAmulet of Yendor(?= named\b)/ => "bmagenta";
 # }}}
 
 # cursed goodies {{{
