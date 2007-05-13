@@ -371,9 +371,9 @@ recolor qr/xorns?/ => "brown";
 
 # apelike creatures Y {{{
 recolor qr/monkeys?|sasquatch$es/ => "gray";
-recolor qr/apes?|owlbears?/ => "brown";
+each_iteration { s/carnivorous ape(s?)/\e[34mcarnivorous ap\e[34me$1/g }
+recolor qr/(?<s[ch])apes?|owlbears?/ => "brown";
 recolor qr/yetis?/ => "bwhite";
-recolor qr/carnivorous apes?/ => "blue";
 # }}}
 
 # zombies Z {{{
@@ -401,7 +401,7 @@ recolor qr/humans?/ => "bwhite";
 recolor qr/wererats?/ => "brown";
 recolor qr/werejackals?/ => "red";
 recolor qr/werewol$ves/ => "bred";
-recolor qr/el$ves/ => "bwhite";
+recolor qr/(?<![dny]-)el$ves(?!-lord)/ => "bwhite";
 recolor qr/Woodland-el$ves/ => "green";
 recolor qr/Green-el$ves/ => "bgreen";
 recolor qr/Grey-el$ves/ => "gray";
