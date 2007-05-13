@@ -164,7 +164,7 @@ make_tab qr/\e\[H(.) - (an?|\d+) (?:blessed |uncursed |cursed )?(.*?) ?(scroll|p
 
              $cost = join '/', 
                      grep {exists $price_table{$type}{$_}}
-                     $price1, $price2;
+                     sort {$a <=> $b} $price1, $price2;
              return '' if $cost eq '';
 
              $cost =~ s/(?<=\d)\d+//g
