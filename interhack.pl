@@ -8,6 +8,7 @@ use File::Temp qw/tempfile/;
 our $autologin = 1;
 our $arg_nick = '';
 
+# find what nick to use for autologin {{{
 if (@ARGV)
 {
   for (<$ENV{HOME}/.interhack/passwords/*>)
@@ -26,6 +27,7 @@ if (@ARGV)
     }
   }
 }
+# }}}
 
 # globals {{{
 our $nick = $arg_nick;
@@ -39,6 +41,7 @@ our @colormap;
 our %extended_command;
 our %plugin_loaded;
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
+# colormap {{{
 our %colormap =
 (
   black          => "\e[0;30m",
@@ -93,6 +96,7 @@ our %colormap =
   "bold&white"   => "\e[1;37m",
   "white&bold"   => "\e[1;37m",
 );
+# }}}
 # }}}
 
 # lexical variables {{{
@@ -497,5 +501,5 @@ while (1)
   # }}}
 }
 
-print "You typed $keystrokes keystrokes in the game.\n";
+print "You typed $keystrokes keystrokes in this session .\n";
 
