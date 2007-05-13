@@ -38,10 +38,16 @@ my @ring_sink_regex =
 
 each_interval
 {
-  if (/You drop a ([\w\s]+) ring down the drain\./)
+  if (/You drop a (\w+(?: \w+)?) ring down the drain\./)
   {
     $last_sink_drop = $1;
   }
+
+  if (/Call a ([\w\s]+) ring:/ && exists $sink_message{$1})
+  {
+    tab($sink_message{$1}."\n");
+  }
+
   return if $last_sink_drop eq '';
 
   for my $sink (@ring_sink_regex)
@@ -50,11 +56,9 @@ each_interval
     {
       $sink_message{$last_sink_drop} = $sink->[1];
       $last_sink_drop = '';
+      annotate("That ring is $sink->[1].");
       return;
     }
   }
 }
-
-make_tab qr/Call a ([\w\s]+) ring:/
-      => sub { exists($sink_message{$1}) ? $sink_message{$1} : "" }
 
