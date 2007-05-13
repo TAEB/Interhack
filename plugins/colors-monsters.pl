@@ -463,7 +463,7 @@ recolor qr/salamanders?/ => "bred";
 # }}}
 
 # player monsters {{{
-recolor qr/archeologists?|barbarians?|cave(?:wo)?m[ae]n|healers?|knights?|monks?|priests?|priestess(?:es)?|rangers?|rogues?|samurai|tourists?|valkyries?|(?<!ish|old) wizards?/ => "white";
+recolor qr/archeologists?|barbarians?|cave(?:wo)?m[ae]n|healers?|knights?|monks?|priests?(?! of )|priestess(?:es)?(?! of )|rangers?|rogues?|samurai|tourists?|valkyries?|(?<!ish|old) wizards?/ => "white";
 # }}}
 
 # quest nemeses {{{
