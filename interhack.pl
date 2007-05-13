@@ -117,140 +117,20 @@ our ($curhp, $maxhp, $curpw, $maxpw) = (0, 0, 0, 0);
 our $vikeys = 0;
 # }}}
 
-sub exclude_plugins # {{{
-{
-    for (@_)
-    {
-        my $module = $_;
-        $module .= ".pl" unless $module =~ /\.p[lm]$/;
-        $plugin_loaded{$module} = 1;
-    }
-} # }}}
-
-sub extended_command # {{{
-{
-    my ($cmd, $result) = @_;
-    $cmd =~ s/^#//;
-    $extended_command{$cmd} = $result;
-} # }}}
-
-sub remap # {{{
-{
-    my ($key, $result) = @_;
-    $keymap{$key} = $result;
-} # }}}
-
-sub value_of # {{{
-{
-    my ($exp, $args) = @_;
-    return $exp unless ref($exp);
-    return $exp->($args) if ref($exp) eq "CODE";
-    return $exp;
-} # }}}
-
-sub make_annotation # {{{
-{
-    my ($matching, $annotation) = @_;
-    if (!ref($matching))
-    {
-        push @configmap, sub { if (index($_, $matching) > -1) { annotate($annotation) } }
-    }
-    elsif (ref($matching) eq "Regexp")
-    {
-        push @configmap, sub { if (/$matching/) { annotate($annotation) } }
-    }
-    elsif (ref($matching) eq "CODE")
-    {
-        push @configmap, sub { if ($matching->()) { annotate($annotation) } }
-    }
-    else
-    {
-        die "Unable to make_annotation matching object of type " . ref($matching);
-    }
-} # }}}
-
-sub make_anno # {{{
-{
-    make_annotation(@_);
-} # }}}
-
-sub recolor # {{{
-{
-    my $matching = shift;
-    my $newcolor = shift;
-    $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : die "Unable to discern the color described by \"$newcolor\""
-      unless ref($newcolor) eq 'CODE';
-
-    if (!ref($matching))
-    {
-        if (!ref($newcolor))
-        {
-          push @colormap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
-        }
-        else
-        {
-          push @colormap, sub { s/\Q$matching\E/my $c = $newcolor->(); $c ? "$c$&\e[0m" : $&/eg }
-        }
-    }
-    elsif (ref($matching) eq "Regexp")
-    {
-        if (!ref($newcolor))
-        {
-          push @colormap, sub { s/$matching/$newcolor$&\e[0m/g }
-        }
-        else
-        {
-          push @colormap, sub { s/$matching/my $c = $newcolor->(); $c ? "$c$&\e[0m" : $&/eg }
-        }
-    }
-    else
-    {
-        die "Unable to recolor matching object of type " . ref($matching);
-    }
-} # }}}
-
-sub make_tab # {{{
-{
-    my ($matching, $tabstring) = @_;
-    if (!ref($matching))
-    {
-        push @configmap, sub { if (index($_, $matching) > -1) { tab($tabstring) } }
-    }
-    elsif (ref($matching) eq "Regexp")
-    {
-        push @configmap, sub { if (/$matching/) { tab($tabstring) } }
-    }
-    elsif (ref($matching) eq "CODE")
-    {
-        push @configmap, sub { if ($matching->()) { tab($tabstring) } }
-    }
-    else
-    {
-        die "Unable to make_tab matching object of type " . ref($matching);
-    }
-} # }}}
-
+# subroutines {{{
 sub nick # {{{
 {
     $nick = shift;
 } # }}}
-
 sub pass # {{{
 {
     $pass = shift;
 } # }}}
-
 sub server # {{{
 {
     ($server, $port) = @_;
     $port = 23 unless defined $port;
 } # }}}
-
-sub each_iteration(&;$) # {{{
-{
-    push @configmap, shift;
-} # }}}
-
 sub include # {{{
 {
     my @modules = @_;
@@ -291,7 +171,136 @@ sub include # {{{
         die $@ if $@;
     }
 } # }}}
+sub exclude_plugins # {{{
+{
+    for (@_)
+    {
+        my $module = $_;
+        $module .= ".pl" unless $module =~ /\.p[lm]$/;
+        $plugin_loaded{$module} = 1;
+    }
+} # }}}
 
+sub each_iteration(&;$) # {{{
+{
+    push @configmap, shift;
+} # }}}
+sub extended_command # {{{
+{
+    my ($cmd, $result) = @_;
+    $cmd =~ s/^#//;
+    $extended_command{$cmd} = $result;
+} # }}}
+sub remap # {{{
+{
+    my ($key, $result) = @_;
+    $keymap{$key} = $result;
+} # }}}
+sub value_of # {{{
+{
+    my ($exp, $args) = @_;
+    return $exp unless ref($exp);
+    return $exp->($args) if ref($exp) eq "CODE";
+    return $exp;
+} # }}}
+
+sub make_annotation # {{{
+{
+    my ($matching, $annotation) = @_;
+    if (!ref($matching))
+    {
+        push @configmap, sub { if (index($_, $matching) > -1) { annotate($annotation) } }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @configmap, sub { if (/$matching/) { annotate($annotation) } }
+    }
+    elsif (ref($matching) eq "CODE")
+    {
+        push @configmap, sub { if ($matching->()) { annotate($annotation) } }
+    }
+    else
+    {
+        die "Unable to make_annotation matching object of type " . ref($matching);
+    }
+} # }}}
+sub make_anno # {{{
+{
+    make_annotation(@_);
+} # }}}
+sub annotate # {{{
+{
+  my $annotation = value_of(shift);
+  return if $annotation eq '';
+  $annotation_onscreen = 1;
+  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
+} # }}}
+
+sub make_tab # {{{
+{
+    my ($matching, $tabstring) = @_;
+    if (!ref($matching))
+    {
+        push @configmap, sub { if (index($_, $matching) > -1) { tab($tabstring) } }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @configmap, sub { if (/$matching/) { tab($tabstring) } }
+    }
+    elsif (ref($matching) eq "CODE")
+    {
+        push @configmap, sub { if ($matching->()) { tab($tabstring) } }
+    }
+    else
+    {
+        die "Unable to make_tab matching object of type " . ref($matching);
+    }
+} # }}}
+sub tab # {{{
+{
+  my $display = value_of(shift);
+  return if $display eq '';
+  $tab = $display;
+  return if @_;
+  $display =~ s/\n/\\n/g;
+  $display =~ s/\e/\\e/g;
+  annotate("Press tab to send the string: $display");
+} # }}}
+
+sub recolor # {{{
+{
+    my $matching = shift;
+    my $newcolor = shift;
+    $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : die "Unable to discern the color described by \"$newcolor\""
+      unless ref($newcolor) eq 'CODE';
+
+    if (!ref($matching))
+    {
+        if (!ref($newcolor))
+        {
+          push @colormap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
+        }
+        else
+        {
+          push @colormap, sub { s/\Q$matching\E/my $c = $newcolor->(); $c ? "$c$&\e[0m" : $&/eg }
+        }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        if (!ref($newcolor))
+        {
+          push @colormap, sub { s/$matching/$newcolor$&\e[0m/g }
+        }
+        else
+        {
+          push @colormap, sub { s/$matching/my $c = $newcolor->(); $c ? "$c$&\e[0m" : $&/eg }
+        }
+    }
+    else
+    {
+        die "Unable to recolor matching object of type " . ref($matching);
+    }
+} # }}}
 sub serialize_time # {{{
 {
   my $seconds = shift;
@@ -308,25 +317,7 @@ sub serialize_time # {{{
     sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
   }
 } # }}}
-
-sub annotate # {{{
-{
-  my $annotation = value_of(shift);
-  return if $annotation eq '';
-  $annotation_onscreen = 1;
-  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
-} # }}}
-
-sub tab # {{{
-{
-  my $display = value_of(shift);
-  return if $display eq '';
-  $tab = $display;
-  return if @_;
-  $display =~ s/\n/\\n/g;
-  $display =~ s/\e/\\e/g;
-  annotate("Press tab to send the string: $display");
-} # }}}
+# }}}
 
 # read config, get a socket {{{
 do "$ENV{HOME}/.interhack/config"
@@ -336,7 +327,6 @@ die $@ if $@;
 use Interhack::Sock;
 my $sock = Interhack::Sock::sock($server, $port);
 # }}}
-
 # autologin {{{
 if ($autologin)
 {
@@ -356,7 +346,7 @@ if ($autologin)
     print {$sock} "$pass\n";
   }
 } # }}}
-
+# get ready to start accepting keypresses {{{
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
 if ($server =~ /alt\.org/)
 {
@@ -366,7 +356,8 @@ if ($server =~ /alt\.org/)
 ReadMode 3;
 END { ReadMode 0 }
 $|++;
-
+# }}}
+# main loop {{{
 ITER:
 while (1)
 {
@@ -441,7 +432,6 @@ while (1)
     $at_login = 0;
     $annotation_onscreen = 0;
   } # }}}
-
   # read from sock, print to stdout {{{
   next ITER
     unless defined(recv($sock, $_, 4096, 0));
@@ -526,6 +516,7 @@ while (1)
     if $postprint ne '';
   # }}}
 }
+# }}}
 
 print "You typed $keystrokes keystrokes in this session.\n";
 
