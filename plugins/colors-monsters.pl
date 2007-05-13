@@ -86,12 +86,11 @@ recolor qr/winged gargoyles?/ => "purple";
 
 # humanoids h {{{
 recolor qr/hobbits?/ => "green";
-recolor qr/dwar$ves/ => "red";
+recolor qr/dwar$ves(?! lord|king)/ => "red";
 recolor qr/bugbears?/ => "brown";
 recolor qr/dwarf lords?/ => "blue";
 recolor qr/dwarf kings?/ => "purple";
-recolor qr/mind flayers?/ => "purple";
-recolor qr/master mind flayers?/ => "purple";
+recolor qr/(?:master )?mind flayers?/ => "purple";
 # }}}
 
 # minor demons i {{{
