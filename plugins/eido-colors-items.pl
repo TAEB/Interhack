@@ -161,7 +161,6 @@ recolor qr/ \(on right [^)]+\)/ => "brown";
 recolor qr/ \(in use\)/ => "brown";
 # }}}
 # }}}
-# }}}
 
 # pretty useless items {{{
 # scrolls {{{
@@ -187,3 +186,10 @@ recolor qr/amulet versus poison\b/ => "darkgray";
 # }}}
 # }}}
 
+# unidentified magical armor {{{
+recolor qr/(?:mud|buckled|riding|snow|hiking|combat|jungle) boots/ => "green";
+recolor qr/piece of cloth|opera cloak|ornamental cope|tattered cape/ => "green";
+recolor qr/(?:plumed|etched|crested|visored) helmet/ => "green";
+recolor qr/(?:old|riding|padded|fencing) gloves/ => "green";
+# }}}
+# }}}
