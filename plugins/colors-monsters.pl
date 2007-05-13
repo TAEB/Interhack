@@ -379,12 +379,14 @@ recolor qr/yetis?/ => "bwhite";
 
 # zombies Z {{{
 recolor qr/(?:kobold|gnome) zombies?/ => "brown";
-recolor qr/(?:ghoul|orc) zombies?/ => "gray";
+recolor qr/orc zombies?/ => "gray";
 recolor qr/dwarf zombies?/ => "red";
 recolor qr/elf zombies?/ => "green";
-recolor qr/(?:skeleton|human) zombies?/ => "bwhite";
+recolor qr/human zombies?/ => "bwhite";
 recolor qr/ettin zombies?/ => "blue";
 recolor qr/giant zombies?/ => "cyan";
+recolor qr/ghouls?/ => "gray";
+recolor qr/skeletons?/ => "bwhite";
 
 # }}}
 
