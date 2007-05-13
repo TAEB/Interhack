@@ -35,6 +35,7 @@ our $port = 23;
 our %keymap;
 our $lastkey;
 our @configmap;
+our @colormap;
 our %extended_command;
 our %plugin_loaded;
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
@@ -172,11 +173,11 @@ sub recolor # {{{
 
     if (!ref($matching))
     {
-        push @configmap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
+        push @colormap, sub { s/\Q$matching\E/$newcolor$&\e[0m/g }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @configmap, sub { s/$matching/$newcolor$&\e[0m/g }
+        push @colormap, sub { s/$matching/$newcolor$&\e[0m/g }
     }
     else
     {
@@ -452,7 +453,7 @@ while (1)
       }
   }eg;
 
-  foreach my $map (@configmap)
+  foreach my $map (@configmap, @colormap)
   {
     $map->();
   }
