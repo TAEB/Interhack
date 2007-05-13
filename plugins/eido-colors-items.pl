@@ -107,7 +107,7 @@ recolor qr/\bcursed (?:Bell of Opening|silver bell|Candelabrum of Invocation|can
 # }}}
 
 # bad stuff! {{{
-recolor qr/\b(?:stone called )?load(?:stone)?\b/ => "bred";
+recolor qr/\b(?:stone called )?(?<!your )load(?:stone)?\b/ => "bred";
 # }}}
 
 # watch out bag of holding {{{
