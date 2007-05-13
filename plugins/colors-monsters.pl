@@ -265,7 +265,7 @@ recolor qr/gnome kings?/ => "purple";
 # }}}
 
 # team H {{{
-recolor qr/giants?(?! ant| beetle| mimic| eel)/ => "red";
+recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel)/ => "red";
 recolor qr/stone giants?/ => "gray";
 recolor qr/hill giants?/ => "cyan";
 recolor qr/fire giants?/ => "bbrown";
