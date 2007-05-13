@@ -1,4 +1,4 @@
-# vim:ft=perl:
+# vim:ft=perl:fdm=marker:
 
 # main config {{{
 nick "doy";
