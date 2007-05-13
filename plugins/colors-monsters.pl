@@ -372,7 +372,7 @@ recolor qr/xorns?/ => "brown";
 # apelike creatures Y {{{
 recolor qr/monkeys?|sasquatch$es/ => "gray";
 each_iteration { s/carnivorous ape(s?)/\e[34mcarnivorous ap\e[34me$1/g }
-recolor qr/(?<s[ch])apes?|owlbears?/ => "brown";
+recolor qr/(?<!s[ch])apes?|owlbears?/ => "brown";
 recolor qr/yetis?/ => "bwhite";
 # }}}
 
