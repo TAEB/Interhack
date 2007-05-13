@@ -34,6 +34,7 @@ our $server = 'nethack.alt.org';
 our $port = 23;
 our %keymap;
 our $lastkey;
+our @key_queue;
 our @configmap;
 our @colormap;
 our %extended_command;
@@ -106,6 +107,7 @@ our $stop_sing_pass = 0;
 our $keystrokes = 0;
 our $in_game = 0;
 our $buf = '';
+our $resting = 0;
 # }}}
 
 sub exclude_plugins # {{{
@@ -344,8 +346,20 @@ $|++;
 ITER:
 while (1)
 {
+  my $c;
   # read from stdin, print to sock {{{
-  if (defined(my $c = ReadKey .05))
+  if (@key_queue)
+  {
+    $c = shift @key_queue;
+  }
+  else
+  {
+    $c = ReadKey .05;
+    ($resting, @key_queue) = 0
+      if defined $c;
+  }
+
+  if (defined $c)
   {
     $lastkey = $c;
     if ($c eq "p" && $logged_in) { $in_game = 1 }
@@ -452,6 +466,24 @@ while (1)
         $&
       }
   }eg;
+
+  ($resting, @key_queue) = 0
+    if /\e\[H(?!(?:\e\[\d?K|Count:))/ || /(?:\e\[24;\d+H|HP:)(\d+)\(\1\)/;
+
+  if (/\e\[Hrest: unknown extended command\./)
+  {
+    $resting = 1;
+  }
+
+  s{rest: unknown extended command\.}
+   {To sleep, perchance to dream.}g;
+
+  if ($resting)
+  {
+    push @key_queue => "n10s"
+      unless @key_queue;
+  }
+
 
   foreach my $map (@configmap, @colormap)
   {
