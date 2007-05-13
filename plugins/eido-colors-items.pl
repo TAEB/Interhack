@@ -7,9 +7,9 @@ if (!$ece_buc)
 {
     if (!$ece_shortbuc)
     {
-        recolor qr/(?<=named )!C\b/ => $ec_notcursed || "brown";
-        recolor qr/(?<=named )!B\b/ => $ec_notblessed || "brown";
-        recolor qr/(?<=named )!UC\b/ => $ec_notuncursed || "brown";
+        recolor qr/(?<=named )!C\b/ => $ec_semiknown || $ec_notcursed || "brown";
+        recolor qr/(?<=named )!B\b/ => $ec_semiknown || $ec_notblessed || "brown";
+        recolor qr/(?<=named )!UC\b/ => $ec_semiknown || $ec_notuncursed || "brown";
     }
 
     if (!$ece_longbuc)
@@ -78,34 +78,33 @@ if (!$ece_food)
 # goodies {{{
 if (!$ece_goodies)
 {
-    recolor qr/(?<!cursed )\bbag $called holding\b/ => $ec_boh || "magenta" unless $ece_boh;
-    recolor qr/(?<!cursed )\b(?:stone called )?luck(?:stone)?\b/ => $ec_luckstone || "magenta" unless $ece_luckstone;
-    recolor qr/\bwand $called wishing\b/ => $ec_wishing || "magenta" unless $ece_wishing;
-    recolor qr/\bmagic marker\b/ => $ec_marker || "magenta" unless $ece_marker;
-    recolor qr/\bmagic lamp\b/ => $ec_magiclamp || "magenta" unless $ece_magiclamp;
-    recolor qr/\blamp called magic\b/ => $ec_magiclamp || "magenta" unless $ece_magiclamp;
-    recolor qr/(?<!cursed )\bunicorn horn\b(?!\s+\[)/ => $ec_unihorn || "magenta" unless $ece_unihorn;
+    recolor qr/(?<!cursed )\bbag $called holding\b/ => $ec_boh || $ec_goody || "magenta" unless $ece_boh;
+    recolor qr/(?<!cursed )\b(?:stone called )?luck(?:stone)?\b/ => $ec_luckstone || $ec_goody || "magenta" unless $ece_luckstone;
+    recolor qr/\bwand $called wishing\b/ => $ec_wishing || $ec_goody || "magenta" unless $ece_wishing;
+    recolor qr/\bmagic marker\b/ => $ec_marker || $ec_goody || "magenta" unless $ece_marker;
+    recolor qr/\bmagic lamp\b/ => $ec_magiclamp || $ec_goody || "magenta" unless $ece_magiclamp;
+    recolor qr/\blamp called magic\b/ => $ec_magiclamp || $ec_goody || "magenta" unless $ece_magiclamp;
+    recolor qr/(?<!cursed )\bunicorn horn\b(?!\s+\[)/ => $ec_unihorn || $ec_goody || "magenta" unless $ece_unihorn;
     recolor qr/\btinning kit\b/ => $ec_tinkit || "magenta" unless $ece_tinkit;
-    recolor qr/\bring $called regen(?:eration)?\b/ => $ec_regen || "magenta" unless $ece_regen;
-    recolor qr/\bring $called conflict\b/ => $ec_conflict || "magenta" unless $ece_conflict;
-    recolor qr/\bring $called (?:FA|free action)\b/ => $ec_freeaction || "magenta" unless $ece_freeaction;
-    recolor qr/\bring $called (?:TC|teleport control)\b/ => $ec_tc || "magenta" unless $ece_tc;
-    recolor qr/\bring $called lev(?:itation)?\b/ => $ec_lev || "magenta" unless $ece_lev;
-    recolor qr/\bamulet $called (?:LS|life ?saving)\b/ => $ec_ls || "magenta" unless $ece_ls;
-    recolor qr/\bamulet $called ref(?:lection)?\b/ => $ec_ref || "magenta" unless $ece_ref;
-    recolor qr/\bc(?:o|hi)ckatrice (?:corpse|egg)\b/ => $ec_trice || "magenta" unless $ece_trice;
-    recolor qr/\begg named cockatrice\b/ => $ec_trice || "magenta" unless $ece_trice;
-    recolor qr/\bstethoscope\b/ => $ec_scope || "magenta" unless $ece_scope;
+    recolor qr/\bring $called regen(?:eration)?\b/ => $ec_regen || $ec_goody || "magenta" unless $ece_regen;
+    recolor qr/\bring $called conflict\b/ => $ec_conflict || $ec_goody || "magenta" unless $ece_conflict;
+    recolor qr/\bring $called (?:FA|free action)\b/ => $ec_freeaction || $ec_goody || "magenta" unless $ece_freeaction;
+    recolor qr/\bring $called (?:TC|teleport control)\b/ => $ec_tc || $ec_goody || "magenta" unless $ece_tc;
+    recolor qr/\bring $called lev(?:itation)?\b/ => $ec_lev || $ec_goody || "magenta" unless $ece_lev;
+    recolor qr/\bamulet $called (?:LS|life ?saving)\b/ => $ec_ls || $ec_goody || "magenta" unless $ece_ls;
+    recolor qr/\bamulet $called ref(?:lection)?\b/ => $ec_ref || $ec_goody || "magenta" unless $ece_ref;
+    recolor qr/\bc(?:o|hi)ckatrice (?:corpse|egg)\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
+    recolor qr/\begg named cockatrice\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
+    recolor qr/\bstethoscope\b/ => $ec_scope || $ec_goody || "magenta" unless $ece_scope;
 }
-
 # instruments {{{
 if (!$ece_instrument)
 {
-    recolor qr/\b(?:(?:tooled|fire|frost)? horn)\b/ => $ec_instrument || "magenta";
-    recolor qr/\bhorn $called (?:tooled|fire|frost)\b/ => $ec_instrument || "magenta";
-    recolor qr/\b(?:magic|wooden) (?:harp|flute)\b/ => $ec_instrument || "magenta";
-    recolor qr/\b(?:harp|flute) $called (?:magic|wooden)\b/ => $ec_instrument || "magenta";
-    recolor qr/\bbugle\b/ => $ec_instrument || "magenta";
+    recolor qr/\b(?:(?:tooled|fire|frost)? horn)\b/ => $ec_instrument || $ec_goody || "magenta";
+    recolor qr/\bhorn $called (?:tooled|fire|frost)\b/ => $ec_instrument || $ec_goody || "magenta";
+    recolor qr/\b(?:magic|wooden) (?:harp|flute)\b/ => $ec_instrument || $ec_goody || "magenta";
+    recolor qr/\b(?:harp|flute) $called (?:magic|wooden)\b/ => $ec_instrument || $ec_goody || "magenta";
+    recolor qr/\bbugle\b/ => $ec_instrument || $ec_goody || "magenta";
 }
 # }}}
 # }}}
