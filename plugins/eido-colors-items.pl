@@ -118,8 +118,8 @@ recolor qr/\bwand $called vanish(?:er)?\b/ => "blue";
 
 # shinies {{{
 recolor qr/\d+ (?:gold piece|[Zz]orkmid)s?\b/ => "yellow";
-recolor qr/\bgems? $called valuable\b/ => "brown";
-recolor qr/\bgems? $called hard\b/ => "yellow";
+recolor qr/\bgems? $called valuable\b(?: \w+\b)?/ => "brown";
+recolor qr/\bgems? $called hard\b(?: \w+\b)?/ => "yellow";
 
 # too tired to do this now {{{
 #soft gems
