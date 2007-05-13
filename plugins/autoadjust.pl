@@ -26,14 +26,15 @@ sub autoadjust
 
     make_tab qr{ \e\[H
                  (?-x:You have a little trouble lifting )?
-                 (.)
-                 \ -\ 
-                 (an?|\d+)
-                 [^.]*?
-                 \ 
-                 $item
-                 (?-x: named.*?)?                  # item name
-                 (?: \ ? \( -? \d+ : -? \d+ \) )?  # charges
+                 (.)                                # inv slot
+                 \ -\                               # literal
+                 (an?|\d+)                          # count
+                 [^.]*?                             # blessed, e.g.
+                 \                                  # require space before item
+                 $item                              # user regex
+                 (?-x: named.*?)?                   # item name
+                 (?: \  \( -? \d+ : -? \d+ \))?     # charges
+                 (?-x: \(unpaid, \d+ zorkmids?\))?  # price
                  \.
                }x
           => sub
