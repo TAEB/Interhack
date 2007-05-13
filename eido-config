@@ -5,3 +5,15 @@ include "*";
 remap chr(5) => sub { "E-  Elbereth\n" };
 remap chr(4) => "aany\e";
 
+sub autoadjust;
+autoadjust qr/key|lock pick|credit card/       => "k";
+autoadjust "unicorn horn"                      => "h";
+autoadjust "Magicbane"                         => "E";
+autoadjust "stethoscope"                       => "s";
+autoadjust qr/pick-axe|mattock/                => "x";
+autoadjust qr/sack|holding|bag/                => "b";
+autoadjust qr/Amulet of Yendor(?: named .*?)?/ => "d";
+autoadjust qr/towel|blindfold/                 => "P";
+autoadjust qr/lizard corpse/                   => "L";
+autoadjust qr/ring (?:of|called) conflict/     => "C";
+
