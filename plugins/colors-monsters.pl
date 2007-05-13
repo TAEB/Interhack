@@ -272,7 +272,7 @@ recolor qr/hill giants?/ => "cyan";
 recolor qr/fire giants?/ => "yellow";
 recolor qr/frost giants?/ => "bwhite";
 recolor qr/storm giants?/ => "blue";
-recolor qr/ettins?|minotaurs?/ => "brown";
+recolor qr/ettins?\b(?! zombie)|minotaurs?/ => "brown";
 recolor qr/titans?/ => "purple";
 # }}}
 
