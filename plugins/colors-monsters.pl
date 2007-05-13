@@ -31,7 +31,7 @@ if ($chromatic_gods)
 }
 else
 {
-  recolor qr/Marduk|Moloch|Quetzalcoatl|Camaxtli|Huhetotl|Mitra|Crom|Set(?! what opt)|Anu|Ishtar|Anshar|Athena|Hermes|Poseidon|Lugh|Brigit|Manannan Mac Lir|Shan Lai Ching|Chih Sung-tzu|Huan Ti|Mercury|Venus|Mars|Issek|Mog|Kos|Amaterasu Omikami|Raijin|Susanowo|Blind Io|The Lady|Offler|Tyr|Odin|Loki|Ptah|Thoth|Anhur/ => \&random_color;
+  recolor qr/Marduk|Moloch|Quetzalcoatl|Camaxtli|Huhetotl|Mitra|Crom|Set(?! what opt)|Anu|Ishtar|Anshar|Athena|Hermes|Poseidon|Lugh|Brigit|Manannan Mac Lir|Shan Lai Ching|Chih Sung-tzu|Huan Ti|Mercury|Venus|Mars|Issek|Mog|Kos|Amaterasu Omikami|Raijin|Susanowo|Blind Io|The Lady|Offler|Tyr|Odin|Loki|Ptah|Thoth|Anhur/ => \&random_bold;
 }
 # }}}
 
