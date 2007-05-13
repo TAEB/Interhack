@@ -341,7 +341,7 @@ recolor qr/elf zombies?/ => "green";
 recolor qr/human zombies?/ => "bwhite";
 recolor qr/ettin zombies?/ => "blue";
 recolor qr/giant zombies?/ => "cyan";
-recolor qr/ghouls?/ => "gray";
+recolor qr/ghouls?/ => "blue";
 recolor qr/skeletons?/ => "bwhite";
 
 # }}}
@@ -355,7 +355,7 @@ recolor qr/stone golems?/ => "gray";
 recolor qr/(?:iron|glass) golems?/ => "cyan";
 # }}}
 # humans and elves @ {{{
-recolor qr/humans?(?! zombie| mumm)/ => "bwhite";
+recolor qr/humans?(?!oid| zombie| mumm)/ => "bwhite";
 recolor qr/wererats?/ => "brown";
 recolor qr/werejackals?/ => "red";
 recolor qr/werewol$ves/ => "bred";
