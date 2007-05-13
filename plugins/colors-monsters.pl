@@ -54,8 +54,8 @@ recolor qr/pyrolisks?/ => "red";
 # }}}
 
 # canines d {{{
-recolor qr/jackals?|coyotes?/ => "brown";
-recolor qr/(?<!winter )wol$ves|wargs?/ => "brown";
+recolor qr/(?<!were)jackals?|coyotes?/ => "brown";
+recolor qr/(?<!ter |were)wol$ves|wargs?/ => "brown";
 recolor qr/fox$es/ => "red";
 recolor qr/(?:little|large)? dogs?|dingos?/ => "bwhite";
 recolor qr/winter wolf cubs?|winter wol$ves/ => "cyan";
@@ -80,7 +80,7 @@ recolor qr/tigers?/ => "yellow";
 
 # gremlins and gargoyles g {{{
 recolor qr/gremlins?/ => "green";
-recolor qr/gargoyles?/ => "brown";
+recolor qr/(?<!winged )gargoyles?/ => "brown";
 recolor qr/winged gargoyles?/ => "purple";
 # }}}
 
@@ -131,9 +131,9 @@ recolor qr/mountain nymphs?/ => "brown";
 # }}}
 
 # orcs o {{{
-recolor qr/goblins?/ => "gray";
+recolor qr/(?<!hob)goblins?/ => "gray";
 recolor qr/hobgoblins?/ => "brown";
-recolor qr/orcs?(?! zombie| mumm)\b/ => "red";
+recolor qr/(?<!hill |rdor )orcs?(?! zombie| mumm| shaman|-captain)\b/ => "red";
 recolor qr/hill orcs?/ => "yellow";
 recolor qr/Mordor orcs?/ => "blue";
 recolor qr/Uruk-hai/ => "gray";
