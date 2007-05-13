@@ -273,7 +273,7 @@ recolor qr/fire giants?/ => "yellow";
 recolor qr/frost giants?/ => "bwhite";
 recolor qr/storm giants?/ => "blue";
 recolor qr/ettins?\b(?! zombie)|minotaurs?/ => "brown";
-recolor qr/titans?/ => "purple";
+recolor qr/titan(?!otheres?)s?/ => "purple";
 # }}}
 
 # jabberwocks J {{{
@@ -336,14 +336,14 @@ recolor qr/disenchanters?/ => "blue";
 
 # snakes S {{{
 recolor qr/garter snakes?/ => "green";
-recolor qr/snakes?/ => "brown";
+recolor qr/(?<!garter )snakes?/ => "brown";
 recolor qr/water moccasins?/ => "red";
 recolor qr/pit vipers?|cobras?/ => "blue";
 recolor qr/pythons?/ => "purple";
 # }}}
 
 # trolls T {{{
-recolor qr/trolls?\b/ => "brown";
+recolor qr/(?<!ice |ock |ter )trolls?\b/ => "brown";
 recolor qr/ice trolls?/ => "bwhite";
 recolor qr/rock trolls?/ => "cyan";
 recolor qr/water trolls?/ => "blue";
