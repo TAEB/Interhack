@@ -53,26 +53,26 @@ if (!$ece_water)
 if (!$ece_food)
 {
 # vegan {{{
-if ($ece_vegan)
-{
-    recolor qr/\b(?:food |cram |[KC]-)rations?\b/ => $ec_vegan || "bgreen";
-    recolor qr/\btins? (?:called|named|of) spinach/ => $ec_vegan || "bgreen";
-    recolor qr/\boranges?(?! dragon| gem)\b/ => $ec_vegan || "bgreen";
-    recolor qr/\bpears?\b/ => $ec_vegan || "bgreen";
-    recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot|pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => $ec_vegan || "bgreen";
-    recolor qr/\bsprigs? of wolfsbane\b/ => $ec_vegan || "bgreen";
-    recolor qr/\beucalyptus lea(?:f|ves)\b/ => $ec_vegan || "bgreen";
-    recolor qr/\bcloves? of garlic\b/ => $ec_vegan || "bgreen";
-    recolor qr/\b(?:tin of )?(?:gelatinous cube|acid blob|quivering blob|lichen|shrieker|violet fungus|(?:blue|spotted|ochre) jelly|(?:brown|yellow|green) mold)(?: corpse)?\b/ => $ec_vegan || "bgreen";
-}
+    if (!$ece_vegan)
+    {
+        recolor qr/\b(?:food |cram |[KC]-)rations?\b/ => $ec_vegan || "bgreen";
+        recolor qr/\btins? (?:called|named|of) spinach/ => $ec_vegan || "bgreen";
+        recolor qr/\boranges?(?! dragon| gem)\b/ => $ec_vegan || "bgreen";
+        recolor qr/\bpears?\b/ => $ec_vegan || "bgreen";
+        recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot|pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => $ec_vegan || "bgreen";
+        recolor qr/\bsprigs? of wolfsbane\b/ => $ec_vegan || "bgreen";
+        recolor qr/\beucalyptus lea(?:f|ves)\b/ => $ec_vegan || "bgreen";
+        recolor qr/\bcloves? of garlic\b/ => $ec_vegan || "bgreen";
+        recolor qr/\b(?:tin of )?(?:gelatinous cube|acid blob|quivering blob|lichen|shrieker|violet fungus|(?:blue|spotted|ochre) jelly|(?:brown|yellow|green) mold)(?: corpse)?\b/ => $ec_vegan || "bgreen";
+    }
 # }}}
 # vegetarian {{{
-if (!$ece_vegetarian)
-{
-    recolor qr/\b(?:egg|pancake|fortune cookie|candy bar|cream pie)s?\b/ => $ec_vegetarian || "green";
-    recolor qr/\blumps? of royal jelly\b/ => $ec_vegetarian || "green";
-    recolor qr/\b(?:tin of )?(?:brown pudding|gray ooze)(?: corpse)?\b/ => $ec_vegetarian || "green";
-}
+    if (!$ece_vegetarian)
+    {
+        recolor qr/\b(?:egg|pancake|fortune cookie|candy bar|cream pie)s?\b/ => $ec_vegetarian || "green";
+        recolor qr/\blumps? of royal jelly\b/ => $ec_vegetarian || "green";
+        recolor qr/\b(?:tin of )?(?:brown pudding|gray ooze)(?: corpse)?\b/ => $ec_vegetarian || "green";
+    }
 # }}}
 }
 # }}}
