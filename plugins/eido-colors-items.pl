@@ -32,7 +32,7 @@ recolor qr/\bpotions? called water named (?:unholy|cursed|C)\b/ => "orange";
 # vegan {{{
 recolor qr/\b(?:food |cram |[KC]-)rations?\b/ => "bgreen";
 recolor qr/\btins? (?:called|named|of) spinach/ => "bgreen";
-recolor qr/\boranges?(?! dragon)\b/ => "bgreen";
+recolor qr/\boranges?(?! dragon| gem)\b/ => "bgreen";
 recolor qr/\bpears?\b/ => "bgreen";
 recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot|pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => "bgreen";
 recolor qr/\bsprigs? of wolfsbane\b/ => "bgreen";
