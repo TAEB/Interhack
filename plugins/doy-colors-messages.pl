@@ -75,6 +75,7 @@ recolor qr/You feel somewhat dizzy./ => "red";
 recolor qr/You feel feverish./ => "red";
 recolor qr/You can't see in here./ => "red";
 recolor qr/Everything suddenly goes dark./ => "red";
+recolor qr/The world spins and goes dark./ => "red";
 # }}}
 # losing resists {{{
 recolor qr/You feel (?:warmer|a little sick|cooler|tired|conductive)./ => "red";
