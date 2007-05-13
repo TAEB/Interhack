@@ -86,7 +86,7 @@ recolor qr/winged gargoyles?/ => "purple";
 
 # humanoids h {{{
 recolor qr/hobbits?/ => "green";
-recolor qr/dwar$ves(?! lord|king)/ => "red";
+recolor qr/dwar$ves(?! lord| king| zombie)/ => "red";
 recolor qr/bugbears?/ => "brown";
 recolor qr/dwarf lords?/ => "blue";
 recolor qr/dwarf kings?/ => "purple";
@@ -108,7 +108,7 @@ recolor qr/ochre jell$ies/ => "brown";
 # }}}
 
 # kobolds k {{{
-recolor qr/(?<!large )kobolds?(?! lord| shaman)/ => "brown";
+recolor qr/(?<!large )kobolds?(?! lord| shaman| zombie)/ => "brown";
 recolor qr/large kobolds?/ => "red";
 recolor qr/kobold lords?/ => "purple";
 recolor qr/kobold shamans?/ => "bblue";
@@ -133,7 +133,7 @@ recolor qr/mountain nymphs?/ => "brown";
 # orcs o {{{
 recolor qr/goblins?/ => "gray";
 recolor qr/hobgoblins?/ => "brown";
-recolor qr/orcs?\b/ => "red";
+recolor qr/orcs?(?! zombie)\b/ => "red";
 recolor qr/hill orcs?/ => "yellow";
 recolor qr/Mordor orcs?/ => "blue";
 recolor qr/Uruk-hai/ => "gray";
@@ -259,14 +259,14 @@ recolor qr/shriekers?|violet fung$us/ => "purple";
 # }}}
 
 # gnomes G {{{
-recolor qr/gnomes?(?! lord|king)/ => "brown";
+recolor qr/gnomes?(?! lord| king| zombie)/ => "brown";
 recolor qr/gnome lords?/ => "blue";
 recolor qr/gnomish wizards?/ => "bblue";
 recolor qr/gnome kings?/ => "purple";
 # }}}
 
 # large humanoids H {{{
-recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel| spider| rat)/ => "red";
+recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel| spider| rat| zombie)/ => "red";
 recolor qr/stone giants?/ => "gray";
 recolor qr/hill giants?/ => "cyan";
 recolor qr/fire giants?/ => "yellow";
@@ -398,7 +398,7 @@ recolor qr/(?:iron|glass) golems?/ => "cyan";
 # }}}
 
 # humans and elves @ {{{
-recolor qr/humans?/ => "bwhite";
+recolor qr/humans?(?! zombie)/ => "bwhite";
 recolor qr/wererats?/ => "brown";
 recolor qr/werejackals?/ => "red";
 recolor qr/werewol$ves/ => "bred";
