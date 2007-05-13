@@ -1,5 +1,7 @@
 nick "Crassworm";
 $vikeys = 1;
+$chromatic_gods = 1;
+$chromatic_nemeses = 1;
 
 # plugins {{{
 exclude_plugins "doy-colors-items";
@@ -9,7 +11,7 @@ $fortune = "yasd ideas nethackidiocy";
 
 # remappings {{{
 remap chr(5) => sub { "E-  Elbereth\n" }; # (^E)
-remap chr(16) => "aany\e"; # for the drawbridge :) (^P)
+remap chr(23) => "aany\e"; # for the drawbridge :) (^W)
 # }}}
 
 # autoadjusts {{{
