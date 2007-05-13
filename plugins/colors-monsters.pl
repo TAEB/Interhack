@@ -132,7 +132,7 @@ recolor qr/mountain nymphs?/ => "brown";
 # team o {{{
 recolor qr/goblins?/ => "gray";
 recolor qr/hobgoblins?/ => "brown";
-recolor qr/orcs?/ => "red";
+recolor qr/orcs?\b/ => "red";
 recolor qr/hill orcs?/ => "bbrown";
 recolor qr/Mordor orcs?/ => "blue";
 recolor qr/Uruk-hai/ => "gray";
@@ -176,7 +176,7 @@ recolor qr/trappers?/ => "green";
 recolor qr/white unicorns?/ => "white";
 recolor qr/gray unicorns?/ => "gray";
 recolor qr/black unicorns?/ => "gray";
-recolor qr/pon$ies|(?:war)?horses?/ => "brown";
+recolor qr/pon$ies|(?:war)?horses?\b/ => "brown";
 # }}}
 
 # team v {{{
@@ -312,7 +312,7 @@ recolor qr/guardian nagas?(?: hatchlings?)?/ => "green";
 # }}}
 
 # ogres O {{{
-recolor qr/ogres?(?! lord|king)/ => "brown";
+recolor qr/ogres?\b(?! lord|king)/ => "brown";
 recolor qr/ogre lords?/ => "red";
 recolor qr/ogre kings?/ => "purple";
 # }}}
