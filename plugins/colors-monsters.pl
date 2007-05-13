@@ -313,7 +313,7 @@ recolor qr/guardian nagas?(?: hatchlings?)?/ => "green";
 # }}}
 
 # ogres O {{{
-recolor qr/ogres?\b(?! lord|king)/ => "brown";
+recolor qr/(?<!pr)ogres?\b(?! lord|king)/ => "brown";
 recolor qr/ogre lords?/ => "red";
 recolor qr/ogre kings?/ => "purple";
 # }}}
