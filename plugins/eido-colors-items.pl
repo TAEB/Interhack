@@ -163,3 +163,27 @@ recolor qr/ \(in use\)/ => "brown";
 # }}}
 # }}}
 
+# pretty useless items {{{
+# scrolls {{{
+recolor qr/scrolls? of (?:light|confuse monster|stinking cloud|punishment|fire|destroy armor|amnesia|create monster|food detection)\b/ => "darkgray";
+# }}}
+
+# potions {{{
+recolor qr/potions? of (?:booze|sake|fruit juice|see invisible|sickness|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|object detection|levitation|polymorph|acid|oil|paralysis)\b/ => "darkgray";
+recolor qr/potions? called \w+ 150/ => "darkgray"; # only exception is gain energy and it's ok if we lose that one
+# }}}
+
+# rings {{{
+recolor qr/ring of (?:adornment|hunger|protection(?: from shape changers)?|stealth|sustain ability|warning|aggravate monster|\w+ resistance|gain \w+|increase \w+|invisibility|see invisible|searching|polymorph(?: control)?)\b/ => "darkgray";
+# }}}
+
+# wands {{{
+recolor qr/wand of (?:light|nothing|locking|make invisible|opening|probing|secret door detection|\w+ monster|undead turning|create monster)\b/ => "darkgray";
+# }}}
+
+# amulets {{{
+recolor qr/amulet of (?:change|ESP|magical breathing|restful sleep|strangulation|unchanging)\b/ => "darkgray";
+recolor qr/amulet versus poison\b/ => "darkgray";
+# }}}
+# }}}
+
