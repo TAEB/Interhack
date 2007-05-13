@@ -1,6 +1,6 @@
 # good messages {{{
 # resists {{{
-make_annotation qr/\e\[HYou feel (?:(?:especially )? healthy|hardy)./ => "Gained poison resistance.";
+make_annotation qr/\e\[HYou feel (?:(?:especially )?healthy|hardy)./ => "Gained poison resistance.";
 make_annotation qr/\e\[HYou feel (?:full of hot air|warm)./ => "Gained cold resistance.";
 make_annotation qr/\e\[HYou (?:feel a momentary chill|feel cool|be chillin')./ => "Gained fire resistance.";
 make_annotation qr/\e\[HYou feel (?:wide )?awake./ => "Gained sleep resistance.";
