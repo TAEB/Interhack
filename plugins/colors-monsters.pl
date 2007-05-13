@@ -232,7 +232,7 @@ recolor qr/mountain centaurs?/ => "cyan";
 
 # dragons D {{{
 recolor qr/(?:baby )?gray dragons?(?! scale)/ => "gray";
-recolor qr/(?:baby )?silver dragons?(?! scale)/ => "cyan";
+recolor qr/(?:baby )?silver dragons?(?! scale)/ => "bcyan";
 recolor qr/(?:baby )?red dragons?(?! scale)/ => "red";
 recolor qr/(?:baby )?white dragons?(?! scale)/ => "bwhite";
 recolor qr/(?:baby )?orange dragons?(?! scale)/ => "orange";
