@@ -31,7 +31,7 @@ extended_command "#geno"
                  };
 each_iteration
 {
-  while (/You drop (.*?)\./g)
+  while (/Wiped out all (.*?)\./g)
   {
     $geno{$1} = 1;
   }
