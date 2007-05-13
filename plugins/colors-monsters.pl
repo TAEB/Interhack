@@ -20,7 +20,14 @@ sub random_dim   { $dim_colors[ rand @dim_colors ] }
 sub random_bold  { $bold_colors[rand @bold_colors] }
 
 # deities {{{
-recolor qr/Marduk|Moloch|Quetzalcoatl|Camaxtli|Huhetotl|Mitra|Crom|Set|Anu|Ishtar|Anshar|Athena|Hermes|Poseidon|Lugh|Brigit|Manannan Mac Lir|Shan Lai Ching|Chih Sung-tzu|Huan Ti|Mercury|Venus|Mars|Issek|Mog|Kos|Amaterasu Omikami|Raijin|Susanowo|Blind Io|The Lady|Offler|Tyr|Odin|Loki|Ptah|Thoth|Anhur/ => \&random_color;
+if ($chromatic_gods)
+{
+  each_iteration { s/Marduk|Moloch|Quetzalcoatl|Camaxtli|Huhetotl|Mitra|Crom|Set(?! what opt)|Anu|Ishtar|Anshar|Athena|Hermes|Poseidon|Lugh|Brigit|Manannan Mac Lir|Shan Lai Ching|Chih Sung-tzu|Huan Ti|Mercury|Venus|Mars|Issek|Mog|Kos|Amaterasu Omikami|Raijin|Susanowo|Blind Io|The Lady|Offler|Tyr|Odin|Loki|Ptah|Thoth|Anhur/(join '', map {random_bold()."$_"} split '', $&)."\e[0m"/eg }
+}
+else
+{
+  recolor qr/Marduk|Moloch|Quetzalcoatl|Camaxtli|Huhetotl|Mitra|Crom|Set(?! what opt)|Anu|Ishtar|Anshar|Athena|Hermes|Poseidon|Lugh|Brigit|Manannan Mac Lir|Shan Lai Ching|Chih Sung-tzu|Huan Ti|Mercury|Venus|Mars|Issek|Mog|Kos|Amaterasu Omikami|Raijin|Susanowo|Blind Io|The Lady|Offler|Tyr|Odin|Loki|Ptah|Thoth|Anhur/ => \&random_color;
+}
 # }}}
 
 # team a {{{
