@@ -55,7 +55,7 @@ recolor qr/pyrolisks?/ => "red";
 # }}}
 # canines d {{{
 recolor qr/(?<!were)jackals?|coyotes?/ => "brown";
-recolor qr/(?<!ter |were)wol$ves|wargs?/ => "brown";
+recolor qr/(?<!ter |were)wol$ves(?!sbane)|wargs?/ => "brown";
 recolor qr/fox$es/ => "red";
 recolor qr/(?:little|large)? dogs?|dingos?/ => "bwhite";
 recolor qr/winter wolf cubs?|winter wol$ves/ => "cyan";
@@ -194,7 +194,9 @@ recolor qr/ki-rin/ => "yellow";
 recolor qr/Archons?/ => "purple";
 # }}}
 # bats and birds B {{{
-recolor qr/(?<!giant |mpire )bats?\b/ => "brown";
+# the following shouldnt match giant, vampire, and combat boots 
+# but no-variable length negative lookaround so it might screw up. XXX
+recolor qr/(?<!nt |re |com)bats?\b/ => "brown"; 
 recolor qr/giant bats?/ => "red";
 recolor qr/ravens?/ => "gray";
 recolor qr/vampire bats?/ => "gray";
@@ -357,7 +359,7 @@ recolor qr/humans?(?! zombie| mumm)/ => "bwhite";
 recolor qr/wererats?/ => "brown";
 recolor qr/werejackals?/ => "red";
 recolor qr/werewol$ves/ => "bred";
-recolor qr/(?<![dny]-)el$ves(?!-lord)/ => "bwhite";
+recolor qr/(?<![dny]-)el$ves(?!-lord| zombie| mumm)/ => "bwhite";
 recolor qr/Woodland-el$ves/ => "green";
 recolor qr/Green-el$ves/ => "bgreen";
 recolor qr/Grey-el$ves/ => "gray";
