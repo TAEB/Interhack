@@ -102,9 +102,9 @@ recolor qr/tengus?/ => "cyan";
 # }}}
 
 # jellies j {{{
-recolor qr/blue jellys?/ => "blue";
-recolor qr/spotted jellys?/ => "green";
-recolor qr/ochre jellys?/ => "brown";
+recolor qr/blue jell$ies/ => "blue";
+recolor qr/spotted jell$ies/ => "green";
+recolor qr/ochre jell$ies/ => "brown";
 # }}}
 
 # kobolds k {{{
@@ -217,7 +217,7 @@ recolor qr/Archons?/ => "purple";
 # }}}
 
 # bats and birds B {{{
-recolor qr/bats?/ => "brown";
+recolor qr/(?<!giant |mpire )bats?\b/ => "brown";
 recolor qr/giant bats?/ => "red";
 recolor qr/ravens?/ => "gray";
 recolor qr/vampire bats?/ => "gray";
