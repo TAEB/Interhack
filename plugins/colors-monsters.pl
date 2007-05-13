@@ -8,6 +8,7 @@ my $us = qr/us|i/;
 my $es = qr/(?:es)?/;
 my $ies = qr/y|ies/;
 my $ex = qr/ex|ices/;
+my $esses = qr/s?|esses?/;
 
 # chromatic stuff!
 my @dim_colors = qw/red brown green cyan magenta blue/;
@@ -414,8 +415,8 @@ recolor qr/shopkeepers?/ => "bwhite";
 recolor qr/guards?/ => "blue";
 recolor qr/prisoners?/ => "bwhite";
 recolor qr/${the}Oracle/ => "bblue";
-recolor qr/priests?/ => "bwhite";
-recolor qr/high priests?/ => "bwhite";
+recolor qr/(?<!high )priest$esses/ => "bwhite";
+recolor qr/high priest$esses/ => "bred"; # XXX: changed from bwhite
 recolor qr/soldiers?/ => "gray";
 recolor qr/sergeants?/ => "red";
 recolor qr/lieutenants?/ => "green";
@@ -463,7 +464,7 @@ recolor qr/salamanders?/ => "bred";
 # }}}
 
 # player monsters {{{
-recolor qr/archeologists?|barbarians?|cave(?:wo)?m[ae]n|healers?|knights?|monks?|priests?(?! of )|priestess(?:es)?(?! of )|rangers?|rogues?|samurai|tourists?|valkyries?|(?<!ish|old) wizards?/ => "white";
+recolor qr/archeologists?|barbarians?|cave(?:wo)?m[ae]n|healers?|knights?|monks?|(?<!high )priest$esses(?! of )|rangers?|rogues?|samurai|tourists?|valkyries?|(?<!ish|old) wizards?/ => "white";
 # }}}
 
 # quest nemeses {{{
