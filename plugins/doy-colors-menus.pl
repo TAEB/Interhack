@@ -14,10 +14,10 @@ recolor qr/[a-zA-Z] - [a-z ]+ \d\*.*[0-9]+%/ => "magenta";
 # }}}
 
 # enhance menu {{{
-recolor qr/(?<![a-z] - )[a-z -]+\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "darkgray";
-recolor qr/[a-z] - [a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "bgreen";
-recolor qr/\*[a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "green";
-recolor qr/\#[a-z0-9\e\[; -]+?\[(Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "red";
+recolor qr/(?<![a-z] - )[a-z -]+\[(?:Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "darkgray";
+recolor qr/[a-z] - [a-z0-9\e\[; -]+?\[(?:Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "bgreen";
+recolor qr/\*[a-z0-9\e\[; -]+?\[(?:Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "green";
+recolor qr/\#[a-z0-9\e\[; -]+?\[(?:Unskilled|Basic|Skilled|Expert|Master|Grand Master)\]/ => "red";
 recolor qr/\[Unskilled\]/ => "white";
 recolor qr/\[Basic\]/ => "cyan";
 recolor qr/\[Skilled\]/ => "yellow";

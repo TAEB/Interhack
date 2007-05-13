@@ -13,7 +13,7 @@ recolor qr/(?<!AC)\s\-[1-9]\d*/ => "red";
 # }}}
 
 # erosion {{{
-recolor qr/(very|thoroughly)? ?(rusty|burnt|rotted|corroded)/ => "red";
+recolor qr/(?:very|thoroughly)? ?(?:rusty|burnt|rotted|corroded)/ => "red";
 # }}}
 
 # important items {{{
@@ -28,13 +28,13 @@ recolor qr/papyrus spellbook/ => "magenta";
 
 # dangerous items {{{
 recolor qr/(?<=wand of )cancellation/ => "bred";
-recolor qr/(cock|chick)atrice corpse/ => "bred";
+recolor qr/(?:cock|chick)atrice corpse/ => "bred";
 recolor qr/bag of tricks/ => "bred";
-recolor qr/vanish(es)?/ => "bred";
+recolor qr/vanish(?:es)?/ => "bred";
 # }}}
 
 # gold {{{
-recolor qr/\d+ (gold piece|zorkmid)s?/ => "yellow";
+recolor qr/\d+ (?:gold piece|zorkmid)s?/ => "yellow";
 # }}}
 
 # water {{{
