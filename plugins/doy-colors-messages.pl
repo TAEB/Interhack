@@ -106,7 +106,7 @@ recolor qr/You (don't feel very well|are turning a little green)./ => "bred";
 recolor qr/Your (limbs are getting oozy|skin begins to peel away)./ => "bred";
 recolor qr/You are turning into a green slime./ => "bred";
 recolor qr/You feel deathly sick./ => "bred";
-recolor qr/You feel much worse./ => "bred";
+recolor qr/You feel (much|even) worse./ => "bred";
 recolor qr/The .*? swings itself around you!/ => "bred";
 recolor qr/Really quit\?/ => "bred";
 # }}}
