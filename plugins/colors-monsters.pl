@@ -194,12 +194,13 @@ recolor qr/ki-rin/ => "yellow";
 recolor qr/Archons?/ => "purple";
 # }}}
 # bats and birds B {{{
-# the following shouldnt match giant, vampire, and combat boots 
+# the following shouldnt match giant, vampire, and combat boots
 # but no-variable length negative lookaround so it might screw up. XXX
-recolor qr/(?<!nt |re |com)bats?\b/ => "brown"; 
-recolor qr/giant bats?/ => "red";
-recolor qr/ravens?/ => "gray";
+each_iteration { s/giant bat(s?)/\e[31mgiant b\e[31mat$1\e[0m/g }
 recolor qr/vampire bats?/ => "gray";
+each_iteration { s/vampire bat(s?)/\e[34mvampire b\e[34mat$1\e[0m/g }
+recolor qr/(?<!com)bats?\b/ => "brown";
+recolor qr/ravens?/ => "gray";
 # }}}
 # centaurs C {{{
 recolor qr/plains centaurs?/ => "brown";
@@ -239,7 +240,7 @@ recolor qr/gnomish wizards?/ => "bblue";
 recolor qr/gnome kings?/ => "purple";
 # }}}
 # large humanoids H {{{
-recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel| spider| rat| zombie| mumm)/ => "red";
+recolor qr/(?<!tone |hill |fire |rost |torm )giants?(?! ant| beetle| mimic| eel| spider| rat| zombie| mumm| b(?:\e\[31m)?at)/ => "red";
 recolor qr/stone giants?/ => "gray";
 recolor qr/hill giants?/ => "cyan";
 recolor qr/fire giants?/ => "yellow";
@@ -315,7 +316,7 @@ recolor qr/Olog-hai/ => "purple";
 recolor qr/umber hulks?/ => "brown";
 # }}}
 # vampires V {{{
-recolor qr/vampires?(?! lord)/ => "red";
+recolor qr/vampires?(?! lord| b(?:\e\[34m)?at)/ => "red";
 recolor qr/vampire lords?/ => "blue";
 recolor qr/Vlad the Impaler/ => "purple";
 # }}}
