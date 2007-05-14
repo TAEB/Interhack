@@ -203,8 +203,8 @@ if (!$ece_charges_individual)
 }
 elsif (!$ece_charges)
 {
-    recolor qr/\(\d+:\d+\)/         => $ec_charged || "cyan";
-    recolor qr/\(\d+:0\)/           => $ec_0_charges || $ec_empty || "darkgray";
+    recolor qr/\([\d-]+:\d+\)/         => $ec_charged || "cyan";
+    recolor qr/\([\d-]+:0\)/           => $ec_0_charges || $ec_empty || "darkgray";
 }
 # }}}
 # enchantment (originally from doy) {{{
