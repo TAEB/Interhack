@@ -60,6 +60,18 @@ if (!$ece_water)
         recolor qr/\bpotions? called water named (?:unholy|cursed|C)\b/ => $ec_unholywater || "orange";
     }
 # }}}
+# split water coloring {{{
+    if ($eci_splitwater)
+    {
+        recolor qr/\bclear potions?\b/ => $ec_water || "cyan";
+        recolor qr/\b(?<= of )water\b/ => $ec_water || "cyan";
+        recolor qr/\b(?<= of holy )water\b/ => $ec_water || "cyan";
+        recolor qr/\b(?<= of unholy )water\b/ => $ec_water || "cyan";
+        recolor qr/\b(?<= called )water\b/ => $ec_water || "cyan";
+        recolor qr/\b(?<!un)holy(?= (?:\e\[[0-9;]*m)?water)\b/ => $ec_holywater || "bcyan";
+        recolor qr/\bunholy(?= (?:\e\[[0-9;]*m)?water)\b/ => $ec_unholywater || "orange";
+    }
+# }}}
 }
 # }}}
 # food conducts {{{
