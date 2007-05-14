@@ -89,7 +89,7 @@ recolor qr/dwarf kings?/ => "purple";
 recolor qr/(?:master )?mind flayers?/ => "purple";
 # }}}
 # minor demons i {{{
-recolor qr/manes|imps?/ => "red";
+recolor qr/manes|imps?\b/ => "red";
 recolor qr/homuncul$us/ => "green";
 recolor qr/lemures?/ => "brown";
 recolor qr/quasits?/ => "blue";
