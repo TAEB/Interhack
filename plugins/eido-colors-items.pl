@@ -183,8 +183,8 @@ if (!$ece_bohboom)
 # }}}
 # shinies {{{
 recolor qr/\d+ (?:gold piece|[Zz]orkmid)s?\b/ => $ec_gold || "yellow" unless $ece_gold;
-recolor qr/\bgems? $called valuable\b(?: \w+\b)?/ => $ec_goodsoft || $ec_goodgem || "brown" unless $ece_gem;
-recolor qr/\bgems? $called hard\b(?: \w+\b)?/ => $ec_goodhard || $ec_goodgem || "yellow" unless $ece_gem;
+recolor qr/\bgems? $called valuable(?: \w+| yellowish brown)?\b/ => $ec_goodsoft || $ec_goodgem || "brown" unless $ece_gem;
+recolor qr/\bgems? $called hard(?: \w+| yellowish brown)?\b/ => $ec_goodhard || $ec_goodgem || "yellow" unless $ece_gem;
 # too tired to do this now {{{
 #soft gems
 #MENUCOLOR=" \([0-9]+\|an?\|gems? .*\) \(uncursed \|cursed \|blessed \)?\(dilithium\|opal\|garnet\|jasper\|agate\|jet\|obsidian\|jade\|citrine\|chrysoberyl\|amber\|amethyst\|fluorite\|turquoise\)\(e?s\)?\( stones?\| gems?\| crystals?\)?\( named .*\)?$"=brown
