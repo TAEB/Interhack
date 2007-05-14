@@ -4,8 +4,30 @@
 nick "doy";
 $vikeys = 1;
 # }}}
+# eido-colors (has to go before include) {{{
+# exclude/include categories {{{
+$ece_shortbuc = 1;
+$ece_scope = 1;
+$ece_instrument = 1;
+$ece_gem = 1;
+$ece_charges_individual = 1;
+$ece_holywater = 1;
+$ece_unholywater = 1;
+$eci_splitwater = 1;
+$eci_erosion = 1;
+# }}}
+# change colors {{{
+$ec_blessed = "green";
+$ec_uncursed = "brown";
+$ec_cursed = "red";
+$ec_holywater = "blue";
+$ec_unholywater = "red";
+$ec_trice = "bred";
+$ec_bohboom = "bred";
+# }}}
+# }}}
 # plugins {{{
-exclude_plugins "eido-colors-items";
+exclude_plugins "doy-colors-items";
 include "*";
 # }}}
 # plugin configuration {{{
