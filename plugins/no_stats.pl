@@ -14,7 +14,7 @@ extended_command "#stats"
               => sub { $stats };
 
 each_iteration
-{
+{ eval {
   my $s = qr/(?:\s|\e\[C)/;
   my $st_char = qr#[\d\*/]#;
   s{\e\[23;(\d+)H((.*?)$s*)(St:($st_char+) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+))($s+(\w+)$s+)S:(\d+)}{
@@ -71,5 +71,5 @@ each_iteration
     $stats = "St:$stats[0] Dx:$stats[1] Co:$stats[2] In:$stats[3] Wi:$stats[4] Ch:$stats[5]";
     "\e[23;1H\e[0mS:$score\e[K"
   }eg;
-}
+} }
 
