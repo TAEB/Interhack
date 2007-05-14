@@ -53,21 +53,18 @@ sub draw_map
     }
 }
 
-for (qw/frontier town_square alley college grotto bustling bazaar
+for (qw/frontier townsquare alley college grotto bustling bazaar
         delphi ludios castle valley sanctum
         cellar catacombs mimic
         bigplus bigoval bigtie
         medusa1 medusa2
         asmodeus baalzebub juiblex orcus
-        wiz_top wiz_mid wiz_bot
-        vlad_top vlad_mid vlad_bot
-        earth air fire water astral
-       /, map {("${_}_home", "${_}_loc", "${_}_goal")}
+        wiztop wizmid wizbot
+        vladtop vladmid vladbot
+        earth air fire astral
+       /, map {("${_}home", "${_}loc", "${_}goal")}
           qw/arc bar cav hea kni mon pri ran rog sam tou val wiz/)
 {
-    my $cmd = $_;
-    $cmd =~ s/_//g;
-
-    extended_command "$_" => draw_map($_);
+    extended_command $_ => draw_map($_);
 }
 
