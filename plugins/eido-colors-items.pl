@@ -1,3 +1,12 @@
+# this is essentially NAO's eidocolors with a number of improvements
+# it aims to be very configurable, so you can do things like:
+#   $ece_gold = 1; # to exclude coloring "gold pieces"
+#   $ec_bohboom = "magenta"; # color items like bag of tricks, /oCanc purple
+# you have to make these changes BEFORE you include this plugin
+# PLEASE PLEASE PLEASE talk to Eidolos before you change any defaults
+# I'm fine with anyone else adding new colors as long as they make it OFF
+# by default. See doy's uncursed water colors for an example.
+
 # common regexes {{{
 my $called = qr/called|of/;
 # }}}
