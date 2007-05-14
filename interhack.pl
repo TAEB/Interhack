@@ -469,10 +469,10 @@ while (1)
     s/(o\) Edit option file)/$1  \e[1;30mTab) edit options locally\e[0m/g;
   }
 
-  s{(\e\[[0-9;]*.\s*)(\w+): unknown extended command\.}{
-      if (exists $extended_command{$2})
+  s{\e\[H(\w+): unknown extended command\.}{
+      if (exists $extended_command{$1})
       {
-        $1 . value_of($extended_command{$2}, $2) . "\e[K"
+        "\e[H" . value_of($extended_command{$1}, $1) . "\e[K"
       }
       else
       {
