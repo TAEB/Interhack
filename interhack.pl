@@ -325,7 +325,7 @@ use Interhack::Sock;
 my $sock = Interhack::Sock::sock($server, $port);
 # }}}
 # autologin {{{
-if ($autologin)
+if ($autologin && $server !~ /noway\.ratry/)
 {
   $nick = value_of($nick);
   $nick = $arg_nick if $arg_nick ne '';
