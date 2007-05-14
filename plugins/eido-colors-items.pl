@@ -9,6 +9,7 @@
 
 # common regexes {{{
 my $called = qr/called|of/;
+my $colors = qr/(?:\e\[[0-9;]*m)?/;
 # }}}
 # BUC {{{
 if (!$ece_buc)
