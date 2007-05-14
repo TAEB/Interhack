@@ -4,17 +4,14 @@
 nick "doy";
 $vikeys = 1;
 # }}}
-
 # plugins {{{
 exclude_plugins "eido-colors-items";
 include "*";
 # }}}
-
 # plugin configuration {{{
 # fortune {{{
 $fortune = "~/.fortune/yasd-fortune ~/.fortune/ideas";
 # }}}
-
 # autoadjust {{{
 sub autoadjust;
 autoadjust $aa_key         => "o";
@@ -28,7 +25,6 @@ autoadjust $aa_lamp        => "j";
 autoadjust $aa_trice       => "^y";
 # }}}
 # }}}
-
 # mappings {{{
 remap chr(5) => "E-  Elbereth\n";
 # }}}
