@@ -73,7 +73,7 @@ recolor qr/kittens?|(?:house|large )cats?/ => "bwhite";
 recolor qr/jaguars?/ => "brown";
 recolor qr/lynxes?/ => "cyan";
 recolor qr/panthers?/ => "gray";
-recolor qr/tigers?/ => "yellow";
+recolor qr/tigers?(?! eye)/ => "yellow";
 # }}}
 # gremlins and gargoyles g {{{
 recolor qr/gremlins?/ => "green";
