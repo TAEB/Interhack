@@ -196,10 +196,10 @@ recolor qr/\bgems? $called hard\b(?: \w+\b)?/ => $ec_goodhard || $ec_goodgem || 
 # charges (originally from doy) {{{
 if (!$ece_charges_individual)
 {
-    recolor qr/(?<=\()0(?=:)/       => $ec_0_recharges || "cyan";  # 0 recharges
-    recolor qr/(?<=:)0(?=\))/       => $ec_0_charges || "red";   # 0 charges
-    recolor qr/(?<=:)\d+(?=\))/     => $ec_recharges || "cyan";  # many charges
-    recolor qr/(?<=\()\d+(?=:)/     => $ec_charges || "green"; # many recharges
+    recolor qr/(?<=\()0(?=:)/        => $ec_0_recharges || "cyan";  # 0 recharge
+    recolor qr/(?<=:)(?:0|-1)(?=\))/ => $ec_0_charges || "red";   # no charges
+    recolor qr/(?<=:)\d+(?=\))/      => $ec_recharges || "cyan";  # many charges
+    recolor qr/(?<=\()\d+(?=:)/      => $ec_charges || "green"; # many recharges
 }
 elsif (!$ece_charges)
 {
