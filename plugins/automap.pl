@@ -5,10 +5,11 @@
 
 sub draw_map
 {
+    my $mapfile = shift;
     sub
     {
         print "\e[1;30m"
-            . `./plugins/automap/draw_map.pl plugins/automap/$_[0].txt`
+            . `./plugins/automap/draw_map.pl plugins/automap/$mapfile.txt`
             . "\e[0m";
         "Press ^L to redraw the screen."
     }
