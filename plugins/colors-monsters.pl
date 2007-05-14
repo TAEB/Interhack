@@ -49,8 +49,8 @@ recolor qr/quivering blobs?/ => "white";
 recolor qr/gelatinous cubes?/ => "cyan";
 # }}}
 # cockatrices c {{{
-recolor qr/chickatrices?/ => "brown";
-recolor qr/cockatrices?/ => "yellow";
+recolor qr/chickatrices?(?! corpse)/ => "brown";
+recolor qr/cockatrices?(?! corpse| egg)/ => "yellow";
 recolor qr/pyrolisks?/ => "red";
 # }}}
 # canines d {{{
