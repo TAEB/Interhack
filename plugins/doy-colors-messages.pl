@@ -68,6 +68,101 @@ recolor qr/The [^.!\e]*? grabs you./ => "red";
 recolor qr/The .*? yowls!/ => "red";
 recolor qr/You have a (?:sad|peculiar) feeling for a moment, then it passes\./ => "red";
 # }}}
+# traps {{{
+# had an effect {{{
+# arrow trap {{{
+recolor qr/An arrow shoots out at you!/ => "red";
+# }}}
+# dart trap {{{
+recolor qr/A little dart shoots out at you!/ => "red";
+# }}}
+# rock trap {{{
+recolor qr/A trap door in .*? opens and .*? falls on your [^!]*!/ => "red";
+# }}}
+# squeaky board {{{
+recolor qr/A board beneath you squeaks loudly./ => "red";
+# }}}
+# bear trap {{{
+recolor qr/.*? bear trap closes on [^!]*!/ => "red";
+# }}}
+# rust trap
+# pit
+# hole
+# trapdoor
+# teleporter
+# magic trap {{{
+recolor qr/You are caught in a magical explosion!/ => "red";
+recolor qr/You are momentarily blinded by a flash of light!/ => "red";
+recolor qr/You hear a deafening roar!/ => "red";
+recolor qr/You see a flash of light!/ => "red";
+# }}}
+# antimagic trap {{{
+recolor qr/You feel your magical energy drain away./ => "red";
+# }}}
+# rolling boulder
+# sleeping gas trap {{{
+recolor qr/A cloud of gas puts you to sleep./ => "red";
+# }}}
+# levporter
+# spiked pit
+# landmine
+# web
+# statue trap
+# polytrap
+# fire trap {{{
+recolor qr/A tower of flame (bursts|erupts) from [^!]*!/ => "red";
+# }}}
+# }}}
+# no effect {{{
+# arrow trap {{{
+recolor qr/You hear a loud click./ => "darkgray";
+# }}}
+# dart trap {{{
+recolor qr/You hear a soft click./ => "darkgray";
+# }}}
+# rock trap {{{
+recolor qr/A trap door in .*? opens, but nothing falls out!/ => "darkgray";
+# }}}
+# squeaky board {{{
+recolor qr/You notice a loose board below you./ => "darkgray";
+recolor qr/You notice a crease in the linoleum./ => "darkgray";
+# }}}
+# bear trap {{{
+recolor qr/\w+ bear trap closes harmlessly (through|over) you./ => "darkgray";
+# }}}
+# rust trap
+# pit
+# hole
+# trapdoor
+# teleporter
+# magic trap {{{
+recolor qr/A shiver runs up and down your spine!/ => "darkgray";
+recolor qr/You hear a distant howling./ => "darkgray";
+recolor qr/You hear the moon howling at you./ => "darkgray";
+recolor qr/Your pack shakes violently!/ => "darkgray";
+recolor qr/You smell charred flesh./ => "darkgray";
+recolor qr/You smell hamburgers./ => "darkgray";
+recolor qr/You feel tired./ => "darkgray";
+recolor qr/You suddenly yearn for your (?:distant|nearby) homeland./ => "darkgray";
+recolor qr/You suddenly yearn for Cleveland./ => "darkgray";
+recolor qr/You feel (?:oddly )?like the prodigal son./ => "darkgray";
+# }}}
+# antimagic trap {{{
+recolor qr/You feel momentarily lethargic./ => "darkgray";
+# }}}
+# rolling boulder
+# sleeping gas trap {{{
+recolor qr/You are enveloped in a cloud of gas./ => "red";
+# }}}
+# levporter
+# spiked pit
+# landmine
+# web
+# statue trap
+# polytrap
+# fire trap
+# }}}
+# }}}
 # negative status effects {{{
 recolor qr/Oh wow!  Great stuff!/ => "red";
 recolor qr/You reel.../ => "red";
