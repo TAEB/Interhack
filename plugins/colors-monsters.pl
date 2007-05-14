@@ -411,7 +411,7 @@ recolor qr/electric eels?/ => "bblue";
 # }}}
 # lizards : {{{
 recolor qr/newts?/ => "yellow";
-recolor qr/geckos?|lizards?/ => "green";
+recolor qr/geckos?|lizards?(?! corpse)/ => "green";
 recolor qr/chameleons?|(?:baby )?crocodiles?|iguanas?/ => "brown";
 recolor qr/salamanders?/ => "bred";
 # }}}
