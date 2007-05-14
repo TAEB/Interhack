@@ -226,7 +226,7 @@ if (!$ece_useless)
     recolor qr/scrolls? (?:called|of) (?:light|confuse monster|stinking cloud|punishment|fire|destroy armor|amnesia|create monster|food detection)\b/ => $ec_useless_scrolls || $ec_useless || "darkgray" unless $ece_useless_scrolls;
 # }}}
 # potions {{{
-    recolor qr/potions? (?:called|of) (?:booze|sake|fruit juice|see invisible|sickness|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|object detection|levitation|polymorph|acid|oil|paralysis)\b/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
+    recolor qr/potions? (?:called|of) (?:booze|sake|fruit juice|see invisible|sickness|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|obj(?:ect)? ?det(?:ection)?|(?:\d+x)?OD|levitation|polymorph|acid|oil|paralysis)\b/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
     recolor qr/potions? called \w+ 150/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions; # only exception is gain energy and it's ok if we lose that one
 # }}}
 # rings {{{
