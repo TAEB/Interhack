@@ -82,7 +82,7 @@ if (!$ece_food)
     {
         recolor qr/\b(?:food |cram |[KC]-)rations?\b/ => $ec_vegan || "bgreen";
         recolor qr/\btins? (?:called|named|of) spinach/ => $ec_vegan || "bgreen";
-        recolor qr/\boranges?(?! dragon| gem)\b/ => $ec_vegan || "bgreen";
+        recolor qr/(?<!soft )\boranges?(?! dragon| gem)\b/ => $ec_vegan || "bgreen";
         recolor qr/\bpears?\b/ => $ec_vegan || "bgreen";
         recolor qr/\b(?:gunyoki|lembas wafer|melon|carrot|pear|apple|banana|kelp frond|slime mold|brain)s?\b/ => $ec_vegan || "bgreen";
         recolor qr/\bsprigs? of wolfsbane\b/ => $ec_vegan || "bgreen";
