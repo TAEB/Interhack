@@ -181,12 +181,17 @@ recolor qr/\bgems? $called hard\b(?: \w+\b)?/ => $ec_goodhard || $ec_goodgem || 
 # }}}
 # interhack-specific stuff {{{
 # charges (originally from doy) {{{
-if (!$ece_charges)
+if (!$ece_charges_individual)
 {
     recolor qr/(?<=\()0(?=:)/       => $ec_0_recharges || "cyan";  # 0 recharges
     recolor qr/(?<=:)0(?=\))/       => $ec_0_charges || "red";   # 0 charges
     recolor qr/(?<=:)\d+(?=\))/     => $ec_recharges || "cyan";  # many charges
     recolor qr/(?<=\()\d+(?=:)/     => $ec_charges || "green"; # many recharges
+}
+elsif (!$ece_charges)
+{
+    recolor qr/\(\d+:\d+\)/         => $ec_charged || "cyan";
+    recolor qr/\(\d+:0\)/           => $ec_0_charges || $ec_empty || "darkgray";
 }
 # }}}
 # enchantment (originally from doy) {{{
@@ -199,7 +204,7 @@ if (!$ece_enchantment)
 }
 # }}}
 # empty wands and tools {{{
-recolor qr/(?<=named )empty\b/ => $ec_emptywand || "darkgray" unless $ece_emptywand;
+recolor qr/(?<=named )e(?:mpty)?\b/ => $ec_empty || "darkgray" unless $ece_empty;
 # }}}
 # item in use {{{
 recolor qr/(?<=\()lit(?=\))/ => $ec_lit || "yellow" unless $ece_lit;
