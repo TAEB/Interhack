@@ -177,7 +177,7 @@ recolor qr/\b(?:stone called )?(?<!your )load(?:stone)?\b/ => $ec_loadstone || "
 if (!$ece_bohboom)
 {
     recolor qr/\bbag $called tricks\b/ => $ec_bot || $ec_bohboom || "blue";
-    recolor qr/\bwand $called [^\e]*(?<!!)canc(?:ellation)?\b/ => $ec_canc || $ec_bohboom || "blue";
+    recolor qr/\bwand $called [^\e]*(?<!!)canc(?:ellation)?\b(?! named ${colors}e(?:mpty)?\b| (?:named .*?)?\($colors\d+$colors:${colors}(?:0|-1)$colors\))/ => $ec_canc || $ec_bohboom || "blue";
     recolor qr/\bwand $called vanish(?:er)?\b/ => $ec_vanish || $ec_canc || $ec_bohboom || "blue";
 }
 # }}}
