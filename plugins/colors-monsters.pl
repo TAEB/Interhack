@@ -343,7 +343,7 @@ recolor qr/human zombies?/ => "bwhite";
 recolor qr/ettin zombies?/ => "blue";
 recolor qr/giant zombies?/ => "cyan";
 recolor qr/ghouls?/ => "blue";
-recolor qr/skeletons?/ => "bwhite";
+recolor qr/skeletons?(?! key)/ => "bwhite";
 
 # }}}
 
@@ -360,7 +360,8 @@ recolor qr/humans?(?!oid| zombie| mumm)/ => "bwhite";
 recolor qr/wererats?/ => "brown";
 recolor qr/werejackals?/ => "red";
 recolor qr/werewol$ves/ => "bred";
-recolor qr/(?<![dny]-)el$ves(?!-lord| zombie| mumm)/ => "bwhite";
+# should stop yourself among other things
+recolor qr/(?<![dny]-|rs)el$ves(?!-lord| zombie| mumm)/ => "bwhite";
 recolor qr/Woodland-el$ves/ => "green";
 recolor qr/Green-el$ves/ => "bgreen";
 recolor qr/Grey-el$ves/ => "gray";
