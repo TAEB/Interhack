@@ -121,6 +121,7 @@ recolor qr/\bamulet $called (?:LS|life ?saving)\b/ => $ec_ls || $ec_goody || "ma
 recolor qr/\bamulet $called ref(?:lection)?\b/ => $ec_ref || $ec_goody || "magenta" unless $ece_ref;
 recolor qr/\bc(?:o|hi)ckatrice (?:corpse|egg)\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
 recolor qr/\begg named cockatrice\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
+recolor qr/\blizard corpse\b/ => $ec_lizard || $ec_goody || "magenta" unless $ece_lizard;
 recolor qr/\bstethoscope\b/ => $ec_scope || $ec_goody || "magenta" unless $ece_scope;
 }
 # instruments {{{
