@@ -32,6 +32,9 @@ if (!$ece_buc)
 # }}}
 }
 # }}}
+# erosion {{{
+recolor qr/(?:very|thoroughly)? ?(?:rusty|burnt|rotted|corroded)/ => $ec_erosion || "red" if $eci_erosion;
+# }}}
 # water sports {{{
 if (!$ece_water)
 {
