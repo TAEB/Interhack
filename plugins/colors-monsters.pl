@@ -40,7 +40,7 @@ recolor qr/giant ants?/ => "brown";
 recolor qr/killer bees?/ => "yellow";
 recolor qr/soldier ants?/ => "blue";
 recolor qr/fire ants?/ => "red";
-recolor qr/giant beetles?/ => "blue";
+recolor qr/giant beetles?/ => "nhblack";
 recolor qr/queen bees?/ => "purple";
 # }}}
 # blobs b {{{
@@ -72,7 +72,7 @@ recolor qr/shocking spheres?/ => "bblue";
 recolor qr/kittens?|(?:house|large )cats?/ => "bwhite";
 recolor qr/jaguars?/ => "brown";
 recolor qr/lynxes?/ => "cyan";
-recolor qr/panthers?/ => "gray";
+recolor qr/panthers?/ => "nhblack";
 recolor qr/tigers?(?! eye)/ => "yellow";
 # }}}
 # gremlins and gargoyles g {{{
@@ -125,7 +125,7 @@ recolor qr/hobgoblins?/ => "brown";
 recolor qr/(?<!hill |rdor )orcs?(?! zombie| mumm| shaman|-captain)\b/ => "red";
 recolor qr/hill orcs?/ => "yellow";
 recolor qr/Mordor orcs?/ => "blue";
-recolor qr/Uruk-hai/ => "gray";
+recolor qr/Uruk-hai/ => "nhblack";
 recolor qr/orc shamans?/ => "bblue";
 recolor qr/orc-captains?/ => "purple";
 # }}}
@@ -139,7 +139,7 @@ recolor qr/rothes?/ => "brown";
 recolor qr/mumaks?|titanotheres?|baluchitheri(?:um|a)/ => "gray";
 recolor qr/leocrottas?/ => "red";
 recolor qr/wumpus$es/ => "cyan";
-recolor qr/mastodons?/ => "gray";
+recolor qr/mastodons?/ => "nhblack";
 # }}}
 # rodents r {{{
 recolor qr/(?:sewer |rabid |giant |were)rats?/ => "brown";
@@ -159,7 +159,7 @@ recolor qr/trappers?/ => "green";
 # horses and unicorns u {{{
 recolor qr/white unicorns?/ => "white";
 recolor qr/gray unicorns?/ => "gray";
-recolor qr/black unicorns?/ => "gray";
+recolor qr/black unicorns?/ => "nhblack";
 recolor qr/pon$ies|(?:war)?horses?\b/ => "brown";
 # }}}
 # clouds and vortices v {{{
@@ -180,7 +180,7 @@ recolor qr/xans?/ => "red";
 # }}}
 # lights y {{{
 recolor qr/yellow lights?/ => "yellow";
-recolor qr/black lights?/ => "gray";
+recolor qr/black lights?/ => "nhblack";
 # }}}
 # zruties z {{{
 recolor qr/zruty$ies/ => "brown";
@@ -197,10 +197,10 @@ recolor qr/Archons?/ => "purple";
 # the following shouldnt match giant, vampire, and combat boots
 # but no-variable length negative lookaround so it might screw up. XXX
 each_iteration { s/giant bat(s?)/\e[31mgiant b\e[31mat$1\e[0m/g }
-recolor qr/vampire bats?/ => "gray";
-each_iteration { s/vampire bat(s?)/\e[34mvampire b\e[34mat$1\e[0m/g }
+recolor qr/vampire bats?/ => "nhblack";
+each_iteration { s/vampire bat(s?)/vampire b\e[B\e[Cmat$1/g }
 recolor qr/(?<!com)bats?\b/ => "brown";
-recolor qr/ravens?/ => "gray";
+recolor qr/ravens?/ => "nhblack";
 # }}}
 # centaurs C {{{
 recolor qr/plains centaurs?/ => "brown";
@@ -213,7 +213,7 @@ recolor qr/(?:baby )?silver dragons?(?! scale)/ => "bcyan";
 recolor qr/(?:baby )?red dragons?(?! scale)/ => "red";
 recolor qr/(?:baby )?white dragons?(?! scale)/ => "bwhite";
 recolor qr/(?:baby )?orange dragons?(?! scale)/ => "orange";
-recolor qr/(?:baby )?black dragons?(?! scale)/ => "blue";
+recolor qr/(?:baby )?black dragons?(?! scale)/ => "nhblack";
 recolor qr/(?:baby )?blue dragons?(?! scale)/ => "blue";
 recolor qr/(?:baby )?green dragons?(?! scale)/ => "green";
 recolor qr/(?:baby )?yellow dragons?(?! scale)/ => "yellow";
@@ -276,7 +276,7 @@ recolor qr/giant mumm$ies/ => "cyan";
 # }}}
 # nagas N {{{
 recolor qr/red nagas?(?: hatchlings?)?/ => "red";
-recolor qr/black nagas?(?: hatchlings?)?/ => "blue";
+recolor qr/black nagas?(?: hatchlings?)?/ => "nhblack";
 recolor qr/golden nagas?(?: hatchlings?)?/ => "yellow";
 recolor qr/guardian nagas?(?: hatchlings?)?/ => "green";
 # }}}
@@ -288,7 +288,7 @@ recolor qr/ogre kings?/ => "purple";
 # puddings and other amoeboids P {{{
 recolor qr/gray oozes?/ => "gray";
 recolor qr/brown puddings?/ => "brown";
-recolor qr/black puddings?/ => "blue";
+recolor qr/black puddings?/ => "nhblack";
 recolor qr/green slimes?/ => "green";
 # }}}
 # quantum mechanics Q {{{
@@ -322,7 +322,7 @@ recolor qr/Vlad the Impaler/ => "purple";
 # }}}
 # wraiths W {{{
 recolor qr/barrow wights?/ => "gray";
-recolor qr/wraiths?/ => "blue";
+recolor qr/wraiths?/ => "nhblack";
 recolor qr/Nazguls?/ => "purple"; # yes it's "9 Nazgul" but NetHack sucks!
 # }}}
 # xorns X {{{
@@ -330,7 +330,8 @@ recolor qr/xorns?/ => "brown";
 # }}}
 # apelike creatures Y {{{
 recolor qr/monkeys?|sasquatch$es/ => "gray";
-each_iteration { s/carnivorous ape(s?)/\e[34mcarnivorous a\e[34mpe$1\e[0m/g }
+recolor qr/carnivorous apes?/ => "nhblack";
+each_iteration { s/carnivorous ape(s?)/carnivorous a\e[C\e[Dmpe$1/g };
 recolor qr/(?<!s[ch])apes?\b|owlbears?/ => "brown";
 recolor qr/yetis?/ => "bwhite";
 # }}}
@@ -342,7 +343,7 @@ recolor qr/elf zombies?/ => "green";
 recolor qr/human zombies?/ => "bwhite";
 recolor qr/ettin zombies?/ => "blue";
 recolor qr/giant zombies?/ => "cyan";
-recolor qr/ghouls?/ => "blue";
+recolor qr/ghouls?/ => "nhblack";
 recolor qr/skeletons?(?! key)/ => "bwhite";
 
 # }}}
@@ -435,7 +436,7 @@ if ($chromatic_nemeses)
     recolor qr/${the}Master Assassin/    => "purple";
     recolor qr/Ashikaga Takauji/         => "purple";
     recolor qr/Lord Surtur/              => "purple";
-    recolor qr/${the}Dark One/           => "blue";
+    recolor qr/${the}Dark One/           => "nhblack";
 }
 else
 {
@@ -459,7 +460,7 @@ recolor qr/Pelias/                  => "purple";
 recolor qr/Shaman Karnov/           => "purple";
 recolor qr/Hippocrates/             => "purple";
 recolor qr/King Arthur/             => "purple";
-recolor qr/${the}Grand Master/      => "blue";
+recolor qr/${the}Grand Master/      => "nhblack";
 recolor qr/${the}Arch Priest/       => "white";
 recolor qr/Orion/                   => "purple";
 recolor qr/${the}Master of Thieves/ => "purple";
