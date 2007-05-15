@@ -171,8 +171,12 @@ recolor qr/You feel feverish./ => "red";
 recolor qr/You can't see in here./ => "red";
 recolor qr/Everything suddenly goes dark./ => "red";
 recolor qr/The world spins and goes dark./ => "red";
+recolor qr/It suddenly gets dark./ => "red";
 recolor qr/The [^.!\e]*? gaze confuses you./ => "red";
 recolor qr/The [^.!\e]*? blinds you./ => "red";
+# }}}
+# monster spells {{{
+recolor qr/You feel a malignant aura surround you./ => "red";
 # }}}
 # losing resists {{{
 recolor qr/You feel (?:warmer|a little sick|cooler|tired|conductive)./ => "red";
