@@ -1,6 +1,6 @@
 nick "Crassworm";
 $vikeys = 1;
-$chromatic_gods = 1;
+$chromatic_gods = 0;
 $chromatic_nemeses = 1;
 
 # plugins {{{
