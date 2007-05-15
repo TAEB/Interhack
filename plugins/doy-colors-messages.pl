@@ -65,7 +65,7 @@ recolor qr/Goodbye level \d+./ => "red";
 recolor qr/The [^.!\e]*? grabs you[^,]/ => "red";
 # }}}
 # pets {{{
-recolor qr/The .*? yowls!/ => "red";
+recolor qr/The [^.!\e]*? yowls!/ => "red";
 recolor qr/You have a (?:sad|peculiar) feeling for a moment, then it passes\./ => "red";
 # }}}
 # traps {{{
@@ -165,12 +165,14 @@ recolor qr/You are enveloped in a cloud of gas./ => "red";
 # }}}
 # negative status effects {{{
 recolor qr/Oh wow!  Great stuff!/ => "red";
-recolor qr/You reel.../ => "red";
+recolor qr/You (reel|stagger).../ => "red";
 recolor qr/You feel somewhat dizzy./ => "red";
 recolor qr/You feel feverish./ => "red";
 recolor qr/You can't see in here./ => "red";
 recolor qr/Everything suddenly goes dark./ => "red";
 recolor qr/The world spins and goes dark./ => "red";
+recolor qr/The [^.!\e]*? gaze confuses you./ => "red";
+recolor qr/The [^.!\e]*? blinds you./ => "red";
 # }}}
 # losing resists {{{
 recolor qr/You feel (?:warmer|a little sick|cooler|tired|conductive)./ => "red";
@@ -205,7 +207,7 @@ recolor qr/Your (?:limbs are getting oozy|skin begins to peel away)./ => "bred";
 recolor qr/You are turning into a green slime./ => "bred";
 recolor qr/You feel deathly sick./ => "bred";
 recolor qr/You feel (?:much|even) worse./ => "bred";
-recolor qr/The .*? swings itself around you!/ => "bred";
+recolor qr/The [^.!\e]*? swings itself around you!/ => "bred";
 recolor qr/Really quit\?/ => "bred";
 # }}}
 # }}}
