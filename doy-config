@@ -49,4 +49,5 @@ autoadjust $aa_trice       => "^y";
 # }}}
 # mappings {{{
 remap chr(5) => "E-  Elbereth\n";
+remap chr(23) => "aqny ";
 # }}}
