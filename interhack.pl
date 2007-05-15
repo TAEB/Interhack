@@ -4,6 +4,7 @@ use lib 'lib';
 use Term::ReadKey;
 use LWP::Simple;
 use File::Temp qw/tempfile/;
+use Term::VT102;
 
 # check arguments for a nick to autologin {{{
 our $autologin = 1;
@@ -347,6 +348,8 @@ die $@ if $@;
 
 use Interhack::Sock;
 my $sock = Interhack::Sock::sock($server, $port);
+
+our $vt = Term::VT102->new(cols => 80, rows => 24);
 # }}}
 # autologin {{{
 if ($autologin && $server !~ /noway\.ratry/)
@@ -457,6 +460,8 @@ while (1)
   next ITER
     unless defined(recv($sock, $_, 4096, 0));
   last if length == 0;
+
+  $vt->process($_);
 
   if (/ \e \[? [0-9;]* \z /x || m/  [^]* \z /x)
   {
