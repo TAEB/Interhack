@@ -40,7 +40,7 @@ recolor qr/giant ants?/ => "brown";
 recolor qr/killer bees?/ => "yellow";
 recolor qr/soldier ants?/ => "blue";
 recolor qr/fire ants?/ => "red";
-recolor qr/giant beetles?/ => "gray";
+recolor qr/giant beetles?/ => "blue";
 recolor qr/queen bees?/ => "purple";
 # }}}
 # blobs b {{{
