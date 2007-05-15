@@ -264,6 +264,29 @@ sub tab # {{{
   annotate("Press tab to send the string: $display");
 } # }}}
 
+sub alphakeys # {{{
+{
+    my $num = shift;
+    if ($num < 0)
+    {
+        for (my $i = -1; abs($i) <= @lastkeys; --$i)
+        {
+            local $_ = $lastkeys[$i];
+            next unless /\w/;
+            return $_ if ++$num >= 0;
+        }
+    }
+    else
+    {
+        for (@lastkeys)
+        {
+            next unless /\w/;
+            return $_ if --$num < 0;
+        }
+    }
+
+    return;
+} # }}}
 sub recolor # {{{
 {
     my $matching = shift;
