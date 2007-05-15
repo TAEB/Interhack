@@ -123,6 +123,7 @@ recolor qr/\bc(?:o|hi)ckatrice (?:corpse|egg)s?\b/ => $ec_trice || $ec_goody || 
 recolor qr/\beggs? named cockatrice\b/ => $ec_trice || $ec_goody || "magenta" unless $ece_trice;
 recolor qr/\blizard corpses?\b/ => $ec_lizard || $ec_goody || "magenta" unless $ece_lizard;
 recolor qr/\bstethoscope\b/ => $ec_scope || $ec_goody || "magenta" unless $ece_scope;
+recolor qr/\bwraith corpses?\b/ => $ec_wraith || $ec_goody || "magenta" unless $ece_wraith;
 }
 # instruments {{{
 if (!$ece_instrument)
