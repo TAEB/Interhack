@@ -68,6 +68,8 @@ our %price_table =
           },
 );
 
+our $tourist;
+
 sub calc_base
 {
     my $charisma = shift;
@@ -184,3 +186,10 @@ make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:bless
              }
          };
 
+each_iteration
+{
+    $tourist = 1 if /\e\[HAloha \w+, welcome to NetHack!  You are a \w+ \w+ \w+ Tourist\./;
+    $tourist = 0 if $level > 15;
+}
+
+extended_command "shirt" => sub { "You are now marked as a " . (($tourist = !$tourist) ? "" : "non-") . "tourist." }
