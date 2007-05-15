@@ -198,7 +198,7 @@ recolor qr/Archons?/ => "purple";
 # but no-variable length negative lookaround so it might screw up. XXX
 each_iteration { s/giant bat(s?)/\e[31mgiant b\e[31mat$1\e[0m/g }
 recolor qr/vampire bats?/ => "nhblack";
-each_iteration { s/vampire bat(s?)/vampire b\e[B\e[Cmat$1/g }
+each_iteration { s/vampire bat(s?)/vampire b\e[C\e[Dmat$1/g }
 recolor qr/(?<!com)bats?\b/ => "brown";
 recolor qr/ravens?/ => "nhblack";
 # }}}
