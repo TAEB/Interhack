@@ -68,8 +68,8 @@ our %price_table =
           },
 );
 
-our $tourist;
-my $shirt;
+our $tourist = 0;
+our $shirt = 0;
 
 sub calc_base
 {
@@ -106,7 +106,7 @@ sub calc_base
       $amount = 1;
     }
 
-    $amount -= $amount / 4 if $tourist;
+    $amount -= $amount / 4 if ($tourist && $level <= 15) || $shirt;
     $amount = 0 if $amount == 5;
 
     $amount_sur = $amount - $amount / 4;
@@ -190,7 +190,8 @@ make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:bless
 each_iteration
 {
     $tourist = 1 if /\e\[HAloha \w+, welcome to NetHack!  You are a \w+ \w+ \w+ Tourist\./;
-    $tourist = 0 if $level > 15 and !$shirt;
+    $tourist = 1 if /\e\[HAloha \w+, the \w+ Tourist, welcome back to NetHack!/;
 }
 
-extended_command "shirt" => sub { $shirt = !$shirt; "You are now marked as a " . (($tourist = $shirt) ? "" : "non-") . "tourist." }
+extended_command "shirt" => sub { $shirt = !$shirt; "You are now marked as " . ($shirt ? "" : "not ") . " wearing a visible shirt." }
+
