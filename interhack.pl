@@ -533,7 +533,7 @@ while (1)
 
   foreach my $map (@configmap, @colormap)
   {
-    $map->();
+    eval { $map->() }
   }
 
   print;
