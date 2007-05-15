@@ -61,6 +61,7 @@ for (qw/frontier townsquare alley college grotto bustling bazaar
         asmodeus baalzebub juiblex orcus
         wiztop wizmid wizbot
         vladtop vladmid vladbot
+        fakewiz
         earth air fire astral
        /, map {("${_}home", "${_}loc", "${_}goal")}
           qw/arc bar cav hea kni mon pri ran rog sam tou val wiz/)
