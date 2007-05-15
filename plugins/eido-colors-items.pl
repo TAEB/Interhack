@@ -221,7 +221,7 @@ if (!$ece_enchantment)
 recolor qr/(?<=named )e(?:mpty)?\b/ => $ec_empty || "darkgray" unless $ece_empty;
 # }}}
 # item in use {{{
-recolor qr/(?<=\()lit(?=\))/ => $ec_lit || "yellow" unless $ece_lit;
+recolor qr/(?<=\()(?:\d candles, )lit(?=\))/ => $ec_lit || "yellow" unless $ece_lit;
 # equipment (originally by Stabwound) {{{
 if (!$ece_wielded)
 {
