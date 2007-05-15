@@ -62,7 +62,7 @@ recolor qr/You feel a mild buzz./ => "bblue";
 # dangerous messages {{{
 # attack effects {{{
 recolor qr/Goodbye level \d+./ => "red";
-recolor qr/The [^.!\e]*? grabs you./ => "red";
+recolor qr/The [^.!\e]*? grabs you[^,]/ => "red";
 # }}}
 # pets {{{
 recolor qr/The .*? yowls!/ => "red";
