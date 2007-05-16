@@ -167,6 +167,14 @@ sub each_iteration(&;$) # {{{
 {
     push @configmap, shift;
 } # }}}
+sub each_match # {{{
+{
+    my $regex = shift;
+    my $code = shift;
+    my @args = @_;
+
+    push @configmap, sub { if ($_ =~ $regex) { $code->(@args) } };
+} # }}}
 sub extended_command # {{{
 {
     my ($cmd, $result) = @_;
