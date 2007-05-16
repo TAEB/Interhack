@@ -1,75 +1,51 @@
-# avoids adding stats to botl to make room for other more important things
-# stats are still available through new #stats ext-cmd
+# parse all kinds of info about your character (score, stats, align, etc) so
+# that other modules have access to this information
+# also clears the penultimate line to allow for other information to be placed
+# there
 # by Eidolos and doy
 
-our $stats = '';
-our @stats = ();
-my $char = '';
-my $align = '';
-my $score = '';
-my @stat_pos = ();
-my $score_pos = '';
+our $st = 0;
+our $dx = 0;
+our $co = 0;
+our $in = 0;
+our $wi = 0;
+our $ch = 0;
+our $name = '';
+our $align = '';
+our $sex = '';
+our $race = '';
+our $role = '';
+
+our $statusline = sub { "S:$score" };
+
+my %races = ('dwarven' => 'dwarf',
+             'elven'   => 'elf',
+             'human'   => 'human',
+             'orcish'  => 'orc'
+);
 
 extended_command "#stats"
-              => sub { $stats };
+    => sub { "St:$st Dx:$dx Co:$co In:$in Wi:$wi Ch:$ch" };
+extended_command "#score"
+    => sub { "S:$score" };
+extended_command "#char"
+    => sub { sprintf "%s: %s%s%s%s", $name,
+                                     $role  ? "$role "  : "",
+                                     $race  ? "$race "  : "",
+                                     $sex   ? "$sex "   : "",
+                                     $align ? "$align " : "" };
 
 each_iteration
-{ eval {
-  my $s = qr/(?:\s|\e\[C)/;
-  my $st_char = qr#[\d\*/]#;
-  s{\e\[23;(\d+)H((.*?)$s*)(St:($st_char+) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+))($s+(\w+)$s+)S:(\d+)}{
-    my $stat_start = length($2) + $1 - 1;
-    $char = $3;
-    $stats = $4;
-    @stats = ($5, $6, $7, $8, $9, ${10});
-    $stat_pos[0] = $stat_start + 3;
-    for my $i (1..5) {
-      $stat_pos[$i] = $stat_pos[$i - 1] + length($stats[$i - 1]) + 4;
-    }
-    $score_pos = $stat_start + length($stats) + length(${11}) + 2;
-    $align = ${12};
-    $score = ${13};
-    "\e[23;1H\e[0mS:$score\e[K"
-  }eg;
+{
+    ($name, $align, $sex, $race, $role) = ($1, $2, $3, $races{$4}, lc $5) if $vt->row_plaintext(1) =~ /\w+ (\w+), welcome to NetHack! You are a (\w+) (\w+) (\w+) (\w+)\./;
+    ($name, $race, $role) = ($1, $races{$2}, lc $3) if $vt->row_plaintext(1) =~ /\w+ (\w+), the (\w+) (\w+), welcome back to NetHack!/;
 
-  s{\e\[23;(?!1H)(\d+)H((?:$st_char|\e\[C)+)(\e\[K)?}{
-    my $update_pos = $1;
-    my @updates = split /\e\[C/, $2;
-    my $clr_to_end = $3;
-    for my $i (0..4) {
-      if ($update_pos >= $stat_pos[$i] && $update_pos < $stat_pos[$i + 1]) {
-        for my $update (@updates) {
-          my $start = $update_pos - $stat_pos[$i] - 1;
-          substr($stats[$i], $start, length($update), $update);
-          $update_pos += length($update) + 1;
-        }
-        $update_pos--;
-        $stats[$i] = substr($stats[$i], 0, $update_pos - $stat_pos[$i] - 1)
-          if $clr_to_end;
-      }
-    }
-    if ($update_pos >= $stat_pos[5] && $update_pos < $score_pos) {
-      for my $update (@updates) {
-        my $start = $update_pos - $stat_pos[5] - 1;
-        substr($stats[5], $start, length($update), $update);
-        $update_pos += length($update) + 1;
-      }
-      $update_pos--;
-      $stats[5] = substr($stats[5], 0, $update_pos - $stat_pos[5] - 1)
-        if $clr_to_end;
-    }
-    elsif ($update_pos >= $score_pos) {
-      for my $update (@updates) {
-        my $start = $update_pos - $score_pos - 1;
-        substr($score, $start, length($update), $update);
-        $update_pos += length($update) + 1;
-      }
-      $update_pos--;
-      $score = substr($score, 0, $update_pos - $score_pos - 1)
-        if $clr_to_end;
-    }
-    $stats = "St:$stats[0] Dx:$stats[1] Co:$stats[2] In:$stats[3] Wi:$stats[4] Ch:$stats[5]";
-    "\e[23;1H\e[0mS:$score\e[K"
-  }eg;
-} }
+    return unless /\e\[23(?:;\d+)?H/;
 
+    my @groups = $vt->row_plaintext(23) =~ /St:(\d+(?:\/(?:\*\*|\d+))?) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+)\s*(\w+)\s*S:(\d+)/;
+    return if @groups == 0;
+    ($st, $dx, $co, $in, $wi, $ch, $align, $score) = @groups;
+
+    my $sl = $statusline->();
+    $postprint .= "\e[s\e[23;1H\e[0m$sl\e[K\e[u";
+}
