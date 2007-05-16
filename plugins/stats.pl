@@ -18,10 +18,36 @@ our $role = '';
 
 our $statusline = sub { "S:$score" };
 
+my %aligns = (lawful  => 'Law',
+              neutral => 'Neu',
+              chaotic => 'Cha',
+);
+
+my %sexes = (male   => 'Mal',
+             female => 'Fem',
+);
+
 my %races = ('dwarven' => 'dwarf',
              'elven'   => 'elf',
              'human'   => 'human',
-             'orcish'  => 'orc'
+             'orcish'  => 'orc',
+);
+
+my %roles = (Archeologist => 'Arc',
+             Barbarian    => 'Bar',
+             Caveman      => 'Cav',
+             Cavewoman    => 'Cav',
+             Healer       => 'Hea',
+             Knight       => 'Kni',
+             Monk         => 'Mon',
+             Priest       => 'Pri',
+             Priestess    => 'Pri',
+             Rogue        => 'Rog',
+             Ranger       => 'Ran',
+             Samurai      => 'Sam',
+             Tourist      => 'Tou',
+             Valkyrie     => 'Val',
+             Wizard       => 'Wiz',
 );
 
 extended_command "#stats"
@@ -30,16 +56,28 @@ extended_command "#score"
     => sub { "S:$score" };
 extended_command "#char"
     => sub { sprintf "%s: %s%s%s%s", $name,
-                                     $role  ? "$role "  : "",
-                                     $race  ? "$race "  : "",
-                                     $sex   ? "$sex "   : "",
-                                     $align ? "$align " : "" };
+                                     $role  ? "$role "  : "unk-role",
+                                     $race  ? "$race "  : "unk-race",
+                                     $sex   ? "$sex "   : "unk-sex",
+                                     $align ? "$align " : "unk-align" };
 
+# figure out role, race, gender, align
 each_iteration
 {
-    ($name, $align, $sex, $race, $role) = ($1, $2, $3, $races{$4}, lc $5) if $vt->row_plaintext(1) =~ /\w+ (\w+), welcome to NetHack! You are a (\w+) (\w+) (\w+) (\w+)\./;
-    ($name, $race, $role) = ($1, $races{$2}, lc $3) if $vt->row_plaintext(1) =~ /\w+ (\w+), the (\w+) (\w+), welcome back to NetHack!/;
+    if ($vt->row_plaintext(1) =~ /\w+ (\w+), welcome to NetHack! You are a (\w+) (\w+) (\w+)(?: (\w+))?\./)
+    {
+        if (!defined($5)) { $sex = "Fem" }
+        else              { $sex = $genders{$3} }
 
+        ($name, $align, $race, $role) = ($1, $aligns{$2}, $races{$4}, $roles{$5})
+    }
+
+    ($name, $race, $role) = ($1, $races{$2}, $roles{$3}) if $vt->row_plaintext(1) =~ /\w+ (\w+), the (\w+) (\w+), welcome back to NetHack!/;
+}
+
+# figure out stats (strength, score, etc)
+each_iteration
+{
     return unless /\e\[23(?:;\d+)?H/;
 
     my @groups = $vt->row_plaintext(23) =~ /St:(\d+(?:\/(?:\*\*|\d+))?) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+)\s*(\w+)\s*S:(\d+)/;
