@@ -517,8 +517,9 @@ while (1)
       my $frame = $ttp->next_frame();
       select undef, undef, undef, $frame->{diff};
       $_ = $frame->{data};
-      $anno_frames-- unless $anno_frames == 0;
   }
+
+  $anno_frames-- unless $anno_frames == 0;
 
   $vt->process($_);
 
