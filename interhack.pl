@@ -5,36 +5,17 @@ use Term::ReadKey;
 use LWP::Simple;
 use File::Temp qw/tempfile/;
 use Term::VT102;
-
-# check arguments for a nick to autologin {{{
-our $autologin = 1;
-our $arg_nick = '';
-
-if (@ARGV)
-{
-  for (<$ENV{HOME}/.interhack/passwords/*>)
-  {
-    local ($_) = m{.*/(\w+)};
-    if (index($_, $ARGV[0]) > -1)
-    {
-      if ($arg_nick ne '')
-      {
-        die "Ambiguous login name given: $arg_nick, $_";
-      }
-      else
-      {
-        $arg_nick = $_;
-      }
-    }
-  }
-}
-# }}}
+use Term::TtyRec::Plus;
 
 # globals {{{
-our $nick = $arg_nick;
+our $nick = '';
 our $pass = '';
 our $server = 'nethack.alt.org';
 our $port = 23;
+our $autologin = 1;
+our $ttp;
+our $ttyrec;
+our $paused = 0;
 our %keymap;
 our @key_queue;
 our @lastkeys;
@@ -341,13 +322,48 @@ sub serialize_time # {{{
 } # }}}
 # }}}
 
+# check for ttyrec passed in {{{
+if (@ARGV == 1 && $ARGV[0] =~ /\.ttyrec$/)
+{
+    $ttyrec = shift;
+    $autologin = 0;
+    $in_game = 1;
+    $ttp = Term::TtyRec::Plus->new(infile => $ttyrec, time_threshold => 10);
+}
+# }}}
+# check arguments for a nick to autologin {{{
+if (@ARGV)
+{
+  $nick = '';
+  for (<$ENV{HOME}/.interhack/passwords/*>)
+  {
+    local ($_) = m{.*/(\w+)};
+    if (index($_, $ARGV[0]) > -1)
+    {
+      if ($nick ne '')
+      {
+        die "Ambiguous login name given: $nick, $_";
+      }
+      else
+      {
+        $nick = $_;
+      }
+    }
+  }
+}
+# }}}
+
 # read config, get a socket {{{
 do "$ENV{HOME}/.interhack/config"
     if -e "$ENV{HOME}/.interhack/config";
 die $@ if $@;
 
-use Interhack::Sock;
-my $sock = Interhack::Sock::sock($server, $port);
+our $sock;
+if (!defined($ttyrec))
+{
+    use Interhack::Sock;
+    $sock = Interhack::Sock::sock($server, $port);
+}
 
 our $vt = Term::VT102->new(cols => 80, rows => 24);
 # }}}
@@ -355,7 +371,6 @@ our $vt = Term::VT102->new(cols => 80, rows => 24);
 if ($autologin && $server !~ /noway\.ratry/)
 {
   $nick = value_of($nick);
-  $nick = $arg_nick if $arg_nick ne '';
   $pass = value_of($pass);
   print {$sock} "l$nick\n";
 
@@ -372,7 +387,7 @@ if ($autologin && $server !~ /noway\.ratry/)
 } # }}}
 # get ready to start accepting keypresses {{{
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
-if ($server =~ /alt\.org/)
+if (!defined($ttyrec) && $server =~ /alt\.org/)
 {
   until (defined(recv($sock, $_, 4096, 0)) && /zaphod\.alt\.org/) {}
 }
@@ -387,79 +402,115 @@ while (1)
 {
   my $c;
   # read from stdin, print to sock {{{
-  if (@key_queue)
+  if (defined($ttyrec))
   {
-    $c = shift @key_queue;
-  }
-  else
-  {
-    $c = ReadKey .05;
-    ($resting, @key_queue) = 0
-      if defined $c;
-  }
-
-  if (defined $c)
-  {
-    if ($c eq "p" && $logged_in) { $in_game = 1 }
-    if ($c eq "\t" && $at_login && $logged_in)
-    {
-      print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
-      my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
-      my ($fh, $name) = tempfile();
-      print {$fh} $nethackrc;
-      close $fh;
-      my $t = (stat $name)[9];
-      $ENV{EDITOR} = 'vi' unless exists $ENV{EDITOR};
-      system("$ENV{EDITOR} $name");
-
-      # file wasn't modified, so silently bail
-      if ($t == (stat $name)[9])
+      if ($paused)
       {
-        print {$sock} ' ';
-        next ITER;
-      }
-
-      $nethackrc = do { local (@ARGV, $/) = $name; <> };
-      if ($nethackrc eq '')
-      {
-        print "\e[24H\e[1;30mYour nethackrc came out empty, so I'm bailing.--More--\e[0m";
-        ReadKey 0;
+          $c = ReadKey 0;
       }
       else
       {
-        print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.\e[0m";
-        chomp $nethackrc;
-        print {$sock} "o:0\n1000ddi";
-        print {$sock} "$nethackrc\eg";
-        until (defined(recv($sock, $_, 1024, 0)) && /\e\[.*?'g' is not implemented/) {}
-        print {$sock} ":wq\n";
+          $c = ReadKey -1;
       }
-    }
+      if (defined($c))
+      {
+          if ($c eq 'p')
+          {
+              $paused = !$paused;
+              next ITER;
+          }
+          elsif ($c eq 'q')
+          {
+              last ITER;
+          }
+      }
+  }
+  else
+  {
+      if (@key_queue)
+      {
+          $c = shift @key_queue;
+      }
+      else
+      {
+          $c = ReadKey .05;
+          ($resting, @key_queue) = 0
+              if defined $c;
+      }
 
-    if ($tab ne "\t")
-    {
-      $c = $tab if $c eq "\t";
-      $tab = "\t";
-    }
-    elsif (exists $keymap{$c})
-    {
-      $c = value_of($keymap{$c}, $c);
-    }
+      if (defined $c)
+      {
+          if ($c eq "p" && $logged_in) { $in_game = 1 }
+          if ($c eq "\t" && $at_login && $logged_in)
+          {
+          print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
+          my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
+          my ($fh, $name) = tempfile();
+          print {$fh} $nethackrc;
+          close $fh;
+          my $t = (stat $name)[9];
+          $ENV{EDITOR} = 'vi' unless exists $ENV{EDITOR};
+          system("$ENV{EDITOR} $name");
 
-    $keystrokes += length $c;
+          # file wasn't modified, so silently bail
+          if ($t == (stat $name)[9])
+          {
+              print {$sock} ' ';
+              next ITER;
+          }
 
-    push @lastkeys => split //, $c;
-    shift @lastkeys if defined($lastkeysmaxlen) && @lastkeys > $lastkeysmaxlen;
+          $nethackrc = do { local (@ARGV, $/) = $name; <> };
+          if ($nethackrc eq '')
+          {
+              print "\e[24H\e[1;30mYour nethackrc came out empty, so I'm bailing.--More--\e[0m";
+              ReadKey 0;
+          }
+          else
+          {
+              print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.\e[0m";
+              chomp $nethackrc;
+              print {$sock} "o:0\n1000ddi";
+              print {$sock} "$nethackrc\eg";
+              until (defined(recv($sock, $_, 1024, 0)) && /\e\[.*?'g' is not implemented/) {}
+              print {$sock} ":wq\n";
+          }
+          }
 
-    print {$sock} $c;
-    print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
-    $at_login = 0;
-    $annotation_onscreen = 0;
+          if ($tab ne "\t")
+          {
+          $c = $tab if $c eq "\t";
+          $tab = "\t";
+          }
+          elsif (exists $keymap{$c})
+          {
+          $c = value_of($keymap{$c}, $c);
+          }
+
+          $keystrokes += length $c;
+
+          push @lastkeys => split //, $c;
+          shift @lastkeys if defined($lastkeysmaxlen) && @lastkeys > $lastkeysmaxlen;
+
+          print {$sock} $c;
+          print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
+          $at_login = 0;
+          $annotation_onscreen = 0;
+      }
   } # }}}
   # read from sock, print to stdout {{{
-  next ITER
-    unless defined(recv($sock, $_, 4096, 0));
-  last if length == 0;
+
+  if (!defined($ttyrec))
+  {
+      next ITER
+          unless defined(recv($sock, $_, 4096, 0));
+      last if length == 0;
+  }
+  else
+  {
+      my $frame = $ttp->next_frame();
+      select undef, undef, undef, $frame->{diff};
+      $_ = $frame->{data};
+  }
 
   $vt->process($_);
 
