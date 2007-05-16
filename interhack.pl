@@ -91,6 +91,7 @@ our $postprint = '';
 our $annotation_onscreen = 0;
 our $stop_sing_pass = 0;
 our $keystrokes = 0;
+our %intrinsics;
 our $in_game = 0;
 our $buf = '';
 our $resting = 0;
