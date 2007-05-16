@@ -1,6 +1,6 @@
 # adds a new extended command #read which tells you the odds of successfully
 # reading spellbooks of different levels
-# DEPENDS ON: exp_2nl (for $level), no_stats (for $stats)
+# DEPENDS ON: exp_2nl (for $level), stats (for $in)
 # by Eidolos
 
 sub _calc_read_chance
@@ -24,7 +24,6 @@ sub calc_read_chances
 extended_command "#read"
               => sub
                  {
-                   my ($int) = $stats =~ /In:(\d+)/;
-                   calc_read_chances($int, $level, undef);
+                   calc_read_chances($in, $level, undef);
                  };
 
