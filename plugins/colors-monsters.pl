@@ -9,7 +9,7 @@ my $us = qr/us|i/;
 my $es = qr/(?:es)?/;
 my $ies = qr/y|ies/;
 my $ex = qr/ex|ices/;
-my $esses = qr/s?|esses?/;
+my $esses = qr/esses?|s?/;
 # }}}
 
 # chromatic stuff {{{
