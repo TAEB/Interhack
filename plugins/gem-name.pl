@@ -15,4 +15,4 @@ make_tab qr/\e\[HYou write in the dust with (?:an?|\d+) ([\w ]+) gems?(?: \(unpa
 make_tab qr/\e\[HYou engrave in the floor with (?:an?|\d+) ([\w ]+) gems?(?: \(unpaid, \d+ zorkmids?\))?\./ => sub{my $name = exists($hardgems{$1}) ? $hardgems{$1} : "hard $1"; " \e#name\nn$lastkeys[-1]$name\n"};
 
 # adds "scritch scritch" sensing (useless? XXX)
-make_tab qr/\e\[H"scritch, scritch"/ => sub{my $key = alphakeys(-1); " \e#name\nn${key}touchstone\n"};
+make_tab qr/\e\[H"scritch, scritch"/ => sub{my $key = alphakeys(-2); " \e#name\nn${key}touchstone\n"};
