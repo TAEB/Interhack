@@ -332,7 +332,7 @@ recolor qr/xorns?/ => "brown";
 recolor qr/monkeys?|sasquatch$es/ => "gray";
 recolor qr/carnivorous apes?/ => "nhblack";
 each_iteration { s/carnivorous ape(s?)/carnivorous a\e[C\e[Dmpe$1/g };
-recolor qr/(?<!s[ch])apes?\b|owlbears?/ => "brown";
+recolor qr/(?<![s ][ch])apes?\b|owlbears?/ => "brown";
 recolor qr/yetis?/ => "bwhite";
 # }}}
 # zombies Z {{{
