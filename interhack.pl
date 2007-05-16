@@ -519,11 +519,12 @@ while (1)
   {
       next ITER
           unless defined(recv($sock, $_, 4096, 0));
-      last if length == 0;
+      last ITER if length == 0;
   }
   else
   {
       my $frame = $ttp->next_frame();
+      last ITER if !defined($frame);
       select undef, undef, undef, $frame->{diff};
       $_ = $frame->{data};
   }
