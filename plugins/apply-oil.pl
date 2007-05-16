@@ -3,6 +3,6 @@
 # it really should only match once per potion appearance
 # by Eidolos
 
-make_tab qr/\e\[H(.) - (?:an?|\d+)? (?:blessed |uncursed |cursed )?(?!clear)([\w ]+) potions?\./
+make_tab qr/\e\[H(.) - (?:an?|\d+)? (?:blessed |uncursed |cursed )?(?!clear)([\w -]+) potions?\./
       => sub { "a$1#name\nn$1$2 !oil\n" };
 
