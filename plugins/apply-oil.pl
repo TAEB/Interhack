@@ -4,5 +4,5 @@
 # by Eidolos
 
 make_tab qr/\e\[H(.) - (?:an?|\d+)? (?:blessed |uncursed |cursed )?(?!clear)([\w -]+) potions?\./
-      => sub { "a$1#name\nn$1$2 !oil\n" };
+      => sub { "\ea$1#name\nn$1$2 !oil\n" };
 
