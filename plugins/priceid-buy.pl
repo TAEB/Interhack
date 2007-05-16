@@ -141,7 +141,7 @@ make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:bless
              }
              $existing = " $existing" if $existing ne '';
 
-             my ($price1, $price2) = calc_base($stats[5], $cost);
+             my ($price1, $price2) = calc_base($ch, $cost);
 
              for ($price1, map {$price1 - $_, $price1 + $_} 1..5)
              {
