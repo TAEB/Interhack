@@ -436,7 +436,7 @@ while (1)
       else
       {
           $c = ReadKey .05;
-          ($resting, @key_queue) = 0
+          ($resting, $anno_frames, @key_queue) = (0, 0)
               if defined $c;
       }
 
