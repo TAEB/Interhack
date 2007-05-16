@@ -253,7 +253,7 @@ if (!$ece_useless)
     recolor qr/potions? called \w+ 150(?!\/)/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions; # only exception is gain energy and it's ok if we lose that one
 # }}}
 # rings {{{
-    recolor qr/ring (?:of|called) (?:adornment|hunger|protection(?: from shape changers)?|stealth|sustain ability|warning|aggravate monster|\w+ resistance|gain \w+|increase \w+|invisibility|see invisible|searching|polymorph(?: control)?)\b/ => $ec_useless_rings || $ec_useless || "darkgray" unless $ece_useless_rings;
+    recolor qr/ring (?:of|called) (?:adornment|hunger|protection(?: from shape changers)?|stealth|sustain ability|warning|aggravate monster|\w+ resistance|gain \w+|increase \w+|see invisible|searching|polymorph(?: control)?)\b/ => $ec_useless_rings || $ec_useless || "darkgray" unless $ece_useless_rings;
 # }}}
 # wands {{{
     recolor qr/wand (?:called|of) (?:light|nothing|locking|make invisible|opening|probing|secret door detection|\w+ monster|undead turning|create monster)\b/ => $ec_useless_wands || $ec_useless || "darkgray" unless $ece_useless_wands;
