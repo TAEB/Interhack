@@ -105,7 +105,7 @@ sub calc_base
       $amount = 1;
     }
 
-    $amount -= $amount / 4 if ($char eq 'tourist' && $level <= 15) || $shirt;
+    $amount -= $amount / 4 if ($role eq 'Tou' && $level <= 15) || $shirt;
     $amount = 0 if $amount == 5;
 
     $amount_sur = $amount - $amount / 4;
