@@ -183,7 +183,7 @@ recolor qr/yellow lights?/ => "yellow";
 recolor qr/black lights?/ => "nhblack";
 # }}}
 # zruties z {{{
-recolor qr/zruty$ies/ => "brown";
+recolor qr/zrut$ies/ => "brown";
 # }}}
 
 # angelic beings A {{{
