@@ -324,6 +324,20 @@ sub serialize_time # {{{
 } # }}}
 # }}}
 
+# read config, get a socket {{{
+do "$ENV{HOME}/.interhack/config"
+    if -e "$ENV{HOME}/.interhack/config";
+die $@ if $@;
+
+our $sock;
+if (!defined($ttyrec))
+{
+    use Interhack::Sock;
+    $sock = Interhack::Sock::sock($server, $port);
+}
+
+our $vt = Term::VT102->new(cols => 80, rows => 24);
+# }}}
 # check for ttyrec passed in {{{
 if (@ARGV == 1 && $ARGV[0] =~ /\.ttyrec$/)
 {
@@ -355,20 +369,6 @@ if (@ARGV)
 }
 # }}}
 
-# read config, get a socket {{{
-do "$ENV{HOME}/.interhack/config"
-    if -e "$ENV{HOME}/.interhack/config";
-die $@ if $@;
-
-our $sock;
-if (!defined($ttyrec))
-{
-    use Interhack::Sock;
-    $sock = Interhack::Sock::sock($server, $port);
-}
-
-our $vt = Term::VT102->new(cols => 80, rows => 24);
-# }}}
 # autologin {{{
 if ($autologin && $server !~ /noway\.ratry/)
 {
