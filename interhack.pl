@@ -16,6 +16,7 @@ our $autologin = 1;
 our $ttp;
 our $ttyrec;
 our $paused = 0;
+our $anno_frames = 0;
 our %keymap;
 our @key_queue;
 our @lastkeys;
@@ -213,6 +214,7 @@ sub annotate # {{{
   my $annotation = value_of(shift);
   return if $annotation eq '';
   $annotation_onscreen = 1;
+  $anno_frames = 5;
   $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
 } # }}}
 
@@ -443,47 +445,47 @@ while (1)
           if ($c eq "p" && $logged_in) { $in_game = 1 }
           if ($c eq "\t" && $at_login && $logged_in)
           {
-          print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
-          my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
-          my ($fh, $name) = tempfile();
-          print {$fh} $nethackrc;
-          close $fh;
-          my $t = (stat $name)[9];
-          $ENV{EDITOR} = 'vi' unless exists $ENV{EDITOR};
-          system("$ENV{EDITOR} $name");
+            print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
+            my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
+            my ($fh, $name) = tempfile();
+            print {$fh} $nethackrc;
+            close $fh;
+            my $t = (stat $name)[9];
+            $ENV{EDITOR} = 'vi' unless exists $ENV{EDITOR};
+            system("$ENV{EDITOR} $name");
 
-          # file wasn't modified, so silently bail
-          if ($t == (stat $name)[9])
-          {
-              print {$sock} ' ';
-              next ITER;
-          }
+            # file wasn't modified, so silently bail
+            if ($t == (stat $name)[9])
+            {
+                print {$sock} ' ';
+                next ITER;
+            }
 
-          $nethackrc = do { local (@ARGV, $/) = $name; <> };
-          if ($nethackrc eq '')
-          {
-              print "\e[24H\e[1;30mYour nethackrc came out empty, so I'm bailing.--More--\e[0m";
-              ReadKey 0;
-          }
-          else
-          {
-              print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.\e[0m";
-              chomp $nethackrc;
-              print {$sock} "o:0\n1000ddi";
-              print {$sock} "$nethackrc\eg";
-              until (defined(recv($sock, $_, 1024, 0)) && /\e\[.*?'g' is not implemented/) {}
-              print {$sock} ":wq\n";
-          }
+            $nethackrc = do { local (@ARGV, $/) = $name; <> };
+            if ($nethackrc eq '')
+            {
+                print "\e[24H\e[1;30mYour nethackrc came out empty, so I'm bailing.--More--\e[0m";
+                ReadKey 0;
+            }
+            else
+            {
+                print "\e[24H\e[1;30mPlease wait while I update the serverside rcfile.\e[0m";
+                chomp $nethackrc;
+                print {$sock} "o:0\n1000ddi";
+                print {$sock} "$nethackrc\eg";
+                until (defined(recv($sock, $_, 1024, 0)) && /\e\[.*?'g' is not implemented/) {}
+                print {$sock} ":wq\n";
+            }
           }
 
           if ($tab ne "\t")
           {
-          $c = $tab if $c eq "\t";
-          $tab = "\t";
+            $c = $tab if $c eq "\t";
+            $tab = "\t";
           }
           elsif (exists $keymap{$c})
           {
-          $c = value_of($keymap{$c}, $c);
+            $c = value_of($keymap{$c}, $c);
           }
 
           $keystrokes += length $c;
@@ -492,11 +494,16 @@ while (1)
           shift @lastkeys if defined($lastkeysmaxlen) && @lastkeys > $lastkeysmaxlen;
 
           print {$sock} $c;
-          print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
           $at_login = 0;
-          $annotation_onscreen = 0;
       }
-  } # }}}
+  }
+
+  if ($anno_frames <= 0)
+  {
+      print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
+      $annotation_onscreen = 0;
+  }
+# }}}
   # read from sock, print to stdout {{{
 
   if (!defined($ttyrec))
@@ -510,6 +517,7 @@ while (1)
       my $frame = $ttp->next_frame();
       select undef, undef, undef, $frame->{diff};
       $_ = $frame->{data};
+      $anno_frames-- unless $anno_frames == 0;
   }
 
   $vt->process($_);
