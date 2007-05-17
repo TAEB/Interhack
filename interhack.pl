@@ -227,6 +227,27 @@ sub annotate # {{{
   $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
 } # }}}
 
+sub each_match # {{{
+{
+    my ($matching, $action) = @_;
+    if (!ref($matching))
+    {
+        push @configmap, sub { if (index($_, $matching) > -1) { $action->()} }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @configmap, sub { if (/$matching/) { $action->() } }
+    }
+    elsif (ref($matching) eq "CODE")
+    {
+        push @configmap, sub { if ($matching->()) { $action->() } }
+    }
+    else
+    {
+        die "Unable to each_match matching object of type " . ref($matching);
+    }
+} # }}}
+
 sub make_tab # {{{
 {
     my ($matching, $tabstring) = @_;
