@@ -123,7 +123,7 @@ make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:bless
              $existing = "" unless defined $existing;
 
              # avoid making a tab for existing prices
-             return "" if $existing =~ /\b\d+\b/;
+             return "" if $existing =~ /\b(?<!NR )\d+\b/;
 
              $count = 1 unless $count =~ /\d/;
              return "" if $count == 0; # just in case!
