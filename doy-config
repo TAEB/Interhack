@@ -44,7 +44,11 @@ autoadjust $aa_bag         => "i";
 autoadjust $aa_blindfold   => "n";
 autoadjust $aa_whistle     => "z";
 autoadjust $aa_lamp        => "j";
+autoadjust $aa_instrument  => "q";
 autoadjust $aa_trice       => "^y";
+# }}}
+# priceid {{{
+$lc_scrolls = 1;
 # }}}
 # }}}
 # mappings {{{
