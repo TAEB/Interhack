@@ -6,7 +6,7 @@ nick "Eidolos";
 
 # plugins {{{
 $chromatic_nemeses = 1;
-exclude_plugins "doy-colors-items";
+exclude "doy-colors-items";
 include "*";
 # }}}
 

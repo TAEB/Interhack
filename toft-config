@@ -4,7 +4,7 @@ $chromatic_gods = 0;
 $chromatic_nemeses = 1;
 
 # plugins {{{
-exclude_plugins "doy-colors-items";
+exclude "doy-colors-items";
 include "*";
 $fortune = "yasd ideas nethackidiocy";
 # }}}

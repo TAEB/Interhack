@@ -155,7 +155,7 @@ sub include # {{{
         die $@ if $@;
     }
 } # }}}
-sub exclude_plugins # {{{
+sub exclude # {{{
 {
     for (@_)
     {
