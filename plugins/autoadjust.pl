@@ -85,7 +85,7 @@ our $aa_whistle     = qr/magic whistle|whistle called magic/;
 our $aa_lamp        = qr/lamp|lantern|lamp called (?:magic|oil)/;
 our $aa_luckstone   = qr/luck(?:stone)?|Heart of Ahriman/;
 our $aa_levitation  = qr/lev(?:itation)?/;
-our $aa_instrument  = qr/(?:tooled |frost |fire )?horn|(?:wooden |magic )?(?:flute|harp)|bugle/;
+our $aa_instrument  = qr/(?<!unicorn )horn|(?:wooden |magic )?(?:flute|harp)|bugle/;
 our $aa_trice       = qr/c(?:o|hi)ckatrice corpse/;
 
 # samples (see *-config for more):
