@@ -83,7 +83,7 @@ recolor qr/A trap door in .*? opens and .*? falls on your [^!]*!/ => "red";
 recolor qr/A board beneath you squeaks loudly./ => "red";
 # }}}
 # bear trap {{{
-recolor qr/.*? bear trap closes on [^!]*!/ => "red";
+recolor qr/\S+ bear trap closes on [^!]*!/ => "red";
 # }}}
 # rust trap
 # pit
@@ -183,6 +183,7 @@ recolor qr/You feel (?:warmer|a little sick|cooler|tired|conductive)./ => "red";
 # }}}
 # losing intrinsics {{{
 recolor qr/You seem slower./ => "red";
+recolor qr/You slow down./ => "red";
 recolor qr/You feel (?:slow|slower)./ => "red";
 recolor qr/You feel (?:less attractive|paranoid|vulnerable|clumsy)./ => "red";
 recolor qr/You feel (?:uncontrolled|less jumpy)./ => "red";
