@@ -36,9 +36,9 @@ my @ring_sink_regex =
   [qr/The sink looks like it is being beamed aboard somewhere/ => "TC"],
 );
 
-each_interval
+each_iteration
 {
-  if (/You drop a (\w+(?: \w+)?) ring down the drain\./)
+  if (/You drop an? (?:blessed |(?:un)?cursed )?(\w+(?: \w+)?) ring down the drain\./)
   {
     $last_sink_drop = $1;
   }
