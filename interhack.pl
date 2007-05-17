@@ -167,14 +167,7 @@ sub each_iteration(&;$) # {{{
 {
     push @configmap, shift;
 } # }}}
-sub each_match # {{{
-{
-    my $regex = shift;
-    my $code = shift;
-    my @args = @_;
 
-    push @configmap, sub { if ($_ =~ $regex) { $code->(@args) } };
-} # }}}
 sub extended_command # {{{
 {
     my ($cmd, $result) = @_;
@@ -229,18 +222,20 @@ sub annotate # {{{
 
 sub each_match # {{{
 {
-    my ($matching, $action) = @_;
+    my $matching = shift;
+    my $action = shift;
+    my @args = @_;
     if (!ref($matching))
     {
-        push @configmap, sub { if (index($_, $matching) > -1) { $action->()} }
+        push @configmap, sub { if (index($_, $matching) > -1) { $action->(@args)} }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @configmap, sub { if (/$matching/) { $action->() } }
+        push @configmap, sub { if ($_ =~ $matching) { $action->(@args) } }
     }
     elsif (ref($matching) eq "CODE")
     {
-        push @configmap, sub { if ($matching->()) { $action->() } }
+        push @configmap, sub { if ($matching->()) { $action->(@args) } }
     }
     else
     {
