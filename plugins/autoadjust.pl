@@ -41,7 +41,7 @@ sub autoadjust
              {
                  if (substr($adjust_to, 0, 1) ne '^')
                  {
-                     return $1 eq $adjust_to ? "" : "\e#adjust\n$1$adjust_to"
+                     return $1 eq $adjust_to ? "" : "\e\e#adjust\n$1$adjust_to"
                  }
                  else
                  {
@@ -53,7 +53,7 @@ sub autoadjust
                      {
                          if (!exists($autoadjusts{$_}) && !exists($adjust_bad{$_}))
                          {
-                             return "\e#adjust\n$1$_";
+                             return "\e\e#adjust\n$1$_";
                          }
                      }
 
@@ -61,11 +61,11 @@ sub autoadjust
                      # getting silly, so we'll just pick "a" or "b"
                      if ($adjust_bad{a})
                      {
-                         return "\e#adjust\n$1b";
+                         return "\e\e#adjust\n$1b";
                      }
                      else
                      {
-                         return "\e#adjust\n$1a";
+                         return "\e\e#adjust\n$1a";
                      }
                  }
              };
