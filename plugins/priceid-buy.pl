@@ -142,7 +142,7 @@ make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:bless
 
              my ($price1, $price2) = calc_base($ch, $cost);
 
-             for ($price1, map {$price1 - $_, $price1 + $_} 1..5)
+             for ($price1, map {$price1 - $_, $price1 + $_} 1..4)
              {
                  if (exists $price_table{$type}{$_})
                  {
@@ -151,7 +151,7 @@ make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:bless
                  }
              }
 
-             for ($price2, map {$price2 - $_, $price2 + $_} 1..5)
+             for ($price2, map {$price2 - $_, $price2 + $_} 1..4)
              {
                  if (exists $price_table{$type}{$_})
                  {
