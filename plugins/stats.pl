@@ -56,10 +56,10 @@ extended_command "#score"
     => sub { "S:$score" };
 extended_command "#char"
     => sub { sprintf "%s: %s%s%s%s", $name,
-                                     $role  ? "$role "  : "unk-role",
-                                     $race  ? "$race "  : "unk-race",
-                                     $sex   ? "$sex "   : "unk-sex",
-                                     $align ? "$align " : "unk-align" };
+                                     $role  ? "$role "  : "unk-role ",
+                                     $race  ? "$race "  : "unk-race ",
+                                     $sex   ? "$sex "   : "unk-sex ",
+                                     $align ? "$align " : "unk-align " };
 
 # figure out role, race, gender, align
 each_iteration
