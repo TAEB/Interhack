@@ -16,7 +16,7 @@ price IDing help
 conduct blocks (so if illit, confirm for the "r" command)
 * edit nethackrc locally
 keep track of which squares you've stepped on (key off of Dlvl etc)
-automap certain levels (such as each Minetown)
+* automap certain levels (such as each Minetown)
 * internal paste buffer ("Press X to send the string: "#name\nnldark 100/150")
 view other maps
 thing finder ("/scare monster" -> "Dlvl 5, turn 1090")
@@ -53,7 +53,7 @@ color altars based on alignment
 * exp to next level
 exp gained from kills
 automatic intrinsic tracker
-object ID stuff (like wand engraving, ring sinkdropping, etc)
+* object ID stuff (like wand engraving, ring sinkdropping, etc)
 autoopen doors :)
 doy: marvin's farsight, looking at every square for ghosts
 auto-unidle
