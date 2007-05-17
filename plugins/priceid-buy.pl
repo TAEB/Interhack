@@ -135,7 +135,7 @@ make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:bless
                  # if they are entirely identified (scroll called identify)
                  return "" if $existing !~ /[A-Z]/;
 
-                 $appearance = $existing;
+                 $appearance = $lc_scrolls ? lc $existing : $existing;
                  $existing = '';
              }
              $existing = " $existing" if $existing ne '';
