@@ -110,7 +110,7 @@ recolor qr/A cloud of gas puts you to sleep./ => "red";
 # statue trap
 # polytrap
 # fire trap {{{
-recolor qr/A tower of flame (bursts|erupts) from(?: the \w+)?(?! under the)[^!]*!/ => "red";
+recolor qr/A tower of flame (bursts|erupts) from(?: the \w+)?(?! under the[^!]*)!/ => "red";
 # }}}
 # }}}
 # no effect {{{
