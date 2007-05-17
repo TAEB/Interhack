@@ -122,7 +122,8 @@ sub include # {{{
         for (map {sort <$_/*.p[lm]>} @mINC)
         {
             my ($file) = m{^.*/([^/]+)$};
-            next if $plugin_loaded{$file}++;
+            next if exists $plugin_loaded{$file};
+            $plugin_loaded{$file} = 1;
             do $_;
             die $@ if $@;
         }
@@ -148,7 +149,8 @@ sub include # {{{
             die "Unable to find $module in @mINC";
         }
 
-        next MODULE if $plugin_loaded{$file}++;
+        next MODULE if exists $plugin_loaded{$file};
+        $plugin_loaded{$file} = 1;
         do $file;
         die $@ if $@;
     }
@@ -159,7 +161,7 @@ sub exclude_plugins # {{{
     {
         my $module = $_;
         $module .= ".pl" unless $module =~ /\.p[lm]$/;
-        $plugin_loaded{$module} = 1;
+        $plugin_loaded{$module} = 0; # include checks for existence, not truth
     }
 } # }}}
 
