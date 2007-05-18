@@ -20,7 +20,6 @@ sub read_map
         if ($. == 1 && /^\s*(\d+)\s*(\d+)\s*$/)
         {
             ($y, $x) = ($1, $2);
-            annotate("OK, y$y x$x");
             next;
         }
 
