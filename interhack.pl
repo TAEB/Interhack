@@ -670,9 +670,12 @@ while (1)
       unless @key_queue;
   }
 
-  foreach my $map (@configmap, @colormap)
   {
-    eval { $map->() }
+      local $sock; # hide $sock from plugins
+      foreach my $map (@configmap, @colormap)
+      {
+          eval { $map->() }
+      }
   }
 
   print;
