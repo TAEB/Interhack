@@ -10,7 +10,7 @@ our $dlvl;
 
 each_iteration
 {
-    for (my $i = 1; $i <= 24; ++$i)
+    for (my $i = 2; $i <= 24; ++$i)
     {
         return if $vt->row_plaintext($i) =~ /\((?:end|\d+ of \d+)\)/;
     }
