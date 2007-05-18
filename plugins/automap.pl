@@ -57,6 +57,7 @@ for (qw/frontier townsquare alley college grotto bustling bazaar
         oracle ludios castle valley sanctum
         cellar catacombs mimic
         bigplus bigoval bigtie
+        samfill
         medusa1 medusa2
         asmodeus baalzebub juiblex orcus
         wiztop wizmid wizbot
