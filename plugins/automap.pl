@@ -54,7 +54,7 @@ sub draw_map
 }
 
 for (qw/frontier townsquare alley college grotto bustling bazaar
-        delphi ludios castle valley sanctum
+        oracle ludios castle valley sanctum
         cellar catacombs mimic
         bigplus bigoval bigtie
         medusa1 medusa2
