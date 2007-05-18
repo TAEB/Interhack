@@ -1,11 +1,13 @@
 our %intrinsics;
 
-extended_command "#intrinsics"
-    => sub
-    {
-        my $annotation = "Intrinsics: " . join(', ', sort keys %intrinsics);
-        pline($annotation);
-    };
+sub show_intrinsics
+{
+    my $annotation = "Intrinsics: " . join(', ', sort keys %intrinsics);
+    pline($annotation);
+}
+
+extended_command "#intrinsics" => \&show_intrinsics;
+extended_command "#int" => \&show_intrinsics;
 
 sub add_intrinsic
 {
