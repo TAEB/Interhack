@@ -3,12 +3,8 @@ our %intrinsics;
 extended_command "#intrinsics"
     => sub
     {
-        my $annotation;
-        for my $key (keys %intrinsics)
-        {
-           $annotation .= "$key ";
-        }
-        annotate($annotation)
+        my $annotation = "Intrinsics: " . join(', ', sort keys %intrinsics);
+        pline($annotation);
     };
 
 sub add_intrinsic
