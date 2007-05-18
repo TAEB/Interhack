@@ -36,14 +36,14 @@ my %del_annotation_for =
 sub annotate_add_intrinsic
 {
     my $intrinsic = shift;
-    annotate($add_annotation_for{$intrinsic}) if $add_annotation_for{$intrinsic}):
+    annotate($add_annotation_for{$intrinsic}) if $add_annotation_for{$intrinsic};
 
 }
 
 sub annotate_del_intrinsic
 {
     my $intrinsic = shift;
-    annotate($del_annotation_for{$intrinsic}) if $del_annotation_for{$intrinsic}):
+    annotate($del_annotation_for{$intrinsic}) if $del_annotation_for{$intrinsic};
 
 }
 

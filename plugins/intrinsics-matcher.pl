@@ -1,18 +1,19 @@
-my $tracker_path = 'intrinsic-tracker.pl';
+my $tracker_path = 'intrinsics-tracker.pl';
 my $annotations_path = 'annotations-messages.pl';
+
 my $add = sub
 {
     my $intrinsic = shift;
-    add_intrinsic($intrinsic) if $plugins_loaded{$tracker_path};
-    annotate_add_intrinsic($intrinsic) if $plugins_loaded{$annotations_path};
-}
+    add_intrinsic($intrinsic) if $plugin_loaded{$tracker_path};
+    annotate_add_intrinsic($intrinsic) if $plugin_loaded{$annotations_path};
+};
 
 my $del = sub
 {
     my $intrinsic = shift;
-    del_intrinsic($intrinsic) if $plugins_loaded{$tracker_path};
-    annotate_del_intrinsic($intrinsic) if $plugins_loaded{$annotations_path};
-}
+    del_intrinsic($intrinsic) if $plugin_loaded{$tracker_path};
+    annotate_del_intrinsic($intrinsic) if $plugin_loaded{$annotations_path};
+};
 
 # good messages {{{
 # resists {{{
