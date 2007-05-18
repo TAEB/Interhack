@@ -216,6 +216,19 @@ sub pline # {{{
     return $lines[0];
 } # }}}
 
+{ # request_redraw {{{
+    my $lexisock;
+
+    sub request_redraw # {{{
+    {
+        print {$lexisock} chr(18);
+    } # }}}
+    sub set_lexisock # {{{
+    {
+        $lexisock = shift;
+    } # }}}
+} # }}}
+
 sub each_iteration(&;$) # {{{
 {
     push @configmap, shift;
@@ -234,9 +247,9 @@ sub remap # {{{
 } # }}}
 sub value_of # {{{
 {
-    my ($exp, $args) = @_;
+    my ($exp, @args) = @_;
     return $exp unless ref($exp);
-    return $exp->($args) if ref($exp) eq "CODE";
+    return $exp->(@args) if ref($exp) eq "CODE";
     return $exp;
 } # }}}
 
@@ -412,6 +425,7 @@ if (!defined($ttyrec))
 {
     use Interhack::Sock;
     $sock = Interhack::Sock::sock($server, $port);
+    set_lexisock($sock);
 }
 
 our $vt = Term::VT102->new(cols => 80, rows => 24);
@@ -637,10 +651,10 @@ while (1)
     s/(o\) Edit option file)/$1  \e[1;30mTab) edit options locally\e[0m/g;
   }
 
-  s{\e\[H(\w+): unknown extended command\.}{
+  s{\e\[H(\w+)((?:\s+\w+)*): unknown extended command\.}{
       if (exists $extended_command{$1})
       {
-        "\e[H" . value_of($extended_command{$1}, $1) . "\e[K"
+        "\e[H" . value_of($extended_command{$1}, $1, $2) . "\e[K"
       }
       else
       {
