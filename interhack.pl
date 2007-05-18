@@ -165,6 +165,57 @@ sub exclude # {{{
     }
 } # }}}
 
+sub splitline # {{{
+{
+  # @lines = splitline($longline, $length);
+  my $line   = shift;
+  my $length = shift || 70;
+
+  my $chop;
+  my @lines;
+
+  while (length($line) > $length)
+  {
+    # Here we just need the effects of the capturing parentheses.
+    # We break at the last space possible. If no space, then at $length
+    # characters. I could've put ($chop, $line).. in each brace pair, but better
+    # to have it just once.
+
+       if ($line =~ /^(.{1,$length}) +(.*)$/os) { }
+    elsif ($line =~ /^(.{$length})(.*)$/os)     { }
+
+    ($chop, $line) = ($1, $2);
+
+    # remove any trailing or leading whitespace
+    $chop =~ s/^ +//;
+    $line =~ s/^ +//;
+    $chop =~ s/ +$//;
+    $line =~ s/ +$//;
+
+    push @lines, $chop;
+  }
+
+  push @lines, $line unless $line =~ /^\s*$/;
+  return @lines;
+} # }}}
+sub pline # {{{
+{
+    my $text = shift;
+    my @lines = splitline($text);
+    print "\e[s";
+
+    while (@lines > 1)
+    {
+       my $line = shift @lines;
+       print "\e[H$line\e[K";
+       print "--More--";
+       ReadKey 0;
+    }
+
+    print "\e[u";
+    return $lines[0];
+} # }}}
+
 sub each_iteration(&;$) # {{{
 {
     push @configmap, shift;
