@@ -6,7 +6,7 @@ extended_command "#intrinsics"
         my $annotation;
         for my $key (keys %intrinsics)
         {
-           $annotation .= "$key " if exists($intrinsics{$key});
+           $annotation .= "$key ";
         }
         annotate($annotation)
     };
@@ -14,11 +14,11 @@ extended_command "#intrinsics"
 sub add_intrinsic
 {
     my $intrinsic = shift;
-    $intrinsics{$intrinsic} = 1 if !exists($intrinsics{$intrinsic});
+    $intrinsics{$intrinsic} = 1;
 }
 
 sub del_intrinsic
 {
     my $intrinsic = shift;
-    $intrinsics{$intrinsic} = 0 if $intrinsics{$intrinsic};
+    delete $intrinsics{$intrinsic};
 }
