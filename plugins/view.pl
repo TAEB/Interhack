@@ -11,7 +11,7 @@ our $dlvl;
 each_iteration
 {
     $dlvl = $1 if $vt->row_plaintext(24) =~ /^Dlvl:(\d+) /;
-    if ($keystrokes & 15)
+    if ($keystrokes & 16)
     {
         $map{$dlvl} = [map {$vt->row_plaintext($_)} 2..22];
     }
