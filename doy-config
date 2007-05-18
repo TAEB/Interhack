@@ -54,4 +54,5 @@ $lc_scrolls = 1;
 # mappings {{{
 remap chr(5) => "E-  Elbereth\n";
 remap chr(23) => "aqny ";
+remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      ";
 # }}}
