@@ -347,6 +347,38 @@ sub tab # {{{
   annotate("Press tab to send the string: $display");
 } # }}}
 
+sub force_tab # {{{
+{
+    annotate("\e[1;31mPress tab to continue!");
+    print $postprint;
+    $postprint = '';
+
+    1 until ReadKey(0) eq "\t";
+
+    clear_annotation();
+} # }}}
+sub press_tab # {{{
+{
+    my $matching = shift;
+
+    if (!ref($matching))
+    {
+        push @postmap, sub { if (index($vt->row_plaintext(1), $matching) > -1) { force_tab() } }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @postmap, sub { if ($vt->row_plaintext(1) =~ $matching) { force_tab() } }
+    }
+    elsif (ref($matching) eq "CODE")
+    {
+        push @postmap, sub { if ($matching->()) { force_tab() } }
+    }
+    else
+    {
+        die "Unable to press_tab matching object of type " . ref($matching);
+    }
+} # }}}
+
 sub alphakeys # {{{
 {
     my $num = shift;
