@@ -25,6 +25,7 @@ our @configmap;
 our @colormap;
 our %extended_command;
 our %plugin_loaded;
+our $vt = Term::VT102->new(cols => 80, rows => 24);
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
 # colormap {{{
 our %colormap =
@@ -427,8 +428,6 @@ if (!defined($ttyrec))
     $sock = Interhack::Sock::sock($server, $port);
     set_lexisock($sock);
 }
-
-our $vt = Term::VT102->new(cols => 80, rows => 24);
 # }}}
 # check for ttyrec passed in {{{
 if (@ARGV == 1 && $ARGV[0] =~ /\.ttyrec$/)
