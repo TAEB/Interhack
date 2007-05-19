@@ -89,7 +89,7 @@ each_iteration
                                          $sex   ? "$sex "   : "",
                                          $align ? "$align" : "";
     $botl{stats} = "St:$st Dx:$dx Co:$co In:$in Wi:$wi Ch:$ch";
-    $botl{score} = "S:$score";
+    $botl{score} = "S:$score" if $score;
 }
 
 # parse botl
