@@ -2,6 +2,8 @@
 # also adds an extended command #exp for a summary
 # by Eidolos with help from arcanehl
 
+include "stats";
+
 my @exp_for = qw/0 0 20 40 80 160 320 640 1280 2560 5120 10000 20000 40000
 80000 160000 320000 640000 1280000 2560000 5120000 10000000 20000000 30000000
 40000000 50000000 60000000 70000000 80000000 90000000 10000000/;
@@ -13,39 +15,28 @@ sub exp_for
   return $exp_for[$level];
 }
 
-our ($level, $total_exp, $exp_needed);
+our $exp_needed;
 
 extended_command "#exp"
               => sub
                  {
-                   return "Level: 30. Experience: $total_exp."
-                     if $level == 30;
+                   return "Level: 30. Experience: $xp."
+                     if $xlvl == 30;
 
                    sprintf 'Level: %d. Experience: %d. '
                          . 'Next in: %d. Progress: %.2f%%.',
-                             $level,
-                             $total_exp,
+                             $xlvl,
+                             $xp,
                              $exp_needed,
-                             100 * ($total_exp        - exp_for($level))
-                                 / (exp_for($level+1) - exp_for($level))
+                             100 * ($xp        - exp_for($xlvl))
+                                 / (exp_for($xlvl+1) - exp_for($xlvl))
                  };
 
 each_iteration
 {
-  s{Xp:(\d+)\/(\d+)}{
-    ($level, $total_exp) = ($1, $2);
-    my $length = length $total_exp;
-    $exp_needed = exp_for($level+1) - $total_exp;
-    $exp_needed = 0 if $level == 30;
-
-    if (length($exp_needed)-1 > $length)
-    {
-      "Xp:$level!$total_exp"
-    }
-    else
-    {
-      sprintf "X:%dn%-" . (1+$length) . "s", $level, $exp_needed
-    }
-  }eg;
+    return unless $xp;
+    $exp_needed = exp_for($xlvl+1) - $xp;
+    $exp_needed = 0 if $xlvl == 30;
+    $botl{xp} = "Xp:${xlvl}n${exp_needed}";
 };
 
