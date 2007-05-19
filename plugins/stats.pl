@@ -15,8 +15,17 @@ our $align = '';
 our $sex = '';
 our $race = '';
 our $role = '';
-
-our $statusline = sub { "S:$score" };
+our $dlvl = '';
+our $au = 0;
+our $curhp = 0;
+our $maxhp = 0;
+our $curpw = 0;
+our $maxpw = 0;
+our $ac = 0;
+our $xlvl = 0;
+our $xp = 0;
+our $turncount = 0;
+our $status = '';
 
 my %aligns = (lawful  => 'Law',
               neutral => 'Neu',
@@ -50,17 +59,6 @@ my %roles = (Archeologist => 'Arc',
              Wizard       => 'Wiz',
 );
 
-extended_command "#stats"
-    => sub { "St:$st Dx:$dx Co:$co In:$in Wi:$wi Ch:$ch" };
-extended_command "#score"
-    => sub { "S:$score" };
-extended_command "#char"
-    => sub { sprintf "%s: %s%s%s%s", $name,
-                                     $role  ? "$role "  : "unk-role ",
-                                     $race  ? "$race "  : "unk-race ",
-                                     $sex   ? "$sex "   : "unk-sex ",
-                                     $align ? "$align " : "unk-align " };
-
 # figure out role, race, gender, align
 each_iteration
 {
@@ -84,6 +82,30 @@ each_iteration
     return if @groups == 0;
     ($st, $dx, $co, $in, $wi, $ch, $align, $score) = @groups;
 
-    my $sl = $statusline->();
-    $postprint .= "\e[s\e[23;1H\e[0m$sl\e[K\e[u";
+    $botl{char} = sprintf "%s: %s%s%s%s", $name,
+                                         $role  ? "$role "  : "unk-role ",
+                                         $race  ? "$race "  : "unk-race ",
+                                         $sex   ? "$sex "   : "unk-sex ",
+                                         $align ? "$align " : "unk-align ";
+    $botl{stats} = "St:$st Dx:$dx Co:$co In:$in Wi:$wi Ch:$ch";
+    $botl{score} = "S:$score";
+}
+
+# parse botl
+each_iteration
+{
+    return unless /\e\[24(?:;\d+)?H/;
+
+    my @groups = $vt->row_plaintext(24) =~ /^(Dlvl:\d+|Home \d+|End Game)\s+\$:(\d+)\s+HP:(\d+)\((\d+)\)\s+Pw:(\d+)\((\d+)\)\s+AC:([0-9-]+)\s+(?:Exp|Xp):(\d+)(?:\/(\d+))?\s+T:(\d+)\s+(.*?)\s*$/;
+    return if @groups == 0;
+    ($dlvl, $au, $curhp, $maxhp, $curpw, $maxpw, $ac, $xlvl, $xp, $turncount, $status) = @groups;
+
+    $botl{dlvl} = $dlvl;
+    $botl{au} = "\$:$au";
+    $botl{hp} = "HP:$curhp($maxhp)";
+    $botl{pw} = "Pw:$curpw($maxpw)";
+    $botl{ac} = "AC:$ac";
+    $botl{xp} = sprintf "Xp:$xlvl%s", $xp ? "/$xp" : "";
+    $botl{turncount} = "T:$turncount";
+    $botl{status} = "$status";
 }
