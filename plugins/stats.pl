@@ -36,10 +36,10 @@ my %sexes = (male   => 'Mal',
              female => 'Fem',
 );
 
-my %races = ('dwarven' => 'dwarf',
-             'elven'   => 'elf',
-             'human'   => 'human',
-             'orcish'  => 'orc',
+my %races = ('dwarven' => 'Dwa',
+             'elven'   => 'Elf',
+             'human'   => 'Hum',
+             'orcish'  => 'Orc',
 );
 
 my %roles = (Archeologist => 'Arc',
