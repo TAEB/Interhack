@@ -5,7 +5,7 @@
 extended_command "#donate"
       => sub
       {
-          "clairvoyance: \$" . $level * 200 . ", protection: \$" . $level * 400 . "\n"
+          "clairvoyance: \$" . $xlvl * 200 . ", protection: \$" . $xlvl * 400 . "\n"
       };
 make_tab qr/\e\[HHow much will you offer\?/
-      => sub { $level * 400 . "\n" };
+      => sub { $xlvl * 400 . "\n" };
