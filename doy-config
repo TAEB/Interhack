@@ -50,6 +50,9 @@ autoadjust $aa_trice       => "^y";
 # priceid {{{
 $lc_scrolls = 1;
 # }}}
+# botl {{{
+$statusline = sub { "$botl{score}" };
+# }}}
 # }}}
 # mappings {{{
 remap chr(5) => "E-  Elbereth\n"; # ^E to engrave Elbereth
