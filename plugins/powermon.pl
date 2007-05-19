@@ -1,15 +1,16 @@
 # adds color to the power display
 # by Eidolos
 
+include "stats";
+
 each_iteration
 {
-    s{Pw:((-?\d+)\((-?\d+)\))}{
+    $botl{pw} =~ s{Pw:(-?\d+\(-?\d+\))}{
         my $color = '';
-        ($curpw, $maxpw) = ($2, $3);
 
-           if ($2     >= $3) {                     }
-        elsif ($2 * 2 >= $3) { $color = "\e[1;36m" }
-        elsif ($2 * 3 >= $3) { $color = "\e[1;35m" }
+           if ($curpw     >= $maxpw) {                     }
+        elsif ($curpw * 2 >= $maxpw) { $color = "\e[1;36m" }
+        elsif ($curpw * 3 >= $maxpw) { $color = "\e[1;35m" }
         else                 { $color = "\e[0;35m" }
 
         "Pw:$color$1\e[0m"
