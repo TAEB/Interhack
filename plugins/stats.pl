@@ -88,9 +88,10 @@ each_iteration
 {
     return unless /\e\[23(?:;\d+)?H/;
 
-    my @groups = $vt->row_plaintext(23) =~ /St:(\d+(?:\/(?:\*\*|\d+))?) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+)\s*(\w+)(?:\s*S:(\d+))?/;
+    my @groups = $vt->row_plaintext(23) =~ /^(\w+)?.*?St:(\d+(?:\/(?:\*\*|\d+))?) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+)\s*(\w+)(?:\s*S:(\d+))?/;
     return if @groups == 0;
-    ($st, $dx, $co, $in, $wi, $ch, $align, $score) = @groups;
+    ($st, $dx, $co, $in, $wi, $ch, $align, $score) = @groups[1..8];
+    $name = $groups[0] if $groups[0];
     $align = $aligns{lc $align};
 
     $botl{char} = sprintf "%s: %s%s%s%s", $name,
