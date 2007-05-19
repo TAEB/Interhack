@@ -144,22 +144,22 @@ if (!$ece_artifact)
 # }}}
 #lawful {{{
     recolor qr/\b(?:Demonbane|Excalibur|Grayswandir|Snickersnee|Sunsword)\b/ => $ec_lartifact || $ec_artifact || "bgreen";
-    recolor qr/\b(?:Orb of Detection|Sceptre of Might|Magic Mirror of Merlin|Mitre of Holiness|Tsurugi of Muramasa)\b/ => $ec_qlartifact || $ec_qartifact || $ec_lartifact || $ec_artifact || "bgreen";
+    recolor qr/(?:[Tt]he )?\b(?:Orb of Detection|Sceptre of Might|Magic Mirror of Merlin|Mitre of Holiness|Tsurugi of Muramasa)\b/ => $ec_qlartifact || $ec_qartifact || $ec_lartifact || $ec_artifact || "bgreen";
 # }}}
 #neutral {{{
     recolor qr/\b(?:Cleaver|Giantslayer|Magicbane|Mjollnir|Vorpal Blade)\b/ => $ec_nartifact || $ec_artifact || "bgreen";
-    recolor qr/\b(?:Heart of Ahriman|Staff of Aesculapius|Eyes of the Overworld|Platinum Yendorian Express Card|Orb of Fate|Eye of the Aethiopica)\b/ => $ec_qnartifact || $ec_qartifact || $ec_nartifact || $ec_artifact || "bgreen";
+    recolor qr/(?:[Tt]he )?\b(?:Heart of Ahriman|Staff of Aesculapius|Eyes of the Overworld|Platinum Yendorian Express Card|Orb of Fate|Eye of the Aethiopica)\b/ => $ec_qnartifact || $ec_qartifact || $ec_nartifact || $ec_artifact || "bgreen";
 # }}}
 #chaotic {{{
     recolor qr/\b(?:Grimtooth|Orcrist|Sting|Stormbringer)\b/ => $ec_cartifact || $ec_artifact || "bgreen";
-    recolor qr/\b(?:Longbow of Diana|Master Key of Thievery)\b/ => $ec_qcartifact || $ec_qartifact || $ec_cartifact || $ec_artifact || "bgreen";
+    recolor qr/(?:[Tt]he )?\b(?:Longbow of Diana|Master Key of Thievery)\b/ => $ec_qcartifact || $ec_qartifact || $ec_cartifact || $ec_artifact || "bgreen";
 }
 # }}}
 #invocation items {{{
-    recolor qr/(?<!cursed )\b(?:Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)\b/ => $ec_invocation || "bmagenta" unless $ece_invocation;
+    recolor qr/(?:[Tt]he )?(?<!cursed )\b(?:Bell of Opening|silver bell|Candelabrum of Invocation|candelabrum|Book of the Dead|papyrus spellbook)\b/ => $ec_invocation || "bmagenta" unless $ece_invocation;
 # }}}
 #raison d'etre {{{
-    recolor qr/\bAmulet of Yendor(?= named\b)/ => $ec_yendor || "bmagenta" unless $ece_yendor;
+    recolor qr/(?:[Tt]he )?\bAmulet of Yendor(?= named\b)/ => $ec_yendor || "bmagenta" unless $ece_yendor;
 # }}}
 # }}}
 # cursed goodies {{{
