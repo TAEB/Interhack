@@ -286,6 +286,11 @@ sub annotate # {{{
   $anno_frames = 5;
   $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
 } # }}}
+sub clear_annotation # {{{
+{
+    print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
+    $annotation_onscreen = 0;
+} # }}}
 
 sub each_match # {{{
 {
@@ -591,8 +596,7 @@ while (1)
 
   if ($anno_frames <= 0)
   {
-      print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
-      $annotation_onscreen = 0;
+      clear_annotation();
   }
 # }}}
   # read from sock, print to stdout {{{
