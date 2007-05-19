@@ -84,10 +84,10 @@ each_iteration
     $align = $aligns{lc $align};
 
     $botl{char} = sprintf "%s: %s%s%s%s", $name,
-                                         $role  ? "$role "  : "unk-role ",
-                                         $race  ? "$race "  : "unk-race ",
-                                         $sex   ? "$sex "   : "unk-sex ",
-                                         $align ? "$align " : "unk-align ";
+                                         $role  ? "$role "  : "",
+                                         $race  ? "$race "  : "",
+                                         $sex   ? "$sex "   : "",
+                                         $align ? "$align" : "";
     $botl{stats} = "St:$st Dx:$dx Co:$co In:$in Wi:$wi Ch:$ch";
     $botl{score} = "S:$score";
 }
