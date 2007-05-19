@@ -349,6 +349,7 @@ sub tab # {{{
 
 sub force_tab # {{{
 {
+    return if defined $ttyrec;
     annotate("\e[1;31mPress tab to continue!");
     print $postprint;
     $postprint = '';
