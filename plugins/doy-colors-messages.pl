@@ -83,7 +83,7 @@ recolor qr/A trap door in .*? opens and .*? falls on your [^!]*!/ => "red";
 recolor qr/A board beneath you squeaks loudly./ => "red";
 # }}}
 # bear trap {{{
-recolor qr/\S+ bear trap closes on [^!]*!/ => "red";
+recolor qr/\e\[H\S+ bear trap closes on [^!]*!/ => "red";
 # }}}
 # rust trap
 # pit
