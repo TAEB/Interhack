@@ -40,6 +40,7 @@ my %races = ('dwarven' => 'Dwa',
              'elven'   => 'Elf',
              'human'   => 'Hum',
              'orcish'  => 'Orc',
+             'gnomish' => 'Gno',
 );
 
 my %roles = (Archeologist => 'Arc',
