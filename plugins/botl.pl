@@ -6,7 +6,7 @@ include "powermon";
 include "eido-colors-status";
 include "exp-2nl";
 
-our $statusline ||= sub { "$botl{score}" };
+our $statusline ||= sub { "$botl{char}  $botl{stats}  $botl{score}" };
 our $botl ||= sub { "$botl{dlvl} $botl{au} $botl{hp} $botl{pw} $botl{ac} $botl{xp} $botl{turncount} $botl{status}" };
 
 for my $item (qw/char stats score dlvl gold hp pw ac xp turncount status/)
