@@ -3,6 +3,8 @@
 # Burdened but we can't display it, but we should color it
 # the cutoff is three characters so as to minimize false positives
 
+include "stats";
+
 # pre-code {{{
 my %status_colors =
 (
@@ -39,13 +41,27 @@ my %status_colors =
 # post-code {{{
 );
 
-while (my ($k, $v) = each(%status_colors))
+each_iteration
 {
-  for (3..length($k))
-  {
-    my $status_trunc = substr($k, 0, $_);
-    recolor qr/(?<= )$status_trunc(?=[ \e])/ => $v;
-  }
+    my @status_effects;
+
+    STATUS: for my $status (split /\s+/, $botl{status}) {
+        for (reverse 3..10) # Overloaded has length 10
+        {
+            while (my ($k, $v) = each(%status_colors))
+            {
+                next if $_ > length $k;
+                my $status_trunc = substr($k, 0, $_);
+                if ($status =~ s/$status_trunc/$colormap{$v}$&\e[0m/) {
+                    push @status_effects, $status;
+                    keys %status_colors; # reset the internal iterator
+                    next STATUS;
+                }
+            }
+        }
+    }
+
+    $botl{status} = join " ", @status_effects;
 }
 
 # }}}
