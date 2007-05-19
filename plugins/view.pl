@@ -8,19 +8,16 @@
 our %map;
 our $dlvl;
 
-each_iteration
+$vt->callback_set("CLEAR", sub
 {
-    for (my $i = 2; $i <= 24; ++$i)
-    {
-        return if $vt->row_plaintext($i) =~ /\((?:end|\d+ of \d+)\)/;
-    }
-    $dlvl = $1 if $vt->row_plaintext(24) =~ /^Dlvl:(\d+) /;
-    $dlvl = "q$1" if $vt->row_plaintext(24) =~ /^Home (\d+) /;
-    if ($keystrokes & 16)
-    {
-        $map{$dlvl} = [map {$vt->row_plaintext($_)} 2..22];
-    }
-}
+    my ($cbvt, $cbtype) = @_;
+    return unless $cbtype eq "CLEAR";
+    return unless $cbvt->row_plaintext(24) =~ /^(?:Dlvl:|Home )\d+ /;
+
+    $dlvl = $1 if $cbvt->row_plaintext(24) =~ /^Dlvl:(\d+) /;
+    $dlvl = "q$1" if $cbvt->row_plaintext(24) =~ /^Home (\d+) /;
+    $map{$dlvl} = [map {$cbvt->row_plaintext($_)} 2..22];
+});
 
 extended_command "#view"
               => sub
