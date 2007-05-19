@@ -62,7 +62,7 @@ my %roles = (Archeologist => 'Arc',
 # figure out role, race, gender, align
 each_iteration
 {
-    if ($vt->row_plaintext(1) =~ /\w+ (\w+), welcome to NetHack! You are a (\w+) (\w+) (\w+)(?: (\w+))?\./)
+    if ($vt->row_plaintext(1) =~ /\w+ (\w+), welcome to NetHack!  You are a (\w+) (\w+) (\w+)(?: (\w+))?\./)
     {
         if (!defined($5)) { $sex = "Fem" }
         else              { $sex = $genders{$3} }
@@ -81,6 +81,7 @@ each_iteration
     my @groups = $vt->row_plaintext(23) =~ /St:(\d+(?:\/(?:\*\*|\d+))?) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+)\s*(\w+)(?:\s*S:(\d+))?/;
     return if @groups == 0;
     ($st, $dx, $co, $in, $wi, $ch, $align, $score) = @groups;
+    $align = $aligns{lc $align};
 
     $botl{char} = sprintf "%s: %s%s%s%s", $name,
                                          $role  ? "$role "  : "unk-role ",
