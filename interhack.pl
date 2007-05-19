@@ -23,6 +23,7 @@ our @lastkeys;
 our $lastkeysmaxlen = 100;
 our @configmap;
 our @colormap;
+our @postmap;
 our %extended_command;
 our %plugin_loaded;
 our $vt = Term::VT102->new(cols => 80, rows => 24);
@@ -696,6 +697,14 @@ while (1)
   }
 
   print;
+
+  {
+      local $sock; # hide $sock from plugins
+      foreach my $map (@postmap)
+      {
+          eval { $map->() }
+      }
+  }
 
   print $postprint and $postprint = ''
     if $postprint ne '';
