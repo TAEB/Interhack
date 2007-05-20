@@ -18,7 +18,7 @@ conduct blocks (so if illit, confirm for the "r" command)
 keep track of which squares you've stepped on (key off of Dlvl etc)
 * automap certain levels (such as each Minetown)
 * internal paste buffer ("Press X to send the string: "#name\nnldark 100/150")
-view other maps
+* view other maps
 thing finder ("/scare monster" -> "Dlvl 5, turn 1090")
 overview mode ("Level 1: fountain, Level 3: mines entrance")
 ray bounce thing
