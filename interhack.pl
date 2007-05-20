@@ -736,14 +736,14 @@ while (1)
     || (($resting & 2) && /(?:\e\[24;\d+H|HP:)(\d+)\(\1\)/)
     || (($resting & 4) && /Pw:(\d+)\(\1\)/);
 
-  if (/\e\[Hrest: unknown extended command\./)
+  if (/\e\[Hr(?:est)?: unknown extended command\./)
   {
     $resting  = 1;
     $resting |= 2 if $curhp != $maxhp;
     $resting |= 4 if $curpw != $maxpw;
   }
 
-  s{rest: unknown extended command\.}
+  s{r(?:est)?: unknown extended command\.}
    {To sleep, perchance to dream.}g;
 
   if ($resting)
