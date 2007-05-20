@@ -11,6 +11,7 @@ $fortune = "yasd ideas nethackidiocy";
 
 # remappings {{{
 remap chr(5) => sub { "E-  Elbereth\n" }; # (^E)
+remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V to DfV
 remap chr(23) => "aany\e"; # for the drawbridge :) (^W)
 # }}}
 
