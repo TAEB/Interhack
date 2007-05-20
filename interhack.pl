@@ -24,6 +24,9 @@ our $lastkeysmaxlen = 100;
 our @configmap;
 our @colormap;
 our @postmap;
+our @configonce;
+our @coloronce;
+our @postonce;
 our %extended_command;
 our %plugin_loaded;
 our $vt = Term::VT102->new(cols => 80, rows => 24);
@@ -723,20 +726,22 @@ while (1)
 
   {
       local $sock; # hide $sock from plugins
-      foreach my $map (@configmap, @colormap)
+      foreach my $map (@configmap, @configonce, @colormap, @coloronce)
       {
           eval { $map->() }
       }
+      @configonce = @coloronce = ();
   }
 
   print;
 
   {
       local $sock; # hide $sock from plugins
-      foreach my $map (@postmap)
+      foreach my $map (@postmap, @postonce)
       {
           eval { $map->() }
       }
+      @postonce = ();
   }
 
   print $postprint and $postprint = ''
