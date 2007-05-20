@@ -530,6 +530,7 @@ if (!defined($ttyrec) && $server =~ /alt\.org/)
 ReadMode 3;
 END { ReadMode 0 }
 $|++;
+$SIG{INT} = sub {};
 # }}}
 # main loop {{{
 ITER:
