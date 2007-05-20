@@ -11,8 +11,9 @@ include "*";
 # }}}
 
 # key remappings {{{
-remap chr(5) => sub { "E-  Elbereth\n" };
-remap chr(4) => "aany\e"; # for the drawbridge :)
+remap chr(5) => "E-  Elbereth\n"; # ^E for Elbereth
+remap chr(4) => "aany\e"; # ^D for the drawbridge :)
+remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V to DfV
 # }}}
 
 # autoadjusts {{{
