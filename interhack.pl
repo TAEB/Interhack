@@ -350,6 +350,25 @@ sub tab # {{{
   annotate("Press tab to send the string: $display");
 } # }}}
 
+sub force_yn # {{{
+{
+    return if defined $ttyrec;
+    my $msg = shift;
+    my $c;
+
+    annotate("\e[1;31m$msg [yn] ");
+    print $postprint;
+    $postprint = '';
+
+    while (1)
+    {
+        $c = ReadKey(0);
+        last if $c eq 'y' || $c eq 'Y' || $c eq 'n' || $c eq 'N';
+    }
+
+    clear_annotation();
+    return $c eq 'y' || $c eq 'Y' ? 1 : 0;
+} # }}}
 sub force_tab # {{{
 {
     return if defined $ttyrec;
