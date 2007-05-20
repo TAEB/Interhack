@@ -29,10 +29,10 @@ our %price_table =
               700 => ['cancellation', 'finger of death'],
           },
   'potion' => {
-              0   => ['uncursed water'],
+              0   => ['water'],
               50  => ['booze', 'fruit juice', 'see invisible', 'sickness'],
               100 => ['confusion', 'extra healing', 'hallucination', 'healing',
-                      'restore ability', 'sleeping', '(un)holy water'],
+                      'restore ability', 'sleeping', 'water'],
               150 => ['blindness', 'gain energy', 'invisibility',
                       'monster detection', 'object detection'],
               200 => ['enlightenment', 'full healing', 'levitation',
