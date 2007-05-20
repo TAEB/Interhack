@@ -595,7 +595,16 @@ while (1)
 
       if (defined $c)
       {
-          if ($c eq "p" && $logged_in) { $in_game = 1 }
+          if ($c eq "\e" && $vt->row_plaintext(1) =~ /^For what do you wish\? /)
+          {
+              # force_yn returns 1 if yes, 0 if no
+              if (force_yn("Are you sure you want to cancel your wish?") == 0)
+              {
+                  next;
+              }
+          }
+
+          if ($c eq "p" && $at_login && $logged_in) { $in_game = 1 }
           if ($c eq "\t" && $at_login && $logged_in)
           {
             print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
