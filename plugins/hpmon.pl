@@ -19,7 +19,7 @@ each_iteration
     elsif ($curhp * 4 >= $maxhp)            { $color = "\e[0;31m" }
     elsif ($curhp * 5 >= $maxhp)            { $color = "\e[1;31m" }
 
-    if ($curhp * 7 <= $maxhp || $curhp < 6)
+    if ($curhp > 0 && ($curhp * 7 <= $maxhp || $curhp < 6))
     {
         if (!$notified)
         {
