@@ -5,6 +5,8 @@
 
 include "stats";
 
+our $notified = 0;
+
 each_iteration
 {
   $botl{hp} =~ s{(HP:)(\d+\(\d+\))}{
@@ -16,6 +18,19 @@ each_iteration
     elsif ($curhp * 3 >= $maxhp)            { $color = "\e[1;33m" }
     elsif ($curhp * 4 >= $maxhp)            { $color = "\e[0;31m" }
     elsif ($curhp * 5 >= $maxhp)            { $color = "\e[1;31m" }
+
+    if ($curhp * 7 <= $maxhp || $curhp < 6)
+    {
+        if (!$notified)
+        {
+            push @postonce, sub { force_tab("Your HP is monstrously low! Press tab to acknowledge!") };
+            $notified = 1;
+        }
+    }
+    else
+    {
+        $notified = 0;
+    }
 
     "$1$color$2\e[0m"
   }eg;
