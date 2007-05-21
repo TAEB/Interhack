@@ -9,5 +9,5 @@ press_tab qr/\bYou feel deathly sick\./;
 press_tab qr/\bYou feel (?:much|even) worse./;
 press_tab qr/\bStop eating\?/;
 press_tab qr/\bThe [^.!\e]*? swings itself around you!/;
-press_tab qr/\bReally quit\?/;
+press_tab qr/^Really quit\? \[yn\] \(n\) +$/;
 
