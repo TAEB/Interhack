@@ -171,6 +171,24 @@ sub exclude # {{{
     }
 } # }}}
 
+{ # request_redraw {{{
+    my $lexisock;
+
+    sub request_redraw # {{{
+    {
+        print {$lexisock} chr(18);
+    } # }}}
+    sub set_lexisock # {{{
+    {
+        $lexisock = shift;
+    } # }}}
+} # }}}
+
+sub each_iteration(&;$) # {{{
+{
+    push @configmap, shift;
+} # }}}
+
 sub splitline # {{{
 {
   # @lines = splitline($longline, $length);
@@ -221,23 +239,25 @@ sub pline # {{{
     print "\e[u";
     return $lines[0];
 } # }}}
-
-{ # request_redraw {{{
-    my $lexisock;
-
-    sub request_redraw # {{{
-    {
-        print {$lexisock} chr(18);
-    } # }}}
-    sub set_lexisock # {{{
-    {
-        $lexisock = shift;
-    } # }}}
-} # }}}
-
-sub each_iteration(&;$) # {{{
+sub show_menu # {{{
 {
-    push @configmap, shift;
+    my $regex = shift;
+    my %items = %{shift(@_)};
+
+    each_iteration
+    {
+        if ($vt->row_plaintext(1) =~ $regex)
+        {
+            $postprint .= "\e[s\e[1;30m\e[2H";
+            for my $k (sort keys %items)
+            {
+                my $v = value_of($items{$k});
+                $keyonce{$k} = "$v";
+                $postprint .= " $k - $v \n";
+            }
+            $postprint .= "\e[m\e[u";
+        }
+    }
 } # }}}
 
 sub extended_command # {{{

@@ -17,18 +17,5 @@ our %wishes =
     F => 'blessed fixed greased ring of levitation',
 );
 
-each_iteration
-{
-    if ($vt->row_plaintext(1) =~ /^For what do you wish\? +$/)
-    {
-        $postprint .= "\e[s\e[1;30m\e[2H";
-        for my $k (sort keys %wishes)
-        {
-            my $v = value_of($wishes{$k});
-            $keyonce{$k} = "$v";
-            $postprint .= " $k - $v \n";
-        }
-        $postprint .= "\e[m\e[u";
-    }
-}
+show_menu qr/^For what do you wish\? +$/ => \%wishes;
 
