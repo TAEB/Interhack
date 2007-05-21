@@ -4,8 +4,8 @@ recolor qr/With great effort you move the boulder./ => "darkgray";
 recolor qr/You try to move the boulder, but in vain./ => "darkgray";
 # }}}
 # pets {{{
-recolor qr/You displaced your [^.?!]*./ => "darkgray";
-recolor qr/You stop[^.?!]*.  Your .*? is in the way!/ => "darkgray";
+recolor qr/You displaced (?:your )?[^.?!]*./ => "darkgray";
+recolor qr/You stop[^.?!]*.  (?:Your )?.*? is in the way!/ => "darkgray";
 # }}}
 # fountains {{{
 recolor qr/You hear water falling on coins./ => "darkgray";
