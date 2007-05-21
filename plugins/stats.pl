@@ -27,6 +27,9 @@ our $xp = 0;
 our $turncount = 0;
 our $status = '';
 
+our $show_sl = 0;
+our $show_bl = 0;
+
 my %aligns = (lawful  => 'Law',
               neutral => 'Neu',
               chaotic => 'Cha',
@@ -89,6 +92,7 @@ each_iteration
     return unless /\e\[23(?:;\d+)?H/;
 
     my @groups = $vt->row_plaintext(23) =~ /^(\w+)?.*?St:(\d+(?:\/(?:\*\*|\d+))?) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+)\s*(\w+)(?:\s*S:(\d+))?/;
+    $show_sl = @groups;
     return if @groups == 0;
     ($st, $dx, $co, $in, $wi, $ch, $align, $score) = @groups[1..8];
     $name = $groups[0] if $groups[0];
@@ -109,6 +113,7 @@ each_iteration
     return unless /\e\[24(?:;\d+)?H/;
 
     my @groups = $vt->row_plaintext(24) =~ /^(Dlvl:\d+|Home \d+|End Game|Astral Plane)\s+(?:\$|\*):(\d+)\s+HP:(\d+)\((\d+)\)\s+Pw:(\d+)\((\d+)\)\s+AC:([0-9-]+)\s+(?:Exp|Xp):(\d+)(?:\/(\d+))?\s+T:(\d+)\s+(.*?)\s*$/;
+    $show_bl = @groups;
     return if @groups == 0;
     ($dlvl, $au, $curhp, $maxhp, $curpw, $maxpw, $ac, $xlvl, $xp, $turncount, $status) = @groups;
 

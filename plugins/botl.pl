@@ -16,11 +16,8 @@ for my $item (qw/char stats score dlvl gold hp pw ac xp turncount status/)
 
 each_iteration
 {
-    for (2..24) {
-        return if $vt->row_plaintext($_) =~ /\((?:end|\d+ of \d+)\)/;
-    }
     my $sl = $statusline->();
     my $bl = $botl->();
-    $postprint .= "\e[s\e[23;1H\e[0m$sl\e[K\e[u";
-    $postprint .= "\e[s\e[24;1H\e[0m$bl\e[K\e[u";
+    $postprint .= "\e[s\e[23;1H\e[0m$sl\e[K\e[u" if $show_sl;
+    $postprint .= "\e[s\e[24;1H\e[0m$bl\e[K\e[u" if $show_bl;
 }
