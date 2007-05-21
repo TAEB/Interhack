@@ -71,7 +71,7 @@ sub autoadjust
              };
 }
 
-our $aa_key         = qr/key|lock pick|credit card/;
+our $aa_key         = qr/key|lock pick|credit card|osaku/;
 our $aa_unihorn     = qr/unicorn horn/;
 our $aa_athame      = qr/Magicbane|athame/;
 our $aa_stethoscope = qr/stethoscope/;
