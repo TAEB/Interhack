@@ -66,7 +66,7 @@ my %roles = (Archeologist => 'Arc',
 # figure out role, race, gender, align
 each_iteration
 {
-    if ($vt->row_plaintext(1) =~ /\w+ (\w+), welcome to NetHack!  You are a (\w+) (\w+) (\w+)(?: (\w+))?\./)
+    if ($vt->row_plaintext(1) =~ /\w+ (?:\w+ )?(\w+), welcome to NetHack!  You are a (\w+) (\w+) (\w+)(?: (\w+))?\./)
     {
         if (!defined($5)) {
             ($name, $align, $race, $role) = ($1, $aligns{$2}, $races{$3}, $roles{$4});
