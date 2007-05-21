@@ -18,6 +18,7 @@ our $ttyrec;
 our $paused = 0;
 our $anno_frames = 0;
 our %keymap;
+our %keyonce;
 our @key_queue;
 our @lastkeys;
 our $lastkeysmaxlen = 100;
@@ -645,10 +646,16 @@ while (1)
             $c = $tab if $c eq "\t";
             $tab = "\t";
           }
+          elsif (exists $keyonce{$c})
+          {
+            $c = value_of($keyonce{$c}, $c);
+          }
           elsif (exists $keymap{$c})
           {
             $c = value_of($keymap{$c}, $c);
           }
+
+          %keyonce = ();
 
           $keystrokes += length $c;
 
