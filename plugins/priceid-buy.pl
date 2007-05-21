@@ -3,7 +3,7 @@ our %price_table =
   'scroll' => {
               20  => ['identify'],
               50  => ['light'],
-              60  => ['blank paper', 'enchant weapon'],
+              60  => ['enchant weapon'],
               80  => ['enchant armor', 'remove curse'],
               100 => ['confuse monster', 'destroy armor', 'fire',
                       'food detection', 'gold detection', 'magic mapping',
