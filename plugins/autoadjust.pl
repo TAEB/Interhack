@@ -32,6 +32,7 @@ sub autoadjust
                  [^.]*?                             # blessed, e.g.
                  \                                  # require space before item
                  $item                              # user regex
+                 [^.]*?                             # rest of the item name
                  (?-x: named.*?)?                   # item name
                  (?: \  \( -? \d+ : -? \d+ \))?     # charges
                  (?-x: \(unpaid, \d+ zorkmids?\))?  # price
