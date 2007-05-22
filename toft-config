@@ -4,9 +4,56 @@ $chromatic_gods = 0;
 $chromatic_nemeses = 1;
 
 # plugins {{{
-exclude "doy-colors-items";
+exclude "doy-colors-items", "apply-oil", "dual-slow-digestion";
 include "*";
 $fortune = "yasd ideas nethackidiocy";
+# }}}
+# wish-menu {{{
+$wish_enchantment = 2;
+my $armor = "blessed greased fixed +$wish_enchantment";
+%wishes =
+(
+    A => "$wish_quantity blessed scrolls of charging",
+    B => "magic marker",
+    C => "$armor helm of brilliance",
+    D => "$armor gray dragon scale mail",
+    E => "$armor silver dragon scale mail",
+    F => "blessed ring of levitation",
+    G => "7 candles",
+    H => "blessed ring of conflict",
+    I => "blessed greased fixed bag of holding",
+    J => "$wish_number cursed potions of gain level",
+    K => "$armor jumping boots",
+    L => "blessed spellbook of identify",
+    M => "blessed eye of the aethiopica",
+    N => "$armor gauntlets of power",
+    O => "blessed ring of free action",
+    P => "$armor speed boots",
+    Q => "$armor helm of telepathy",
+    R => "blessed orb of fate",
+    S => "blessed ring of teleport control",
+    T => "blessed amulet of life saving",
+    U => "$wish_quantity blessed scrolls of genocide",
+    V => "$armor helm of opposite alignment",
+    W => "nothing",
+);
+# }}}
+# marker-menu {{{
+%scrolls =
+(
+  A => 'charging',
+  B => 'enchant armor',
+  C => 'enchant weapon',
+  D => 'identify',
+  E => 'remove curse',
+  F => 'magic mapping',
+  G => 'gold detection',
+  H => 'scare monster',
+  I => 'teleportation',
+  J => 'earth',
+  K => 'taming',
+  L => 'genocide',
+);
 # }}}
 
 # remappings {{{
@@ -32,7 +79,7 @@ autoadjust $aa_whistle     => "w";
 autoadjust $aa_lamp        => "l";
 autoadjust $aa_luckstone   => "Z";
 autoadjust $aa_instrument  => "n";
-autoadjust $aa_trice       => "^y";
+autoadjust $aa_trice       => "^ye";
 
 # }}}
 
