@@ -53,6 +53,72 @@ $lc_scrolls = 1;
 # botl {{{
 $statusline = sub { "$botl{score}" };
 # }}}
+# wish-menu {{{
+$wish_enchantment = 2;
+my $armor = "blessed greased fixed +$wish_enchantment";
+%wishes =
+(
+    A => "$wish_quantity blessed scrolls of charging",
+    B => "magic marker",
+    C => "$armor helm of brilliance",
+    D => "$armor gray dragon scale mail",
+    E => "$armor silver dragon scale mail",
+    F => "blessed ring of levitation",
+    G => "7 candles",
+    H => "blessed ring of conflict",
+    I => "blessed greased fixed bag of holding",
+    J => "$wish_number cursed potions of gain level",
+    K => "$armor jumping boots",
+    L => "blessed spellbook of identify",
+    M => "blessed eye of the aethiopica",
+    N => "$armor gauntlets of power",
+    O => "blessed ring of free action",
+    P => "$armor speed boots",
+    Q => "$armor helm of telepathy",
+    R => "blessed orb of fate",
+    S => "blessed ring of teleport control",
+    T => "blessed amulet of life saving",
+    U => "$wish_quantity blessed scrolls of genocide",
+    V => "$armor helm of opposite alignment",
+    W => "nothing",
+);
+# }}}
+# marker-menu {{{
+%scrolls =
+(
+  A => 'charging',
+  B => 'enchant armor',
+  C => 'enchant weapon',
+  D => 'identify',
+  E => 'remove curse',
+  F => 'magic mapping',
+  G => 'gold detection',
+  H => 'scare monster',
+  I => 'teleportation',
+  J => 'earth',
+  K => 'taming',
+  L => 'genocide',
+);
+%spellbooks =
+(
+  A => 'magic mapping',
+  B => 'identify',
+  C => 'jumping',
+  D => 'haste self',
+  E => 'magic missile',
+  F => 'drain life',
+  G => 'charm monster',
+  H => 'finger of death',
+  I => 'cure sickness',
+  J => 'extra healing',
+  K => 'detect treasure',
+  L => 'create monster',
+  M => 'remove curse',
+  N => 'polymorph',
+  O => 'cancellation',
+);
+show_menu qr/^What type of spellbook do you want to write\? +$/ => \%spellbooks;
+# }}}
 # }}}
 # mappings {{{
 remap chr(5) => "E-  Elbereth\n"; # ^E to engrave Elbereth
