@@ -13,7 +13,7 @@ my $nw = sub
 };
 
 make_tab qr/\e\[HThe engraving now reads: ".*?"./ => sub{my $key = alphakeys(-1); " \e#name\nn${key}polymorph\n"};
-make_tab qr/\e\[HThe wand unsucessfully fights your attempt to write!/ => $nw->("striking");
+make_tab qr/\e\[HThe wand unsuccessfully fights your attempt to write!/ => $nw->("striking");
 make_tab qr/\e\[HA few ice cubes drop from the wand./ => $nw->("cold");
 make_tab qr/\e\[HThe \w+ is riddled by bullet holes!/ => $nw->("magic missile");
 make_tab qr/\e\[HThe bugs on the \w+ slow down!/ => $nw->("slow monster");
