@@ -27,7 +27,8 @@ $ec_bohboom = "bred";
 # }}}
 # }}}
 # plugins {{{
-exclude "doy-colors-items", "colors-monsters";
+exclude "doy-colors-items", "colors-monsters", "apply-oil";
+exclude "dual-slow-digestion";
 include "*";
 # }}}
 # plugin configuration {{{
