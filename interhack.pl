@@ -250,7 +250,7 @@ sub show_menu # {{{
             $postprint .= "\e[s\e[1;30m\e[2H";
             for my $k (sort keys %$items)
             {
-                my $v = value_of($$items{$k});
+                my $v = value_of($items->{$k});
                 $keyonce{$k} = "$v";
                 $postprint .= " $k - $v \n";
             }
