@@ -1,6 +1,6 @@
 # adds a little menu for easy wishing
 # it intentionally doesn't send the \n for you so you can check or back up
-# known issues: max of 23 items available (not enforced)
+# known issues: max of 22 items available (not enforced)
 #               screws up the display (mildly fixable)
 # by Eidolos
 
