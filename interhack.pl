@@ -241,17 +241,16 @@ sub pline # {{{
 } # }}}
 sub show_menu # {{{
 {
-    my $regex = shift;
-    my %items = %{shift(@_)};
+    my ($regex, $items) = @_;
 
     each_iteration
     {
         if ($vt->row_plaintext(1) =~ $regex)
         {
             $postprint .= "\e[s\e[1;30m\e[2H";
-            for my $k (sort keys %items)
+            for my $k (sort keys %$items)
             {
-                my $v = value_of($items{$k});
+                my $v = value_of($$items{$k});
                 $keyonce{$k} = "$v";
                 $postprint .= " $k - $v \n";
             }
