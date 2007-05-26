@@ -1,12 +1,13 @@
 nick "Crassworm";
 $vikeys = 1;
-$chromatic_gods = 0;
-$chromatic_nemeses = 1;
+$write_keys = 1;
 
 # plugins {{{
 exclude "doy-colors-items", "apply-oil", "dual-slow-digestion";
 include "*";
 $fortune = "yasd ideas nethackidiocy";
+$chromatic_gods = 0;
+$chromatic_nemeses = 1;
 # }}}
 # wish-menu {{{
 $wish_enchantment = 2;
@@ -22,7 +23,7 @@ my $armor = "blessed greased fixed +$wish_enchantment";
     G => "7 candles",
     H => "blessed ring of conflict",
     I => "blessed greased fixed bag of holding",
-    J => "$wish_number cursed potions of gain level",
+    J => "$wish_quantity cursed potions of gain level",
     K => "$armor jumping boots",
     L => "blessed spellbook of identify",
     M => "blessed eye of the aethiopica",
@@ -35,7 +36,6 @@ my $armor = "blessed greased fixed +$wish_enchantment";
     T => "blessed amulet of life saving",
     U => "$wish_quantity blessed scrolls of genocide",
     V => "$armor helm of opposite alignment",
-    W => "nothing",
 );
 # }}}
 # marker-menu {{{
@@ -59,7 +59,7 @@ my $armor = "blessed greased fixed +$wish_enchantment";
 # remappings {{{
 remap chr(5) => sub { "E-  Elbereth\n" }; # (^E)
 remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V to DfV
-remap chr(23) => "aany\e"; # for the drawbridge :) (^W)
+remap chr(23) => "anny\e"; # for the drawbridge :) (^W)
 # }}}
 
 # autoadjusts {{{
