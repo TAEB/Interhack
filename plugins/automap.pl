@@ -47,7 +47,10 @@ sub draw_map
             return "Sorry, can't read plugins/automap/$mapfile.txt";
         }
 
-        print "\e[1;30m\e[$y;${x}H$map\e[0m";
+        local $_ = "\e[1;30m\e[$y;${x}H$map\e[0m";
+        print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+        print;
+
         "Drawing at (y$y, x$x). Press ^R to redraw the screen."
     }
 }

@@ -27,13 +27,19 @@ extended_command "#view"
                   my @args = split ' ', $args;
                   my $level = $args[0];
                   return "I don't have a map for $level." unless exists $map{$level};
+
+                  print_ttyrec($interhack_handle, "\e[s\e[1;30m\e[2H") if $write_interhack_ttyrec;
                   print "\e[s\e[1;30m\e[2H";
                   for (@{$map{$level}})
                   {
-                      print substr($_, 0, 79), "\n";
+                      local $_ = substr($_, 0, 79) . "\n";
+                      print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+                      print;
                   }
 
-                  print "\e[m\e[HDrawing dlvl $level. Press a key to redraw the screen.--More--";
+                  local $_ = "\e[m\e[HDrawing dlvl $level. Press a key to redraw the screen.--More--";
+                  print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+                  print;
                   ReadKey 0;
                   request_redraw();
                   "If you can read this, you have pretty quick eyes!"

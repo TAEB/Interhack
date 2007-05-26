@@ -6,6 +6,7 @@ use LWP::Simple;
 use File::Temp qw/tempfile/;
 use Term::VT102;
 use Term::TtyRec::Plus;
+use Time::HiRes qw/gettimeofday/;
 
 # globals {{{
 our $nick = '';
@@ -32,6 +33,9 @@ our %extended_command;
 our %plugin_loaded;
 our $vt = Term::VT102->new(cols => 80, rows => 24);
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
+our $write_normal_ttyrec = 0;
+our $write_interhack_ttyrec = 0;
+our ($normal_handle, $interhack_handle);
 # colormap {{{
 our %colormap =
 (
@@ -226,16 +230,18 @@ sub pline # {{{
 {
     my $text = shift;
     my @lines = splitline($text);
+    print_ttyrec($interhack_handle, "\e[s") if $write_interhack_ttyrec;
     print "\e[s";
 
     while (@lines > 1)
     {
        my $line = shift @lines;
-       print "\e[H$line\e[K";
-       print "--More--";
+       print_ttyrec($interhack_handle, "\e[H$line--More--\e[K") if $write_interhack_ttyrec;
+       print "\e[H$line--More--\e[K";
        ReadKey 0;
     }
 
+    print_ttyrec($interhack_handle, "\e[u") if $write_interhack_ttyrec;
     print "\e[u";
     return $lines[0];
 } # }}}
@@ -312,7 +318,12 @@ sub annotate # {{{
 } # }}}
 sub clear_annotation # {{{
 {
-    print "\e[s\e[2H\e[K\e[u" if $annotation_onscreen;
+    if ($annotation_onscreen)
+    {
+        local $_ = "\e[s\e[2H\e[K\e[u";
+        print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+        print;
+    }
     $annotation_onscreen = 0;
 } # }}}
 
@@ -377,6 +388,7 @@ sub force_yn # {{{
     my $c;
 
     annotate("\e[1;31m$msg [yn] ");
+    print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
     print $postprint;
     $postprint = '';
 
@@ -393,6 +405,7 @@ sub force_tab # {{{
 {
     return if defined $ttyrec;
     annotate("\e[1;31m" . (shift || "Press tab to continue!"));
+    print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
     print $postprint;
     $postprint = '';
 
@@ -495,6 +508,16 @@ sub serialize_time # {{{
     sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
   }
 } # }}}
+
+sub print_ttyrec # {{{
+{
+    my $handle = shift;
+    my @text = grep {defined($_) && $_ ne ''} @_;
+    return unless @text;
+    print {$handle}
+          map { pack("VVV", gettimeofday(), length) . $_ }
+          @text;
+} # }}}
 # }}}
 
 # read config, get a socket {{{
@@ -570,6 +593,23 @@ ReadMode 3;
 END { ReadMode 0 }
 $|++;
 $SIG{INT} = sub {};
+
+if ($write_normal_ttyrec)
+{
+    system("mkdir -p $ENV{HOME}/.interhack/ttyrec/normal");
+    my $ttyrec_name = sprintf '%s/.interhack/ttyrec/normal/%s.ttyrec', $ENV{HOME}, scalar(localtime);
+    open $normal_handle, '>', $ttyrec_name
+        or die "Unable to open $ttyrec_name for writing: $!";
+}
+
+if ($write_interhack_ttyrec)
+{
+    system("mkdir -p $ENV{HOME}/.interhack/ttyrec/interhack");
+    my $ttyrec_name = sprintf '%s/.interhack/ttyrec/interhack/%s.ttyrec', $ENV{HOME}, scalar(localtime);
+    open $interhack_handle, '>', $ttyrec_name
+        or die "Unable to open $ttyrec_name for writing: $!";
+}
+
 # }}}
 # main loop {{{
 ITER:
@@ -710,6 +750,7 @@ while (1)
   $anno_frames-- unless $anno_frames == 0;
 
   $vt->process($_);
+  print_ttyrec($normal_handle, $_) if $write_normal_ttyrec;
 
   if (/ \e \[? [0-9;]* \z /x || m/  [^]* \z /x)
   {
@@ -789,6 +830,7 @@ while (1)
   }
 
   print;
+  print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
 
   {
       local $sock; # hide $sock from plugins
@@ -799,6 +841,7 @@ while (1)
       @postonce = ();
   }
 
+  print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
   print $postprint and $postprint = ''
     if $postprint ne '';
   # }}}
