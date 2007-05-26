@@ -4,6 +4,7 @@
 nick "doy";
 $vikeys = 1;
 # }}}
+# early plugin configuration {{{
 # eido-colors (has to go before include) {{{
 # exclude/include categories {{{
 $ece_shortbuc = 1;
@@ -24,6 +25,13 @@ $ec_holywater = "blue";
 $ec_unholywater = "red";
 $ec_trice = "bred";
 $ec_bohboom = "bred";
+# }}}
+# }}}
+# priceid {{{
+$lc_scrolls = 1;
+$short_names{scroll}{60} = ['ew'];
+$short_names{scroll}{80} = ['ea', 'rc'];
+$short_names{potion}{300} = ['ga', 'gl', 'para'];
 # }}}
 # }}}
 # plugins {{{
@@ -47,9 +55,6 @@ autoadjust $aa_whistle     => "z";
 autoadjust $aa_lamp        => "j";
 autoadjust $aa_instrument  => "q";
 autoadjust $aa_trice       => "^y";
-# }}}
-# priceid {{{
-$lc_scrolls = 1;
 # }}}
 # botl {{{
 $statusline = sub { "$botl{score}" };
