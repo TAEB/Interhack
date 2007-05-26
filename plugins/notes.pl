@@ -3,22 +3,43 @@
 # by Eidolos
 
 our $note_file ||= 'notes.txt';
-sub open_notes
+
+sub open_notes # {{{
 {
     my $rw = shift || '>>';
     open my $h, $rw, $note_file
         or warn "Unable to open $note_file for ${rw}ing: $!";
     return $h;
-}
-
+} # }}}
 my $note_handle = open_notes('>>');
 
-sub make_note
+sub make_note # {{{
 {
-    print {$note_handle} map {"T:$turncount $_\n"} @_;
-}
+    print {$note_handle} map {"T:$turncount $dlvl $_\n"} @_;
+} # }}}
+sub note_all # (stuff noted every time, like wishes) # {{{
+{
+    my ($matching, $note) = @_;
+    each_match $matching => sub { make_note(value_of($note)) };
+} # }}}
+# sub note_once (stuff noted only once for a dlvl, like shops) {{{
+{
+    my %seen;
 
-extended_command "#write"
+    sub note_once
+    {
+        my ($matching, $note) = @_;
+
+        each_match $matching => sub
+        {
+            my $t = value_of($note);
+            return if $t eq '' || $seen{"$dlvl $t"}++;
+            make_note($t);
+        }
+    }
+} # }}}
+
+extended_command "#write" # {{{
               => sub
                  {
                      my (undef, $args) = @_;
@@ -28,9 +49,8 @@ extended_command "#write"
                      }
                      make_note $args;
                      return "Noted!";
-                 };
-
-extended_command "#notes"
+                 }; # }}}
+extended_command "#notes" # {{{
               => sub
                  {
                      close $note_handle;
