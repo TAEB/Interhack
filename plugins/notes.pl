@@ -97,7 +97,7 @@ our %shoptype =
 );
 my $shops = join '|', keys %shoptype;
 
-note_once qr/\e\[(?:\d+;1)?H"[^\e]+Welcome(?: again)? to .*? ($shoptype)!"/
+note_once qr/\e\[(?:\d+;1)?H"[^\e]+Welcome(?: again)? to .*? ($shops)!"/
        => sub { $shop{$dlvl} = 1; "Level has a $shoptype{$1} store"};
 # }}}
 # nonshop special rooms {{{
