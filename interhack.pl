@@ -35,7 +35,8 @@ our $vt = Term::VT102->new(cols => 80, rows => 24);
 our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
 our $write_normal_ttyrec = 0;
 our $write_interhack_ttyrec = 0;
-our ($normal_handle, $interhack_handle);
+our $write_keys = 1;
+our ($normal_handle, $interhack_handle, $keys_handle);
 # colormap {{{
 our %colormap =
 (
@@ -238,7 +239,7 @@ sub pline # {{{
        my $line = shift @lines;
        print_ttyrec($interhack_handle, "\e[H$line--More--\e[K") if $write_interhack_ttyrec;
        print "\e[H$line--More--\e[K";
-       ReadKey 0;
+       print {$keys_handle} ReadKey 0;
     }
 
     print_ttyrec($interhack_handle, "\e[u") if $write_interhack_ttyrec;
@@ -395,6 +396,7 @@ sub force_yn # {{{
     while (1)
     {
         $c = ReadKey(0);
+        print {$keys_handle} $c;
         last if $c eq 'y' || $c eq 'Y' || $c eq 'n' || $c eq 'N';
     }
 
@@ -610,6 +612,13 @@ if ($write_interhack_ttyrec)
         or die "Unable to open $ttyrec_name for writing: $!";
 }
 
+if ($write_keys)
+{
+    system("mkdir -p $ENV{HOME}/.interhack/keys");
+    my $filename = sprintf '%s/.interhack/keys/%s.txt', $ENV{HOME}, scalar(localtime);
+    open $keys_handle, '>', $filename
+        or die "Unable to open $filename for writing: $!";
+}
 # }}}
 # main loop {{{
 ITER:
@@ -722,6 +731,7 @@ while (1)
           shift @lastkeys if defined($lastkeysmaxlen) && @lastkeys > $lastkeysmaxlen;
 
           print {$sock} $c;
+          print {$keys_handle} $c if $write_keys;
           $at_login = 0;
       }
   }
