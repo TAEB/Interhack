@@ -11,6 +11,23 @@ our @intrinsics_colors =
     [disintegration => "\e[1;30m"],
 );
 
+our %shorten_intrinsic =
+(
+    disintegration => 'disint',
+    sleep => 'slp',
+    shock => 'shk',
+    poison => 'pois',
+    'see invisible' => 'SI',
+    invisibility => 'invis',
+    'teleport control' => 'TC',
+    teleportitis => 'tpitis',
+    searching => 'srch',
+    stealth => 'stlth',
+    warning => 'warn',
+    telepathy => 'ESP',
+
+);
+
 sub show_intrinsics
 {
     my %t = %intrinsics; # save another copy so we can delete what we process
@@ -22,12 +39,15 @@ sub show_intrinsics
 
         my $out = $color;
         $out .= '!' unless delete $t{$intrinsic};
+        $intrinsic = $shorten_intrinsic{$intrinsic} || $intrinsic;
         $out .= "$intrinsic\e[m";
 
         push @intrinsics, $out;
     }
 
-    push @intrinsics, sort keys %t;
+    push @intrinsics, sort
+                      map { $shorten_intrinsic{$_} || $_ }
+                      keys %t;
 
     return "Intrinsics: " . join(', ', @intrinsics);
 }
