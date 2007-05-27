@@ -33,27 +33,28 @@ our %wishes =
     Q => "$bfg amulet of life saving",
     R => "7 $bfg candles",
     S => "$bfg bag of holding",
+    T => "$bfg tooled horn",
 );
 
 our %law_wishes =
 (
-    T => "$armor Sceptre of Might",
-    U => "$bfg Magic Mirror of Merlin",
-    V => "$bfg Orb of Detection",
+    U => "$armor Sceptre of Might",
+    V => "$bfg Magic Mirror of Merlin",
+    W => "$bfg Orb of Detection",
 );
 
 our %neu_wishes =
 (
-    T => "$bfg Eye of the Aethiopica",
-    U => "$bfg Orb of Fate",
-    V => "$bfg Platinum Yendorian Express Card",
+    U => "$bfg Eye of the Aethiopica",
+    V => "$bfg Orb of Fate",
+    W => "$bfg Platinum Yendorian Express Card",
 );
 
 our %cha_wishes =
 (
-    T => "$bfg Master Key of Thievery",
-    U => "$bfg spellbook of identify",
-    V => "$bfg spellbook of magic mapping",
+    U => "$bfg Master Key of Thievery",
+    V => "$bfg spellbook of identify",
+    W => "$bfg spellbook of magic mapping",
 );
 
 my $added_align = '';
