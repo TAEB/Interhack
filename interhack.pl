@@ -178,10 +178,13 @@ sub exclude # {{{
 
 { # request_redraw {{{
     my $lexisock;
-
     sub request_redraw # {{{
     {
         print {$lexisock} chr(18);
+    } # }}}
+    sub print_sock # {{{
+    {
+        print {$lexisock} @_;
     } # }}}
     sub set_lexisock # {{{
     {
