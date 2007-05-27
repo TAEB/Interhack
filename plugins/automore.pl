@@ -6,6 +6,7 @@
 # by Eidolos
 
 our $automore_enabled = 0;
+our $automore_delay = 0.05;
 
 extended_command "#automore"
               => sub
@@ -20,7 +21,7 @@ each_match qr/--More--/ => sub
     return unless $automore_enabled;
     my $top_row = $vt->row_text(1);
     return if $top_row =~ /Message History/ || $top_row =~ /Things that are here/;
-    select undef, undef, undef, 0.1;
+    select undef, undef, undef, $automore_delay;
     print_sock ' ';
 }
 
