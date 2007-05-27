@@ -23,24 +23,33 @@ extended_command "#view"
               => sub
               {
                   my ($cmd, $args) = @_;
-                  return "Syntax: #view DLVL" if !defined($args) || $args eq '';
-                  my @args = split ' ', $args;
-                  my $level = $args[0];
-                  return "I don't have a map for $level." unless exists $map{$level};
 
-                  print_ttyrec($interhack_handle, "\e[s\e[1;30m\e[2H") if $write_interhack_ttyrec;
-                  print "\e[s\e[1;30m\e[2H";
-                  for (@{$map{$level}})
+                  $args = '' if !defined($args);
+                  $args =~ s/(\d+)//;
+                  return "Syntax: #view DLVL [or #view FROM-TO]" if !defined($1);
+
+                  my $from = $1;
+                  my $to = $1 if $args =~ s/(\d+)//;
+                  $to = $from if !defined($to);
+
+                  for my $level ($from..$to)
                   {
-                      local $_ = substr($_, 0, 79) . "\n";
+                      return "I don't have a map for $level." unless exists $map{$level};
+
+                      print_ttyrec($interhack_handle, "\e[s\e[1;30m\e[2H") if $write_interhack_ttyrec;
+                      print "\e[s\e[1;30m\e[2H";
+                      for (@{$map{$level}})
+                      {
+                          local $_ = substr($_, 0, 79) . "\n";
+                          print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+                          print;
+                      }
+
+                      local $_ = "\e[m\e[HDrawing dlvl $level. Press a key to redraw the screen.--More--";
                       print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
                       print;
+                      print {$keys_handle} ReadKey 0;
                   }
-
-                  local $_ = "\e[m\e[HDrawing dlvl $level. Press a key to redraw the screen.--More--";
-                  print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
-                  print;
-                  print {$keys_handle} ReadKey 0;
                   request_redraw();
                   "If you can read this, you have pretty quick eyes!"
               };
