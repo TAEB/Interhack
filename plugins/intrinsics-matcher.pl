@@ -28,17 +28,17 @@ each_match qr/\e\[(?:1;\d+)?HYour health currently feels amplified!/ => $add, "s
 each_match qr/\e\[(?:1;\d+)?HYou feel (?:insulated|grounded in reality)/ => $add, "shock";
 # }}}
 # other intrinsics {{{
-each_match qr/\e\[(?:1;\d+)?HYou feel (?:very jumpy|diffuse)\./ => $add, "tpitis";
-each_match qr/\e\[(?:1;\d+)?HYou feel (?:in control of yourself|centered in your personal space)\./ => $add, "tc";
-each_match qr/\e\[(?:1;\d+)?HYou feel controlled\./ => $add, "tc";
+each_match qr/\e\[(?:1;\d+)?HYou feel (?:very jumpy|diffuse)\./ => $add, "teleportitis";
+each_match qr/\e\[(?:1;\d+)?HYou feel (?:in control of yourself|centered in your personal space)\./ => $add, "teleport control";
+each_match qr/\e\[(?:1;\d+)?HYou feel controlled\./ => $add, "teleport control";
 each_match qr/\e\[(?:1;\d+)?HYou feel (?:a strange mental acuity|in touch with the cosmos)\./ => $add, "telepathy";
-each_match qr/\e\[(?:1;\d+)?HYou feel hidden\./ => $add, "invis";
+each_match qr/\e\[(?:1;\d+)?HYou feel hidden\./ => $add, "invisibility";
 each_match qr/\e\[(?:1;\d+)?HYou feel perceptive\./ => $add, "searching";
 each_match qr/\e\[(?:1;\d+)?HYou feel stealthy\./ => $add, "stealth";
 each_match qr/\e\[(?:1;\d+)?HYou feel sensitive\./ => $add, "warning";
-each_match qr/\e\[(?:1;\d+)?HYou feel (?:very self-conscious|transparent)\./ => $add, "see invis";
-each_match qr/\e\[(?:1;\d+)?HYou see an image of someone stalking you\./ => $add, "see invis";
-each_match qr/\e\[(?:1;\d+)?HYour vision becomes clear\./ => $add, "see invis";
+each_match qr/\e\[(?:1;\d+)?HYou feel (?:very self-conscious|transparent)\./ => $add, "see invisible";
+each_match qr/\e\[(?:1;\d+)?HYou see an image of someone stalking you\./ => $add, "see invisible";
+each_match qr/\e\[(?:1;\d+)?HYour vision becomes clear\./ => $add, "see invisible";
 each_match qr/\e\[(?:1;\d+)?HYou (?:seem faster|feel quick)\./ => $add, "fast";
 # }}}
 # notices that we still have a resistance {{{
@@ -65,11 +65,11 @@ each_match qr/\e\[(?:1;\d+)?HYou feel conductive\./ => $del, "shock";
 # losing intrinsics {{{
 each_match qr/\e\[(?:1;\d+)?HYou seem slower\./ => $del, "fast";
 each_match qr/\e\[(?:1;\d+)?HYou feel (?:slow|slower)\./ => $del, "fast";
-each_match qr/\e\[(?:1;\d+)?HYou feel paranoid\./ => $del, "invis";
+each_match qr/\e\[(?:1;\d+)?HYou feel paranoid\./ => $del, "invisibility";
 each_match qr/\e\[(?:1;\d+)?HYou feel clumsy\./ => $del, "stealth";
-each_match qr/\e\[(?:1;\d+)?HYou feel less jumpy\./ => $del, "tpitis";
-each_match qr/\e\[(?:1;\d+)?HYou feel uncontrolled\./ => $del, "tc";
-each_match qr/\e\[(?:1;\d+)?HYou (?:thought you saw something|tawt you taw a puttie tat)\./ => $add, "see invis";
+each_match qr/\e\[(?:1;\d+)?HYou feel less jumpy\./ => $del, "teleportitis";
+each_match qr/\e\[(?:1;\d+)?HYou feel uncontrolled\./ => $del, "teleport control";
+each_match qr/\e\[(?:1;\d+)?HYou (?:thought you saw something|tawt you taw a puttie tat)\./ => $add, "see invisible";
 each_match qr/\e\[(?:1;\d+)?HYour senses fail\./ => $del, "telepathy";
 # }}}
 # }}}
