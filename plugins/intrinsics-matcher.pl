@@ -39,6 +39,17 @@ each_match qr/\e\[(?:1;\d+)?HYou see an image of someone stalking you\./ => $add
 each_match qr/\e\[(?:1;\d+)?HYour vision becomes clear\./ => $add, "see invis";
 each_match qr/\e\[(?:1;\d+)?HYou (?:seem faster|feel quick)\./ => $add, "fast";
 # }}}
+# notices that we still have a resistance {{{
+each_match qr/\e\[(?:1;\d+)?HYou seem unaffected by the poison\./ => $add, "poison";
+each_match qr/\e\[(?:1;\d+)?HThe poison doesn't seem to affect you\./ => $add, "poison";
+each_match qr/\e\[(?:1;\d+)?HThe fire doesn't feel hot!/ => $add, "fire";
+each_match qr/\e\[(?:1;\d+)?HThe feel mildly hot\./ => $add, "fire";
+each_match qr/\e\[(?:1;\d+)?HYou don't feel cold\.\./ => $add, "cold";
+each_match qr/\e\[(?:1;\d+)?HYou feel mildly chilly\./ => $add, "cold";
+each_match qr/\e\[(?:1;\d+)?HYou feel a mild tingle\./ => $add, "shock";
+each_match qr/\e\[(?:1;\d+)?HYou seem unhurt\./ => $add, "shock";
+each_match qr/\e\[(?:1;\d+)?HYou are not disintegrated\./ => $add, "disintegration";
+# }}}
 # }}}
 
 # dangerous messages {{{
