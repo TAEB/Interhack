@@ -7,7 +7,12 @@
 
 # this can be useful because it's so damn flexible.. for example, re-remapping
 # keys: #eval $keymap{"\ce"} = "EE  Elbereth\n"
-# set a reminder: #eval press_tab sub{$vt->row_text(24)=~/^Dlvl:9\b/}=>"enchant stuff plz"
+# set a reminder: #eval press_tab sub{$vt->row_text(24)=~/^Dlvl:9\b/}=>"enchant
+# stuff plz"
+
+# note: if the "#eval <code>: unknown extended command" output exceeds one line,
+# it won't work. One solution is to put <code> into a file and use
+# #eval do 'eval.pl'
 
 # by Eidolos
 
