@@ -831,8 +831,8 @@ while (1)
     $resting |= 4 if $curpw != $maxpw;
   }
 
-  s{r(?:est)?: unknown extended command\.}
-   {To sleep, perchance to dream.}g;
+  s{\e\[Hr(?:est)?: unknown extended command\.}
+   {\e[HTo sleep, perchance to dream.}g;
 
   if ($resting)
   {
