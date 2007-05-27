@@ -30,8 +30,8 @@ extended_command "#view"
                   return "Syntax: #view DLVL [or #view FROM-TO]" if !defined($1);
 
                   my $from = $1;
-                  my $to = $1 if $args =~ s/(\d+)//;
-                  $to = $from if !defined($to);
+                  my $to = $from;
+                  $to = $1 if $args =~ s/(\d+)//;
 
                   for my $level ($from..$to)
                   {
