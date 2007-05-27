@@ -2,16 +2,20 @@
 # I don't think this has any security holes, but one can never be too sure
 # this requires that you set $load_eval to 1 before including *, just so you
 # know what you're dealing with
+# set $no_evalcontext to a true value if you don't want to install
+# Devel::EvalContext
 
 # this can be useful because it's so damn flexible.. for example, re-remapping
 # keys: #eval $keymap{"\ce"} = "EE  Elbereth\n"
-
 # set a reminder: #eval press_tab sub{$vt->row_text(24)=~/^Dlvl:9\b/}=>"enchant stuff plz"
+
 # by Eidolos
 
 if ($load_eval)
 {
-    use Devel::EvalContext; # for persistency across #evals
+    # for persistency across #evals
+    use Devel::EvalContext unless $no_evalcontext;
+
     extended_command "#eval"
                   => sub
                   {
