@@ -48,7 +48,7 @@ sub show_intrinsics
                       map { $shorten_intrinsic{$_} || $_ }
                       keys %t;
 
-    return "Intrinsics: " . join(', ', @intrinsics);
+    return join ' ', @intrinsics;
 }
 
 extended_command "#intrinsics" => \&show_intrinsics;
