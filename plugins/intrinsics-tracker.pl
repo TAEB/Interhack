@@ -8,7 +8,6 @@ our @intrinsics_colors =
     [fire           => "\e[1;33m"],
     [cold           => "\e[1;36m"],
     [shock          => "\e[1;34m"],
-    [disintegration => "\e[1;30m"],
 );
 
 our %shorten_intrinsic =
