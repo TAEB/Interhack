@@ -87,7 +87,11 @@ my $armor = "blessed greased fixed +$wish_enchantment";
     T => "blessed amulet of life saving",
     U => "$wish_quantity blessed scrolls of genocide",
     V => "$armor helm of opposite alignment",
+    W => "nothing",
 );
+%law_wishes = ();
+%neu_wishes = ();
+%cha_wishes = ();
 # }}}
 # marker-menu {{{
 %scrolls =
