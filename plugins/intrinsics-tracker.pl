@@ -37,7 +37,7 @@ sub show_intrinsics
         my ($intrinsic, $color) = @$int_color;
 
         my $out = $color;
-        $out .= '!' unless delete $t{$intrinsic};
+        $out .= "\e[1;30m!" unless delete $t{$intrinsic};
         $intrinsic = $shorten_intrinsic{$intrinsic} || $intrinsic;
         $out .= "$intrinsic\e[m";
 
