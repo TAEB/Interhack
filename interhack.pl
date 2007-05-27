@@ -254,12 +254,19 @@ sub show_menu # {{{
     {
         if ($vt->row_plaintext(1) =~ $regex)
         {
+            my $longest_length = 0;
+            for (values %$items)
+            {
+                $longest_length = length if length > $longest_length;
+            }
+            $longest_length++; # extra space at the end
+
             $postprint .= "\e[s\e[1;30m\e[2H";
             for my $k (sort keys %$items)
             {
                 my $v = value_of($items->{$k});
                 $keyonce{$k} = "$v";
-                $postprint .= " $k - $v \n";
+                $postprint .= sprintf " %s - %-${longest_length}s\n", $k, $v;
             }
             $postprint .= "\e[m\e[u";
         }
