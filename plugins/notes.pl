@@ -68,7 +68,7 @@ extended_command "#notes" # {{{
 # major events {{{
 note_all "\e[HFor what do you wish?" => "Got a wish!";
 note_all qr/Welcome to experience level (\d+)\./ => sub { "Hit experience level $1." };
-note_all qr/\e[HYou receive a faint telepathic message from / => "Quest!";
+note_all qr/\e\[HYou receive a faint telepathic message from / => "Quest!";
 # }}}
 # altars {{{
 note_once qr/\e\[HThere is an altar to .*? \((\w+)\) here\./ => sub { "\u$1 altar" };
