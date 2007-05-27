@@ -4,6 +4,7 @@
 nick "doy";
 $vikeys = 1;
 $write_keys = 0;
+$no_evalcontext = 1;
 # }}}
 # early plugin configuration {{{
 # eido-colors (has to go before include) {{{
