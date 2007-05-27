@@ -268,6 +268,7 @@ sub show_menu # {{{
                 $keyonce{$k} = "$v";
                 $postprint .= sprintf " %s - %-${longest_length}s\n", $k, $v;
             }
+            chomp $postprint; # to fit another item on the menu
             $postprint .= "\e[m\e[u";
         }
     }
