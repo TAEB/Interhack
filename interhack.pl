@@ -796,7 +796,6 @@ while (1)
   }
   if (/Logged in as: (\w+)/)
   {
-    print {$sock} ' ' if !$stop_sing_pass; # try to fix no output on start
     $stop_sing_pass = 1;
     $at_login = 1;
     $logged_in = 1;
