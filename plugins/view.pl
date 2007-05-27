@@ -5,18 +5,19 @@
 # level
 # by Eidolos
 
+include "stats";
+
 our %map;
-our $dlvl;
 
 $vt->callback_set("CLEAR", sub
 {
     my ($cbvt, $cbtype) = @_;
     return unless $cbtype eq "CLEAR";
-    return unless $cbvt->row_plaintext(24) =~ /^(?:Dlvl:|Home )\d+ /;
+    return unless $cbvt->row_plaintext(24) =~ /^(?:Dlvl:\d+|Home \d+|End Game|Astral Plane) /;
 
-    $dlvl = $1 if $cbvt->row_plaintext(24) =~ /^Dlvl:(\d+) /;
-    $dlvl = "q$1" if $cbvt->row_plaintext(24) =~ /^Home (\d+) /;
-    $map{$dlvl} = [map {$cbvt->row_plaintext($_)} 2..22];
+    $mapdlvl = $1 if $dlvl =~ /Dlvl:(\d+)/;
+    $mapdlvl = "q$1" if $dlvl =~ /Home (\d+)/;
+    $map{$mapdlvl} = [map {$cbvt->row_plaintext($_)} 2..22];
 });
 
 extended_command "#view"
