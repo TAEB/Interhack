@@ -55,6 +55,6 @@ make_annotation qr/\e\[HYou feel vulnerable./ => sub{"Lost protection."};
 
 make_annotation qr/\e\[HThe .*? yowls!/ => "Your pet is hungry!";
 make_annotation qr/\e\[HOh wow!  Great stuff!/ => "You are now hallucinating.";
-make_annotation qr/\e\[HYou reel.../ => "You are now stunned.";
+make_annotation qr/\e\[HYou reel\.\.\./ => "You are now stunned.";
 make_annotation qr/\e\[HYou feel somewhat dizzy./ => "You are now confused.";
 make_annotation qr/\e\[HYou feel feverish./ => "You are now a werefoo.";
