@@ -19,7 +19,7 @@
 if ($load_eval)
 {
     # for persistency across #evals
-    use Devel::EvalContext unless $no_evalcontext;
+    require Devel::EvalContext unless $no_evalcontext;
 
     extended_command "#eval"
                   => sub
