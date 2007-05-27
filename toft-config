@@ -1,6 +1,7 @@
 nick "Crassworm";
 $vikeys = 1;
 $write_keys = 1;
+$no_evalcontext = 1;
 
 # plugins {{{
 exclude "doy-colors-items", "apply-oil", "dual-slow-digestion";
