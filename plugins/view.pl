@@ -49,7 +49,8 @@ extended_command "#view"
                       local $_ = "\e[m\e[HDrawing dlvl $level. Press a key to redraw the screen.--More--";
                       print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
                       print;
-                      print {$keys_handle} ReadKey 0;
+                      my $c = ReadKey 0;
+                      print {$keys_handle} $c if $write_keys;
                   }
                   request_redraw();
                   "If you can read this, you have pretty quick eyes!"
