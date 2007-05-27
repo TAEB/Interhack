@@ -1,9 +1,35 @@
 our %intrinsics;
 
+our @intrinsics_colors =
+(
+    [fast           => "\e[1;35m"],
+    [poison         => "\e[0;32m"],
+    [sleep          => "\e[1;31m"],
+    [fire           => "\e[1;33m"],
+    [cold           => "\e[1;36m"],
+    [shock          => "\e[1;34m"],
+    [disintegration => "\e[1;30m"],
+);
+
 sub show_intrinsics
 {
-    my $annotation = "Intrinsics: " . join(', ', sort keys %intrinsics);
-    pline($annotation);
+    my %t = %intrinsics; # save another copy so we can delete what we process
+    my @intrinsics;
+
+    for my $int_color (@intrinsics_colors)
+    {
+        my ($intrinsic, $color) = @$int_color;
+
+        my $out = $color;
+        $out .= '!' unless delete $t{$intrinsic};
+        $out .= "$intrinsic\e[m";
+
+        push @intrinsics, $out;
+    }
+
+    push @intrinsics, sort keys %t;
+
+    return "Intrinsics: " . join(', ', @intrinsics);
 }
 
 extended_command "#intrinsics" => \&show_intrinsics;
