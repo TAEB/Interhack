@@ -35,7 +35,11 @@ extended_command "#view"
 
                   for my $level ($from..$to)
                   {
-                      return "I don't have a map for $level." unless exists $map{$level};
+                      if (!exists($map{$level}))
+                      {
+                          request_redraw() if $level > $from;
+                          return "I don't have a map for $level.";
+                      }
 
                       print_ttyrec($interhack_handle, "\e[s\e[1;30m\e[2H") if $write_interhack_ttyrec;
                       print "\e[s\e[1;30m\e[2H";
