@@ -4,7 +4,7 @@
 
 our $mysterious_force = 0;
 
-make_anno "A mysterious force momentarily surrounds you..."
+make_annotation "A mysterious force momentarily surrounds you..."
        => sub { "That's force number " . ++$mysterious_force . "." };
 
 extended_command "#hell"
