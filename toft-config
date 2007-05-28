@@ -1,68 +1,27 @@
+# main config {{{
 nick "Crassworm";
 $vikeys = 1;
 $write_keys = 1;
 $no_evalcontext = 1;
-
+# }}}
 # plugins {{{
 exclude "apply-oil", "dual-slow-digestion";
-include "*";
-$fortune = "yasd ideas nethackidiocy";
 $chromatic_gods = 0;
 $chromatic_nemeses = 1;
-# }}}
 # wish-menu {{{
-$wish_enchantment = 2;
-my $armor = "blessed greased fixed +$wish_enchantment";
-%wishes =
-(
-    A => "$wish_quantity blessed scrolls of charging",
-    B => "magic marker",
-    C => "$armor helm of brilliance",
-    D => "$armor gray dragon scale mail",
-    E => "$armor silver dragon scale mail",
-    F => "blessed ring of levitation",
-    G => "7 candles",
-    H => "blessed ring of conflict",
-    I => "blessed greased fixed bag of holding",
-    J => "$wish_quantity cursed potions of gain level",
-    K => "$armor jumping boots",
-    L => "blessed spellbook of identify",
-    M => "blessed eye of the aethiopica",
-    N => "$armor gauntlets of power",
-    O => "blessed ring of free action",
-    P => "$armor speed boots",
-    Q => "$armor helm of telepathy",
-    R => "blessed orb of fate",
-    S => "blessed ring of teleport control",
-    T => "blessed amulet of life saving",
-    U => "$wish_quantity blessed scrolls of genocide",
-    V => "$armor helm of opposite alignment",
-);
-# }}}
-# marker-menu {{{
-%scrolls =
-(
-  A => 'charging',
-  B => 'enchant armor',
-  C => 'enchant weapon',
-  D => 'identify',
-  E => 'remove curse',
-  F => 'magic mapping',
-  G => 'gold detection',
-  H => 'scare monster',
-  I => 'teleportation',
-  J => 'earth',
-  K => 'taming',
-  L => 'genocide',
-);
+$wish_enchantment = 3;
+$bfg = "blessed greased fixed";
 # }}}
 
+include "*";
+
+$fortune = "yasd ideas nethackidiocy";
+# }}}
 # remappings {{{
-remap chr(5) => sub { "E-  Elbereth\n" }; # (^E)
-remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V to DfV
-remap chr(23) => "anny\e"; # for the drawbridge :) (^W)
+remap chr(5) => sub { "E-  Elbereth\n" }; # ^E
+remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V
+remap chr(23) => "anny\e"; # drawbridge: ^W
 # }}}
-
 # autoadjusts {{{
 sub autoadjust;
 
