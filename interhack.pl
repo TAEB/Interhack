@@ -297,30 +297,6 @@ sub value_of # {{{
     return $exp;
 } # }}}
 
-sub make_annotation # {{{
-{
-    my ($matching, $annotation) = @_;
-    each_match $matching => annotate($annotation);
-} # }}}
-sub annotate # {{{
-{
-  my $annotation = value_of(shift);
-  return if $annotation eq '';
-  $annotation_onscreen = 1;
-  $anno_frames = 5;
-  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
-} # }}}
-sub clear_annotation # {{{
-{
-    if ($annotation_onscreen)
-    {
-        local $_ = "\e[s\e[2H\e[K\e[u";
-        print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
-        print;
-    }
-    $annotation_onscreen = 0;
-} # }}}
-
 sub each_match # {{{
 {
     my $matching = shift;
@@ -369,6 +345,30 @@ sub each_match_row # {{{
     {
         die "Unable to each_match_vt matching object of type " . ref($matching);
     }
+} # }}}
+
+sub make_annotation # {{{
+{
+    my ($matching, $annotation) = @_;
+    each_match $matching => sub { annotate($annotation) };
+} # }}}
+sub annotate # {{{
+{
+  my $annotation = value_of(shift);
+  return if $annotation eq '';
+  $annotation_onscreen = 1;
+  $anno_frames = 5;
+  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
+} # }}}
+sub clear_annotation # {{{
+{
+    if ($annotation_onscreen)
+    {
+        local $_ = "\e[s\e[2H\e[K\e[u";
+        print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+        print;
+    }
+    $annotation_onscreen = 0;
 } # }}}
 
 sub make_tab # {{{
