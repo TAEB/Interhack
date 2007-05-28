@@ -64,3 +64,4 @@ Aioli: in fact, you can do a lot of speed upgrades just by "generalizing" g + di
 Aioli: like a routine for searching for the VS, that stops if a monster is encountered
 expand monster colors to have an option for only dangerous monsters (named demons, footrices, riders, flayers, etc)
 * add a 'press tab to continue' prompt when you get an instadeath message ('You are slowing down.', etc) to make sure you read it
+realtime counter should have an option for compressing pauses like timettyrecs
