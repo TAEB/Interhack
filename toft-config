@@ -4,7 +4,7 @@ $write_keys = 1;
 $no_evalcontext = 1;
 
 # plugins {{{
-exclude "doy-colors-items", "apply-oil", "dual-slow-digestion";
+exclude "apply-oil", "dual-slow-digestion";
 include "*";
 $fortune = "yasd ideas nethackidiocy";
 $chromatic_gods = 0;

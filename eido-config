@@ -8,7 +8,6 @@ nick "Eidolos";
 $chromatic_nemeses = 1;
 $load_eval = 1;
 $write_interhack_ttyrec = 1;
-exclude "doy-colors-items";
 include "*";
 # }}}
 
