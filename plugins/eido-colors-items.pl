@@ -245,6 +245,9 @@ if (!$ece_worn)
 # pretty useless items {{{
 if (!$ece_useless)
 {
+# things explicitly named "crap" {{{
+    recolor qr/\w+ called (?:crap|junk|worthless)\b/ => $ec_useless_crap || $ec_useless || "darkgray" unless $ece_useless_crap;
+# }}}
 # scrolls {{{
     recolor qr/scrolls? (?:called|of) (?:light|confuse monster|stinking cloud|punishment|fire|destroy armor|amnesia|create monster|food detection)\b/ => $ec_useless_scrolls || $ec_useless || "darkgray" unless $ece_useless_scrolls;
 # }}}
