@@ -10,11 +10,5 @@ extended_command "#geno"
                      $geno = "No genocides." if $geno eq '';
                      pline($geno);
                  };
-each_iteration
-{
-  while (/Wiped out all (.*?)\./g)
-  {
-    $geno{$1} = 1;
-  }
-}
+each_match qr/Wiped out all (.*?)\./ => sub { $geno{$1} = 1 };
 
