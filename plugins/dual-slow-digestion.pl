@@ -12,7 +12,7 @@ extended_command "#dualsd"
          "Slow digestion notification " . ($dual_sd_enabled ? "ON." : "OFF.")
        };
 
-each_match qr/ T:(\d+)/
+each_match_vt 24, qr/ T:(\d+)/
     => sub
        {
            my $mod20 = $1 % 20;
