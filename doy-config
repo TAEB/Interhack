@@ -37,7 +37,7 @@ $short_names{potion}{300} = ['ga', 'gl', 'para'];
 # }}}
 # }}}
 # plugins {{{
-exclude "apply-oil", "colors-monsters", "doy-colors-items";
+exclude "apply-oil", "colors-monsters";
 exclude "dual-slow-digestion", "eval", "gem-name", "geno-list";
 exclude "intrinsics-matcher", "intrinsics-tracker";
 include "*";
