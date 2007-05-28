@@ -3,20 +3,18 @@
 # main config {{{
 nick "Eidolos";
 # }}}
-
 # plugins {{{
 $chromatic_nemeses = 1;
 $load_eval = 1;
 $write_interhack_ttyrec = 1;
 include "*";
+$statusline = sub { my $timepos = 80 - length($botl{time}); "$botl{score} \e[23;${timepos}H$colormap{darkgray}$botl{time}\e[0m" };
 # }}}
-
 # key remappings {{{
 remap "\ce" => "E-  Elbereth\n";
 remap "\cw" => "aany\e";
 remap "\cv" => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      ";
 # }}}
-
 # autoadjusts {{{
 sub autoadjust;
 autoadjust $aa_key         => "k";
