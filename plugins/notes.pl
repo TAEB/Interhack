@@ -20,7 +20,7 @@ sub make_note # {{{
 sub note_all # (stuff noted every time, like wishes) # {{{
 {
     my ($matching, $note) = @_;
-    each_match $matching => sub { make_note(value_of($note)) };
+    each_match_vt 1, $matching => sub { make_note(value_of($note)) };
 } # }}}
 # sub note_once (stuff noted only once for a dlvl, like shops) {{{
 {
@@ -30,7 +30,7 @@ sub note_all # (stuff noted every time, like wishes) # {{{
     {
         my ($matching, $note) = @_;
 
-        each_match $matching => sub
+        each_match_vt 1, $matching => sub
         {
             my $t = value_of($note);
             return if $t eq '' || $seen{"$dlvl $t"}++;
@@ -66,24 +66,24 @@ extended_command "#notes" # {{{
 
 # set up some autonotes (this will become its own plugin) {{{
 # major events {{{
-note_all "\e[HFor what do you wish?" => "Got a wish!";
+note_all qr/^For what do you wish\?/ => "Got a wish!";
 note_all qr/Welcome to experience level (\d+)\./ => sub { "Hit experience level $1." };
-note_all qr/\e\[HYou receive a faint telepathic message from / => "Quest!";
-note_all qr/\e\[(?:1;\d+)?H"So thou thought thou couldst kill me, fool\."/ => "Rodney encounter!";
-note_all qr/\e\[(?:1;\d+)?HDouble Trouble\.\.\./ => "Double Trouble!";
-note_all qr/\e\[HA mysterious force momentarily surrounds you\.\.\./ => "Hit by the mysterious force.";
-note_all qr/\e\[HBut now thou must face the final Test\.\.\./ => "Entered the Endgame.";
+note_all 'You receive a faint telepathic message from ' => "Quest!";
+note_all '"So thou thought thou couldst kill me, fool."' => "Rodney encounter!";
+note_all 'Double Trouble...' => "Double Trouble!";
+note_all 'A mysterious force momentarily surrounds you...' => "Hit by the mysterious force.";
+note_all 'But now thou must face the final Test...' => "Entered the Endgame.";
 # }}}
 # altars {{{
-note_once qr/\e\[HThere is an altar to .*? \((\w+)\) here\./ => sub { "\u$1 altar" };
-note_once qr/\e\[H.\s+.*?\((\w+) altar\)/ => sub { "\u$1 altar" };
+note_once qr/There is an altar to .*? \((\w+)\) here\./ => sub { "\u$1 altar" };
+note_once qr/^.\s+.*?\((\w+) altar\)/ => sub { "\u$1 altar" };
 # }}}
 # shops {{{
 # when we get a generic shop message, we check $shop{dlvl} -- if it's already
 # set to >0, then we have seen a more specific shop message
 our %shop;
 
-note_once qr/\e\[HYou hear (?:the chime of a cash register|someone cursing shoplifters)\./ => sub { $shop{$dlvl} ? "" : "Level has some kind of shop"};
+note_once qr/You hear (?:the chime of a cash register|someone cursing shoplifters)\./ => sub { $shop{$dlvl} ? "" : "Level has some kind of shop"};
 
 # get rid of "again" when persistence is in..
 our %shoptype =
@@ -102,11 +102,11 @@ our %shoptype =
 );
 my $shops = join '|', keys %shoptype;
 
-note_once qr/\e\[(?:\d+;1)?H"[^\e]+Welcome(?: again)? to .*? ($shops)!"/
+note_once qr/"[^\e]+Welcome(?: again)? to .*? ($shops)!"/
        => sub { $shop{$dlvl} = 1; "Level has a $shoptype{$1} store"};
 # }}}
 # nonshop special rooms {{{
-note_once qr/You hear the footsteps of a guard on patrol\./ => "Level has a vault";
+note_once "You hear the footsteps of a guard on patrol." => "Level has a vault";
 # }}}
 # }}}
 
