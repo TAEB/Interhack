@@ -30,12 +30,12 @@ showweight
 * realtime counter
 some kind of mouse support
 kill counter
-local ttyrec output
+* local ttyrec output
 which could be used to rewind live
 sokoban helper
 hunger estimator
 prayer timeout estimator
-wish listings
+* wish listings
 * geno listings
 * name empty wands
 mind flayer protection
@@ -52,13 +52,13 @@ remap escape to something that works instantly.. or something.. maybe!
 color altars based on alignment
 * exp to next level
 exp gained from kills
-automatic intrinsic tracker
+* automatic intrinsic tracker
 * object ID stuff (like wand engraving, ring sinkdropping, etc)
 autoopen doors :)
 doy: marvin's farsight, looking at every square for ghosts
 auto-unidle
 * keystroke counter!
-... and recorder!
+* ... and recorder!
 * dual slow digestion messages (and anything else of that nature)
 Aioli: in fact, you can do a lot of speed upgrades just by "generalizing" g + direction travel for many cases
 Aioli: like a routine for searching for the VS, that stops if a monster is encountered
