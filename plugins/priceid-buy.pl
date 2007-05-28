@@ -148,7 +148,7 @@ sub calc_base
     return map {int} ($amount, $amount_sur);
 }
 
-make_tab qr/\e\[H(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:blessed |uncursed |cursed )?(.*?) ?(scroll|potion|wand|ring|spellbook)s? (?:(?:called |labeled )(.*?) ?)?\(unpaid, (\d+) zorkmids?\)\./
+make_tab_vt qr/^(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:blessed |uncursed |cursed )?(.*?) ?(scroll|potion|wand|ring|spellbook)s? (?:(?:called |labeled )(.*?) ?)?\(unpaid, (\d+) zorkmids?\)\./
       => sub
          {
              my ($letter, $count, $appearance, $type, $existing, $cost)
