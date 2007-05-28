@@ -371,6 +371,11 @@ sub each_match_row # {{{
     }
 } # }}}
 
+sub make_tab_vt # {{{
+{
+    my ($matching, $tabstring) = @_;
+    each_match $matching => tab($tabstring);
+} # }}}
 sub make_tab # {{{
 {
     my ($matching, $tabstring) = @_;
