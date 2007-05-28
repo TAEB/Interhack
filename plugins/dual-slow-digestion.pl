@@ -12,22 +12,21 @@ extended_command "#dualsd"
          "Slow digestion notification " . ($dual_sd_enabled ? "ON." : "OFF.")
        };
 
-each_iteration
-{
-    if (/ T:(\d+)/)
-    {{
-        my $mod20 = $1 % 20;
+each_match qr/ T:(\d+)/
+    => sub
+       {
+           my $mod20 = $1 % 20;
 
-        # avoid saying the same thing twice in case of redraw or what have you
-        last if $mod20 == $last_mod20;
-        $last_mod20 = $mod20;
+           # avoid saying the same thing twice in case of redraw or what have
+           # you
+           return if $mod20 == $last_mod20;
+           $last_mod20 = $mod20;
 
-        last if not $dual_sd_enabled;
+           return if not $dual_sd_enabled;
 
-           if ($mod20 == 3)  { annotate("Remove your left =oSD.")  }
-        elsif ($mod20 == 5)  { annotate("Put on your left =oSD.")  }
-        elsif ($mod20 == 11) { annotate("Remove your right =oSD.") }
-        elsif ($mod20 == 13) { annotate("Put on your right =oSD.") }
-    }}
-}
+              if ($mod20 == 3)  { annotate("Remove your left =oSD.")  }
+           elsif ($mod20 == 5)  { annotate("Put on your left =oSD.")  }
+           elsif ($mod20 == 11) { annotate("Remove your right =oSD.") }
+           elsif ($mod20 == 13) { annotate("Put on your right =oSD.") }
+       };
 
