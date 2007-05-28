@@ -92,7 +92,7 @@ each_match qr/\e\[(?:1;\d+)?HYou feel sensitive\./ => $add, "warning";
 each_match qr/\e\[(?:1;\d+)?HYou feel (?:very self-conscious|transparent)\./ => $add, "see invisible";
 each_match qr/\e\[(?:1;\d+)?HYou see an image of someone stalking you\./ => $add, "see invisible";
 each_match qr/\e\[(?:1;\d+)?HYour vision becomes clear\./ => $add, "see invisible";
-each_match qr/\e\[(?:1;\d+)?HYou (?:seem faster|feel quick)\./ => $add, "fast";
+each_match qr/\e\[(?:1;\d+)?HYou (?:seem faster|feel quick|speed up)./ => $add, "fast";
 # }}}
 # notices that we still have a resistance {{{
 each_match qr/\e\[(?:1;\d+)?HYou seem unaffected by the poison\./ => $add, "poison";
@@ -116,6 +116,8 @@ each_match qr/\e\[(?:1;\d+)?HYou feel tired\./ => $del, "sleep";
 each_match qr/\e\[(?:1;\d+)?HYou feel conductive\./ => $del, "shock";
 # }}}
 # losing intrinsics {{{
+each_match qr/\e\[(?:1;\d+)?HYou feel unaware\./ => $del, "warning";
+each_match qr/\e\[(?:1;\d+)?HYou slow down./ => $del, "fast";
 each_match qr/\e\[(?:1;\d+)?HYou seem slower\./ => $del, "fast";
 each_match qr/\e\[(?:1;\d+)?HYou feel (?:slow|slower)\./ => $del, "fast";
 each_match qr/\e\[(?:1;\d+)?HYou feel paranoid\./ => $del, "invisibility";
