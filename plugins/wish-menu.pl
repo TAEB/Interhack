@@ -6,7 +6,7 @@
 
 our $wish_quantity = 2 unless defined $wish_quantity;
 our $wish_enchantment = 3 unless defined $wish_enchantment;
-our $bfg = "blessed fixed greased";
+our $bfg = "blessed fixed greased" unless defined $bfg;
 our $armor = "$bfg +$wish_enchantment";
 
 our %wishes =
