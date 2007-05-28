@@ -60,7 +60,7 @@ autoadjust $aa_instrument  => "q";
 autoadjust $aa_trice       => "^y";
 # }}}
 # botl {{{
-$statusline = sub { "$botl{score}" };
+$statusline = sub { my $timepos = 80 - length($botl{time}); "$botl{score} \e[23;${timepos}H$colormap{darkgray}$botl{time}\e[0m" };
 # }}}
 # wish-menu {{{
 $wish_enchantment = 2;
