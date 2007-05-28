@@ -455,7 +455,7 @@ sub recolor # {{{
 {
     my $matching = shift;
     my $newcolor = shift;
-    $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : die "Unable to discern the color described by \"$newcolor\""
+    $newcolor = exists $colormap{$newcolor} ? $colormap{$newcolor} : $newcolor
       unless ref($newcolor) eq 'CODE';
 
     if (!ref($matching))
