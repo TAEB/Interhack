@@ -5,6 +5,7 @@ include "hpmon";
 include "powermon";
 include "eido-colors-status";
 include "exp-2nl";
+include "timer";
 
 our $statusline ||= sub { "$botl{char}  $botl{stats}  $botl{score}" };
 our $botl ||= sub { "$botl{dlvl} $botl{au} $botl{hp} $botl{pw} $botl{ac} $botl{xp} $botl{turncount} $botl{status}" };
