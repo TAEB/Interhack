@@ -136,8 +136,8 @@ my %annotation_for =
 
 while (my ($monster, $intrinsics) = each %annotation_for)
 {
-    make_anno qr/\e\[HYou see here (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse\./ => "Corpse: $intrinsics";
-    make_anno qr/\e\[HThere is (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse here; eat it\?/ => "Corpse: $intrinsics";
-    make_anno qr/\e\[HIt smells like $monster\./ => "Tin: $intrinsics";
+    make_annotation qr/^You see here (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse\./ => "Corpse: $intrinsics";
+    make_annotation qr/^There is (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse here; eat it\?/ => "Corpse: $intrinsics";
+    make_annotation qr/It smells like $monster\./ => "Tin: $intrinsics";
 }
 

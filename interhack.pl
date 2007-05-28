@@ -300,26 +300,7 @@ sub value_of # {{{
 sub make_annotation # {{{
 {
     my ($matching, $annotation) = @_;
-    if (!ref($matching))
-    {
-        push @configmap, sub { if (index($_, $matching) > -1) { annotate($annotation) } }
-    }
-    elsif (ref($matching) eq "Regexp")
-    {
-        push @configmap, sub { if (/$matching/) { annotate($annotation) } }
-    }
-    elsif (ref($matching) eq "CODE")
-    {
-        push @configmap, sub { if ($matching->()) { annotate($annotation) } }
-    }
-    else
-    {
-        die "Unable to make_annotation matching object of type " . ref($matching);
-    }
-} # }}}
-sub make_anno # {{{
-{
-    make_annotation(@_);
+    each_match $matching => annotate($annotation);
 } # }}}
 sub annotate # {{{
 {
