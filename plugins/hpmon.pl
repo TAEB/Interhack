@@ -23,7 +23,7 @@ each_iteration
     {
         if (!$notified)
         {
-            push @postonce, sub { force_tab("Your HP is monstrously low! Press tab to acknowledge!") };
+            push @postonce, sub { force_tab("Your HP is monstrously low!") };
             $notified = 1;
         }
     }
