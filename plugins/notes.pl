@@ -71,8 +71,8 @@ note_all qr/Welcome to experience level (\d+)\./ => sub { "Hit experience level 
 note_all qr/\e\[HYou receive a faint telepathic message from / => "Quest!";
 note_all qr/\e\[(?:1;\d+)?H"So thou thought thou couldst kill me, fool\."/ => "Rodney encounter!";
 note_all qr/\e\[(?:1;\d+)?HDouble Trouble\.\.\./ => "Double Trouble!";
-note_all qr/\e[HA mysterious force momentarily surrounds you\.\.\./ => "Hit by the mysterious force.";
-note_all qr/\e[HBut now thou must face the final Test\.\.\./ => "Entered the Endgame.";
+note_all qr/\e\[HA mysterious force momentarily surrounds you\.\.\./ => "Hit by the mysterious force.";
+note_all qr/\e\[HBut now thou must face the final Test\.\.\./ => "Entered the Endgame.";
 # }}}
 # altars {{{
 note_once qr/\e\[HThere is an altar to .*? \((\w+)\) here\./ => sub { "\u$1 altar" };
