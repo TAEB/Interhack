@@ -34,7 +34,7 @@ extended_command "#exp"
 
 each_iteration
 {
-    return unless $xp;
+    return unless defined $xp;
     $exp_needed = exp_for($xlvl+1) - $xp;
     $exp_needed = 0 if $xlvl == 30;
     $botl{xp} = "Xp:${xlvl}n${exp_needed}";
