@@ -7,5 +7,5 @@ extended_command "#donate"
       {
           "clairvoyance: \$" . $xlvl * 200 . ", protection: \$" . $xlvl * 400 . "\n"
       };
-make_tab qr/\e\[HHow much will you offer\?/
+make_tab_vt qr/^How much will you offer\?/
       => sub { $xlvl * 400 . "\n" };

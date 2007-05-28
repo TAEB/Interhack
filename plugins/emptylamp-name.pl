@@ -3,7 +3,7 @@
 
 our $empty ||= "empty";
 
-make_tab qr/\e\[HThis (?:oil )?lamp.*? has no oil\./
+make_tab_vt qr/^This (?:oil )?lamp.*? has no oil\./
     => sub{my $key = alphakeys(-1); " \e#name\ny${key}$empty\n"};
-make_tab qr/\e\[HYour lamp.*? has run out of power\./
+make_tab_vt qr/^Your lamp.*? has run out of power\./
     => sub{my $key = alphakeys(-1); " \e#name\ny${key}$empty\n"};
