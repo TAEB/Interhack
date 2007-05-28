@@ -105,6 +105,7 @@ our $keystrokes = 0;
 our %intrinsics;
 our $in_game = 0;
 our $buf = '';
+our $topline = '';
 our $resting = 0;
 our ($curhp, $maxhp, $curpw, $maxpw) = (0, 0, 0, 0);
 our $vikeys = 0;
@@ -807,6 +808,9 @@ while (1)
     $_ = $buf . $_;
     $buf = '';
   }
+
+  $topline = $vt->row_plaintext(1);
+  study $topline;
 
   unless ($stop_sing_pass)
   {
