@@ -411,7 +411,9 @@ sub force_yn # {{{
 sub force_tab # {{{
 {
     return if defined $ttyrec;
-    annotate("\e[1;31m" . (shift || "Press tab to continue!"));
+    my $message = shift;
+    $message .= " " if defined($message);
+    annotate("\e[1;31m" . $message . "Press tab to continue!");
     print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
     print $postprint;
     $postprint = '';
