@@ -35,6 +35,7 @@ $short_names{scroll}{60} = ['ew'];
 $short_names{scroll}{80} = ['ea', 'rc'];
 $short_names{potion}{300} = ['ga', 'gl', 'para'];
 # }}}
+$empty = "e";
 # }}}
 # plugins {{{
 exclude "apply-oil", "colors-monsters";
