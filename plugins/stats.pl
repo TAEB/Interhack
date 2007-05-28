@@ -64,27 +64,25 @@ my %roles = (Archeologist => 'Arc',
 );
 
 # figure out role, race, gender, align
-each_iteration
-{
-    if ($vt->row_plaintext(1) =~ /\w+ (?:\w+ )?(\w+), welcome to NetHack!  You are a (\w+) (\w+) (\w+)(?: (\w+))?\./)
-    {
-        if (!defined($5)) {
-            ($name, $align, $race, $role) = ($1, $aligns{$2}, $races{$3}, $roles{$4});
-            $sex = $4 =~ /(?:woman|ess)$/ ? "Fem" : "Mal";
-        }
-        else {
-            $sex = $sexes{$3};
-            ($name, $align, $race, $role) = ($1, $aligns{$2}, $races{$4}, $roles{$5})
-        }
-
-    }
-    elsif ($vt->row_plaintext(1) =~ /\w+ (\w+), the (\w+) (\w+), welcome back to NetHack!/)
-    {
-        ($name, $race, $role) = ($1, $races{$2}, $roles{$3});
-        $sex = "Fem" if $3 eq "Cavewoman" || $3 eq "Priestess";
-        $sex = "Mal" if $3 eq "Caveman" || $3 eq "Priest";
-    }
-}
+each_match_vt 1, qr/^\w+ (?:\w+ )?(\w+), welcome to NetHack!  You are a (\w+) (\w+) (\w+)(?: (\w+))?\./
+    => sub
+       {
+           if (!defined($5)) {
+               ($name, $align, $race, $role) = ($1, $aligns{$2}, $races{$3}, $roles{$4});
+               $sex = $4 =~ /(?:woman|ess)$/ ? "Fem" : "Mal";
+           }
+           else {
+               $sex = $sexes{$3};
+               ($name, $align, $race, $role) = ($1, $aligns{$2}, $races{$4}, $roles{$5})
+           }
+       };
+each_match_vt 1, qr/^\w+ (?:\w+ )?(\w+), the (\w+) (\w+), welcome back to NetHack!/
+    => sub
+       {
+           ($name, $race, $role) = ($1, $races{$2}, $roles{$3});
+           $sex = "Fem" if $3 eq "Cavewoman" || $3 eq "Priestess";
+           $sex = "Mal" if $3 eq "Caveman" || $3 eq "Priest";
+       };
 
 # figure out stats (strength, score, etc)
 each_iteration
