@@ -64,7 +64,7 @@ my %roles = (Archeologist => 'Arc',
 );
 
 # figure out role, race, gender, align
-each_match_vt 1, qr/^\w+ (?:\w+ )?(\w+), welcome to NetHack!  You are a (\w+) (\w+) (\w+)(?: (\w+))?\./
+each_match qr/^\w+ (?:\w+ )?(\w+), welcome to NetHack!  You are a (\w+) (\w+) (\w+)(?: (\w+))?\./
     => sub
        {
            if (!defined($5)) {
@@ -76,7 +76,7 @@ each_match_vt 1, qr/^\w+ (?:\w+ )?(\w+), welcome to NetHack!  You are a (\w+) (\
                ($name, $align, $race, $role) = ($1, $aligns{$2}, $races{$4}, $roles{$5})
            }
        };
-each_match_vt 1, qr/^\w+ (?:\w+ )?(\w+), the (\w+) (\w+), welcome back to NetHack!/
+each_match qr/^\w+ (?:\w+ )?(\w+), the (\w+) (\w+), welcome back to NetHack!/
     => sub
        {
            ($name, $race, $role) = ($1, $races{$2}, $roles{$3});

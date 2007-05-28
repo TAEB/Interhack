@@ -20,7 +20,7 @@ sub make_note # {{{
 sub note_all # (stuff noted every time, like wishes) # {{{
 {
     my ($matching, $note) = @_;
-    each_match_vt 1, $matching => sub { make_note(value_of($note)) };
+    each_match $matching => sub { make_note(value_of($note)) };
 } # }}}
 # sub note_once (stuff noted only once for a dlvl, like shops) {{{
 {
@@ -30,7 +30,7 @@ sub note_all # (stuff noted every time, like wishes) # {{{
     {
         my ($matching, $note) = @_;
 
-        each_match_vt 1, $matching => sub
+        each_match $matching => sub
         {
             my $t = value_of($note);
             return if $t eq '' || $seen{"$dlvl $t"}++;

@@ -72,59 +72,59 @@ each_iteration
 
 # good messages {{{
 # resists {{{
-each_match_vt 1, qr/You feel (?:(?:especially )?healthy|hardy)\./ => $add, "poison";
-each_match_vt 1, qr/You feel (?:full of hot air|warm)\./ => $add, "cold";
-each_match_vt 1, qr/You (?:feel a momentary chill|feel cool(?!er)|be chillin')\./ => $add, "fire";
-each_match_vt 1, qr/You feel (?:wide )?awake\./ => $add, "sleep";
-each_match_vt 1, qr/You feel (?:very firm|totally together, man)\./ => $add, "disintegration";
-each_match_vt 1, "Your health currently feels amplified!" => $add, "shock";
-each_match_vt 1, qr/You feel (?:insulated|grounded in reality)/ => $add, "shock";
+each_match qr/You feel (?:(?:especially )?healthy|hardy)\./ => $add, "poison";
+each_match qr/You feel (?:full of hot air|warm)\./ => $add, "cold";
+each_match qr/You (?:feel a momentary chill|feel cool(?!er)|be chillin')\./ => $add, "fire";
+each_match qr/You feel (?:wide )?awake\./ => $add, "sleep";
+each_match qr/You feel (?:very firm|totally together, man)\./ => $add, "disintegration";
+each_match "Your health currently feels amplified!" => $add, "shock";
+each_match qr/You feel (?:insulated|grounded in reality)/ => $add, "shock";
 # }}}
 # other intrinsics {{{
-each_match_vt 1, qr/You feel (?:very jumpy|diffuse)\./ => $add, "teleportitis";
-each_match_vt 1, qr/You feel (?:in control of yourself|centered in your personal space)\./ => $add, "teleport control";
-each_match_vt 1, "You feel controlled." => $add, "teleport control";
-each_match_vt 1, qr/You feel (?:a strange mental acuity|in touch with the cosmos)\./ => $add, "telepathy";
-each_match_vt 1, "You feel hidden." => $add, "invisibility";
-each_match_vt 1, "You feel perceptive." => $add, "searching";
-each_match_vt 1, "You feel stealthy." => $add, "stealth";
-each_match_vt 1, "You feel sensitive." => $add, "warning";
-each_match_vt 1, qr/You feel (?:very self-conscious|transparent)\./ => $add, "see invisible";
-each_match_vt 1, "You see an image of someone stalking you." => $add, "see invisible";
-each_match_vt 1, "Your vision becomes clear." => $add, "see invisible";
-each_match_vt 1, qr/You (?:seem faster|feel quick|speed up)./ => $add, "fast";
+each_match qr/You feel (?:very jumpy|diffuse)\./ => $add, "teleportitis";
+each_match qr/You feel (?:in control of yourself|centered in your personal space)\./ => $add, "teleport control";
+each_match "You feel controlled." => $add, "teleport control";
+each_match qr/You feel (?:a strange mental acuity|in touch with the cosmos)\./ => $add, "telepathy";
+each_match "You feel hidden." => $add, "invisibility";
+each_match "You feel perceptive." => $add, "searching";
+each_match "You feel stealthy." => $add, "stealth";
+each_match "You feel sensitive." => $add, "warning";
+each_match qr/You feel (?:very self-conscious|transparent)\./ => $add, "see invisible";
+each_match "You see an image of someone stalking you." => $add, "see invisible";
+each_match "Your vision becomes clear." => $add, "see invisible";
+each_match qr/You (?:seem faster|feel quick|speed up)./ => $add, "fast";
 # }}}
 # notices that we still have a resistance {{{
-each_match_vt 1, "You seem unaffected by the poison" => $add, "poison";
-each_match_vt 1, "The poison doesn't seem to affect you" => $add, "poison";
-each_match_vt 1, "The fire doesn't feel hot!" => $add, "fire";
-each_match_vt 1, "The feel mildly hot." => $add, "fire";
-each_match_vt 1, "You don't feel cold." => $add, "cold";
-each_match_vt 1, "You feel mildly chilly." => $add, "cold";
-each_match_vt 1, "You feel a mild tingle." => $add, "shock";
-each_match_vt 1, "You seem unhurt." => $add, "shock";
-each_match_vt 1, "You are not disintegrated." => $add, "disintegration";
+each_match "You seem unaffected by the poison" => $add, "poison";
+each_match "The poison doesn't seem to affect you" => $add, "poison";
+each_match "The fire doesn't feel hot!" => $add, "fire";
+each_match "The feel mildly hot." => $add, "fire";
+each_match "You don't feel cold." => $add, "cold";
+each_match "You feel mildly chilly." => $add, "cold";
+each_match "You feel a mild tingle." => $add, "shock";
+each_match "You seem unhurt." => $add, "shock";
+each_match "You are not disintegrated." => $add, "disintegration";
 # }}}
 # }}}
 
 # dangerous messages {{{
 # losing resists {{{
-each_match_vt 1, "You feel warmer." => $del, "fire";
-each_match_vt 1, "You feel cooler." => $del, "cold";
-each_match_vt 1, "You feel a little sick." => $del, "poison";
-each_match_vt 1, "You feel tired." => $del, "sleep";
-each_match_vt 1, "You feel conductive." => $del, "shock";
+each_match "You feel warmer." => $del, "fire";
+each_match "You feel cooler." => $del, "cold";
+each_match "You feel a little sick." => $del, "poison";
+each_match "You feel tired." => $del, "sleep";
+each_match "You feel conductive." => $del, "shock";
 # }}}
 # losing intrinsics {{{
-each_match_vt 1, "You feel unaware." => $del, "warning";
-each_match_vt 1, "You slow down." => $del, "fast";
-each_match_vt 1, "You seem slower." => $del, "fast";
-each_match_vt 1, qr/You feel (?:slow|slower)\./ => $del, "fast";
-each_match_vt 1, "You feel paranoid." => $del, "invisibility";
-each_match_vt 1, "You feel clumsy." => $del, "stealth";
-each_match_vt 1, "You feel less jumpy." => $del, "teleportitis";
-each_match_vt 1, "You feel uncontrolled." => $del, "teleport control";
-each_match_vt 1, qr/You (?:thought you saw something|tawt you taw a puttie tat)\./ => $add, "see invisible";
-each_match_vt 1, "Your senses fail." => $del, "telepathy";
+each_match "You feel unaware." => $del, "warning";
+each_match "You slow down." => $del, "fast";
+each_match "You seem slower." => $del, "fast";
+each_match qr/You feel (?:slow|slower)\./ => $del, "fast";
+each_match "You feel paranoid." => $del, "invisibility";
+each_match "You feel clumsy." => $del, "stealth";
+each_match "You feel less jumpy." => $del, "teleportitis";
+each_match "You feel uncontrolled." => $del, "teleport control";
+each_match qr/You (?:thought you saw something|tawt you taw a puttie tat)\./ => $add, "see invisible";
+each_match "Your senses fail." => $del, "telepathy";
 # }}}
 # }}}

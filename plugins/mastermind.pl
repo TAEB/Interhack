@@ -10,25 +10,25 @@ extended_command "#mm"
               => sub { ($responses_so_far, $response_this_play) = ('', 1);
                        "Resetting Mastermind status." };
 
-each_match_vt 1, qr/You hear (\d) tumblers? click and (\d) gears? turn\./
+each_match qr/You hear (\d) tumblers? click and (\d) gears? turn\./
     => sub
        {
            $responses_so_far .= " $2$1";
            $response_this_play = 1;
        };
-each_match_vt 1, qr/You hear (\d) tumblers? click\./
+each_match qr/You hear (\d) tumblers? click\./
     => sub
        {
            $responses_so_far .= " 0$1";
            $response_this_play = 1;
        };
-each_match_vt 1, qr/You hear (\d) gears? turn\./
+each_match qr/You hear (\d) gears? turn\./
     => sub
        {
            $responses_so_far .= " ${1}0";
            $response_this_play = 1;
        };
-each_match_vt 1, qr/What tune are you playing\?/
+each_match qr/What tune are you playing\?/
     => sub
        {
            $responses_so_far .= " 00" unless $response_this_play;

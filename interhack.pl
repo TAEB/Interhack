@@ -345,13 +345,14 @@ sub each_match # {{{
     my $matching = shift;
     my $action = shift;
     my @args = @_;
+
     if (!ref($matching))
     {
-        push @configmap, sub { if (index($_, $matching) > -1) { $action->(@args)} }
+        push @configmap, sub { if (index($topline, $matching) > -1) { $action->(@args)} }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @configmap, sub { if ($_ =~ $matching) { $action->(@args) } }
+        push @configmap, sub { if ($topline =~ $matching) { $action->(@args) } }
     }
     elsif (ref($matching) eq "CODE")
     {
@@ -362,12 +363,15 @@ sub each_match # {{{
         die "Unable to each_match matching object of type " . ref($matching);
     }
 } # }}}
-sub each_match_vt # {{{
+sub each_match_row # {{{
 {
     my $row = shift;
+    return each_match(@_) if $row == 1;
+
     my $matching = shift;
     my $action = shift;
     my @args = @_;
+
     if (!ref($matching))
     {
         push @configmap, sub { if (index($vt->row_plaintext($row), $matching) > -1) { $action->(@args)} }
