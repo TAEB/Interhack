@@ -19,6 +19,6 @@ each_iteration
 {
     my $sl = $statusline->();
     my $bl = $botl->();
-    $postprint .= "\e[s\e[23;1H\e[0m$sl\e[K\e[u" if $show_sl;
-    $postprint .= "\e[s\e[24;1H\e[0m$bl\e[K\e[u" if $show_bl;
+    $postprint .= "\e[s\e[23;1H\e[K\e[0m$sl\e[u" if $show_sl;
+    $postprint .= "\e[s\e[24;1H\e[K\e[0m$bl\e[u" if $show_bl;
 }
