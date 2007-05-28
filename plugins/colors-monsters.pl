@@ -316,7 +316,7 @@ recolor qr/Olog-hai/ => "purple";
 recolor qr/umber hulks?/ => "brown";
 # }}}
 # vampires V {{{
-recolor qr/vampires?(?! lord| b(?:\e\[34m)?at)/ => "red";
+recolor qr/vampires?(?! lord| b(?:\e\[C\e\[D)?at)/ => "red";
 recolor qr/vampire lords?/ => "blue";
 recolor qr/Vlad the Impaler/ => "purple";
 # }}}
