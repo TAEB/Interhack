@@ -6,14 +6,11 @@ my $last_mod20 = -1;
 our $dual_sd_enabled = 0;
 
 extended_command "#dualsd"
-              => sub
-                 {
-                   # the "if" is to guard against ^P toggling
-                   $dual_sd_enabled = not $dual_sd_enabled
-                     if substr($&, 0, 3) eq "\e[H";
-                   "Slow digestion notification "
-                   . ($dual_sd_enabled ? "ON." : "OFF.")
-                 };
+    => sub
+       {
+         $dual_sd_enabled = not $dual_sd_enabled;
+         "Slow digestion notification " . ($dual_sd_enabled ? "ON." : "OFF.")
+       };
 
 each_iteration
 {
