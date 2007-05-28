@@ -36,18 +36,20 @@ my @ring_sink_regex =
   [qr/The sink looks like it is being beamed aboard somewhere/ => "TC"],
 );
 
+each_match qr/You drop an? (?:blessed |(?:un)?cursed )?(\w+(?: \w+)?) ring down the drain\./
+    => sub
+       {
+           $last_sink_drop = $1;
+       };
+each_match qr/Call a ([\w\s]+) ring:/
+    => sub
+       {
+           return unless exists $sink_message{$1};
+           tab($sink_message{$1}."\n");
+       };
+
 each_iteration
 {
-  if (/You drop an? (?:blessed |(?:un)?cursed )?(\w+(?: \w+)?) ring down the drain\./)
-  {
-    $last_sink_drop = $1;
-  }
-
-  if (/Call a ([\w\s]+) ring:/ && exists $sink_message{$1})
-  {
-    tab($sink_message{$1}."\n");
-  }
-
   return if $last_sink_drop eq '';
 
   for my $sink (@ring_sink_regex)
