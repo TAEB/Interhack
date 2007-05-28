@@ -160,8 +160,8 @@ sub include # {{{
             die "Unable to find $module in @mINC";
         }
 
-        next MODULE if exists $plugin_loaded{$file};
-        $plugin_loaded{$file} = 1;
+        next MODULE if exists $plugin_loaded{$module};
+        $plugin_loaded{$module} = 1;
         do $file;
         die $@ if $@;
     }
