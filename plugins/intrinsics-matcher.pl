@@ -58,7 +58,7 @@ each_iteration
         {
             $add->($intrinsic, 1);
         }
-            $seen_role = $role
+        $seen_role = $role;
     }
     if ($seen_race ne $race)
     {
@@ -66,7 +66,7 @@ each_iteration
         {
             $add->($intrinsic, 1);
         }
-            $seen_race = $race
+        $seen_race = $race;
     }
 }
 
