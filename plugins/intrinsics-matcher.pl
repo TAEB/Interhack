@@ -20,7 +20,7 @@ my %role_intrinsics =
 my %race_intrinsics =
 (
     'Dwa' => [],
-    'Elf' => ['sleep'],
+    'Elf' => [],
     'Hum' => [],
     'Orc' => ['poison'],
     'Gno' => [],
