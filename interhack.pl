@@ -374,7 +374,7 @@ sub clear_annotation # {{{
 sub make_tab # {{{
 {
     my ($matching, $tabstring) = @_;
-    each_match $matching => tab($tabstring);
+    each_match $matching => sub { tab($tabstring) };
 } # }}}
 sub tab # {{{
 {
@@ -423,7 +423,7 @@ sub force_tab # {{{
 sub press_tab # {{{
 {
     my ($matching, $tabtext) = @_;
-    each_match $matching => force_tab($tabtext);
+    each_match $matching => sub { force_tab($tabtext) };
 } # }}}
 
 sub alphakeys # {{{
