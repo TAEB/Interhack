@@ -16,6 +16,7 @@ extended_command "#automore"
                    "Automore " . ($automore_enabled ? "ON." : "OFF.")
                  };
 
+# this should NOT use the VT
 each_match qr/--More--/ => sub
 {
     return unless $automore_enabled;
