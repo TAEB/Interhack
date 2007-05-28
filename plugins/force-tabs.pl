@@ -1,6 +1,6 @@
-# this sets up a "press tab to continue" handler that you must press to
-# acknowledge some important message, like "You are slowing down."
-# by Eidolos (idea by doy)
+# this sets up some "press tab to continue" prompts for important messages,
+# like "You are slowing down."
+# by Eidolos and toft (idea by doy)
 
 press_tab qr/\bYou are slowing down\./;
 press_tab qr/\bYou don't feel very well\./;
