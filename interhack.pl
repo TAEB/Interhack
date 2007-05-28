@@ -487,7 +487,7 @@ sub recolor # {{{
 } # }}}
 sub serialize_time # {{{
 {
-  my $seconds = shift;
+  my $seconds = int(shift);
   my $hours = int($seconds / 3600);
   $seconds %= 3600;
   my $minutes = int($seconds / 60);
