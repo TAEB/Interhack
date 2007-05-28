@@ -215,6 +215,10 @@ recolor qr/You feel (?:much|even) worse./ => "bred";
 recolor qr/The [^.!\e]*? swings itself around you!/ => "bred";
 recolor qr/Really quit\?/ => "bred";
 # }}}
+# Rodders {{{
+recolor qr/\e\[(?:1;\d+)?H"So thou thought thou couldst kill me, fool\."/ => "bred";
+recolor qr/\e\[(?:1;\d+)?HDouble Trouble\.\.\./ => "bred";
+# }}}
 # }}}
 
 # useful messages {{{

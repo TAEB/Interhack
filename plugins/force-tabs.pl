@@ -11,3 +11,5 @@ press_tab qr/\bStop eating\?/;
 press_tab qr/\bThe [^.!\e]*? swings itself around you!/;
 press_tab qr/^Really quit\? \[yn\] \(n\) +$/;
 
+press_tab qr/"So thou thought thou couldst kill me, fool\."/;
+press_tab qr/\bDouble Trouble\.\.\./;
