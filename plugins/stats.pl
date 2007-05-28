@@ -87,8 +87,6 @@ each_match qr/^\w+ (?:\w+ )?(\w+), the (\w+) (\w+), welcome back to NetHack!/
 # figure out stats (strength, score, etc)
 each_iteration
 {
-    return unless /\e\[23(?:;\d+)?H/;
-
     my @groups = $vt->row_plaintext(23) =~ /^(\w+)?.*?St:(\d+(?:\/(?:\*\*|\d+))?) Dx:(\d+) Co:(\d+) In:(\d+) Wi:(\d+) Ch:(\d+)\s*(\w+)(?:\s*S:(\d+))?/;
     $show_sl = @groups;
     return if @groups == 0;
@@ -108,8 +106,6 @@ each_iteration
 # parse botl
 each_iteration
 {
-    return unless /\e\[24(?:;\d+)?H/;
-
     my @groups = $vt->row_plaintext(24) =~ /^(Dlvl:\d+|Home \d+|End Game|Astral Plane)\s+(?:\$|\*):(\d+)\s+HP:(\d+)\((\d+)\)\s+Pw:(\d+)\((\d+)\)\s+AC:([0-9-]+)\s+(?:Exp|Xp|HD):(\d+)(?:\/(\d+))?(?:\s+T:(\d+))?\s+(.*?)\s*$/;
     $show_bl = @groups;
     return if @groups == 0;
@@ -124,3 +120,25 @@ each_iteration
     $botl{turncount} = "T:$turncount";
     $botl{status} = "$status";
 }
+
+my $blocking = 0;
+each_iteration
+{
+    return unless $show_sl or $show_bl;
+    my $replacement = '';
+    @_ = split /(\e\[[0-9;]*H)/;
+    while (1) {
+        last unless @_;
+        my $text = shift;
+        $replacement .= $text unless $blocking;
+
+        last unless @_;
+        my $esc_code = shift;
+        $esc_code =~ /\e\[(?:([0-9]+);)?[0-9;]*H/;
+        my $row = $1 || 1;
+        $blocking = ($row >= 23);
+        $replacement .= $esc_code;
+    }
+    $_ = $replacement;
+}
+
