@@ -68,7 +68,7 @@ sub add_intrinsic
 sub del_intrinsic
 {
     my $intrinsic = shift;
-    return 0 if $intrinsics{$intrinsic};
+    return 0 if !exists($intrinsics{$intrinsic});
     delete $intrinsics{$intrinsic};
     return 1;
 }
