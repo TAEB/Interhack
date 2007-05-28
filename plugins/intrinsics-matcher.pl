@@ -5,15 +5,18 @@ my $annotations_path = 'annotations-messages.pl';
 my $add = sub
 {
     my $intrinsic = shift;
-
+    my $quiet = shift;
     add_intrinsic($intrinsic) or return if $plugin_loaded{$tracker_path};
+    return if $quiet;
     annotate_add_intrinsic($intrinsic) if $plugin_loaded{$annotations_path};
 };
 
 my $del = sub
 {
     my $intrinsic = shift;
+    my $quiet = shift;
     del_intrinsic($intrinsic) or return if $plugin_loaded{$tracker_path};
+    return if $quiet;
     annotate_del_intrinsic($intrinsic) if $plugin_loaded{$annotations_path};
 };
 
