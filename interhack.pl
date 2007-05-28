@@ -361,6 +361,29 @@ sub each_match # {{{
         die "Unable to each_match matching object of type " . ref($matching);
     }
 } # }}}
+sub each_match_vt # {{{
+{
+    my $row = shift;
+    my $matching = shift;
+    my $action = shift;
+    my @args = @_;
+    if (!ref($matching))
+    {
+        push @configmap, sub { if (index($vt->row_plaintext($row), $matching) > -1) { $action->(@args)} }
+    }
+    elsif (ref($matching) eq "Regexp")
+    {
+        push @configmap, sub { if ($vt->row_plaintext($row) =~ $matching) { $action->(@args) } }
+    }
+    elsif (ref($matching) eq "CODE")
+    {
+        push @configmap, sub { if ($matching->()) { $action->(@args) } }
+    }
+    else
+    {
+        die "Unable to each_match_vt matching object of type " . ref($matching);
+    }
+} # }}}
 
 sub make_tab # {{{
 {
