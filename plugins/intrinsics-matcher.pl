@@ -1,3 +1,32 @@
+include "stats";
+
+my %role_intrinsics =
+(
+    Arc => ['stealth', 'fast'],
+    Bar => ['poison'],
+    Cav => [],
+    Hea => ['poison'],
+    Kni => [],
+    Mon => ['fast', 'sleep', 'see invisible'],
+    Pri => [],
+    Rog => ['searching'],
+    Ran => ['stealth'],
+    Sam => ['fast'],
+    Tou => [],
+    Val => ['cold'],
+    Wiz => [],
+);
+
+my %race_intrinsics =
+(
+    'Dwa' => [],
+    'Elf' => ['sleep'],
+    'Hum' => [],
+    'Orc' => ['poison'],
+    'Gno' => [],
+);
+my $seen_role = '';
+my $seen_race = '';
 my $tracker_path = 'intrinsics-tracker.pl';
 my $annotations_path = 'annotations-messages.pl';
 
@@ -19,6 +48,27 @@ my $del = sub
     return if $quiet;
     annotate_del_intrinsic($intrinsic) if $plugin_loaded{$annotations_path};
 };
+
+# Check for starting intrinsics and stuff
+each_iteration
+{
+    if ($seen_role ne $role)
+    {
+        for my $intrinsic (@{$role_intrinsics{$role}})
+        {
+            $add->($intrinsic, 1);
+        }
+            $seen_role = $role
+    }
+    if ($seen_race ne $race)
+    {
+        for my $intrinsic (@{$race_intrinsics{$race}})
+        {
+            $add->($intrinsic, 1);
+        }
+            $seen_race = $race
+    }
+}
 
 # good messages {{{
 # resists {{{
