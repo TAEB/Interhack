@@ -1,19 +1,10 @@
 # Adds a tab that names wands empty if Nothing happens.
 # by toft (but mostly Eidolos)
 
-each_match qr/\e\[HNothing happens\./
+each_match_vt 1, qr/^Nothing happens\./
     => sub
        {
-           my $skip = 1;
-           my $cmdkey;
-           for my $c (reverse @lastkeys)
-           {
-               next unless --$skip < 0;
-               $cmdkey = $c, last if $c =~ /[a-zA-Z]/;
-           }
-           if ($cmdkey eq 'z')
-           {
-               tab("#name\ny$lastkeys[-1]empty\n");
-           }
+           my $wand_slot = alphakeys(-1);
+           tab("#name\ny${wand_slot}empty\n") if alphakeys(-2) eq 'z';
        };
 
