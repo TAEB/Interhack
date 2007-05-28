@@ -2,18 +2,84 @@ Interhack is a layer that sits between you and your NetHack server (which we'll
 call NAO) and plays with the text going both ways. For example, this could be
 used to color the message "You are slowing down" in bright red.
 
-Building:
+Interhack is written primarily by Shawn M Moore, Jesse Luehrs, and Jordan A
+Lewis. It is released under the MIT license (see LICENSE).
 
-There's only one step to building Interhack, which is to build the Mastermind
-program, written in C. The following is all you need:
++---------+
+| GETTING |
++---------+
 
-  make
+The recommended way to get Interhack is through darcs. This way you can easily
+update (and, if you're feeling adventurous, modify) your Interhack build.
+darcs is a source control manager (the one we use for Interhack, obviously).
+It's written in Haskell and depends on ghc (a Haskell compiler). These
+dependencies aren't tiny, so it's up to you whether you want to either fight
+the darcs installation or repeatedly download the Interhack code.
 
+See http://darcs.net/DarcsWiki/CategoryBinaries for getting darcs.
+
+Once you have darcs installed, the command to get Interhack is
+
+    darcs get http://darcs.katron.org/~sartak/interhack/
+
+You can then later receive new patches by typing (in the interhack directory)
+
+    darcs pull
+
++----------+
+| BUILDING |
++----------+
+
+Now assuming you have the source code, it's time to actually get the
+dependencies required for Interhack. If you want the Mastermind solver, you'll
+need a C compiler (we recommend gcc). To build the Mastermind solver, just type
+'make'. Eventually a pure-Perl alternative will be provided to avoid this
+dependency.
+
+The Interhack developers have no qualms with using the CPAN (a repository for
+useful Perl modules for things like reading a ttyrec, or grabbing a webpage).
 If running Interhack produces an error that resembles "Can't locate $FOO.pm in
-@INC", you need to install modules via CPAN. Use "cpan -i $FOO" (possibly as
-root).
+@INC <list of directories>", you need to install modules via CPAN. Use "cpan -i
+$FOO" (possibly as root). For example, if you get "Can't locate Term/ReadKey.pm
+in @INC <list of directories>", you'll need to run "cpan -i Term::ReadKey".
 
-Configuration:
+Here's a list of modules that Interhack depends upon (as of this writing). It
+might be out of date, so it's in your best interest to learn the basics of
+detecting and resolving missing modules (see above). Some of these modules come
+installed with recent perls.
+
+Term::ReadKey      - reading unbuffered keystrokes from the user
+IO::Socket         - connecting to a remote server
+LWP::Simple        - downloading webpages (local nethackrc editing)
+Term::VT102        - getting an addressable screen (instead of one input stream)
+Term::TtyRec::Plus - reading local ttyrecs (debugging)
+Devel::EvalContext - persistency across evals (#eval, optional)
+File::Temp         - getting a temporary file (avoiding race conditions)
+Time::HiRes        - high resolution time (writing ttyrecs)
+
++---------+
+| RUNNING |
++---------+
+
+For now you have to be in the Interhack source directory to be able to run the
+program.
+
+Interhack takes two options:
+./interhack.pl nickname
+./interhack.pl ttyrec
+
+Specifying a nickname (or at least enough of a nickname to be unique) will
+autologin as that user. See the CONFIG file for information about autologin.
+
+Specifying a ttyrec (this is disambiguated from nickname by ending in .ttyrec)
+will play back the ttyrec using Interhack (so you get the fancy colors and
+whatnot). This is useful for debugging, and in general just watching a ttyrec.
+The playback is pretty rigid, it only has two commands: p to pause/unpause, and
+q to quit.
+
++---------------+
+| CONFIGURATION |
++---------------+
 
 See CONFIG for information about the configuration file.
 
