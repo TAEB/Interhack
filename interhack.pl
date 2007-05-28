@@ -371,30 +371,10 @@ sub each_match_row # {{{
     }
 } # }}}
 
-sub make_tab_vt # {{{
-{
-    my ($matching, $tabstring) = @_;
-    each_match $matching => tab($tabstring);
-} # }}}
 sub make_tab # {{{
 {
     my ($matching, $tabstring) = @_;
-    if (!ref($matching))
-    {
-        push @configmap, sub { if (index($_, $matching) > -1) { tab($tabstring) } }
-    }
-    elsif (ref($matching) eq "Regexp")
-    {
-        push @configmap, sub { if (/$matching/) { tab($tabstring) } }
-    }
-    elsif (ref($matching) eq "CODE")
-    {
-        push @configmap, sub { if ($matching->()) { tab($tabstring) } }
-    }
-    else
-    {
-        die "Unable to make_tab matching object of type " . ref($matching);
-    }
+    each_match $matching => tab($tabstring);
 } # }}}
 sub tab # {{{
 {

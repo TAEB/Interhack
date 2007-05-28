@@ -24,7 +24,7 @@ sub autoadjust
         %adjust_bad = map {$_ => 1} split //, substr($adjust_to, 1);
     }
 
-    make_tab_vt
+    make_tab
              qr{ ^
                  (?-x:You have a little trouble lifting )?
                  (.)                                # inv slot

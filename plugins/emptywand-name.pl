@@ -3,7 +3,7 @@
 
 our $empty ||= "empty";
 
-make_tab_vt "Nothing happens."
+make_tab "Nothing happens."
     => sub
        {
            return unless alphakeys(-2) eq 'z';
