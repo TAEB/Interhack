@@ -191,15 +191,15 @@ make_tab qr/^(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:blessed |
 
              if (@possibilities == 1)
              {
-               "\e#name\nn$letter$possibilities[0]\n";
+               "\e\e#name\nn$letter$possibilities[0]\n";
              }
              elsif (@possibilities <= 3)
              {
-               "\e#name\nn$letter$appearance ".(join '/', @possibilities)."\n";
+               "\e\e#name\nn$letter$appearance ".(join '/', @possibilities)."\n";
              }
              else
              {
-               "\e#name\nn$letter$appearance$existing $cost\n";
+               "\e\e#name\nn$letter$appearance$existing $cost\n";
              }
          };
 
