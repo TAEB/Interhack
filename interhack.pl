@@ -418,7 +418,17 @@ sub force_tab # {{{
     print $postprint;
     $postprint = '';
 
-    1 until ReadKey(0) eq "\t";
+    eval
+    {
+        # we don't want the tab to stay onscreen for too long
+        # this is a problem when watching others
+        # so fix this eventually when we get better "am I playing?" detection
+
+        local $SIG{ALRM} = sub { die "alarm\n" };
+        alarm 10;
+        1 until ReadKey(0) eq "\t";
+        alarm 0;
+    };
 
     clear_annotation();
 } # }}}
