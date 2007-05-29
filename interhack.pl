@@ -269,8 +269,9 @@ sub show_menu # {{{
             for my $k (sort keys %$items)
             {
                 my $v = value_of($items->{$k});
-                $keyonce{$k} = "$v";
                 $postprint .= sprintf " %s - %-${longest_length}s\n", $k, $v;
+                $v =~ s/\s*#.*//; # remove any comments (for marker charges, eg)
+                $keyonce{$k} = $v;
             }
             chomp $postprint; # to fit another item on the menu
             $postprint .= "\e[m\e[u";
