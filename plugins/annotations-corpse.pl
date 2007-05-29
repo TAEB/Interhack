@@ -134,10 +134,132 @@ my %annotation_for =
     "yetis?"                    => "Cold: 33%",
 );
 
-while (my ($monster, $intrinsics) = each %annotation_for)
+my %cannibalism =
+(
+    Hum =>
+         {
+            'abbots?' => 1,
+            'acolytes?' => 1,
+            'priests?' => 1,
+            'priestess(?:es)?' => 1,
+            'apprentices?' => 1,
+            'Arch Priest' => 1,
+            'archeologists?' => 1,
+            'attendants?' => 1,
+            'barbarians?' => 1,
+            'captains?' => 1,
+            'cavem[ae]n' => 1,
+            'cavewom[ae]n' => 1,
+            'chieftains?' => 1,
+            'Croesus' => 1,
+            'doppelgangers?' => 1,
+            'Grand Master' => 1,
+            'guards?' => 1,
+            'guides?' => 1,
+            'healers?' => 1,
+            'high priests?' => 1,
+            'Hippocrates' => 1,
+            'humans?' => 1,
+            'hunters?' => 1,
+            'Keystone Kops?' => 1,
+            'Kop Lieutenants?' => 1,
+            'Kop Sergeants?' => 1,
+            'Kop Kaptains?' => 1,
+            'King Arthur' => 1,
+            'knights?' => 1,
+            'lieutenants?' => 1,
+            'Lord Carnarvon' => 1,
+            'Lord Sato' => 1,
+            'Master Assassin' => 1,
+            'Master Kaen' => 1,
+            'Master of Thieves' => 1,
+            'monks?' => 1,
+            'neanderthals?' => 1,
+            'Neferet the Green' => 1,
+            'ninjas?' => 1,
+            'Norn' => 1,
+            'nurses?' => 1,
+            'Oracle' => 1,
+            'Orion' => 1,
+            'pages?' => 1,
+            'Pelias' => 1,
+            'prisoners?' => 1,
+            'rangers?' => 1,
+            'rogues?' => 1,
+            'roshis?' => 1,
+            'samurais?' => 1,
+            'sergeants?' => 1,
+            'Shaman Karnov' => 1,
+            'shopkeepers?' => 1,
+            'soldiers?' => 1,
+            'students?' => 1,
+            'thugs?' => 1,
+            'tourists?' => 1,
+            'Twoflower' => 1,
+            'valkyries?' => 1,
+            'warriors?' => 1,
+            'watch captains?' => 1,
+            'watchm[ae]n' => 1,
+            'werejackals?' => 1,
+            'wererats?' => 1,
+            'werewolfs?' => 1,
+            'wizards?' => 1,
+            'Wizard of Yendor' => 1,
+         },
+    Elf =>
+         {
+            'el(?:f|ves)' => 1,
+            'elf-lords?' => 1,
+            'Elvenkings?' => 1,
+            'Green-el(?:f|ves)' => 1,
+            'Grey-el(?:f|ves)' => 1,
+            'Woodland-el(?:f|ves)' => 1,
+         },
+    Dwa =>
+         {
+            'dwar(?:f|ves)' => 1,
+            'dwarf lords?' => 1,
+            'dwarf kings?' => 1,
+         },
+    Gno =>
+         {
+            'gnomes?' => 1,
+            'gnome lords?' => 1,
+            'gnome kings?' => 1,
+            'gnomish wizards?' => 1,
+         },
+    Orc => {}, # orcs don't suffer from cannibalism
+);
+
+my $helper = sub
 {
+    my ($monster, $intrinsics) = @_;
     make_annotation qr/^You see here (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse\./ => "Corpse: $intrinsics";
     make_annotation qr/^There is (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse here; eat it\?/ => "Corpse: $intrinsics";
     make_annotation qr/It smells like $monster\./ => "Tin: $intrinsics";
+};
+
+while (my ($monster, $intrinsics) = each %annotation_for)
+{
+    $helper->($monster, $intrinsics);
+}
+
+my $seen_race = '';
+each_iteration
+{
+    return if $race eq $seen_race;
+    $seen_race = $race;
+
+    # it's currently okay if we kind of supercede an existing annotation
+    # since annotations are displayed in the order they were initialized
+    # this will require fixing when we get multiple-annotations-in-one-move
+    # working.. :)
+
+    while (my ($monster, undef) = each %{$cannibalism{$race}})
+    {
+        my $intrinsics = 'Cannibalism';
+        $intrinsics .= ", $annotation_for{$monster}" if exists $annotation_for{$monster};
+        $helper->($monster, $intrinsics);
+    }
 }
 
