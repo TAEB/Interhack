@@ -28,7 +28,7 @@ each_match qr/You hear (\d) gears? turn\./
            $responses_so_far .= " ${1}0";
            $response_this_play = 1;
        };
-each_match qr/What tune are you playing\?/
+each_match qr/^What tune are you playing\? \[5 notes, A-G\]\s*$/
     => sub
        {
            $responses_so_far .= " 00" unless $response_this_play;
