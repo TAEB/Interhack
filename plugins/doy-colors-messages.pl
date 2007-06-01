@@ -32,8 +32,8 @@ recolor qr/For what do you wish\?/ => "purple";
 # }}}
 # resists {{{
 recolor qr/You feel (?:(?:especially )?healthy|hardy)./ => "green";
-recolor qr/You feel (?:full of hot air|warm)./ => "green";
-recolor qr/You (?:feel a momentary chill|feel cool|be chillin')./ => "green";
+recolor qr/You feel (?:full of hot air|warm)\./ => "green";
+recolor qr/You (?:feel a momentary chill|feel cool|be chillin')\./ => "green";
 recolor qr/You feel (?:wide )?awake./ => "green";
 recolor qr/You feel (?:very firm|totally together, man)./ => "green";
 recolor qr/Your health currently feels amplified!/ => "green";
