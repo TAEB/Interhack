@@ -23,7 +23,7 @@ each_iteration
 
     if (/--More--/)
     {
-        return if $topline =~ /Message History/ || $topline =~ /Things that are here/;
+        return if $topline =~ /Message History/ || $topline =~ /Things that are here/ || $topline =~ /Current Attributes:/;
         select undef, undef, undef, $automore_delay;
         print_sock ' ';
     }
