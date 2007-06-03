@@ -39,7 +39,6 @@ autoadjust $aa_instrument  => "a";
 autoadjust $aa_trice => "^ye";
 autoadjust qr/\bpotions?\b[^.]*?/ => "^q";
 autoadjust qr/\bwand\b[^.]*?/ => "^z";
-autoadjust qr/bugle/ => "^z";
 # }}}
 # botl {{{
 # figure out current song (amaroK) {{{
