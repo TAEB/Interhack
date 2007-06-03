@@ -259,7 +259,7 @@ if (!$ece_useless)
     recolor qr/ring (?:of|called) (?:adornment|hunger|protection(?: from shape changers)?|stealth|sustain ability|warning|aggravate monster|\w+ resistance|gain \w+|increase \w+|see invisible|searching|polymorph(?: control)?)\b/ => $ec_useless_rings || $ec_useless || "darkgray" unless $ece_useless_rings;
 # }}}
 # wands {{{
-    recolor qr/wand (?:called|of) (?:light|nothing|locking|make invisible|opening|probing|secret door detection|\w+ monster|undead turning|create monster)\b/ => $ec_useless_wands || $ec_useless || "darkgray" unless $ece_useless_wands;
+    recolor qr/wand (?:called|of) (?:light|nothing|locking|make invisible|opening|probing|secret door detection|(?:speed|slow)(?: monster)?|undead turning|create monster)\b/ => $ec_useless_wands || $ec_useless || "darkgray" unless $ece_useless_wands;
 # }}}
 # amulets {{{
     recolor qr/amulet (?:called|of) (?:versus poison|change|ESP|magical breathing|restful sleep|strangulation|unchanging)\b/ => $ec_useless_amulets || $ec_useless || "darkgray" unless $ece_useless_amulets;
