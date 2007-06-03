@@ -13,12 +13,12 @@ $short_names{scroll}{80} = ['EA', 'RC'];
 $short_names{potion}{300} = ['GA', 'GL', 'paral'];
 # }}}
 include "*";
-$statusline = sub { my $timepos = 80 - length($botl{time}); "$botl{score} \e[23;${timepos}H$colormap{darkgray}$botl{time}\e[0m" };
 # }}}
 # key remappings {{{
-remap "\ce" => "E-  Elbereth\n";
+our $elbereths = 0;
+remap "\ce" => sub { $elbereths++; "E-  Elbereth\n" };
 remap "\cw" => "aany\e";
-remap "\cv" => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      ";
+remap "\cv" => sub { $elbereths += 3; ("E-  Elbereth\n"x3).">      " };
 # }}}
 # autoadjusts {{{
 sub autoadjust;
@@ -40,5 +40,42 @@ autoadjust $aa_trice => "^ye";
 autoadjust qr/\bpotions?\b[^.]*?/ => "^q";
 autoadjust qr/\bwand\b[^.]*?/ => "^z";
 autoadjust qr/bugle/ => "^z";
+# }}}
+# botl {{{
+# figure out current song (amaroK) {{{
+our $amarok_counter = 0;
+our $current_song = '';
+
+each_iteration
+{
+    if (--$amarok_counter <= 0)
+    {
+        $amarok_counter = 50;
+        my $artist = `dcop amarok player artist`;
+        my $track  = `dcop amarok player title`;
+        for ($artist, $track) { chomp }
+
+        next if $artist eq '' && $track eq '';
+
+        my $song = "$artist - $track";
+
+        next if $song eq $current_song;
+        $current_song = $song;
+    }
+} # }}}
+
+$statusline = sub
+{
+    my $time_length = length($botl{time});
+    my $cur_length;
+    sprintf "S:%d E:%d K:%d <NP:%n%s>\e[23;%dH$colormap{darkgray}%s\e[0m",
+            $botl{score},
+            $elbereths,
+            $keystrokes,
+            $cur_length,
+            substr($current_song, 0, 80 - $time_length - $cur_length - 3),
+            80 - $time_length,
+            $botl{time},
+};
 # }}}
 
