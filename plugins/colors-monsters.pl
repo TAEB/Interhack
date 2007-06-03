@@ -397,7 +397,8 @@ recolor qr/Juiblex/ => "bgreen";
 recolor qr/Yeenoghu|Geryon|Dispater|Demogorgon/ => "purple";
 
 recolor qr/djinni?/ => "yellow";
-recolor qr/balrogs?|pit fiends?|nalfeshnees?|horned devils?/ => "red";
+recolor qr/balrogs?|pit fiends?|nalfeshnees?/ => "red";
+recolor qr/horned devils?/ => "brown";
 recolor qr/barbed devils?|mariliths?|vrocks?|hezrous?/ => "red";
 recolor qr/(?:suc|in)cub$us|sandestins?|bone devils?/ => "gray";
 recolor qr/ice devils?/ => "white";
