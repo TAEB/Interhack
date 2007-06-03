@@ -18,7 +18,7 @@ $statusline = sub { my $timepos = 80 - length($botl{time}); "$botl{score} \e[23;
 # key remappings {{{
 remap "\ce" => "E-  Elbereth\n";
 remap "\cw" => "aany\e";
-remap "\cv" => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      ";
+remap "\cv" => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      ";
 # }}}
 # autoadjusts {{{
 sub autoadjust;
