@@ -276,4 +276,18 @@ if (!$ece_unid_armor)
     recolor qr/(?:old|riding|padded|fencing) gloves/ => $ec_unid_gloves || $ec_unid_armor || "green";
 }
 # }}}
+# goodies (other) {{{
+if (!$ece_goodies_other)
+{
+# scrolls {{{
+    recolor qr/scrolls? (?:called|of) (?:charging|genocide)\b/ => $ec_good_scrolls || $ec_goodies_other || "magenta" unless $ece_good_scrolls;
+# }}}
+# potions {{{
+    recolor qr/potions? (?:called|of) (?:gain level|(?:full |extra )?healing)\b/ => $ec_good_potions || $ec_goodies_other || "magenta" unless $ece_good_potions;
+# }}}
+# wands {{{
+    recolor qr/wand (?:called|of) (?:death|tele(?:portation)?)\b/ => $ec_good_wands || $ec_goodies_other || "magenta" unless $ece_good_wands;
+# }}}
+}
+# }}}
 # }}}
