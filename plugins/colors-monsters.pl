@@ -268,10 +268,10 @@ recolor qr/(?:demi|master |arch-)?lich$es(?!en)/
 # }}}
 # mummies M {{{
 recolor qr/kobold mumm$ies/ => "brown";
-recolor qr/(?:orc|human) mumm$ies/ => "red";
+recolor qr/human mumm$ies/ => "red";
 recolor qr/(?:gnome|dwarf) mumm$ies/ => "bwhite";
 recolor qr/elf mumm$ies/ => "green";
-recolor qr/ettin mumm$ies/ => "blue";
+recolor qr/(?:orc|ettin) mumm$ies/ => "blue";
 recolor qr/giant mumm$ies/ => "cyan";
 # }}}
 # nagas N {{{
