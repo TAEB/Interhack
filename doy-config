@@ -16,6 +16,7 @@ $ece_gem = 1;
 $ece_charges_individual = 1;
 $ece_holywater = 1;
 $ece_unholywater = 1;
+$ece_goodies_other = 1;
 $eci_splitwater = 1;
 $eci_erosion = 1;
 # }}}
