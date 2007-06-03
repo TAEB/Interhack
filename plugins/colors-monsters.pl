@@ -71,7 +71,7 @@ recolor qr/shocking spheres?/ => "bblue";
 # felines f {{{
 recolor qr/kittens?|(?:house|large )cats?/ => "bwhite";
 recolor qr/jaguars?/ => "brown";
-recolor qr/lynxes?/ => "cyan";
+recolor qr/lynx(?:es)?/ => "cyan";
 recolor qr/panthers?/ => "nhblack";
 recolor qr/tigers?(?! eye)/ => "yellow";
 # }}}
