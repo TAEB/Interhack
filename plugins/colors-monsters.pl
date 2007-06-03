@@ -362,7 +362,7 @@ recolor qr/wererats?/ => "brown";
 recolor qr/werejackals?/ => "red";
 recolor qr/werewol$ves/ => "bred";
 # should stop yourself among other things
-recolor qr/(?<![dny]-|rs|ts)el$ves(?!-lord| zombie| mumm|-knowledgeable)/ => "bwhite";
+recolor qr/(?<![dny]-|[r ]s|ts)el$ves(?!-lord| zombie| mumm|-knowledgeable)/ => "bwhite";
 recolor qr/Woodland-el$ves/ => "green";
 recolor qr/Green-el$ves/ => "bgreen";
 recolor qr/Grey-el$ves/ => "gray";
