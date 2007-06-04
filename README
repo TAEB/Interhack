@@ -74,8 +74,8 @@ For now you have to be in the Interhack source directory to be able to run the
 program.
 
 Interhack takes two options:
-./interhack.pl nickname
-./interhack.pl ttyrec
+perl interhack.pl nickname
+perl interhack.pl ttyrec
 
 Specifying a nickname (or at least enough of a nickname to be unique) will
 autologin as that user. See the CONFIG file for information about autologin.
