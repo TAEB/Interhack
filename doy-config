@@ -135,6 +135,7 @@ show_menu qr/^What type of spellbook do you want to write\? +$/ => \%spellbooks;
 # }}}
 # }}}
 # mappings {{{
+remap chr(2) => "ainy?!\$\n\e"; # ^B to bag non-dangerous stuff
 remap chr(5) => "E-  Elbereth\n"; # ^E to engrave Elbereth
 remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V to DfV
 remap chr(23) => "aqny "; # ^W to work the castle drawbridge
