@@ -5,6 +5,15 @@ used to color the message "You are slowing down" in bright red.
 Interhack is written primarily by Shawn M Moore, Jesse Luehrs, and Jordan A
 Lewis. It is released under the MIT license (see LICENSE).
 
++------------+
+| DISCLAIMER |
++------------+
+
+The Interhack development team is in no way responsible for what happens as a
+result of using Interhack. If pressing tab causes your character to drown, it
+sucks but it's your own fault (hopefully). That's precisely why Interhack tells
+you exactly what characters it's going to send, and asks you to press tab.
+
 +---------+
 | GETTING |
 +---------+
