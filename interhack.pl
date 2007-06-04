@@ -598,6 +598,13 @@ END { ReadMode 0 }
 $|++;
 $SIG{INT} = sub {};
 
+if (defined($ttyrec))
+{
+    $write_normal_ttyrec    =
+    $write_interhack_ttyrec =
+    $write_keys             = 0;
+}
+
 if ($write_normal_ttyrec)
 {
     system("mkdir -p $ENV{HOME}/.interhack/ttyrec/normal");
