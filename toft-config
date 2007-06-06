@@ -14,13 +14,14 @@ $bfg = "blessed greased fixed";
 # }}}
 
 include "*";
-
+$statusline = sub { my $timepos = 80 - length($botl{time}); "$botl{score} \e[23;${timepos}H$colormap{darkgray}$botl{time}\e[0m" };
 $fortune = "yasd ideas nethackidiocy";
 # }}}
 # remappings {{{
-remap chr(5) => sub { "E-  Elbereth\n" }; # ^E
-remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V
-remap chr(23) => "anny\e"; # drawbridge: ^W
+our $elbereths = 0;
+remap "\ce" => sub { $elbereths++; "E-  Elbereth\n" };
+remap "\cw" => "aany\e"; # drawbridge
+remap "\cv" => sub { $elbereths += 3; ("E-  Elbereth\n"x3).">      " };
 # }}}
 # autoadjusts {{{
 sub autoadjust;
@@ -42,5 +43,18 @@ autoadjust $aa_instrument  => "n";
 autoadjust $aa_trice       => "^ye";
 
 # }}}
-
+# botl {{{
+#$statusline = sub { my $timepos = 80 - length($botl{time}); "$botl{score} \e[23;${timepos}H$colormap{darkgray}$botl{time}\e[0m" };
+$statusline = sub
+{
+    my $time_length = length($botl{time});
+    my $cur_length;
+    sprintf "S:%d E:%d K:%d \e[23;%dH$colormap{darkgray}%s\e[0m",
+            $score,
+            $elbereths,
+            $keystrokes,
+            80 - $time_length,
+            $botl{time},
+};
+# }}}
 # vim:ft=perl:fdm=marker:
