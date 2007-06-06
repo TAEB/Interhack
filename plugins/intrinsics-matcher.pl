@@ -75,7 +75,7 @@ each_iteration
 each_match qr/You feel (?:(?:especially )?healthy|hardy)\./ => $add, "poison";
 each_match qr/You feel (?:full of hot air|warm)\./ => $add, "cold";
 each_match qr/You (?:feel a momentary chill|feel cool(?!er)|be chillin')\./ => $add, "fire";
-each_match qr/You feel (?:wide )?awake\./ => $add, "sleep";
+each_match qr/You feel (?:wide )?awake./ => $add, "sleep";
 each_match qr/You feel (?:very firm|totally together, man)\./ => $add, "disintegration";
 each_match "Your health currently feels amplified!" => $add, "shock";
 each_match qr/You feel (?:insulated|grounded in reality)/ => $add, "shock";
