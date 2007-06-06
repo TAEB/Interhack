@@ -433,6 +433,37 @@ sub force_tab # {{{
 
     clear_annotation();
 } # }}}
+sub force_tab_yn # {{{
+{
+    return if defined $ttyrec;
+    my $message = shift;
+    $message .= " " if defined($message);
+    annotate("\e[1;31m" . $message);
+    print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
+    print $postprint;
+    $postprint = '';
+    my $c;
+
+    eval
+    {
+        # we don't want the tab to stay onscreen for too long
+        # this is a problem when watching others
+        # so fix this eventually when we get better "am I playing?" detection
+
+        local $SIG{ALRM} = sub { die "alarm\n" };
+        alarm 10;
+        $c = ReadKey(0);
+        alarm 0;
+    };
+
+    clear_annotation();
+
+    if ($c eq "\t")
+    {
+        return 1;
+    }
+    return 0;
+} # }}}
 sub press_tab # {{{
 {
     my ($matching, $tabtext) = @_;
