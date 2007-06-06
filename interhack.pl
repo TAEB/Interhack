@@ -753,17 +753,23 @@ while (1)
           {
             $c = $tab if $c eq "\t";
             $tab = "\t";
+            %keyonce = ();
           }
           elsif (exists $keyonce{$c})
           {
-            $c = value_of($keyonce{$c}, $c);
+            my $map = $keyonce{$c};
+            %keyonce = ();
+            $c = value_of($map, $c);
           }
           elsif (exists $keymap{$c})
           {
             $c = value_of($keymap{$c}, $c);
+            %keyonce = ();
           }
-
-          %keyonce = ();
+          else
+          {
+            %keyonce = ();
+          }
 
           $keystrokes += length $c;
 
