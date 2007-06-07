@@ -36,6 +36,9 @@ our @mINC = ("$ENV{HOME}/.interhack/plugins", "plugins");
 our $write_normal_ttyrec = 0;
 our $write_interhack_ttyrec = 0;
 our $write_keys = 1;
+our $normal_ttyrec_name = '';
+our $interhack_ttyrec_name = '';
+our $key_name = '';
 our ($normal_handle, $interhack_handle, $keys_handle);
 # colormap {{{
 our %colormap =
@@ -639,25 +642,25 @@ if (defined($ttyrec))
 if ($write_normal_ttyrec)
 {
     system("mkdir -p $ENV{HOME}/.interhack/ttyrec/normal");
-    my $ttyrec_name = sprintf '%s/.interhack/ttyrec/normal/%s.ttyrec', $ENV{HOME}, scalar(localtime);
-    open $normal_handle, '>', $ttyrec_name
-        or die "Unable to open $ttyrec_name for writing: $!";
+    $normal_ttyrec_name = sprintf '%s/.interhack/ttyrec/normal/%s.ttyrec', $ENV{HOME}, scalar(localtime);
+    open $normal_handle, '>', $normal_ttyrec_name
+        or die "Unable to open $normal_ttyrec_name for writing: $!";
 }
 
 if ($write_interhack_ttyrec)
 {
     system("mkdir -p $ENV{HOME}/.interhack/ttyrec/interhack");
-    my $ttyrec_name = sprintf '%s/.interhack/ttyrec/interhack/%s.ttyrec', $ENV{HOME}, scalar(localtime);
-    open $interhack_handle, '>', $ttyrec_name
-        or die "Unable to open $ttyrec_name for writing: $!";
+    $interhack_ttyrec_name = sprintf '%s/.interhack/ttyrec/interhack/%s.ttyrec', $ENV{HOME}, scalar(localtime);
+    open $interhack_handle, '>', $interhack_ttyrec_name
+        or die "Unable to open $interhack_ttyrec_name for writing: $!";
 }
 
 if ($write_keys)
 {
     system("mkdir -p $ENV{HOME}/.interhack/keys");
-    my $filename = sprintf '%s/.interhack/keys/%s.txt', $ENV{HOME}, scalar(localtime);
-    open $keys_handle, '>', $filename
-        or die "Unable to open $filename for writing: $!";
+    $key_name = sprintf '%s/.interhack/keys/%s.txt', $ENV{HOME}, scalar(localtime);
+    open $keys_handle, '>', $key_name
+        or die "Unable to open $key_name for writing: $!";
 }
 # }}}
 # main loop {{{
