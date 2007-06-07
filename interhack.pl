@@ -210,6 +210,7 @@ sub splitline # {{{
   my $chop;
   my @lines;
 
+  $line =~ s/\n+/' ' x $length/eg;
   while (length($line) > $length)
   {
     # Here we just need the effects of the capturing parentheses.
