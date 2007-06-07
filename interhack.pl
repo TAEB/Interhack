@@ -247,7 +247,8 @@ sub pline # {{{
        my $line = shift @lines;
        print_ttyrec($interhack_handle, "\e[H$line--More--\e[K") if $write_interhack_ttyrec;
        print "\e[H$line--More--\e[K";
-       print {$keys_handle} ReadKey 0;
+       my $c = ReadKey 0;
+       last if $c eq "\e";
     }
 
     print_ttyrec($interhack_handle, "\e[u") if $write_interhack_ttyrec;
@@ -405,8 +406,7 @@ sub force_yn # {{{
 
     while (1)
     {
-        $c = ReadKey(0);
-        print {$keys_handle} $c;
+        ReadKey(0);
         last if $c eq 'y' || $c eq 'Y' || $c eq 'n' || $c eq 'N';
     }
 
