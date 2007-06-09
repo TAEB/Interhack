@@ -64,7 +64,11 @@ autoadjust $aa_instrument  => "q";
 autoadjust $aa_trice       => "^y";
 # }}}
 # botl {{{
-$statusline = sub { my $timepos = 80 - length($botl{time}); "$botl{score} \e[23;${timepos}H$colormap{darkgray}$botl{time}\e[0m" };
+$statusline = sub {
+    $elbereths = 0 if !defined($elbereths);
+    my $timepos = 80 - length($botl{time});
+    "$botl{score} E:$elbereths K:$keystrokes\e[23;${timepos}H$colormap{darkgray}$botl{time}\e[0m"
+};
 # }}}
 # wish-menu {{{
 $wish_enchantment = 2;
@@ -138,7 +142,7 @@ show_menu qr/^What type of spellbook do you want to write\? +$/ => \%spellbooks;
 # }}}
 # mappings {{{
 remap chr(2) => "ainy?!\$\n\e"; # ^B to bag non-dangerous stuff
-remap chr(5) => "E-  Elbereth\n"; # ^E to engrave Elbereth
-remap chr(22) => "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      "; # ^V to DfV
+remap chr(5) => sub { $elbereths++; "E-  Elbereth\n" }; # ^E to engrave Elbereth
+remap chr(22) => sub { $elbereths += 6; "E-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\nE-  Elbereth\n>      " }; # ^V to DfV
 remap chr(23) => "aqny "; # ^W to work the castle drawbridge
 # }}}
