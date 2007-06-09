@@ -8,6 +8,7 @@ $no_evalcontext = 1;
 exclude "apply-oil", "dual-slow-digestion";
 $chromatic_gods = 0;
 $chromatic_nemeses = 1;
+$write_interhack_ttyrec = 1;
 # wish-menu {{{
 $wish_enchantment = 3;
 $bfg = "blessed greased fixed";
