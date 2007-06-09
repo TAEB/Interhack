@@ -41,9 +41,9 @@ $short_names{potion}{300} = ['ga', 'gl', 'para'];
 $empty = "e";
 # }}}
 # plugins {{{
-exclude "apply-oil", "colors-monsters";
-exclude "dual-slow-digestion", "eval", "gem-name", "geno-list";
-exclude "intrinsics-matcher", "intrinsics-tracker";
+exclude "apply-oil", "colors-monsters", "dual-slow-digestion", "elbereth";
+exclude "eval", "gem-name", "geno-list", "intrinsics-matcher";
+exclude "intrinsics-tracker", "monster-rename";
 include "*";
 # }}}
 # plugin configuration {{{
