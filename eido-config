@@ -67,7 +67,7 @@ $statusline = sub
 {
     my $time_length = length($botl{time});
     my $cur_length;
-    sprintf "S:%d E:%d K:%d <NP:%n%s>\e[23;%dH$colormap{darkgray}%s\e[0m",
+    sprintf "%s E:%d K:%d <NP:%n%s>\e[23;%dH$colormap{darkgray}%s\e[0m",
             $botl{score},
             $elbereths,
             $keystrokes,
