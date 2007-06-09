@@ -4,6 +4,8 @@
 nick "doy";
 $vikeys = 1;
 $write_keys = 0;
+$write_normal_ttyrec = 1;
+$write_interhack_ttyrec = 1;
 $no_evalcontext = 1;
 # }}}
 # early plugin configuration {{{
