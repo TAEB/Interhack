@@ -531,6 +531,7 @@ sub recolor # {{{
         die "Unable to recolor matching object of type " . ref($matching);
     }
 } # }}}
+
 sub serialize_time # {{{
 {
   my $seconds = int(shift);
@@ -547,6 +548,16 @@ sub serialize_time # {{{
     sprintf '%d:%02d:%02d', $hours, $minutes, $seconds % 60;
   }
 } # }}}
+sub timestamp #{{{
+{
+    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$dst) = localtime();
+    $year += 1900;
+    $mon++;
+    my $d = sprintf("%4d%2.2d%2.2d-", $year, $mon, $mday);
+    my $t = sprintf("%2.2d%2.2d%2.2d", $hour, $min, $sec);
+    return $d.$t;
+}
+# }}}
 
 sub print_ttyrec # {{{
 {
@@ -643,7 +654,7 @@ if (defined($ttyrec))
 if ($write_normal_ttyrec)
 {
     system("mkdir -p $ENV{HOME}/.interhack/ttyrec/normal");
-    $normal_ttyrec_name = sprintf '%s/.interhack/ttyrec/normal/%s.ttyrec', $ENV{HOME}, scalar(localtime);
+    $normal_ttyrec_name = sprintf '%s/.interhack/ttyrec/normal/%s.ttyrec', $ENV{HOME}, timestamp();
     open $normal_handle, '>', $normal_ttyrec_name
         or die "Unable to open $normal_ttyrec_name for writing: $!";
 }
@@ -651,7 +662,7 @@ if ($write_normal_ttyrec)
 if ($write_interhack_ttyrec)
 {
     system("mkdir -p $ENV{HOME}/.interhack/ttyrec/interhack");
-    $interhack_ttyrec_name = sprintf '%s/.interhack/ttyrec/interhack/%s.ttyrec', $ENV{HOME}, scalar(localtime);
+    $interhack_ttyrec_name = sprintf '%s/.interhack/ttyrec/interhack/%s.ttyrec', $ENV{HOME}, timestamp();
     open $interhack_handle, '>', $interhack_ttyrec_name
         or die "Unable to open $interhack_ttyrec_name for writing: $!";
 }
@@ -659,7 +670,7 @@ if ($write_interhack_ttyrec)
 if ($write_keys)
 {
     system("mkdir -p $ENV{HOME}/.interhack/keys");
-    $key_name = sprintf '%s/.interhack/keys/%s.txt', $ENV{HOME}, scalar(localtime);
+    $key_name = sprintf '%s/.interhack/keys/%s.txt', $ENV{HOME}, timestamp();
     open $keys_handle, '>', $key_name
         or die "Unable to open $key_name for writing: $!";
 }
