@@ -262,7 +262,7 @@ if (!$ece_useless)
 # }}}
 # wands {{{
     recolor qr/wand (?:called|of) (?:light|nothing|locking|make invisible|opening|probing|secret door detection|(?:speed|slow)(?: monster)?|undead turning|create monster)\b/ => $ec_useless_wands || $ec_useless || "darkgray" unless $ece_useless_wands;
-    recolor qr/wand called (?:\w+\s+)+100(?!\/)/ => $ec_useless_wands || $ec_useless || "darkgray" unless $ece_useless_wands;
+    recolor qr/wand called (?:\w+\s+)+(?:100|nomsg)(?!\/)/ => $ec_useless_wands || $ec_useless || "darkgray" unless $ece_useless_wands;
 # }}}
 # amulets {{{
     recolor qr/amulet (?:called|of) (?:versus poison|change|ESP|magical breathing|restful sleep|strangulation|unchanging)\b/ => $ec_useless_amulets || $ec_useless || "darkgray" unless $ece_useless_amulets;
