@@ -25,6 +25,10 @@ if ($load_eval)
                   => sub
                   {
                       my ($command, $args) = @_;
+
+                      # need to make sure $is_playing is entirely accurate
+                      return "#eval disabled until it's [more] secure";
+
                       return "Syntax: #eval CODE" if !defined($args) || $args eq '';
                       my $ret = eval $args;
                       return "undef" if !defined($ret);
