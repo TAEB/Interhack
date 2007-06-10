@@ -117,6 +117,21 @@ sub calc_base
     return map {int} ($amount, $amount_sur);
 }
 
+make_tab qr/^(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:clear potions?|potions? (?:of|called) water) \(unpaid, (\d+) zorkmids?\)\./
+      => sub
+         {
+             my ($letter, $count, $cost) = ($1, $2, $3);
+             $cost /= $count if $count > 0;
+
+             my $buc = 'uncursed';
+             if ($cost > 20)
+             {
+                $buc = '!UC';
+             }
+
+             "\e\e#name\ny$letter$buc\n";
+         };
+
 make_tab qr/^(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:blessed |uncursed |cursed )?(.*?) ?(scroll|potion|wand|ring|spellbook)s? (?:(?:called |labeled )(.*?) ?)?\(unpaid, (\d+) zorkmids?\)\./
       => sub
          {
