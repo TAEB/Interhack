@@ -123,6 +123,9 @@ make_tab qr/^(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:blessed |
              my ($letter, $count, $appearance, $type, $existing, $cost)
               = (     $1,     $2,          $3,    $4,        $5,   $6);
 
+             return if $appearance =~ /\bwater\b/i
+                    || $appearance =~ /\bclear\b/i;
+
              $existing = "" unless defined $existing;
 
              # avoid making a tab for existing prices
