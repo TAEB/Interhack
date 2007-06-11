@@ -305,21 +305,24 @@ sub value_of # {{{
 
 sub each_match # {{{
 {
+    my $push_to = \@configmap;
+    $push_to = shift if ref($_[0]) eq 'ARRAY';
+
     my $matching = shift;
     my $action = shift;
     my @args = @_;
 
     if (!ref($matching))
     {
-        push @configmap, sub { if (index($topline, $matching) > -1) { $action->(@args)} }
+        push @{$push_to}, sub { if (index($topline, $matching) > -1) { $action->(@args)} }
     }
     elsif (ref($matching) eq "Regexp")
     {
-        push @configmap, sub { if ($topline =~ $matching) { $action->(@args) } }
+        push @{$push_to}, sub { if ($topline =~ $matching) { $action->(@args) } }
     }
     elsif (ref($matching) eq "CODE")
     {
-        push @configmap, sub { if ($matching->()) { $action->(@args) } }
+        push @{$push_to}, sub { if ($matching->()) { $action->(@args) } }
     }
     else
     {
