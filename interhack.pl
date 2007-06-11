@@ -474,7 +474,7 @@ sub force_tab_yn # {{{
 sub press_tab # {{{
 {
     my ($matching, $tabtext) = @_;
-    each_match $matching => sub { force_tab($tabtext) };
+    each_match \@postmap, $matching => sub { force_tab($tabtext) };
 } # }}}
 
 sub alphakeys # {{{
