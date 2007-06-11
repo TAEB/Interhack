@@ -352,7 +352,7 @@ sub each_match_row # {{{
     }
     else
     {
-        die "Unable to each_match_vt matching object of type " . ref($matching);
+        die "Unable to each_match_row matching object of type " . ref($matching);
     }
 } # }}}
 
