@@ -184,7 +184,7 @@ recolor qr/You feel (?:warmer|a little sick|cooler|tired|conductive)./ => "red";
 # losing intrinsics {{{
 recolor qr/You seem slower./ => "red";
 recolor qr/You slow down./ => "red";
-recolor qr/You feel (?:slow|slower)./ => "red";
+recolor qr/You feel (?:slow|slower)\./ => "red";
 recolor qr/You feel (?:less attractive|paranoid|vulnerable|clumsy)./ => "red";
 recolor qr/You feel (?:uncontrolled|less jumpy)./ => "red";
 recolor qr/You (?:thought you saw something|tawt you taw a puttie tat)./ => "red";
