@@ -1,68 +1,68 @@
 extensible, togglable plugins, etc
 allow rebooting without losing connection (with exec)
-
-starred ideas have been implemented
-
-* autologin
-* castle tune suggestions
-... configurably fast (R3) or slow (current best)
+make castle tune solver configurably fast (R3) or slow (current best)
 price IDing help
-* hpmonitor (for devnull)
-* power monitor
-* menucolors (for devnull) (also optionally specify more-powerful Perl regex)
-* color anything! ("You are slowing down")
-* statuscolors
-* keymappings (so 0 -> "E-  Elbereth\n")
 conduct blocks (so if illit, confirm for the "r" command)
-* edit nethackrc locally
 keep track of which squares you've stepped on (key off of Dlvl etc)
-* automap certain levels (such as each Minetown)
-* internal paste buffer ("Press X to send the string: "#name\nnldark 100/150")
-* view other maps
-* thing finder ("/scare monster" -> "Dlvl 5, turn 1090")
 overview mode ("Level 1: fountain, Level 3: mines entrance")
 ray bounce thing
 possibly some kind of overenchant protection
 builtin start scummer >_>
 send keys at the beginning of play (for setting options in devnull)
 showweight
-* mysterious force counter
-* realtime counter
 some kind of mouse support
 kill counter
-* local ttyrec output
 which could be used to rewind live
 sokoban helper
 hunger estimator
 prayer timeout estimator
-* wish listings
-* geno listings
-* name empty wands
 mind flayer protection
-* hide attributes (to use for something more important)
 max carry capacity indicator
 display stairs (if an item is on them)
 color branch stairs
 VS display
 jump helper
-* recolor certain char/color combos (dark blue e -> cyan e)
-... would be nice to do the same for Elvenkings
-* confirm escape when wishing
+would be nice to be able to recolor Elvenkings
 remap escape to something that works instantly.. or something.. maybe!
 color altars based on alignment
-* exp to next level
 exp gained from kills
-* automatic intrinsic tracker
-* object ID stuff (like wand engraving, ring sinkdropping, etc)
 autoopen doors :)
 doy: marvin's farsight, looking at every square for ghosts
 auto-unidle
-* keystroke counter!
-* ... and recorder!
-* dual slow digestion messages (and anything else of that nature)
 Aioli: in fact, you can do a lot of speed upgrades just by "generalizing" g + direction travel for many cases
 Aioli: like a routine for searching for the VS, that stops if a monster is encountered
 expand monster colors to have an option for only dangerous monsters (named demons, footrices, riders, flayers, etc)
+prompt for eating when satiated
+
+Done!
+-----------
+* autologin
+* castle tune suggestions
+* hpmonitor (for devnull)
+* power monitor
+* menucolors (for devnull) (also optionally specify more-powerful Perl regex)
+* color anything! ("You are slowing down")
+* statuscolors
+* keymappings (so 0 -> "E-  Elbereth\n")
+* edit nethackrc locally
+* automap certain levels (such as each Minetown)
+* internal paste buffer ("Press X to send the string: "#name\nnldark 100/150")
+* view other maps
+* thing finder ("/scare monster" -> "Dlvl 5, turn 1090")
+* mysterious force counter
+* realtime counter
+* wish listings
+* geno listings
+* name empty wands
+* local ttyrec output
+* hide attributes (to use for something more important)
+* recolor certain char/color combos (dark blue e -> cyan e)
+* confirm escape when wishing
+* exp to next level
+* automatic intrinsic tracker
+* object ID stuff (like wand engraving, ring sinkdropping, etc)
+* keystroke counter!
+* ... and recorder!
+* dual slow digestion messages (and anything else of that nature)
 * add a 'press tab to continue' prompt when you get an instadeath message ('You are slowing down.', etc) to make sure you read it
 * realtime counter should have an option for compressing pauses like timettyrecs
-prompt for eating when satiated
