@@ -12,14 +12,14 @@ each_iteration
   $botl{hp} =~ s{(HP:)(\d+\(\d+\))}{
     my $color = '';
 
-       if ($curhp * 7 <= $maxhp || $curhp <= 6) { $color = "\e[1;30m" }
+       if ($curhp * 7 <= $maxhp || $curhp <= 5) { $color = "\e[1;30m" }
     elsif ($curhp     >= $maxhp)            {                     }
     elsif ($curhp * 2 >= $maxhp)            { $color = "\e[1;32m" }
     elsif ($curhp * 3 >= $maxhp)            { $color = "\e[1;33m" }
     elsif ($curhp * 4 >= $maxhp)            { $color = "\e[0;31m" }
     else                                    { $color = "\e[1;31m" }
 
-    if ($curhp > 0 && ($curhp * 7 <= $maxhp || $curhp <= 6))
+    if ($curhp > 0 && ($curhp * 7 <= $maxhp || $curhp <= 5))
     {
         if (!$notified)
         {
