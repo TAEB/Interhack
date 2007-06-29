@@ -253,8 +253,13 @@ if (!$ece_useless)
     recolor qr/scrolls? called (?:\w+\s+)+50(?!\/)/ => $ec_useless_scrolls || $ec_useless || "darkgray" unless $ece_useless_scrolls;
 # }}}
 # potions {{{
-    recolor qr/potions? (?:called|of) (?:booze|sake|fruit juice|see invisible|sickness|deli|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|obj(?:ect)? ?det(?:ection)?|(?:(?!1x)\d+x)?OD|levitation|polymorph|acid|oil|paralysis)\b/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
-    recolor qr/potions? called (?:[\w-]+\s+)+1?50(?!\/)(?: (?:(?!1x)\d+x)?OD)?/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions; # only exception is gain energy and it's ok if we lose that one
+    recolor qr/(?!smoky )potions? (?:called|of) (?:booze|sake|fruit juice|see invisible|sickness|deli|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|obj(?:ect)? ?det(?:ection)?|(?:(?!1x)\d+x)?OD|levitation|polymorph|acid|oil|paralysis)\b/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
+
+    # only 150 potion of note is gain energy, so we can color all 150 crap
+    # three regex for '150' or 'NxOD' or both, for sanity reasons :)
+    recolor qr/(?!smoky )potions? called (?:[\w-]+\s+)+1?50(?!\/)(?: (?:(?!1x)\d+x)?OD)?/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
+    recolor qr/(?!smoky )potions? called (?:[\w-]+\s+)+ (?:(?!1x)\d+x)?OD/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
+    recolor qr/(?!smoky )potions? called (?:[\w-]+\s+)+1?50(?!\/)/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
 # }}}
 # rings {{{
     recolor qr/ring (?:of|called) (?:adornment|hunger|protection(?: from shape changers)?|stealth|sustain ability|warning|aggravate monster|\w+ resistance|gain \w+|increase \w+|see invisible|searching|polymorph(?: control)?)\b/ => $ec_useless_rings || $ec_useless || "darkgray" unless $ece_useless_rings;
@@ -294,3 +299,4 @@ if (!$ece_goodies_other)
 }
 # }}}
 # }}}
+
