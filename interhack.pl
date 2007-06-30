@@ -367,7 +367,7 @@ sub annotate # {{{
   return if $annotation eq '';
   $annotation_onscreen = 1;
   $anno_frames = 5;
-  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[u";
+  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[K\e[u";
 } # }}}
 sub clear_annotation # {{{
 {
