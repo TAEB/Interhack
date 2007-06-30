@@ -253,7 +253,7 @@ if (!$ece_useless)
     recolor qr/scrolls? called (?:\w+\s+)+50(?!\/)/ => $ec_useless_scrolls || $ec_useless || "darkgray" unless $ece_useless_scrolls;
 # }}}
 # potions {{{
-    recolor qr/(?!smoky )potions? (?:called|of) (?!smoky\b)(?:booze|sake|fruit juice|see invisible|sickness|deli|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|obj(?:ect)? ?det(?:ection)?|(?:(?!1x)\d+x)?OD|levitation|polymorph|acid|oil|paralysis)\b/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
+    recolor qr/(?!smoky )potions? (?:called|of) (?!smoky\b)(?:[\w-]+ )?(?:booze|sake|fruit juice|see invisible|sickness|deli|confusion|hallucination|restore ability|sleeping|blindness|invisibility|monster detection|obj(?:ect)? ?det(?:ection)?|(?:(?!1x)\d+x)?OD|levitation|polymorph|acid|oil|paralysis)\b/ => $ec_useless_potions || $ec_useless || "darkgray" unless $ece_useless_potions;
 
     # only 150 potion of note is gain energy, so we can color all 150 crap
     # three regex for '150' or 'NxOD' or both, for sanity reasons :)
