@@ -41,38 +41,14 @@ autoadjust qr/\bpotions?\b[^.]*?/ => "^q";
 autoadjust qr/\bwand\b[^.]*?/ => "^z";
 # }}}
 # botl {{{
-# figure out current song (amaroK) {{{
-our $amarok_counter = 0;
-our $current_song = '';
-
-each_iteration
-{
-    if (!defined($ttyrec) && --$amarok_counter <= 0)
-    {
-        $amarok_counter = 50;
-        my $artist = `dcop amarok player artist`;
-        my $track  = `dcop amarok player title`;
-        for ($artist, $track) { chomp }
-
-        next if $artist eq '' && $track eq '';
-
-        my $song = "$artist - $track";
-
-        next if $song eq $current_song;
-        $current_song = $song;
-    }
-} # }}}
-
 $statusline = sub
 {
     my $time_length = length($botl{time});
     my $cur_length;
-    sprintf "%s E:%d K:%d <NP:%n%s>\e[23;%dH$colormap{darkgray}%s\e[0m",
+    sprintf "%s E:%d K:%d\e[23;%dH$colormap{darkgray}%s\e[0m",
             $botl{score},
             $elbereths,
             $keystrokes,
-            $cur_length,
-            substr($current_song, 0, 80 - $time_length - $cur_length - 3),
             80 - $time_length,
             $botl{time},
 };
