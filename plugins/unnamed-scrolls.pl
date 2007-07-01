@@ -3,7 +3,7 @@
 
 recolor qr/scrolls? labeled [A-Z0-9 ]+/ => 'green';
 
-make_tab qr/(.) - (?:an?|\d+)(?: blessed| uncursed| cursed)?(?: fireproof)?(?: greased)? scrolls? labeled ([A-Z0-9]+)/ =>
+make_tab qr/(.) - (?:an?|\d+)(?: blessed| uncursed| cursed)?(?: fireproof)?(?: greased)? scrolls? labeled ([A-Z0-9 ]+)(?! \(unpaid)/ =>
 sub
 {
     return "#name\nn$1\U$2\n";
