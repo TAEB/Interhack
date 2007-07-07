@@ -614,6 +614,7 @@ if (@ARGV)
       }
     }
   }
+  $autologin = 0 unless $nick;
 }
 # }}}
 
@@ -639,7 +640,17 @@ if ($autologin && $server !~ /noway\.ratry/)
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
 if (!defined($ttyrec) && $server =~ /alt\.org/)
 {
-  until (defined(recv($sock, $_, 4096, 0)) && /zaphod\.alt\.org/) {}
+  my $found = 0;
+  my $dgl_pat = '\e\[H\e\[2J\e\[1B ## dgamelaunch - network console game launcher..\e\[1B ## version';
+  while ($found < ($autologin ? 2 : 1))
+  {
+    next unless defined(recv($sock, $_, 4096, 0));
+    if (s/^.*?($dgl_pat)(.*$dgl_pat)?/$1/s) {
+      $found++;
+      $found++ if $2;
+    }
+  }
+  print;
 }
 
 ReadMode 3;
