@@ -597,8 +597,14 @@ sub print_ttyrec # {{{
 # }}}
 
 # read config, get a socket {{{
-do "$ENV{HOME}/.interhack/config"
-    if -e "$ENV{HOME}/.interhack/config";
+if (-e "$ENV{HOME}/.interhack/servers/$server->{name}/config")
+{
+    do "$ENV{HOME}/.interhack/servers/$server->{name}/config";
+}
+elsif (-e "$ENV{HOME}/.interhack/config")
+{
+    do "$ENV{HOME}/.interhack/config";
+}
 die $@ if $@;
 
 our $sock;
@@ -622,7 +628,7 @@ if (@ARGV == 1 && $ARGV[0] =~ /\.ttyrec$/)
 if (@ARGV)
 {
   $nick = '';
-  for (<$ENV{HOME}/.interhack/passwords/*>)
+  for (glob("$ENV{HOME}/.interhack/servers/$server->{name}/passwords/*"))
   {
     local ($_) = m{.*/(\w+)};
     if (index($_, $ARGV[0]) > -1)
@@ -650,7 +656,7 @@ if ($autologin && $server->{type} eq "dgl")
 
   if ($pass eq '')
   {
-    $pass = do { local @ARGV = "$ENV{HOME}/.interhack/passwords/$nick"; <> };
+    $pass = do { local @ARGV = "$ENV{HOME}/.interhack/servers/$server->{name}/passwords/$nick"; <> };
     chomp $pass;
   }
 
