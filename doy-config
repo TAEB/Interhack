@@ -2,6 +2,7 @@
 
 # main config {{{
 nick "doy";
+#server "sporkhack";
 $vikeys = 1;
 $write_keys = 0;
 $write_normal_ttyrec = 1;
