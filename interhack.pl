@@ -9,10 +9,33 @@ use Term::TtyRec::Plus;
 use Time::HiRes qw/gettimeofday/;
 
 # globals {{{
+our %servers = (
+    nao =>       { server => 'nethack.alt.org',
+                   port   => 23,
+                   name   => 'nao',
+                   type   => 'dgl',
+                   rc_dir => 'http://alt.org/nethack/rcfiles',
+                   dgl_line1 => ' dgamelaunch - network console game launcher',
+                   dgl_line2 => ' version 1.4.6',
+                 },
+    sporkhack => { server => 'sporkhack.nineball.org',
+                   port   => 23,
+                   name   => 'sporkhack',
+                   type   => 'dgl',
+                   rc_dir => 'http://nethack.nineball.org/rcfiles',
+                   dgl_line1 => ' ** Games on this server are recorded for in-progress viewing and playback!',
+                   dgl_line2 => '',
+                 },
+    noway     => { server => 'noway.ratry.ru',
+                   port   => 37331,
+                   name   => 'noway',
+                   type   => 'termcast',
+                   rc_dir => '',
+                 },
+);
 our $nick = '';
 our $pass = '';
-our $server = 'nethack.alt.org';
-our $port = 23;
+our $server = $servers{nao};
 our $autologin = 1;
 our $ttp;
 our $ttyrec;
@@ -125,8 +148,8 @@ sub pass # {{{
 } # }}}
 sub server # {{{
 {
-    ($server, $port) = @_;
-    $port = 23 unless defined $port;
+    my $new_server = shift;
+    $server = $servers{$new_server};
 } # }}}
 sub include # {{{
 {
@@ -582,7 +605,7 @@ our $sock;
 if (!defined($ttyrec))
 {
     use Interhack::Sock;
-    $sock = Interhack::Sock::sock($server, $port);
+    $sock = Interhack::Sock::sock($server->{server}, $server->{port});
     set_lexisock($sock);
 }
 # }}}
@@ -619,7 +642,7 @@ if (@ARGV)
 # }}}
 
 # autologin {{{
-if ($autologin && $server !~ /noway\.ratry/)
+if ($autologin && $server->{type} eq "dgl")
 {
   $nick = value_of($nick);
   $pass = value_of($pass);
@@ -638,7 +661,7 @@ if ($autologin && $server !~ /noway\.ratry/)
 } # }}}
 # get ready to start accepting keypresses {{{
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
-if (!defined($ttyrec) && $server =~ /alt\.org/)
+if (!defined($ttyrec) && $server->{type} eq "dgl")
 {
   my $found = 0;
   my $dgl_pat = '\e\[H\e\[2J\e\[1B ## dgamelaunch - network console game launcher..\e\[1B ## version';
@@ -746,7 +769,7 @@ while (1)
           if ($c eq "\t" && $at_login && $logged_in)
           {
             print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
-            my $nethackrc = get("http://alt.org/nethack/rcfiles/$me.nethackrc");
+            my $nethackrc = get("$server->{rc_dir}/$me.nethackrc");
             my ($fh, $name) = tempfile();
             print {$fh} $nethackrc;
             close $fh;
