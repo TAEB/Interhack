@@ -670,11 +670,11 @@ if ($autologin && $server->{type} eq "dgl")
 if (!defined($ttyrec) && $server->{type} eq "dgl")
 {
   my $found = 0;
-  my $dgl_pat = '\e\[H\e\[2J\e\[1B ## dgamelaunch - network console game launcher..\e\[1B ## version';
   while ($found < ($autologin ? 2 : 1))
   {
     next unless defined(recv($sock, $_, 4096, 0));
-    if (s/^.*?($dgl_pat)(.*$dgl_pat)?/$1/s) {
+    last if /There was a problem with your last entry\./;
+    if (s/^.*?(\e\[H\e\[2J\e\[1B ##\Q$server->{dgl_line1}\E..\e\[1B ##\Q$server->{dgl_line2}\E)(.*\e\[H\e\[2J\e\[1B ##\Q$server->{dgl_line1}\E..\e\[1B ##\Q$server->{dgl_line2}\E)?/$1/s) {
       $found++;
       $found++ if $2;
     }
