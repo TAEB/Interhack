@@ -29,7 +29,7 @@ See http://darcs.net/DarcsWiki/CategoryBinaries for getting darcs.
 
 Once you have darcs installed, the command to get Interhack is
 
-    darcs get http://darcs.katron.org/~sartak/interhack/
+    darcs get http://darcs.katron.org/~sartak/interhack/trunk interhack
 
 You can then later receive new patches by typing (in the interhack directory)
 
