@@ -44,7 +44,7 @@ $empty = "e";
 # plugins {{{
 exclude "apply-oil", "colors-monsters", "dual-slow-digestion", "elbereth";
 exclude "eval", "gem-name", "geno-list", "intrinsics-matcher";
-exclude "intrinsics-tracker", "monster-rename";
+exclude "intrinsics-tracker", "monster-rename", "unnamed-scrolls";
 include "*";
 # }}}
 # plugin configuration {{{
