@@ -135,6 +135,8 @@ our $topline = '';
 our $resting = 0;
 our ($curhp, $maxhp, $curpw, $maxpw) = (0, 0, 0, 0);
 our $vikeys = 0;
+our $show_sl = 0;
+our $show_bl = 0;
 # }}}
 
 # subroutines {{{
@@ -386,6 +388,7 @@ sub make_annotation # {{{
 } # }}}
 sub annotate # {{{
 {
+  return unless $show_sl && $show_bl;
   my $annotation = value_of(shift);
   return if $annotation eq '';
   $annotation_onscreen = 1;
@@ -410,6 +413,7 @@ sub make_tab # {{{
 } # }}}
 sub tab # {{{
 {
+  return unless $show_sl && $show_bl;
   my $display = value_of(shift);
   return if $display eq '';
   $tab = $display;

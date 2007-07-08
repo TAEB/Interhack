@@ -27,9 +27,6 @@ our $xp = 0;
 our $turncount = 0;
 our $status = '';
 
-our $show_sl = 0;
-our $show_bl = 0;
-
 my %aligns = (lawful  => 'Law',
               neutral => 'Neu',
               chaotic => 'Cha',
