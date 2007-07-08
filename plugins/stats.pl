@@ -106,7 +106,7 @@ each_iteration
 # parse botl
 each_iteration
 {
-    my @groups = $vt->row_plaintext(24) =~ /^(Dlvl:\d+|Home \d+|End Game|Astral Plane)\s+(?:\$|\*):(\d+)\s+HP:(\d+)\((\d+)\)\s+Pw:(\d+)\((\d+)\)\s+AC:([0-9-]+)\s+(?:Exp|Xp|HD):(\d+)(?:\/(\d+))?(?:\s+T:(\d+))?\s+(.*?)\s*$/;
+    my @groups = $vt->row_plaintext(24) =~ /^(Dlvl:\d+|Home \d+|Fort Ludios|End Game|Astral Plane)\s+(?:\$|\*):(\d+)\s+HP:(\d+)\((\d+)\)\s+Pw:(\d+)\((\d+)\)\s+AC:([0-9-]+)\s+(?:Exp|Xp|HD):(\d+)(?:\/(\d+))?(?:\s+T:(\d+))?\s+(.*?)\s*$/;
     $show_bl = @groups;
     return if @groups == 0;
     ($dlvl, $au, $curhp, $maxhp, $curpw, $maxpw, $ac, $xlvl, $xp, $turncount, $status) = @groups;
