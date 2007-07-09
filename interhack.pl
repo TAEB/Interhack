@@ -863,6 +863,7 @@ while (1)
       last ITER if !defined($frame);
       select undef, undef, undef, $frame->{diff};
       $_ = $frame->{data};
+      s/\a//g; # HATE BEEPS
   }
 
   $anno_frames-- unless $anno_frames == 0;
