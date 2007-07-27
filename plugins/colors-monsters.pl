@@ -57,7 +57,8 @@ recolor qr/pyrolisks?/ => "red";
 recolor qr/(?<!were)jackals?|coyotes?/ => "brown";
 recolor qr/(?<!ter |were)wol$ves(?!sbane)|wargs?/ => "brown";
 recolor qr/fox$es/ => "red";
-recolor qr/(?:little|large)? dogs?|dingos?/ => "bwhite";
+recolor qr/dingos?/ => "yellow";
+recolor qr/(?:little|large)? dogs?/ => "bwhite";
 recolor qr/winter wolf cubs?|winter wol$ves/ => "cyan";
 recolor qr/hell hound(?: pup)?s?/ => "red";
 # }}}
