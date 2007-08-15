@@ -3,7 +3,7 @@
 # usage: "#c dingos should be yellow, not white"
 
 # Hiveminder is an enterprise web 2.0 todo list tracker made by Eidolos'
-# company, Best Practical. it's what he spends most of his time at working on
+# company, Best Practical. it's what he spends most of his time working on
 
 # this plugin uses AIM to interact with Hiveminder. sign up an AIM account (or
 # use an existing one.. better to get a new one though :)) and put the username
