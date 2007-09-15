@@ -211,10 +211,10 @@ elsif (!$ece_charges)
 # enchantment (originally from doy) {{{
 if (!$ece_enchantment)
 {
-    recolor qr/\s\+0/               => $ece_plus0 || "brown";
-    recolor qr/\s\+[1-3]/           => $ece_plus13 || $ece_plus || "green";
-    recolor qr/\s\+[4-9]\d*/        => $ece_plus4 || $ece_plus || "bgreen";
-    recolor qr/(?<!AC)\s\-[1-9]\d*/ => $ece_minus || "red";
+    recolor qr/\s\+0/               => $ec_plus0 || "brown";
+    recolor qr/\s\+[1-3]/           => $ec_plus13 || $ec_plus || "green";
+    recolor qr/\s\+[4-9]\d*/        => $ec_plus4 || $ec_plus || "bgreen";
+    recolor qr/(?<!AC)\s\-[1-9]\d*/ => $ec_minus || "red";
 }
 # }}}
 # empty wands and tools {{{
