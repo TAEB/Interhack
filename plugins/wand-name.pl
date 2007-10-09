@@ -4,11 +4,33 @@
 # and only engraves one letter
 #
 # by toft
+#
+# $getwand added by Alex, adds support multi-character engravings
+
+my $getwand = sub
+{
+    for (my $i=-2; $i>=-30; --$i)
+    {
+        if ((alphakeys($i) eq "y") || (alphakeys($i) eq "n"))
+        {
+            my $j=$i-2;
+            while ((alphakeys($j) eq "?") || (alphakeys($j) eq "*") || (alphakeys($j) eq " "))
+            {
+                $j--;
+            }
+            if (alphakeys($j) eq "E")
+            {
+                return alphakeys($i-1);
+            }
+        }
+    }
+    return "-";
+};
 
 my $nw = sub
 {
     my $name = shift;
-    my $sub = sub{my $key = alphakeys(-3); " \e#name\nn${key}${name}\n"};
+    my $sub = sub{my $key = $getwand->(); ($key eq "-" ? "" : " \e#name\nn${key}${name}\n")};
     return $sub;
 };
 
