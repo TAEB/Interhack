@@ -1,7 +1,6 @@
 # This adds tabs for wand naming based on engrave-messages
-# Only works for non-ambiguous engrave messages right now
-# Assumes the user is engraving over a previous engraving,
-# and only engraves one letter
+# It looks at what you've typed recently to guess what inventory slot your wand
+# is in. the algorithm is: find the pattern (E) (letter) (y or n)
 #
 # by toft and alexbobp
 
