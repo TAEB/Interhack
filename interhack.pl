@@ -6,7 +6,7 @@ use LWP::Simple;
 use File::Temp qw/tempfile/;
 use Term::VT102;
 use Term::TtyRec::Plus;
-use Time::HiRes qw/gettimeofday/;
+use Time::HiRes qw/gettimeofday ualarm/;
 
 # globals {{{
 our %servers = (
@@ -447,6 +447,7 @@ sub force_tab # {{{
 {
     return if defined $ttyrec;
     my $message = shift;
+    my $timeout = shift;
     $message .= " " if defined($message);
     annotate("\e[1;31m" . $message . "Press tab to continue!");
     print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
@@ -460,7 +461,15 @@ sub force_tab # {{{
         # so fix this eventually when we get better "am I playing?" detection
 
         local $SIG{ALRM} = sub { die "alarm\n" };
-        alarm 10;
+        if (defined($timeout))
+        {
+            ualarm $timeout * 1_000_000;
+        }
+        else
+        {
+            alarm 10;
+        }
+
         1 until ReadKey(0) eq "\t";
         alarm 0;
     };
@@ -500,8 +509,8 @@ sub force_tab_yn # {{{
 } # }}}
 sub press_tab # {{{
 {
-    my ($matching, $tabtext) = @_;
-    each_match \@postmap, $matching => sub { force_tab($tabtext) };
+    my ($matching, $tabtext, $timeout) = @_;
+    each_match \@postmap, $matching => sub { force_tab($tabtext, $timeout) };
 } # }}}
 
 sub alphakeys # {{{
