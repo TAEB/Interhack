@@ -13,3 +13,5 @@ press_tab qr/^Really quit\? \[yn\] \(n\) +$/;
 
 press_tab qr/"So thou thought thou couldst kill me, fool\."/;
 press_tab qr/\bDouble Trouble\.\.\./;
+
+press_tab qr/\bNothing happens\./, undef, 0.5;
