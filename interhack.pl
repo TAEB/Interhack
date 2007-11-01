@@ -144,6 +144,16 @@ our $show_sl = 0;
 our $show_bl = 0;
 # }}}
 
+# boot ih-server.pl if applicable {{{
+if ($server->{type} eq 'ih-server') {
+    if (!fork) {
+        { exec 'perl ih-server.pl'; }
+        die "Unable to exec ih-server.pl";
+    }
+    sleep 1;
+}
+# }}}
+
 # subroutines {{{
 sub nick # {{{
 {

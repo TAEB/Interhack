@@ -9,7 +9,6 @@ use Time::HiRes 'sleep';
 
 # this is a server that acts much like Interhack. it acts as a filter between a socket and a pseudo-tty. in essence, you do the following:
 
-# start the server: ./ih-server.pl
 # change interhack.pl's default server from nao to ih_server:
 # the line looks like the following:
 # our $server = $servers{nao};
