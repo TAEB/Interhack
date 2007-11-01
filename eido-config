@@ -2,6 +2,7 @@
 
 # main config {{{
 nick "Eidolos";
+server "ih_server";
 # }}}
 # plugins {{{
 $chromatic_nemeses = 1;

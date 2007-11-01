@@ -614,7 +614,7 @@ sub print_ttyrec # {{{
 } # }}}
 # }}}
 
-# read config, get a socket {{{
+# read config {{{
 if (-e "$ENV{HOME}/.interhack/servers/$server->{name}/config")
 {
     do "$ENV{HOME}/.interhack/servers/$server->{name}/config";
@@ -624,14 +624,6 @@ elsif (-e "$ENV{HOME}/.interhack/config")
     do "$ENV{HOME}/.interhack/config";
 }
 die $@ if $@;
-
-our $sock;
-if (!defined($ttyrec))
-{
-    use Interhack::Sock;
-    $sock = Interhack::Sock::sock($server->{server}, $server->{port});
-    set_lexisock($sock);
-}
 # }}}
 # boot ih-server.pl if applicable {{{
 if ($server->{type} eq 'ih-server') {
@@ -640,6 +632,15 @@ if ($server->{type} eq 'ih-server') {
         die "Unable to exec ih-server.pl";
     }
     sleep 1;
+}
+# }}}
+# get a socket {{{
+our $sock;
+if (!defined($ttyrec))
+{
+    use Interhack::Sock;
+    $sock = Interhack::Sock::sock($server->{server}, $server->{port});
+    set_lexisock($sock);
 }
 # }}}
 
