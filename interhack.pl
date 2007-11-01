@@ -40,7 +40,7 @@ our %servers = (
 );
 our $nick = '';
 our $pass = '';
-our $server = $servers{ih_server};
+our $server = $servers{nao};
 our $autologin = 1;
 our $ttp;
 our $ttyrec;
