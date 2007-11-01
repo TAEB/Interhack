@@ -12,6 +12,7 @@ sub sock
                                   Proto => 'tcp');
   die "Could not create socket: $!\n" unless $sock;
   $sock->blocking(0);
+  $sock->autoflush(1);
 
   my $IAC = chr(255);
   my $SB = chr(250);
@@ -31,7 +32,8 @@ sub sock
   my $STATUS = chr(5);
   my $LFLOW = chr(33);
 
-  if ($server =~ /noway\.ratry\.ru/)
+  if ($server =~ /localhost/) { }
+  elsif ($server =~ /noway\.ratry\.ru/)
   {
     print {$sock}"$IAC$DO$ECHO"
                 ."$IAC$DO$GOAHEAD"

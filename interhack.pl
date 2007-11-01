@@ -10,6 +10,11 @@ use Time::HiRes qw/gettimeofday ualarm/;
 
 # globals {{{
 our %servers = (
+    ih_server => { server => 'localhost',
+                   port   => 9999,
+                   name   => 'ih_server',
+                   type   => 'ih-server',
+                 },
     nao =>       { server => 'nethack.alt.org',
                    port   => 23,
                    name   => 'nao',
@@ -35,7 +40,7 @@ our %servers = (
 );
 our $nick = '';
 our $pass = '';
-our $server = $servers{nao};
+our $server = $servers{ih_server};
 our $autologin = 1;
 our $ttp;
 our $ttyrec;
