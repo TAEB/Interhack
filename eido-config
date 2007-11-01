@@ -6,6 +6,7 @@ nick "Eidolos";
 # plugins {{{
 $chromatic_nemeses = 1;
 $write_interhack_ttyrec = 1;
+$write_normal_ttyrec = 1;
 # price IDing {{{
 $short_names{scroll}{60} = ['EW'];
 $short_names{scroll}{80} = ['EA', 'RC'];
