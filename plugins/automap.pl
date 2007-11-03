@@ -3,12 +3,10 @@
 # the Gazetteer ought to help
 # by Eidolos
 
-our ($x, $y) = (0, 0);
-
 sub read_map
 {
     my $file = shift;
-    my $output;
+    my @output;
 
     open(my $handle, '<', $file)
       or return undef;
@@ -20,15 +18,21 @@ sub read_map
         if ($. == 1 && /^\s*(\d+)\s*(\d+)\s*$/)
         {
             ($y, $x) = ($1, $2);
+            push @output, [$y, $x];
             next;
         }
 
-        my $length = length;
-        s/([. +S]+)/"\e[".length($1).'C'/eg;
-        $output .= "$_\e[B\e[${length}D";
+        push @output, $_;
     }
 
-    return $output;
+    return \@output;
+}
+
+# helper function to print out Interhack goodness
+sub p {
+    local $_ = shift;
+    print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+    print;
 }
 
 sub draw_map
@@ -42,16 +46,41 @@ sub draw_map
         }
 
         my $map = read_map("plugins/automap/$mapfile.txt");
-        if (!defined($map) || $map eq '')
+
+        if (!defined($map) || @$map == 0)
         {
             return "Sorry, can't read plugins/automap/$mapfile.txt";
         }
 
-        local $_ = "\e[1;30m\e[$y;${x}H$map\e[0m";
-        print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
-        print;
+        my ($y, $X) = @{ shift @$map };
 
-        "Drawing at (y$y, x$x). Press ^R to redraw the screen."
+        p "\e[1;30m";
+
+        for my $row (@$map) {
+            p "\e[$y;${X}H";
+            ++$y;
+            my $x = $X;
+            for my $tile (split '', $row) {
+                ++$x;
+
+                # skip if tile is empty
+                if ($tile eq ' ') {
+                    p "\e[C";
+                }
+                # skip if there's already something on the map
+                elsif (substr($vt->row_plaintext($y-1), $x-2, 1) ne ' ') {
+                    p "\e[C";
+                }
+                # otherwise add it, my good man
+                else {
+                   p $tile;
+                }
+            }
+        }
+
+        p "\e[m";
+
+        "Drawing at (y$y, x$X). Press ^R to redraw the screen."
     }
 }
 
