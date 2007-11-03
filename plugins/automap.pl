@@ -119,6 +119,7 @@ sub guess_and_draw_map
 {
     my $available = shift;
     my @best = (0);
+    my @matches;
     for my $name (@$available) {
         my $map = read_map($name);
         my ($correct, $checked) = match_map($vt, $map);
@@ -130,16 +131,26 @@ sub guess_and_draw_map
         @best = ($match, $name, $correct, $checked)
             if $match > $best[0];
 
-        next if $match < 95;
-
-        draw_map($name);
-        return "The $name map matched your current level: "
-             . "$match% ($correct/$checked)";
+        push @matches, $name
+            if $match >= 95;
     }
 
-    return "You need to explore more of the map." if $best[0] == 0;
-    return "No map matched your level. "
-         . "The best was $best[1] with $best[0]% ($best[2]/$best[3]).";
+    return "You need to explore more of the map."
+        if $best[0] == 0;
+
+    if ($best[0] < 95) {
+        return "No map matched your level. "
+             . "The best was $best[1] with $best[0]% ($best[2]/$best[3]).";
+    }
+
+    if (@matches > 1) {
+        return "Multiple possible matches for what I can see: @matches";
+    }
+
+    my ($match, $name, $correct, $checked) = @best;
+    draw_map($name);
+    return "The $name map matched your current level: "
+         . "$match% ($correct/$checked)";
 }
 
 sub match_map
