@@ -39,7 +39,7 @@ sub read_map
 # helper function to print out Interhack goodness
 sub p {
     local $_ = shift;
-    print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+    print_ih_ttyrec($_);
     print;
 }
 

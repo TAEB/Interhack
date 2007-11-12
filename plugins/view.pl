@@ -41,17 +41,17 @@ extended_command "#view"
                           return "I don't have a map for $level.";
                       }
 
-                      print_ttyrec($interhack_handle, "\e[s\e[1;30m\e[2H") if $write_interhack_ttyrec;
+                      print_ih_ttyrec("\e[s\e[1;30m\e[2H");
                       print "\e[s\e[1;30m\e[2H";
                       for (@{$map{$level}})
                       {
                           local $_ = substr($_, 0, 79) . "\n";
-                          print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+                          print_ih_ttyrec($_);
                           print;
                       }
 
                       local $_ = "\e[m\e[HDrawing dlvl $level. Press a key to redraw the screen.--More--";
-                      print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+                      print_ih_ttyrec($_);
                       print;
                       ReadKey defined $ttyrec ? 5 : 0;
                   }

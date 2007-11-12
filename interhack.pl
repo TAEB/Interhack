@@ -142,6 +142,8 @@ our ($curhp, $maxhp, $curpw, $maxpw) = (0, 0, 0, 0);
 our $vikeys = 0;
 our $show_sl = 0;
 our $show_bl = 0;
+our $termcast_name = '';
+our $termcast_pass = '';
 # }}}
 
 # subroutines {{{
@@ -269,19 +271,19 @@ sub pline # {{{
 {
     my $text = shift;
     my @lines = splitline($text);
-    print_ttyrec($interhack_handle, "\e[s") if $write_interhack_ttyrec;
+    print_ih_ttyrec("\e[s");
     print "\e[s";
 
     while (@lines > 1)
     {
        my $line = shift @lines;
-       print_ttyrec($interhack_handle, "\e[H$line--More--\e[K") if $write_interhack_ttyrec;
+       print_ih_ttyrec("\e[H$line--More--\e[K");
        print "\e[H$line--More--\e[K";
        my $c = ReadKey 0;
        last if $c eq "\e";
     }
 
-    print_ttyrec($interhack_handle, "\e[u") if $write_interhack_ttyrec;
+    print_ih_ttyrec("\e[u");
     print "\e[u";
     return $lines[0];
 } # }}}
@@ -405,7 +407,7 @@ sub clear_annotation # {{{
     if ($annotation_onscreen)
     {
         local $_ = "\e[s\e[2H\e[K\e[u";
-        print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+        print_ih_ttyrec($_);
         print;
     }
     $annotation_onscreen = 0;
@@ -435,7 +437,7 @@ sub force_yn # {{{
     my $c;
 
     annotate("\e[1;31m$msg [yn] ");
-    print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
+    print_ih_ttyrec($postprint);
     print $postprint;
     $postprint = '';
 
@@ -455,7 +457,7 @@ sub force_tab # {{{
     my $timeout = shift;
     $message .= " " if defined($message);
     annotate("\e[1;31m" . $message . "Press tab to continue!");
-    print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
+    print_ih_ttyrec($postprint);
     print $postprint;
     $postprint = '';
 
@@ -487,7 +489,7 @@ sub force_tab_yn # {{{
     my $message = shift;
     $message .= " " if defined($message);
     annotate("\e[1;31m" . $message);
-    print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
+    print_ih_ttyrec($postprint);
     print $postprint;
     $postprint = '';
     my $c;
@@ -611,6 +613,17 @@ sub print_ttyrec # {{{
     print {$handle}
           map { pack("VVV", gettimeofday(), length) . $_ }
           @text;
+} # }}}
+# sub print_ih_ttyrec {{{
+our @after_ih_ttyrec;
+sub print_ih_ttyrec
+{
+    return unless $write_interhack_ttyrec;
+    print_ttyrec($interhack_handle, $_) for @_;
+
+    for (@after_ih_ttyrec) {
+        $_->(@_);
+    }
 } # }}}
 # }}}
 
@@ -977,7 +990,7 @@ while (1)
   }
 
   print;
-  print_ttyrec($interhack_handle, $_) if $write_interhack_ttyrec;
+  print_ih_ttyrec($_);
 
   {
       local $sock; # hide $sock from plugins
@@ -988,7 +1001,7 @@ while (1)
       @postonce = ();
   }
 
-  print_ttyrec($interhack_handle, $postprint) if $write_interhack_ttyrec;
+  print_ih_ttyrec($postprint);
   print $postprint and $postprint = ''
     if $postprint ne '';
   # }}}
