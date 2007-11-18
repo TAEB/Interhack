@@ -16,10 +16,9 @@ $short_names{potion}{300} = ['GA', 'GL', 'paral'];
 include "*";
 # }}}
 # key remappings {{{
-our $elbereths = 0;
-remap "\ce" => sub { $elbereths++; "E-  Elbereth\n" };
+remap "\ce" => "E-  Elbereth\n";
 remap "\cw" => "aany\e";
-remap "\cv" => sub { $elbereths += 3; ("E-  Elbereth\n"x3).">      " };
+remap "\cv" => "E-  Elbereth\n" x 3 .">      ";
 # }}}
 # autoadjusts {{{
 sub autoadjust;
@@ -42,14 +41,22 @@ autoadjust qr/\bpotions?\b[^.]*?/ => "^q";
 autoadjust qr/\bwand\b[^.]*?/ => "^z";
 # }}}
 # botl {{{
+use Mac::iTunes;
+my $itunes = Mac::iTunes->controller;
+my $now_playing;
+my $np_iter = 0;
+
 $statusline = sub
 {
     my $time_length = length($botl{time});
-    my $cur_length;
-    sprintf "%s E:%d K:%d\e[23;%dH$colormap{darkgray}%s\e[0m",
+
+    $now_playing = sprintf '%s - %s', $itunes->current_track_artist,
+                                      $itunes->current_track_name
+        if $np_iter++ % 20 == 0;
+
+    sprintf "%s  %-60.60s\e[23;%dH$colormap{darkgray}%s\e[0m",
             $botl{score},
-            $elbereths,
-            $keystrokes,
+            $now_playing,
             80 - $time_length,
             $botl{time},
 };
