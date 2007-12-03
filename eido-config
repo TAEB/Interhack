@@ -16,7 +16,9 @@ $short_names{potion}{300} = ['GA', 'GL', 'paral'];
 include "*";
 # }}}
 # key remappings {{{
-remap "\ce" => "E-  Elbereth\n";
+our $magicbane = 0;
+extended_command "mb" => sub { $magicbane = !$magicbane; "Magicbane " . ($magicbane ? "ON" : "OFF") };
+remap "\ce" => sub { $magicbane ? "EE  Elbereth\n" : "E-  Elbereth\n" };
 remap "\cw" => "aany\e";
 remap "\cv" => "E-  Elbereth\n" x 3 .">      ";
 # }}}
