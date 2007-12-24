@@ -1,0 +1,242 @@
+# safe-config v1.0 by Marc Hartstein (marcmagus)
+#
+# A configuration file for Interhack which should only include "safe" plugins.
+# "Safe" is here defined as not being spoilers simply by having them on.
+#
+# The defaults are fairly sane so this should work out of the box to play
+# nethack locally, but you should go through and configure it to your liking.
+#
+# Note: If you go hunting in the source code for the plugins, you may well
+# discover things you would prefer to have figured out for yourself.
+# Similarly, it's possible that reading this will give you ideas you didn't
+# have before and which change the way you play the game.  Sorry, there's only
+# so much I can do to protect you from a tool designed to be useful for expert
+# players.
+
+##############################################################################
+# Configure how you're going to connect to your nethack game
+
+# Set nickname for server autologin
+
+nick "Yourname";
+
+# Set password
+# You will probably prefer to use a separate password file.
+# See the file CONFIG for instructions.
+#
+#pass "Password"
+
+# Select server to log in to:
+# Options: ih_server, nao, sporkhack, noway
+#
+# ih_server     Gives you a command-line locally, but you won't see what you
+#               type.  Run nethack, or ssh to your favorite server (devnull?)
+# nao           [nethack.alt.org]
+# sporkhack     Beta server for SporkHack [sporkhack.nineball.org]
+# noway         [noway.ratry.ru]
+
+server "ih_server";
+
+##############################################################################
+# Display improvements
+
+# Overrides the default status line and bottom line with a much improved one.
+#
+# Uncomment the following to turn off features:
+#
+#exclude "hpmon";               # Colorized HP display
+#exclude "powermon";            # Colorized Pw display
+#exclude "eido-colors-status";  # Colorized Status effects
+#exclude "timer";               # Elapsed real-world time
+exclude "exp-2nl";              # Xp needed for next level [SPOILER]
+include "botl";
+
+# You can also configure what should appear on each of the last two lines.
+#
+# Available features are:
+# $botl{char}       <name>: <role> <race> <sex> <alignment>
+# $botl{stats}      St:<st> Dx:<dx> Co:<co> In:<in> Wi:<wi> Ch:<ch>
+# $botl{score}      S:<score>       # Only if showscore is enabled
+# $botl{dlvl}       Dungeon Level
+# $botl{au}         $:<gold carried>
+# $botl{hp}         HP:<hp>(<max-hp>)
+# $botl{pw}         Pw:<pw>(<max-pw>)
+# $botl{ac}         AC:<ac>
+# $botl{xp}         Xp:<level>/<xp> # <xp> only if showexp is enabled.
+#                                   # <xp> is current xp, or needed if enabled.
+# $botl{turncount}  T:<turncount>   # Only if time is enabled.
+# $botl{status}     <status>        # Any current status effects
+#
+# And of course you can include anything else you want in there.
+#
+# Defaults:
+#
+# $statusline = sub { "$botl{char}  $botl{stats}  $botl{score}" };
+# $botl = sub { "$botl{dlvl} $botl{au} $botl{hp} $botl{pw} $botl{ac} $botl{xp} $botl{turncount} $botl{status}" };
+
+# Adds a real-time clock to the right side of the status line.
+# Also adds #time for time elapsed.
+#
+# include "timer";
+
+# Adds #keys to check how many keystrokes you've used.
+#
+# include "keystroke-count";
+
+# Set the color of anything matching a pattern.
+#
+# recolor <matching> => <color>
+#
+# e.g.
+#
+# recolor qr/\bblessed\b/ => "bcyan";   # Make the word blessed bright cyan
+# recolor qr/You hear the wailing of the Banshee.../ => "red"   # WARNING!
+
+# Color monster names the color of the monster's glyph.
+#
+$chromatic_nemeses = 1;        # Give your nemesis a non-random color.
+$chromatic_gods = 0;           # [Don't] Give the gods rainbow-colored names.
+include "colors-monsters";
+
+# Makes names in the nao to-watch menu gray if they're idle.
+#
+# include "idle-gray";
+
+# Strip out colors created by NAO MENUCOLORS
+#
+# include "strip-menucolors";
+
+##############################################################################
+# Annotations
+
+# This feature allows you to annotate messages coming from nethack with
+# anything you'd like to be reminded of when they appear.  Very useful to help
+# you remember what some of the more cryptic messages nethack sends mean.
+# 
+# make_annotation <matching> => <message>;
+
+make_annotation 'Oh wow!  Great stuff!' => "You are now hallucinating.";
+
+##############################################################################
+# Require confirmation for important messages
+
+# This feature will set a check which will stop accepting input until you
+# press the <TAB> key or a sufficiently long time passes.  These are useful
+# for forcing you to notice important messages which might otherwise get lost
+# in the background, and for preventing you from accidentally saying yes to
+# questions when you're typing quickly.
+#
+# You can optionally set a message to display on the "annotation" line.  This
+# works just like making an annotation [see above] in addition to waiting for
+# the tab.
+#
+# You can also select the timeout (in microseconds)
+
+# press_tab (<matching>, <message>, <timeout>)
+
+# Don't let me quit by typo!
+press_tab qr/^Really quit\? \[yn\] \(n\) +$/;
+
+# Adds a confirmation on "really attack?" so you won't accidentally confirm
+# when trying to go northwest
+#
+include "confirm-confirm";
+
+##############################################################################
+# Tabs
+#
+# Tabs anticipate what you might want to do next.  When a pattern is matched,
+# you will be given the opportunity to send an appropriate sequence of
+# keystrokes to nethack by simply pressing <TAB>.  Or you can ignore it by
+# typing anything else.
+#
+# make_tab <matching> => <tabstring>
+
+# make_tab qr/^What do you want to write in the dust here\?/ => "Elbereth\n";
+
+# A plugin like the above, but with more comprehensive regular expressions to
+# cover all cases of writing on the ground.
+#
+# include "elbereth";
+
+# Autoadjust easily sets up tabs to move items to your preferred inventory
+# slot when you obtain them.  It can be given more than one preferred slot for
+# something, and can also be told to *avoid* certain inventory slots.
+
+include "autoadjust";
+sub autoadjust;
+
+# To use this include lines of the form:
+# autoadjust <REGEXP> => <STRING>;
+# e.g.
+# autoadjust qr/key/ => "k";            # Try to move keys to k
+# autoadjust qr/DANGEROUS/ => "^yY";    # Don't put dangerous things on y or Y
+
+# Add a tab to name a lamp as empty when they are.
+#
+# include "emptylamp-name";
+
+# Add a tab to name a wand as empty if Nothing happens.
+# 
+# include "emptywand-name";
+
+##############################################################################
+# Remap
+#
+# Allows you to remap a key to send the specified string to nethack.
+# Saves you keystrokes.
+#
+# remap <key> => <string>;
+
+# remap "\ce" => "E-  Elbereth\n";      # ^E to write Elbereth in the dust...
+
+
+##############################################################################
+# Extended Commands
+#
+# You can add extra extended commands which interhack will recognize.  You
+# won't get the convenient command completion for these, however.
+#
+# extended_command "command" => <subroutine>;
+
+# Automore will skip over every --More-- prompt with a very brief delay.
+# Adds #automore to toggle it on and off.
+#
+# include "automore";
+
+# Add #eval to evaluate arbitrary Perl code.
+# Doesn't currently do anything at all for safety reasons.
+#
+# include "eval";
+
+# Add #geno extended command which lists all genocided species.
+#
+# include "geno-list";
+
+# Add #grep to search your ttyrec.
+# Requires nhgrep
+#
+# include "grep";
+
+# Adds #c to IM hiveminder with a new task.
+# See the comment at the top of plugins/hiveminder.pl for details
+# and configuration instructions.
+#
+# include "hiveminder";
+
+# Lets you view the maps of levels you've visited before:
+# #view DLVL
+#
+# include "view";
+
+##############################################################################
+# Other
+
+# Sends your display to termcast.
+#
+# $termcast_name = 'whatever';
+# $termcast_pass = 'whatever';
+# $write_interhack_ttyrec = 1;
+# include "termcast";
+
+# vim: filetype=perl
