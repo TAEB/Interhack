@@ -20,7 +20,7 @@ our %servers = (
                    name   => 'nao',
                    type   => 'dgl',
                    rc_dir => 'http://alt.org/nethack/rcfiles',
-                   dgl_line1 => ' dgamelaunch 1.4.7svn - network console game launcher',
+                   dgl_line1 => ' dgamelaunch [\w.]+ - network console game launcher',
                    dgl_line2 => '',
                  },
     sporkhack => { server => 'sporkhack.nineball.org',
@@ -716,7 +716,7 @@ if (!defined($ttyrec) && $server->{type} eq "dgl")
   {
     next unless defined(recv($sock, $_, 4096, 0));
     last if /There was a problem with your last entry\./;
-    if (s/^.*?(\e\[H\e\[2J\e\[1B ##\Q$server->{dgl_line1}\E..\e\[1B ##\Q$server->{dgl_line2}\E)(.*\e\[H\e\[2J\e\[1B ##\Q$server->{dgl_line1}\E..\e\[1B ##\Q$server->{dgl_line2}\E)?/$1/s) {
+    if (s/^.*?(\e\[H\e\[2J\e\[1B ##$server->{dgl_line1}..\e\[1B ##\Q$server->{dgl_line2}\E)(.*\e\[H\e\[2J\e\[1B ##$server->{dgl_line1}..\e\[1B ##\Q$server->{dgl_line2}\E)?/$1/s) {
       $found++;
       $found++ if $2;
     }
