@@ -24,7 +24,7 @@ nick "Yourname";
 # You will probably prefer to use a separate password file.
 # See the file CONFIG for instructions.
 #
-#pass "Password"
+#pass "Password";
 
 # Select server to log in to:
 # Options: ih_server, nao, sporkhack, noway
