@@ -118,24 +118,31 @@ each_iteration
     $botl{status} = "$status";
 }
 
-my $blocking = 0;
 each_iteration
 {
+    my $blocking = 0;
+    my ($row,$col);
     return unless $show_sl or $show_bl;
     my $replacement = '';
-    @_ = split /(\e\[[0-9;]*H)/;
-    while (1) {
-        last unless @_;
-        my $text = shift;
-        $replacement .= $text unless $blocking;
-
-        last unless @_;
-        my $esc_code = shift;
-        $esc_code =~ /\e\[(?:([0-9]+);)?[0-9;]*H/;
-        my $row = $1 || 1;
-        $blocking = ($row >= 23);
-        $replacement .= $esc_code;
+    my @pieces = split /(\e\[[0-9;]*H)/;
+    while ( scalar(@pieces) ) {
+        my $piece = shift @pieces;
+        ($row,$col) = $piece =~ /\e\[(?:([0-9]+);)?([0-9]*)H/;
+        unless ( $2 ) {
+            # if this seems to break, perhaps do some intelligent calculations
+            # with the number of \e\[As found to determine what row we're on
+            my ($text, $esc) = $piece =~ /(.*?)(\e\[A.*)/;
+            if ( $row >= 23 && defined $esc) {
+                my $textlen = length( $text ) + $col;
+                # move cursor forward by the length of the text we skipped
+                $replacement .= "\e\[${textlen}C$esc";
+            } else {
+                $replacement .= $piece unless $blocking;
+            }
+        } else {
+          $blocking = ($row >= 23);
+          $replacement .= $piece;
+        }
     }
     $_ = $replacement;
 }
-
