@@ -121,26 +121,46 @@ each_iteration
 each_iteration
 {
     my $blocking = 0;
-    my ($row,$col);
+    my ($row,$col) = (0,0); # $col isn't used at this time
+    # XXX: you know.. this code doesn't really work right if only one of the 
+    # following options is enabled
     return unless $show_sl or $show_bl;
+
     my $replacement = '';
-    my @pieces = split /(\e\[[0-9;]*H)/;
+    $_ =~ s/\x00//g; # strip null bytes as they appear to do nothing
+    my @pieces = split /(\e\[[0-9;]*H|\e\[A|\x0d)/;
     while ( scalar(@pieces) ) {
         my $piece = shift @pieces;
-        ($row,$col) = $piece =~ /\e\[(?:([0-9]+);)?([0-9]*)H/;
-        unless ( defined $col ) {
-            # if this seems to break, perhaps do some intelligent calculations
-            # with the number of \e\[As found to determine what row we're on
-            my ($text, $esc) = $piece =~ /(.*?)(\e\[A.*)/;
-            if ( $blocking && defined $esc) {
-                my $textlen = length( $text ) + $col;
+
+        if ( $piece =~ /(\e\[A)/ ) {
+            # matched a move up cursor sequence
+            $row--;
+            $replacement .= $1;
+            next;
+        }
+
+        if ( $piece =~ /\x0d/ ) {
+            # matched a carriage return
+            $replacement .= "\x0d";
+            next;
+        }
+
+        unless ( $piece =~ /\e\[(?:([0-9]+);)?([0-9]*)H/ ) {
+            if ( $row >= 23 ) {
+                # we don't want things overwriting our bottom lines so 
+                # we replace printing characters with cursor move commands
+                # so everything else printed on other lines work
+
                 # move cursor forward by the length of the text we skipped
-                $replacement .= "\e\[${textlen}C$esc";
+                # \e[0C actually moves it forward one so check for that too
+                my $textlen = length( $piece );
+                $replacement .= "\e\[${textlen}C" if $textlen;
             } else {
-                $replacement .= $piece unless $blocking;
+                $replacement .= $piece;
             }
         } else {
-            $blocking = ($row >= 23);
+            # matched a full cursor move escape sequence
+            ( $row, $col ) = ( $1, $2 );
             $replacement .= $piece;
         }
     }
