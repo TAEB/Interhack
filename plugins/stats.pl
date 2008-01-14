@@ -128,11 +128,11 @@ each_iteration
     while ( scalar(@pieces) ) {
         my $piece = shift @pieces;
         ($row,$col) = $piece =~ /\e\[(?:([0-9]+);)?([0-9]*)H/;
-        unless ( $2 ) {
+        unless ( defined $col ) {
             # if this seems to break, perhaps do some intelligent calculations
             # with the number of \e\[As found to determine what row we're on
             my ($text, $esc) = $piece =~ /(.*?)(\e\[A.*)/;
-            if ( $row >= 23 && defined $esc) {
+            if ( $blocking && defined $esc) {
                 my $textlen = length( $text ) + $col;
                 # move cursor forward by the length of the text we skipped
                 $replacement .= "\e\[${textlen}C$esc";
@@ -140,8 +140,8 @@ each_iteration
                 $replacement .= $piece unless $blocking;
             }
         } else {
-          $blocking = ($row >= 23);
-          $replacement .= $piece;
+            $blocking = ($row >= 23);
+            $replacement .= $piece;
         }
     }
     $_ = $replacement;
