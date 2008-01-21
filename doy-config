@@ -63,6 +63,8 @@ autoadjust $aa_whistle     => "z";
 autoadjust $aa_lamp        => "j";
 autoadjust $aa_instrument  => "q";
 autoadjust $aa_trice       => "^y";
+autoadjust qr/\bpotions?\b[^.]*?/ => "^q";
+autoadjust qr/\bwand\b[^.]*?/ => "^z";
 # }}}
 # botl {{{
 $statusline = sub {
