@@ -52,19 +52,10 @@ If running Interhack produces an error that resembles "Can't locate $FOO.pm in
 $FOO" (possibly as root). For example, if you get "Can't locate Term/ReadKey.pm
 in @INC <list of directories>", you'll need to run "cpan -i Term::ReadKey".
 
-Here's a list of modules that Interhack depends upon (as of this writing). It
-might be out of date, so it's in your best interest to learn the basics of
-detecting and resolving missing modules (see above). Some of these modules come
-installed with recent perls.
+To install these dependencies in one go, you can use:
 
-Term::ReadKey      - reading unbuffered keystrokes from the user
-IO::Socket         - connecting to a remote server
-LWP::Simple        - downloading webpages (local nethackrc editing)
-Term::VT102        - getting an addressable screen (instead of one input stream)
-Term::TtyRec::Plus - reading local ttyrecs (debugging)
-Devel::EvalContext - persistency across evals (#eval, optional)
-File::Temp         - getting a temporary file (avoiding race conditions)
-Time::HiRes        - high resolution time (writing ttyrecs)
+    perl Makefile.PL
+    sudo make installdeps
 
 +---------+
 | RUNNING |
