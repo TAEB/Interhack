@@ -28,7 +28,7 @@ our %servers = (
                    name   => 'sporkhack',
                    type   => 'dgl',
                    rc_dir => 'http://nethack.nineball.org/rcfiles',
-                   dgl_line1 => ' ** Games on this server are recorded for in-progress viewing and playback!',
+                   dgl_line1 => ' \*\* Games on this server are recorded for in-progress viewing and playback!',
                    dgl_line2 => '',
                  },
     noway     => { server => 'noway.ratry.ru',
