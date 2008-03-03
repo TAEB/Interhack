@@ -5,7 +5,6 @@ use Term::ReadKey;
 use LWP::Simple;
 use File::Temp qw/tempfile/;
 use Term::VT102;
-use Term::TtyRec::Plus;
 use Time::HiRes qw/gettimeofday ualarm/;
 
 # globals {{{
@@ -663,6 +662,7 @@ if (@ARGV == 1 && $ARGV[0] =~ /\.ttyrec$/)
     $ttyrec = shift;
     $autologin = 0;
     $in_game = 1;
+    require Term::TtyRec::Plus;
     $ttp = Term::TtyRec::Plus->new(infile => $ttyrec, time_threshold => 10);
 }
 # }}}
