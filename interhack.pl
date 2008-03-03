@@ -709,7 +709,7 @@ if ($autologin && $server->{type} eq "dgl")
 } # }}}
 # get ready to start accepting keypresses {{{
 # clear socket buffer (responses to telnet negotiation, name/pass echoes, etc
-if (!defined($ttyrec) && $server->{type} eq "dgl")
+if (!defined($ttyrec) && $server->{type} eq "dgl" && defined $pass)
 {
   my $found = 0;
   while ($found < ($autologin ? 2 : 1))
