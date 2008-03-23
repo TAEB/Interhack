@@ -57,6 +57,13 @@ To install these dependencies in one go, you can use:
     perl Makefile.PL
     sudo make installdeps
 
++--------+
+| CONFIG |
++--------+
+
+    mkdir ~/.interhack
+    cp eido-config ~/.interhack/config
+
 +---------+
 | RUNNING |
 +---------+
