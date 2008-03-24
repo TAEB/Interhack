@@ -19,7 +19,7 @@ our %servers = (
                    name   => 'nao',
                    type   => 'dgl',
                    rc_dir => 'http://alt.org/nethack/rcfiles',
-                   dgl_line1 => ' dgamelaunch [\w.]+ - network console game launcher',
+                   dgl_line1 => ' nethack.alt.org - http://nethack.alt.org/',
                    dgl_line2 => '',
                  },
     sporkhack => { server => 'sporkhack.nineball.org',
