@@ -49,8 +49,9 @@ my $np_iter = 0;
 $statusline = sub
 {
     my $time_length = length($botl{time});
-    sprintf "%s\e[23;%dH$colormap{darkgray}%s\e[0m",
+    sprintf "%s  %s\e[23;%dH$colormap{darkgray}%s\e[0m",
             $botl{score},
+            $botl{stats},
             80 - $time_length,
             $botl{time},
 };
