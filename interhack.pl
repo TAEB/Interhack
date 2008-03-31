@@ -70,7 +70,7 @@ our ($normal_handle, $interhack_handle, $keys_handle);
 # colormap {{{
 our %colormap =
 (
-  nhblack        => "\e[0;34m", # override to "\e[1;30m" if you want!
+  nhblack        => "\e[1;30m", # override to "\e[1;30m" if you want!
   black          => "\e[0;30m",
   bblack         => "\e[1;30m",
   "bold&black"   => "\e[1;30m",
