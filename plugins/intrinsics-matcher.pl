@@ -93,6 +93,7 @@ each_match qr/You feel (?:very self-conscious|transparent)\./ => $add, "see invi
 each_match "You see an image of someone stalking you." => $add, "see invisible";
 each_match "Your vision becomes clear." => $add, "see invisible";
 each_match qr/You (?:seem faster|feel quick|speed up)./ => $add, "fast";
+each_match qr/"and thus I grant thee the gift of Speed!"/ => $add, "fast";
 # }}}
 # notices that we still have a resistance {{{
 each_match "You seem unaffected by the poison" => $add, "poison";
