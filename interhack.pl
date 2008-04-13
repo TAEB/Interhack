@@ -18,7 +18,7 @@ our %servers = (
                    port   => 23,
                    name   => 'nao',
                    type   => 'dgl',
-                   rc_dir => 'http://alt.org/nethack/rcfiles',
+                   rc_file => sub { "http://alt.org/nethack/userdata/$_[0]/$_[0].nh343rc" },
                    dgl_line1 => ' nethack.alt.org - http://nethack.alt.org/',
                    dgl_line2 => '',
                  },
@@ -26,7 +26,7 @@ our %servers = (
                    port   => 23,
                    name   => 'sporkhack',
                    type   => 'dgl',
-                   rc_dir => 'http://nethack.nineball.org/rcfiles',
+                   rc_file => sub { "http://nethack.nineball.org/rcfiles/$_[0].nethackrc" },
                    dgl_line1 => ' Games on this server are recorded for in-progress viewing and playback!',
                    dgl_line2 => '',
                  },
@@ -34,7 +34,7 @@ our %servers = (
                    port   => 37331,
                    name   => 'noway',
                    type   => 'termcast',
-                   rc_dir => '',
+                   rc_file => '',
                  },
 );
 our $nick = '';
@@ -817,7 +817,9 @@ while (1)
           if ($c eq "\t" && $at_login && $logged_in)
           {
             print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
-            my $nethackrc = get("$server->{rc_dir}/$me.nethackrc");
+            my $rc_file = $server->{rc_file};
+            my $rc_file = $rc_file->($me) if ref($rc_file) eq 'CODE';
+            my $nethackrc = get("$rc_file");
             my ($fh, $name) = tempfile();
             print {$fh} $nethackrc;
             close $fh;
