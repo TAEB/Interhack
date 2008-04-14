@@ -5,25 +5,25 @@
 our $fight_enabled = 0;
 
 sub enable_fight {
-    remap('h', 'Fh');
-    remap('j', 'Fj');
-    remap('k', 'Fk');
-    remap('l', 'Fl');
-    remap('y', 'Fy');
-    remap('u', 'Fu');
-    remap('b', 'Fb');
-    remap('n', 'Fn');
+    remap h => 'Fh';
+    remap j => 'Fj';
+    remap k => 'Fk';
+    remap l => 'Fl';
+    remap y => 'Fy';
+    remap u => 'Fu';
+    remap b => 'Fb';
+    remap n => 'Fn';
 }
 
 sub disable_fight {
-    unmap('h');
-    unmap('j');
-    unmap('k');
-    unmap('l');
-    unmap('y');
-    unmap('u');
-    unmap('b');
-    unmap('n');
+    unmap 'h';
+    unmap 'j';
+    unmap 'k';
+    unmap 'l';
+    unmap 'y';
+    unmap 'u';
+    unmap 'b';
+    unmap 'n';
 }
 
 extended_command "#fight"
