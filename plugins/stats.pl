@@ -148,7 +148,7 @@ each_iteration
         unless ( $piece =~ /\e\[(?:([0-9]+);)?([0-9]*)H/ ) {
             # whee, hacks. don't know what's wrong, so let's see if we can
             # just avoid the issue
-            if ( $row >= 23 && ($vt->row_plaintext(23) . $vt->row_plaintext(24)) !~ /\((?:\d+ of \d+|end)\)/ ) {
+            if ( $row >= 23 && ($vt->row_plaintext(23) . $vt->row_plaintext(24)) !~ /(?:\((?:\d+ of \d+|end)\)|--More--)/ ) {
                 # we don't want things overwriting our bottom lines so 
                 # we replace printing characters with cursor move commands
                 # so everything else printed on other lines work
