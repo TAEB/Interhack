@@ -326,6 +326,11 @@ sub remap # {{{
     my ($key, $result) = @_;
     $keymap{$key} = $result;
 } # }}}
+sub unmap # {{{
+{
+    my $key = shift;
+    delete $keymap{$key};
+} # }}}
 sub value_of # {{{
 {
     my ($exp, @args) = @_;
