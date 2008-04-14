@@ -15,16 +15,16 @@ requires 'Time::HiRes';
 features(
     'nhgrep' => [
         -default => 0,
-       requires('Term::TtyRec::Plus'),
+       recommends('Term::TtyRec::Plus'),
     ],
     'IH server (devnull support)' => [
         -default => 0,
-        requires('IO::Pty::Easy'),
-        requires('IO::Socket::INET'),
+        recommends('IO::Pty::Easy'),
+        recommends('IO::Socket::INET'),
     ],
     'Hiveminder plugin (I think it is broken)' => [
         -default => 0,
-        requires('Net::OSCAR'),
+        recommends('Net::OSCAR'),
     ],
 );
 
