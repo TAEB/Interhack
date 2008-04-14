@@ -9,6 +9,10 @@ sub enable_fight {
     remap('j', 'Fj');
     remap('k', 'Fk');
     remap('l', 'Fl');
+    remap('y', 'Fy');
+    remap('u', 'Fu');
+    remap('b', 'Fb');
+    remap('n', 'Fn');
 }
 
 sub disable_fight {
@@ -16,6 +20,10 @@ sub disable_fight {
     unmap('j');
     unmap('k');
     unmap('l');
+    unmap('y');
+    unmap('u');
+    unmap('b');
+    unmap('n');
 }
 
 extended_command "#fight"
