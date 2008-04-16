@@ -58,13 +58,15 @@ sub draw_map
         return "Sorry, can't read plugins/automap/$mapfile.txt";
     }
 
-    my ($y, $X);
+    my ($Y, $X);
 
     p "\e[1;30m";
 
+    my $y;
     for my $row (@$map) {
         if (ref($row) eq 'ARRAY') {
-            ($y, $X) = @$row;
+            ($Y, $X) = @$row;
+            $y = $Y;
             next;
         }
 
@@ -91,7 +93,7 @@ sub draw_map
 
     p "\e[m";
 
-    "Drawing $mapfile at (y$y, x$X). Press ^R to redraw the screen."
+    "Drawing $mapfile at (y$Y, x$X). Press ^R to redraw the screen."
 }
 
 my @maps = qw/frontier townsquare alley college grotto bustling bazaar
