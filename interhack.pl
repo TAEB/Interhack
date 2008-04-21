@@ -823,7 +823,7 @@ while (1)
           {
             print "\e[1;30mPlease wait while I download the existing rcfile.\e[0m";
             my $rc_file = $server->{rc_file};
-            my $rc_file = $rc_file->($me) if ref($rc_file) eq 'CODE';
+            $rc_file = $rc_file->($me) if ref($rc_file) eq 'CODE';
             my $nethackrc = get("$rc_file");
             my ($fh, $name) = tempfile();
             print {$fh} $nethackrc;
