@@ -139,7 +139,9 @@ make_tab qr/^(?:You have a little trouble lifting )?(.) - (an?|\d+) (?:blessed |
               = (     $1,     $2,          $3,    $4,        $5,   $6);
 
              return if $appearance =~ /\bwater\b/i
-                    || $appearance =~ /\bclear\b/i;
+                    || $appearance =~ /\bclear\b/i
+                    || $appearance =~ /\bunlabeled\b/i
+                    || $appearance =~ /\bblank\b/i;
 
              $existing = "" unless defined $existing;
 
