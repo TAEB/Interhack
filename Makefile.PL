@@ -22,10 +22,6 @@ features(
         recommends('IO::Pty::Easy'),
         recommends('IO::Socket::INET'),
     ],
-    'Hiveminder plugin (I think it is broken)' => [
-        -default => 0,
-        recommends('Net::OSCAR'),
-    ],
 );
 
 auto_install;
