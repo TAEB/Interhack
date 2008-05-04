@@ -90,3 +90,26 @@ q to quit.
 
 See CONFIG for information about the configuration file.
 
++-----------------+
+| TROUBLESHOOTING |
++-----------------+
+
+If Interhack displays things incorrectly, it's probably because you're using
+a terminal that doesn't understand the escape sequences we print. There's
+a fix, though!
+
+Run Interhack in screen. It will correctly interpret what Interhack prints out,
+then gives your terminal something it will understand. Running the "screen"
+command will give you a splash screen, then a new terminal. Just go to your
+interhack directory and start it up.
+
+Both screen and NetHack look for ctrl-A. Unfortunately for casual users, screen
+has priority here. You can tell screen to use a different escape character by:
+
+   Hitting Ctrl-A to tell screen to expect a command.
+   Hit :, this should invert the color of your bottom line.
+   Type in: escape ^\\
+   Hit enter.
+
+This will remap your escape key to ctrl-\ which nothing I know of uses. Now
+NetHack will see your Ctrl-A keystrokes correctly.
