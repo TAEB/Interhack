@@ -17,7 +17,7 @@ features(
         -default => 0,
        recommends('Term::TtyRec::Plus'),
     ],
-    'IH server (devnull support)' => [
+    'IH server (devnull/local support)' => [
         -default => 0,
         recommends('IO::Pty::Easy'),
         recommends('IO::Socket::INET'),
