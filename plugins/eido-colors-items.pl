@@ -17,17 +17,17 @@ if (!$ece_buc)
 # !C !B !UC {{{
     if (!$ece_shortbuc)
     {
-        recolor qr/(?<=named )!C\b/ => $ec_semiknown || $ec_notcursed || "brown";
-        recolor qr/(?<=named )!B\b/ => $ec_semiknown || $ec_notblessed || "brown";
-        recolor qr/(?<=named )!UC\b/ => $ec_semiknown || $ec_notuncursed || "brown";
+        recolor qr/(?<=named )!C\b/i => $ec_semiknown || $ec_notcursed || "brown";
+        recolor qr/(?<=named )!B\b/i => $ec_semiknown || $ec_notblessed || "brown";
+        recolor qr/(?<=named )!UC\b/i => $ec_semiknown || $ec_notuncursed || "brown";
     }
 # }}}
 # blessed uncursed cursed {{{
     if (!$ece_longbuc)
     {
-        recolor qr/\buncursed\b|(?<=named )UC?\b/ => $ec_uncursed || "brown";
-        recolor qr/\bblessed\b|(?<=named )B\b/ => $ec_blessed || "cyan";
-        recolor qr/\bcursed\b|(?<=named )C\b/ => $ec_cursed || "red";
+        recolor qr/\buncursed\b|(?<=named )UC?\b/i => $ec_uncursed || "brown";
+        recolor qr/\bblessed\b|(?<=named )B\b/i => $ec_blessed || "cyan";
+        recolor qr/\bcursed\b|(?<=named )C\b/i => $ec_cursed || "red";
     }
 # }}}
 }
