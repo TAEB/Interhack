@@ -631,6 +631,25 @@ sub print_ih_ttyrec
 } # }}}
 # }}}
 
+# a bit of signal handling {{{
+my $tstp = $SIG{TSTP} = sub {
+    # if we don't invoke TSTP then we won't be suspended
+    $SIG{TSTP} = 'DEFAULT';
+
+    ReadMode 0;
+
+    kill TSTP => $$;
+};
+
+$SIG{CONT} = sub {
+    $SIG{TSTP} = $tstp;
+
+    ReadMode 3;
+
+    request_redraw;
+};
+# }}}
+
 # read config {{{
 if (-e "$ENV{HOME}/.interhack/servers/$server->{name}/config")
 {
