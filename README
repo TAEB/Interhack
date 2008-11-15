@@ -113,3 +113,16 @@ has priority here. You can tell screen to use a different escape character by:
 
 This will remap your escape key to ctrl-\ which nothing I know of uses. Now
 NetHack will see your Ctrl-A keystrokes correctly.
+
++---------+
+| DEVNULL |
++---------+
+
+Interhack runs on the annual /dev/null tournament using the "ih_server"
+feature. If you set "server 'ih_server'" in your config, then when you start
+Interhack you'll see some connection messages, then you'll be back in your own
+shell. This shell has all the functionality of Interhack enabled (try
+"echo Elbereth"). From here you can ssh to devnull and play normally. When you
+use ssh, you must specify the -t option (so,
+"ssh -t myname@nethack1.devnull.net").
+
