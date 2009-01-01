@@ -96,19 +96,7 @@ sub draw_map
     "Drawing $mapfile at (y$Y, x$X). Press ^R to redraw the screen."
 }
 
-my @maps = qw/frontier townsquare alley college grotto bustling bazaar
-              oracle ludios castle valley sanctum
-              cellar catacombs mimic
-              bigplus bigoval bigtie
-              samfill
-              medusa1 medusa2
-              asmodeus baalzebub juiblex orcus
-              wiztop wizmid wizbot
-              vladtop vladmid vladbot
-              fakewiz
-              earth air fire astral
-             /, map {("${_}home", "${_}loc", "${_}goal")}
-                qw/arc bar cav hea kni mon pri ran rog sam tou val wiz/;
+my @maps = map { m{.*/(\w+)\.txt}; $1 } glob('plugins/automap/*.txt');
 
 for my $name (@maps)
 {
