@@ -1,6 +1,7 @@
 # vim:ft=perl:fdm=marker:
 
 # main config {{{
+server 'nao';
 # }}}
 # plugins {{{
 $chromatic_nemeses = 1;
