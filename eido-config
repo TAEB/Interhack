@@ -17,7 +17,7 @@ include "*";
 # key remappings {{{
 our $magicbane = 0;
 extended_command "mb" => sub { $magicbane = !$magicbane; "Magicbane " . ($magicbane ? "ON" : "OFF") };
-remap "\ce" => sub { $magicbane ? "EE  Elbereth\n" : "E-  Elbereth\n" };
+remap "\ce" => sub { $magicbane ? "\e\eEE  Elbereth\n" : "\e\eE-  Elbereth\n" };
 remap "\cw" => "aany\e";
 remap "\cv" => "E-  Elbereth\n" x 3 .">      ";
 # }}}
