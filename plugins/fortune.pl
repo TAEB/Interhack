@@ -7,9 +7,9 @@ each_iteration
 {
     if ($at_login)
     {
-        $postprint .= "\e[s\e[20H\e[1;30m"
+        $postprint .= "\e7\e[20H\e[1;30m"
                     . `fortune -n200 -s $fortune`
-                    . "\e[0m\e[u"
+                    . "\e[0m\e8"
     }
 }
 

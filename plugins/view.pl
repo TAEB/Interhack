@@ -41,8 +41,8 @@ extended_command "#view"
                           return "I don't have a map for $level.";
                       }
 
-                      print_ih_ttyrec("\e[s\e[1;30m\e[2H");
-                      print "\e[s\e[1;30m\e[2H";
+                      print_ih_ttyrec("\e7\e[1;30m\e[2H");
+                      print "\e7\e[1;30m\e[2H";
                       for (@{$map{$level}})
                       {
                           local $_ = substr($_, 0, 79) . "\n";

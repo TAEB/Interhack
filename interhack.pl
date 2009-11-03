@@ -270,8 +270,8 @@ sub pline # {{{
 {
     my $text = shift;
     my @lines = splitline($text);
-    print_ih_ttyrec("\e[s");
-    print "\e[s";
+    print_ih_ttyrec("\e7");
+    print "\e7";
 
     while (@lines > 1)
     {
@@ -282,8 +282,8 @@ sub pline # {{{
        last if $c eq "\e";
     }
 
-    print_ih_ttyrec("\e[u");
-    print "\e[u";
+    print_ih_ttyrec("\e8");
+    print "\e8";
     return $lines[0];
 } # }}}
 sub show_menu # {{{
@@ -301,7 +301,7 @@ sub show_menu # {{{
             }
             $longest_length++; # extra space at the end
 
-            $postprint .= "\e[s\e[1;30m\e[2H";
+            $postprint .= "\e7\e[1;30m\e[2H";
             for my $k (sort keys %$items)
             {
                 my $v = value_of($items->{$k});
@@ -310,7 +310,7 @@ sub show_menu # {{{
                 $keyonce{$k} = $v;
             }
             chomp $postprint; # to fit another item on the menu
-            $postprint .= "\e[m\e[u";
+            $postprint .= "\e[m\e8";
         }
     }
 } # }}}
@@ -404,13 +404,13 @@ sub annotate # {{{
   return if $annotation eq '';
   $annotation_onscreen = 1;
   $anno_frames = 5;
-  $postprint .= "\e[s\e[2H\e[1;30m$annotation\e[0m\e[K\e[u";
+  $postprint .= "\e7\e[2H\e[1;30m$annotation\e[0m\e[K\e8";
 } # }}}
 sub clear_annotation # {{{
 {
     if ($annotation_onscreen)
     {
-        local $_ = "\e[s\e[2H\e[K\e[u";
+        local $_ = "\e7\e[2H\e[K\e8";
         print_ih_ttyrec($_);
         print;
     }

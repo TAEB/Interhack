@@ -11,7 +11,7 @@ each_iteration
             my $nick = $1;
             $nick .= ' ' x (15 - length($nick));
             $color = "\e[1;30m" if $2;
-            $postprint .= "\e[s\e[${_};5H$color$1\e[m\e[u";
+            $postprint .= "\e7\e[${_};5H$color$1\e[m\e8";
         }
     }
 }
