@@ -69,7 +69,7 @@ our %scrolls =
   S => 'amnesia',
   T => 'punishment',
   U => 'stinking cloud',
-) unless defined %scrolls;
+) unless %scrolls;
 
 our %ink_cost =
 (
