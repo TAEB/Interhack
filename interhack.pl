@@ -19,7 +19,7 @@ our %servers = (
                    name   => 'nao',
                    type   => 'dgl',
                    rc_file => sub { "http://alt.org/nethack/userdata/$_[0]/$_[0].nh343rc" },
-                   dgl_line1 => ' nethack.alt.org - http://nethack.alt.org/',
+                   dgl_line1 => 'nethack.alt.org - http://nethack.alt.org/',
                    dgl_line2 => '',
                  },
     sporkhack => { server => 'sporkhack.nineball.org',
@@ -27,7 +27,7 @@ our %servers = (
                    name   => 'sporkhack',
                    type   => 'dgl',
                    rc_file => sub { "http://nethack.nineball.org/rcfiles/$_[0].nethackrc" },
-                   dgl_line1 => ' Games on this server are recorded for in-progress viewing and playback!',
+                   dgl_line1 => 'Games on this server are recorded for in-progress viewing and playback!',
                    dgl_line2 => '',
                  },
     noway     => { server => 'noway.ratry.ru',
@@ -736,11 +736,13 @@ if ($autologin && $server->{type} eq "dgl")
 if (!defined($ttyrec) && $server->{type} eq "dgl" && defined $pass)
 {
   my $found = 0;
+  $|++;
   while ($found < ($autologin ? 2 : 1))
   {
     next unless defined(recv($sock, $_, 4096, 0));
     last if /There was a problem with your last entry\./;
-    if (s/^.*?(\e\[H\e\[2J\e\[1B ##$server->{dgl_line1}..\e\[1B ##\Q$server->{dgl_line2}\E)(.*\e\[H\e\[2J\e\[1B ##$server->{dgl_line1}..\e\[1B ##\Q$server->{dgl_line2}\E)?/$1/s) {
+    print;
+    if (s/^.*?(\e\[H\e\[2J\e\[.*##.*$server->{dgl_line1}.*\e\[.*##.*\Q$server->{dgl_line2}\E)(.*\e\[H\e\[2J\e\[.*##.*$server->{dgl_line1}.*\e\[.*##.*\Q$server->{dgl_line2}\E)?/$1/s) {
       $found++;
       $found++ if $2;
     }
