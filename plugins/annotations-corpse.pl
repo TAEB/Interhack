@@ -245,8 +245,8 @@ my $helper = sub
     }
     $intrinsics = join ',', @int;
 
-    make_annotation qr/^You see here (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse\./ => "Corpse: $intrinsics";
-    make_annotation qr/^There is (?:an? (?:partly eaten )?)?$monster(?:'s?)? corpse here; eat it\?/ => "Corpse: $intrinsics";
+    make_annotation qr/^You see here (?:an? (?:partly eaten )?)?(?:cursed |uncursed |blessed )?$monster(?:'s?)? corpse\./ => "Corpse: $intrinsics";
+    make_annotation qr/^There is (?:an? (?:partly eaten )?)?(?:cursed |uncursed |blessed )?$monster(?:'s?)? corpse here; eat it\?/ => "Corpse: $intrinsics";
     make_annotation qr/It smells like $monster\./ => "Tin: $intrinsics";
 };
 
