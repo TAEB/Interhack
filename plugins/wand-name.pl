@@ -4,29 +4,15 @@
 #
 # by toft and alexbobp
 
-sub getwand
-{
-    for my $i (reverse -30 .. -2)
-    {
-        if (alphakeys($i) eq "y" || alphakeys($i) eq "n")
-        {
-            if (alphakeys($i - 2) eq "E")
-            {
-                return alphakeys($i - 1);
-            }
-        }
-    }
-
-    return "-";
-}
+include "last-inventoryaction";
 
 sub nw
 {
     my $name = shift;
     return sub
     {
-        my $key = getwand;
-        return $key eq "-"
+        my $key = lastinvaction("E");
+        return $key eq ""
                ? ""
                : " \e#name\nn${key}${name}\n"
     }
