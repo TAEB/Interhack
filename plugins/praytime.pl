@@ -18,20 +18,20 @@ each_match "You begin praying to" => sub { $praytime = $turncount; };
 each_match qr/$law_crown|$neu_crown|$cha_crown/ => sub { $crowned = 1; };
 
 extended_command "crown" => sub 
-	{ 
-		$crowned = !$crowned; "Crowned now " .  ($crowned ? "ON" : "OFF") 
-	};
+{
+    $crowned = !$crowned; "Crowned now " .  ($crowned ? "ON" : "OFF")
+};
 
 extended_command "praytime" => sub
-	{
-		my $timeout = $turncount - $praytime;
-		my $confidence_threshold = $crowned ? 3980 : 1229;
-		my $safe_msg = "$colormap{green} 95% safe assuming normal timeout\e[0m";
-		my $unsafe_msg = "$colormap{brown} confidence < 95%\e[0m";
+{
+    my $timeout = $turncount - $praytime;
+    my $confidence_threshold = $crowned ? 3980 : 1229;
+    my $safe_msg = "$colormap{green} 95% safe assuming normal timeout\e[0m";
+    my $unsafe_msg = "$colormap{brown} confidence < 95%\e[0m";
 
-		my $response = "The last prayer was $timeout turns ago.";
-		if ($timeout >= $confidence_threshold) { $response .= $safe_msg; }
-		else { $response .= $unsafe_msg; }
+    my $response = "The last prayer was $timeout turns ago.";
+    if ($timeout >= $confidence_threshold) { $response .= $safe_msg; }
+    else { $response .= $unsafe_msg; }
 
-		return $response
-	}
+    return $response
+}
