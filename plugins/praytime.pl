@@ -11,7 +11,7 @@ my $crowned = 0;
 
 my $law_crown = "I crown thee...  The Hand of Elbereth!";
 my $neu_crown = "Thou shalt be my Envoy of Balance!";
-my $cha_crown = "Thou art chosen to (?:take lives)|(?:steal soles) for My Glory!";
+my $cha_crown = "Thou art chosen to (?:take lives)|(?:steal souls) for My Glory!";
 
 each_match "You begin praying to" => sub { $praytime = $turncount; };
 
