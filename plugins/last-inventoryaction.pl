@@ -15,7 +15,7 @@ sub lastinvaction
                 push @keys, $lastkeys[$j];
             }
             my $keyseq = join '', @keys;
-            if ($keyseq =~ qr/[$action](?:[*?] *)([A-Za-z])/)
+            if ($keyseq =~ qr/[$action](?:[*?] *)?([A-Za-z])/)
             {
                 return($1);
             }
