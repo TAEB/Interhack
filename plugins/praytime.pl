@@ -1,3 +1,11 @@
+# Adds an extended command to show the time since the last prayer and a rough
+# estimate of prayer safety.
+# The plugin notes crowning, but also provides an extended command to toggle
+# crowning manually.
+# This only really works when InterHack has seen your last prayer
+#
+# joc
+
 my $praytime = 0;
 my $crowned = 0;
 
