@@ -27,7 +27,7 @@ extended_command "praytime" => sub
 		my $timeout = $turncount - $praytime;
 		my $confidence_threshold = $crowned ? 3980 : 1229;
 		my $safe_msg = "$colormap{green} 95% safe assuming normal timeout\e[0m";
-		my $unsafe_msg = "$colormap{red} $brown confidence < 95%\e[0m";
+		my $unsafe_msg = "$colormap{brown} confidence < 95%\e[0m";
 
 		my $response = "The last prayer was $timeout turns ago.";
 		if ($timeout >= $confidence_threshold) { $response .= $safe_msg; }
