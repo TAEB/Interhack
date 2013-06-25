@@ -3138,6 +3138,6 @@ sub format_monster_annotation
 		
 for my $monster (keys %mondata)
 {
-	my $re = qr/$monster\)(?:, [\w\s]+)?\s+\[seen:/;
+	my $re = qr/$monster(?:, [\w\s]+)?\)\s+\[seen:/;
 	make_annotation $re => format_monster_annotation($monster);
 }
