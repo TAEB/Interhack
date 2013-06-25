@@ -8,8 +8,8 @@ my $attack_suffix = qr/[ACDEFHMPRSVbcdehimrstwxz.+\-"&<#\$*@]|![CDI]/;
 my $attack = qr/(?:[\[(])?$attack_prefix?$attack_roll$attack_suffix?(?:[\])])?/;
 
 my %passive_attack_str = (
-	"[" => "passive", # when killed
-	"(" => "passive"  # when hit in melee
+	"[" => "pass.", # when killed
+	"(" => "pass."  # when hit in melee
 );
 
 my %attack_types = (
@@ -20,32 +20,32 @@ my %attack_types = (
 	"M" => "spell",
 	"S" => "spit",
 	"W" => "weapon",
-	"X" => "explodes",
+	"X" => "explode",
 );
 
 my %damage_types = (
 	"A" => "acid",
 	"C" => "cold",
-	"D" => "disintegration",
+	"D" => "disint.",
 	"E" => "shock",
 	"F" => "fire",
 	"H" => "heal",
-	"M" => "Magic missiles",
+	"M" => "missiles",
 	"P" => "Poison",
 	"R" => "erode metal",
 	"S" => "sleep",
-	"V" => "drain level",
+	"V" => "drain lev",
 	"b" => "blind",
 	"c" => "confuse",
 	"d" => "digest",
 	"e" => "drain pw",
-	"h" => "hallucination",
-	"i" => "remove intrinsic",
-	"m" => "stick to you",
+	"h" => "hallu",
+	"i" => "steal intrinsic",
+	"m" => "stick",
 	"r" => "rot organics",
 	"s" => "stun",
-	"t" => "teleport you",
-	"w" => "wrap and drown you",
+	"t" => "teleport",
+	"w" => "wrap and drown",
 	"x" => "prick legs",
 	"z" => "special",
 	"." => "paralyse",
@@ -58,16 +58,16 @@ my %damage_types = (
 	"!D" => "drain dex",
 	"!I" => "drain int",
 	"#" => "disease",
-	"\$" => "steal gold",
-	"*" => "turn to stone",
-	"@" => "lycanthropy or slime",
+	"\$" => "steal \$",
+	"*" => "stone",
+	"@" => "lycanthropy/slime",
 );
 
 my %resist_types = (
 	"f" => "fire",
 	"c" => "cold",
 	"s" => "sleep",
-	"d" => "disintegration",
+	"d" => "disint.",
 	"e" => "shock",
 	"p" => "poison",
 	"a" => "acid",
@@ -3115,11 +3115,11 @@ sub format_attacks
 sub format_monster_annotation
 {
 	my $name = shift;
-	my $s = "lev: $mondata{$name}{'lev'}, spd: $mondata{$name}{'spd'}, AC$mondata{$name}{'ac'}";
-    	$s .= ", MR: $mondata{$name}{'mr'}";
+	my $s = "spd: $mondata{$name}{'spd'}; AC$mondata{$name}{'ac'}";
+    	$s .= "; MR: $mondata{$name}{'mr'}" if $mondata{$name}{'mr'} > 0;
 	if ($mondata{$name}{'resists'})
 	{
-		$s .= ", resists: ";
+		$s .= ", resists ";
 		my $first = 1;
 		for my $r (split //, $mondata{$name}{'resists'})
 		{
