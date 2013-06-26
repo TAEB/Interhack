@@ -3121,7 +3121,7 @@ sub format_monster_annotation
     	$s .= "; MR: $mondata{$name}{'mr'}" if $mondata{$name}{'mr'} > 0;
 	if ($mondata{$name}{'resists'})
 	{
-		$s .= ", resists ";
+		$s .= "; resists ";
 		my $first = 1;
 		for my $r (split //, $mondata{$name}{'resists'})
 		{
@@ -3133,13 +3133,25 @@ sub format_monster_annotation
 
 	if ($mondata{$name}{'attacks'})
 	{
-		$s .= ", attacks: " . format_attacks($mondata{$name}{'attacks'});
+		$s .= "; attacks: " . format_attacks($mondata{$name}{'attacks'});
 	}
 	return $s;
 };
 		
 for my $monster (keys %mondata)
 {
-	my $re = qr/^$species\s[^\(]+\(*$monster(?:, [\w\s]+)?\)\s*(?:\[seen:[^\]]+\]\s+)?$/;
+	my $escaped_name = $monster;
+ 	$escaped_name =~ s/ /\\ /g;
+	my $re = qr/
+		^(?:$species|~)
+		[^\(]+
+		\(
+		(?:peaceful\ |tame\ |invisible\ |tail\ of\ a\ )?
+		$escaped_name
+		(?:\ called [\w\s]+)?
+		(?:, [\w\s]+)?     # "holding you", "leashed to you" etc.
+		\)
+		\s+(?:\[seen:[^\]]+\]\s+)?$
+		/x;
 	make_annotation $re => format_monster_annotation($monster);
 }
