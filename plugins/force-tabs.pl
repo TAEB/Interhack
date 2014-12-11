@@ -15,3 +15,4 @@ press_tab qr/"So thou thought thou couldst kill me, fool\."/;
 press_tab qr/\bDouble Trouble\.\.\./;
 
 press_tab qr/\bNothing happens\./, undef, 0.5;
+press_tab qr/\bYou don't have enough energy to cast that spell\./, undef, 0.5;
